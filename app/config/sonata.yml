@@ -1,5 +1,7 @@
 sonata_block:
     default_contexts: [cms]
+    # Sonata Page:
+    context_manager: sonata.page.block.context_manager
     blocks:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
@@ -12,9 +14,18 @@ sonata_block:
         sonata.media.block.gallery:
         sonata.media.block.feature_media:
 
+        # User bundle
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+
+
         # @todo check against actual params in production
         #sonata.block.service.wysiwyg:
         #sonata.block.service.action:
+
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
 
 sonata_media:
     # if you don't use default namespace configuration
@@ -86,6 +97,31 @@ sonata_page:
         not_found: [404]    # render 404 page with "not_found" key (name generated: _page_internal_error_{key})
         fatal:     [500]    # so you can use the same page for different http errors or specify specific page for each error
 
+    slugify_service:   sonata.core.slugify.cocur # old BC value is sonata.core.slugify.native
+    #slugify_service:   sonata.core.slugify.native # old BC value is sonata.core.slugify.native
+    multisite:        host
+    default_template: default # template key from templates section, used as default for
+    templates:
+        default:  { path: 'SonataPageBundle::layout.html.twig',          name: 'default' }
+        2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
+
+    # Generates a snapshot when a page is saved (from the admin)
+    direct_publication: true # or %kernel.debug% if you want to publish in dev mode (but not in prod)
+
+sonata_admin:
+    assets:
+        javascripts:
+            - bundles/sonataadmin/vendor/jquery/dist/jquery.min.js
+            - bundles/sonataadmin/vendor/jquery.scrollTo/jquery.scrollTo.js
+            - bundles/sonataadmin/vendor/jqueryui/ui/minified/jquery-ui.min.js
+            - bundles/sonataadmin/vendor/jqueryui/ui/minified/i18n/jquery-ui-i18n.min.js
+            - bundles/sonatapage/sonata-page.back.min.js
+
+        stylesheets:
+            - bundles/sonataadmin/vendor/AdminLTE/css/font-awesome.min.css
+            - bundles/sonataadmin/vendor/jqueryui/themes/flick/jquery-ui.min.css
+            - bundles/sonatapage/sonata-page.back.min.css
+
 sonata_notification:
     admin:
         enabled: true
@@ -135,6 +171,29 @@ sonata_seo:
             'xmlns':              http://www.w3.org/1999/xhtml
             'xmlns:og':           http://opengraphprotocol.org/schema/
             #'xmlns:fb':           "http://www.facebook.com/2008/fbml"
+
+sonata_news:
+    title:        "Les blogs d'Euradio"
+    link:         http://euradionantes.eu
+    description:  "L’Europe vue d'une autre oreille"
+    salt:         'yoiuplaboumsitck'
+    permalink_generator: sonata.news.permalink.date # sonata.news.permalink.collection
+
+    comment:
+        notification:
+            # @todo: move this to parameters.yml
+            emails:   [webmaster@euradionantes.eu]
+            from:     no-reply@euradionantes.eu
+            template: 'SonataNewsBundle:Mail:comment_notification.txt.twig'
+
+sonata_formatter:
+    formatters:
+        markdown:
+            service: sonata.formatter.text.markdown
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+                - sonata.media.formatter.twig
 
 sonata_cache:
 #    caches:

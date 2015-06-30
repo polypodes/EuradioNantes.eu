@@ -30,12 +30,25 @@ class AppKernel extends Kernel
             new Sonata\PageBundle\SonataPageBundle(),
             new Sonata\CacheBundle\SonataCacheBundle(),
             new Sonata\NotificationBundle\SonataNotificationBundle(),
+            new Sonata\ClassificationBundle\SonataClassificationBundle(),
+            new Sonata\NewsBundle\SonataNewsBundle(),
+            new Sonata\DatagridBundle\SonataDatagridBundle(),
+            new Sonata\FormatterBundle\SonataFormatterBundle(),
+            //new Sonata\UserBundle\SonataUserBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             # Sonata deps
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             # Overrided Sonata bundles
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
             new Application\Sonata\NotificationBundle\ApplicationSonataNotificationBundle(),
+            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
+            new Application\Sonata\PageBundle\ApplicationSonataPageBundle(),
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
