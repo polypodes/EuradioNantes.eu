@@ -34,7 +34,6 @@ class AppKernel extends Kernel
             new Sonata\NewsBundle\SonataNewsBundle(),
             new Sonata\DatagridBundle\SonataDatagridBundle(),
             new Sonata\FormatterBundle\SonataFormatterBundle(),
-            //new Sonata\UserBundle\SonataUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             # Sonata deps
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
