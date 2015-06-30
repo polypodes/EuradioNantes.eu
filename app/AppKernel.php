@@ -18,7 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
 
-            // Sonata & direct deps
+            // Sonata
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
             new Sonata\MediaBundle\SonataMediaBundle(),
@@ -26,11 +26,16 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
-
+            new Sonata\SeoBundle\SonataSeoBundle(),
+            new Sonata\PageBundle\SonataPageBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Sonata\NotificationBundle\SonataNotificationBundle(),
+            # Sonata deps
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-
+            # Overrided Sonata bundles
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new Application\Sonata\NotificationBundle\ApplicationSonataNotificationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

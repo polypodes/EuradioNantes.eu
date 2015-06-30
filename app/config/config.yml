@@ -72,6 +72,8 @@ doctrine:
                 mappings:
                     ApplicationSonataMediaBundle: ~
                     SonataMediaBundle: ~
+                    SonataNotificationBundle: ~
+                    ApplicationSonataNotificationBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
