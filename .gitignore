@@ -30,8 +30,7 @@
 /app/phpunit.xml
 /phpunit.xml
 
-# Build data
+# Bin & Build data
 /build/
+/bin/
 
-# Composer PHAR
-/composer.phar
