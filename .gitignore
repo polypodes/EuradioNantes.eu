@@ -25,6 +25,8 @@
 # Assets and user uploads
 /web/bundles/
 /web/uploads/
+/bower_components/
+
 
 # PHPUnit
 /app/phpunit.xml
