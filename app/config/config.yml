@@ -70,6 +70,7 @@ doctrine:
         entity_managers:
             default:
                 mappings:
+                    ApplicationSonataMediaBundle: ~
                     SonataMediaBundle: ~
 
 # Swiftmailer Configuration
