@@ -5,17 +5,19 @@ Built atop [Symfony2](http://symfony.com) & [Sonata Project](http://sonata-proje
 
 Initiated [here, 2 years ago](https://github.com/DILL44/euradio), currently in a new WIP state,
 
-## Installing via GitHub
+## Installation
+
+### Installing via GitHub
 
 ```bash
     $ git clone https://github.com/polypodes/EuradioNantes.eu.git
 ```
 
-## Creating users
+### Creating users
 
 Check out [FOSUser documentation](https://github.com/FriendsOfSymfony/FOSUserBundle/blob/v1.3.6/Resources/doc/command_line_tools.md)
 
-## Creating website
+### Creating website
 
 Command lines to create a website on a `euradionantes2015` local host, with `fr` locale.
 
@@ -36,7 +38,9 @@ You can now create the related pages and snapshots by running the followings com
   php app/console sonata:page:create-snapshots --site=1
 ``
 
-## License Information
-git s
-MIT Licensed. You can find a copy of this software here: [polypodes/EuradioNantes.eu](https://github.com/polypodes/EuradioNantes.eu)
+## License
+
+MIT Licensed.
+
+You can find a copy of this software here: [polypodes/EuradioNantes.eu](https://github.com/polypodes/EuradioNantes.eu)
 
