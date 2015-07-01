@@ -42,10 +42,13 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             # Overrided Sonata bundles
+
+
+            new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
+            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
             new Application\Sonata\NotificationBundle\ApplicationSonataNotificationBundle(),
-            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
             new Application\Sonata\PageBundle\ApplicationSonataPageBundle(),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
         );

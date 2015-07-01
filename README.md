@@ -7,19 +7,23 @@ Initiated [here, 2 years ago](https://github.com/DILL44/euradio), currently in a
 
 ## Installation
 
-### Installing via GitHub
+### 1/3 Install via GitHub
 
 ```bash
     $ git clone https://github.com/polypodes/EuradioNantes.eu.git
+    $ cd EuradioNantes.eu
+    $ composer install
 ```
 
-### Creating users
+Then create a local vhost: An Apache 2.4 vhost configuration is given in `/doc`.
+
+### 2/3 Create users
 
 Check out [FOSUser documentation](https://github.com/FriendsOfSymfony/FOSUserBundle/blob/v1.3.6/Resources/doc/command_line_tools.md)
 
-### Creating website
+### 3/3 Create website
 
-Command lines to create a website on a `euradionantes2015` local host, with `fr` locale.
+Command lines to create a website on a `euradionantes2015` local vhost, with `fr` locale.
 
 ```bash
 php app/console  sonata:page:create-site --enabled=true --name=EuradioNantes --locale=fr --host=euradionantes2015 --relativePath=/ --enabledFrom=now --enabledTo="+20 years" --default=true 
