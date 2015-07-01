@@ -26,6 +26,7 @@
 /web/bundles/
 /web/uploads/
 /bower_components/
+/web/bower_components/
 
 
 # PHPUnit

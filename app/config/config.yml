@@ -78,6 +78,7 @@ doctrine:
                     SonataClassificationBundle: ~
                     ApplicationSonataUserBundle: ~
                     SonataUserBundle: ~
+                    FOSUserBundle: ~
                     ApplicationSonataPageBundle: ~
                     SonataPageBundle: ~
 
@@ -99,6 +100,12 @@ fos_user:
 
     service:
         user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm
+    profile:  # Authentication Form
+        form:
+            type:               fos_user_profile
+            handler:            fos_user.profile.form.handler.default
+            name:               fos_user_profile_form
+            validation_groups:  [Authentication] # Please note : this is not the default valu
 
 cmf_routing:
     chain:

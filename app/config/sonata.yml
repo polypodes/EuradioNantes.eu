@@ -1,3 +1,4 @@
+sonata_core: ~
 sonata_block:
     default_contexts: [cms]
     # Sonata Page:
@@ -24,8 +25,19 @@ sonata_block:
         #sonata.block.service.action:
 
 sonata_user:
-    security_acl: true
     manager_type: orm # can be orm or mongodb
+    #security_acl: true
+    security_acl: false
+    class:
+        user:         Application\Sonata\UserBundle\Entity\User
+        group:        Application\Sonata\UserBundle\Entity\Group
+
+    profile:  # Profile Form (firstname, lastname, etc ...)
+        form:
+            type:               sonata_user_profile
+            handler:            sonata.user.profile.form.handler.default
+            name:               sonata_user_profile_form
+            validation_groups:  [Profile]
 
 sonata_media:
     # if you don't use default namespace configuration
