@@ -1,5 +1,6 @@
 # [Euradionantes.eu](http://www.euradionantes.eu) Web Platform
 
+# Work in progress: [check out dev branch](https://github.com/polypodes/EuradioNantes.eu/tree/dev)
 
 Built atop [Symfony2](http://symfony.com) & [Sonata Project](http://sonata-project.org).
 
