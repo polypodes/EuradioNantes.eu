@@ -28,7 +28,6 @@
 /bower_components/
 /web/bower_components/
 
-
 # PHPUnit
 /app/phpunit.xml
 /phpunit.xml
@@ -36,4 +35,5 @@
 # Bin & Build data
 /build/
 /bin/
+/dumps/
 
