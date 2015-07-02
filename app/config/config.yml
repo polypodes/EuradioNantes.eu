@@ -89,6 +89,8 @@ doctrine:
                     ProgramBundle: ~
                     PodcastBundle: ~
                     MenuBundle: ~
+                    CarrouselBundle: ~
+                    StaticContentBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

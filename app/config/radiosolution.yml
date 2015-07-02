@@ -50,11 +50,48 @@ services:
     radioSolution.menu.menu:
         class: RadioSolution\MenuBundle\Admin\MenuAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: menu, label: menu }
+            - { name: sonata.admin, manager_type: orm, group: 'Menus', label: 'Menus' }
         arguments: [null, RadioSolution\MenuBundle\Entity\Menu, "SonataAdminBundle:CRUD"]
 
     radioSolution.menu.item:
         class: RadioSolution\MenuBundle\Admin\ItemAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: menu, label: item }
+            - { name: sonata.admin, manager_type: orm, group: 'Menus', label: 'Entrées' }
         arguments: [null, RadioSolution\MenuBundle\Entity\Item, "SonataAdminBundle:CRUD"]
+
+    radioSolution.carrousel.slider:
+        class: RadioSolution\CarrouselBundle\Admin\SliderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Carousels' }
+        arguments: [null, RadioSolution\CarrouselBundle\Entity\Slider, "SonataAdminBundle:CRUD"]
+
+    radioSolution.carrousel.item:
+        class: RadioSolution\CarrouselBundle\Admin\ItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Éléments de carousel'}
+        arguments: [null, RadioSolution\CarrouselBundle\Entity\Item, "SonataAdminBundle:CRUD"]
+
+    radioSolution.carrousel.customItem:
+        class: RadioSolution\CarrouselBundle\Admin\CustomItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Éléments de carousel personnalisés'}
+        arguments: [null, RadioSolution\CarrouselBundle\Entity\CustomItem, "SonataAdminBundle:CRUD"]
+
+    radioSolution.staticContent.staticContent:
+        class: RadioSolution\StaticContentBundle\Admin\StaticContentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sonata_page, label_catalogue: "%sonata.page.admin.site.translation_domain%", label: "Contenus statiques", label_translator_strategy: "sonata.admin.label.strategy.underscore"}
+        arguments: [null, RadioSolution\StaticContentBundle\Entity\StaticContent, "SonataAdminBundle:CRUD"]
+
+    radioSolution.staticContent.CategorystaticContent:
+        class: RadioSolution\StaticContentBundle\Admin\CategoryStaticContentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sonata_page, label_catalogue: "%sonata.page.admin.site.translation_domain%", label: "Catégories contenus statiques", label_translator_strategy: "sonata.admin.label.strategy.underscore"}
+        arguments: [null, RadioSolution\StaticContentBundle\Entity\CategoryStaticContent, "SonataAdminBundle:CRUD"]
+
+    radioSolution.staticContent.DailymediastaticContent:
+        class: RadioSolution\StaticContentBundle\Admin\DailymediaStaticContentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label_catalogue: "%sonata.page.admin.site.translation_domain%", label: "Dailymedia contenus statiques", label_translator_strategy: "sonata.admin.label.strategy.underscore"}
+        arguments: [null, RadioSolution\StaticContentBundle\Entity\DailymediaStaticContent, "SonataAdminBundle:CRUD"]
+

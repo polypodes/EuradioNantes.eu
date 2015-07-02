@@ -1,0 +1,23 @@
+<h1>{{ entity.name }}</h1>
+<p>{{ entity.body }}</p>
+		<div class="navigation">
+	    	{{ entities.render()|raw }}
+		</div>	
+{% for entity in entities %}
+	<div class="static-page_list">
+	{% if entity.getImage() %}
+		<a href="/article/{{ entity.getSlug() }}">
+			{%media entity.getImage() ,'medium' %}
+		</a>
+	{% endif %}
+	
+	<a href="/article/{{ entity.getSlug() }}">
+		<h3>{{ entity.name }}</h3>
+	</a>
+	<p>{{ entity.introduction| truncate(270, true, "...") }}</p>
+	<a href="/article/{{ entity.getSlug() }}" id="plus">lire la suite</a>
+	</div>
+{% endfor %}
+		<div class="navigation">
+	    	{{ entities.render()|raw }}
+		</div>	
