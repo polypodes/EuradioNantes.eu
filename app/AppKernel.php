@@ -60,6 +60,7 @@ class AppKernel extends Kernel
             # RadioSolution
             new RadioSolution\ProgramBundle\ProgramBundle(),
             new RadioSolution\PodcastBundle\PodcastBundle(),
+            new RadioSolution\MenuBundle\MenuBundle(),
 
         );
 

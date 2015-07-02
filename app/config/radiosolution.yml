@@ -46,3 +46,15 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'Podcast', label: 'Podcasts' }
         arguments: [null, RadioSolution\PodcastBundle\Entity\Podcast, "SonataAdminBundle:CRUD"]
+
+    radioSolution.menu.menu:
+        class: RadioSolution\MenuBundle\Admin\MenuAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: menu, label: menu }
+        arguments: [null, RadioSolution\MenuBundle\Entity\Menu, "SonataAdminBundle:CRUD"]
+
+    radioSolution.menu.item:
+        class: RadioSolution\MenuBundle\Admin\ItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: menu, label: item }
+        arguments: [null, RadioSolution\MenuBundle\Entity\Item, "SonataAdminBundle:CRUD"]
