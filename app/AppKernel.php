@@ -63,6 +63,7 @@ class AppKernel extends Kernel
             new RadioSolution\CarrouselBundle\CarrouselBundle(),
             new RadioSolution\ContactBundle\ContactBundle(),
             new RadioSolution\PubBundle\PubBundle(),
+            new RadioSolution\SearchBundle\SearchBundle(),
 
         );
 

@@ -19,6 +19,10 @@ ContactBundle:
     resource: "@ContactBundle/Resources/config/routing.yml"
     prefix:   /
 
+SearchBundle:
+    resource: "@SearchBundle/Resources/config/routing.yml"
+    prefix:   /
+
 # Sonata
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
