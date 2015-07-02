@@ -14,18 +14,14 @@ namespace RadioSolution\PodcastBundle\Provider;
 
 use Symfony\Component\Finder\Finder;
 
-use Sonata\MediaBundle\Entity\MediaManager;
-
-use Sonata\MediaBundle\Provider\FileProvider;
-
-use Application\Sonata\MediaBundle\Entity\Media;
-
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\CDN\CDNInterface;
 use Sonata\MediaBundle\Generator\GeneratorInterface;
 use Sonata\MediaBundle\Thumbnail\ThumbnailInterface;
 
 use Sonata\AdminBundle\Form\FormMapper;
+
+use Sonata\CoreBundle\Model\Metadata;
 use Sonata\CoreBundle\Validator\ErrorElement;
 
 use Symfony\Component\HttpFoundation\File\File;
@@ -38,6 +34,8 @@ use Gaufrette\Filesystem;
 use Sonata\MediaBundle\Provider\BaseProvider as BaseProvider;
 
 
+
+// @todo revamp hardcoded pathes: uploads/ftp, /var/www/..., etc.
 class PodcastProvider extends BaseProvider
 {
 	protected $fileName;
@@ -62,6 +60,14 @@ class PodcastProvider extends BaseProvider
         $this->allowedMimeTypes  = Array('audio/mpeg','audio/mp3','audio/ogg');
 
 
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProviderMetadata()
+    {
+        return new Metadata($this->getName(), $this->getName().'.description', false, 'RadioSolutionPodcastBundle', array('class' => 'fa fa-file-sound-o'));
     }
 
     /**
@@ -156,10 +162,12 @@ class PodcastProvider extends BaseProvider
         $this->setFileContents($media);
         $this->generateThumbnails($media);
         $this->mp32OggFile($media);
+        # @todo Dude, please explain me that shitty condition:
         if(strstr($this->fileName,'uploads/ftp')){
         	unlink($this->fileName);
         }else{
-        	unlink($this->fileName);
+            die(var_dump(__DIR__));
+        	//unlink($this->fileName);
         }
     }
 
@@ -194,8 +202,6 @@ class PodcastProvider extends BaseProvider
      * @throws \RuntimeException
      *
      * @param \Sonata\MediaBundle\Model\MediaInterface $media
-     *
-     * @return
      */
     protected function fixBinaryContent(MediaInterface $media)
     {
@@ -269,6 +275,7 @@ class PodcastProvider extends BaseProvider
     public function updateMetadata(MediaInterface $media, $force = true)
     {
         // this is now optimized at all!!!
+        // tu m'étonnes.
         $path = tempnam(sys_get_temp_dir(), 'sonata_update_metadata');
         $fileObject = new \SplFileObject($path, 'w');
         $fileObject->fwrite($this->getReferenceFile($media)->getContent());

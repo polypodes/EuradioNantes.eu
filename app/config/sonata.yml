@@ -54,6 +54,7 @@ sonata_media:
                 - sonata.media.provider.youtube
                 - sonata.media.provider.image
                 - sonata.media.provider.file
+                - sonata.media.provider.podcast # custom
             # @todo check against actual params in production
             formats:
                 small: { width: 100 , quality: 70}
