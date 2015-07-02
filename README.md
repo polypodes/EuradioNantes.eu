@@ -13,11 +13,22 @@ Initiated [here, 2 years ago](https://github.com/DILL44/euradio), currently in a
     $ git clone https://github.com/polypodes/EuradioNantes.eu.git
     $ cd EuradioNantes.eu
     $ composer install
+    $ php app/console doctrine:database:create
+    $ php app/console doctrine:schema:update --force
 ```
 
 Then create a local vhost: An Apache 2.4 vhost configuration is given in `/doc`.
 
 ### 2/3 Create users
+
+Create a `admin`/`admin` + `user`/`user` logins.
+
+```bash
+php app/console fos:user:create admin admin@domain.com admin --super-admin
+php app/console fos:user:create user user@domain.com user
+php app/console fos:user:promote user SONATA
+```
+
 
 Check out [FOSUser documentation](https://github.com/FriendsOfSymfony/FOSUserBundle/blob/v1.3.6/Resources/doc/command_line_tools.md)
 
