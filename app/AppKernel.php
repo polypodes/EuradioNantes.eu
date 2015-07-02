@@ -64,6 +64,7 @@ class AppKernel extends Kernel
             new RadioSolution\ContactBundle\ContactBundle(),
             new RadioSolution\PubBundle\PubBundle(),
             new RadioSolution\SearchBundle\SearchBundle(),
+            new RadioSolution\SurveyBundle\SurveyBundle(),
 
         );
 

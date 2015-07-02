@@ -92,6 +92,7 @@ doctrine:
                     CarrouselBundle: ~
                     StaticContentBundle: ~
                     PubBundle: ~
+                    SurveyBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
