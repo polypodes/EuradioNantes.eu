@@ -91,6 +91,7 @@ doctrine:
                     MenuBundle: ~
                     CarrouselBundle: ~
                     StaticContentBundle: ~
+                    PubBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -95,3 +95,9 @@ services:
             - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label_catalogue: "%sonata.page.admin.site.translation_domain%", label: "Dailymedia contenus statiques", label_translator_strategy: "sonata.admin.label.strategy.underscore"}
         arguments: [null, RadioSolution\StaticContentBundle\Entity\DailymediaStaticContent, "SonataAdminBundle:CRUD"]
 
+    radioSolution.pub.pub:
+        class: RadioSolution\PubBundle\Admin\PubAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Pub' }
+        arguments: [null, RadioSolution\PubBundle\Entity\Pub, "SonataAdminBundle:CRUD"]
+
