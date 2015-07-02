@@ -2,6 +2,15 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
+# RadioSolution
+ProgramBundle:
+    resource: "@ProgramBundle/Resources/config/routing.yml"
+    prefix:   /
+
+PodcastBundle:
+    resource: "@PodcastBundle/Resources/config/routing.yml"
+    prefix:   /
+
 # Sonata
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'

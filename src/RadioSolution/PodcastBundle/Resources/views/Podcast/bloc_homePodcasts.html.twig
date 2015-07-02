@@ -1,0 +1,159 @@
+
+<div id="main_content home-podcast">
+
+	<div class='top-left home-top-left'>
+	
+		<h3>A la Une</h3>
+
+		<ul id="carrousel-homepodcasts" style="width:100%; margin:0; overflow:hidden; margin-bottom:7px;" >
+
+			{% for podcast in theOne %}
+			
+			<li style="list-style:none; float:left; display:inline; margin:0 0px;  position:relative;">
+				<!-- 
+				<section class="block top group">
+					<div class='top-left'>
+				 -->
+						<a href="/blog/{{ podcast.getSlug() }}">
+							{%media podcast.getPostImage() ,'big' with {'title': podcast.getPostTitle()|striptags|raw}%}
+						</a>
+					
+						<h2>
+							<a href="/blog/{{ podcast.getSlug() }}">
+								<span class="title">{{ podcast.getPostTitle()|striptags|raw  }}</span><br/>
+								<span class="subtitle">{{ podcast.getPostAbstract()|striptags |raw}}</span>				
+							</a>
+						</h2>
+				<!-- 		
+					</div>
+					{% if showPlayer %}
+						<audio class="main" controls="controls" preload="none" >
+							<source src="{% path podcast.filePodcast, 'reference' %}.ogg" type="audio/ogg" />
+							<source src="{% path podcast.filePodcast, 'reference' %}" type="audio/mpeg" />
+							<a href="{% path podcast.filePodcast, 'reference' %}" target="_blank">Téléchargez le podcast</a>
+						</audio>	
+					{% endif %}
+					
+				</section>
+				-->
+			</li>
+			
+			{% endfor %}
+						
+		</ul>
+		
+	<div class="carrousel-toolbar">                       
+		<a class="carrousel-left-homepodcasts left" href="#" onclick="slidCarrousel(homepodcasts)">	
+		</a>
+		<!-- 
+		<div id="slider-range-max-homepodcasts"></div>
+		 -->
+		
+		<a class="carrousel-right-homepodcasts right" href="#" onclick="slidCarrousel(homepodcasts)">
+		</a>    
+	</div>
+		
+	</div>
+
+<section class="entry group" style="width:100%;">
+	<ul class="gallery-list group">
+	
+	{% set class = 'first'%}
+	
+	{% for entity in entities %}
+	
+		    <li class="{{ class }}">
+		    
+				<a href="/blog/{{ entity.getSlug() }}">
+					<figure>
+						<div class="image">
+							{%media entity.getPostImage() ,'medium' with {'title': entity.getPostTitle()}%}
+							<h2>
+								<span>{{ entity.getPostTitle() }}</span>
+							</h2>
+						</div>
+					</figure>
+				</a>
+				{% if showPlayer %}	
+					<audio controls="controls" preload="none" >
+						<source src="{% path entity.filePodcast, 'reference' %}.ogg" type="audio/ogg" />
+						<source src="{% path entity.filePodcast, 'reference' %}" type="audio/mpeg" />
+						<a href="{% path entity.filePodcast, 'reference' %}" target="_blank">Téléchargez le podcast</a>
+					</audio>
+				{% endif %}		
+				{% if entity.realtimestart %}
+				<div class="heure-podcast">
+					<span>
+						{{ entity.realtimestart|date('d/m') }}<br/>
+						{{ entity.realtimestart|date('Y') }}<br/>
+						{{ entity.realtimestart|date('H') }}h{{ entity.realtimestart|date('i') }}
+					</span>
+				</div>
+				{% endif %}	
+									
+				<span class="titre-post">
+					<a href="/blog/{{ entity.getSlug() }}">{{ entity.getPostAbstract() | truncate(80, true, "...")  }}</a>
+				</span>
+
+				<a class="plus" href="/blog/{{ entity.getSlug() }}">lire la suite</a>
+
+			</li>
+			
+			{% if  class == 'first'%}
+				{% set class = ''%}
+			{% else %}
+				{% set class = 'first'%}
+			{% endif %}
+		
+	{% endfor %}	
+	</ul>
+</section>
+<script type="text/javascript" language="javascript" src="/bundles/carrousel/jquery.carouFredSel-5.6.4-packed.js"></script>
+<script type="text/javascript">
+	function slidCarrousel(id){
+		tpj("#slider-range-max-"+id ).slider( "value",tpj("#carrousel-"+id).triggerHandler("currentPosition"));
+		tpj("#test-"+id ).text("slider: "+tpj("#slider-range-max-"+id ).slider( "value" )+"carrousel: "+tpj("#carrousel-"+id).triggerHandler("currentPosition"));
+	};
+
+	var tpj=jQuery;
+	tpj.noConflict();
+	tpj(document).ready(function() {
+		tpj("#carrousel-homepodcasts").carouFredSel({
+			width:620,
+			height:310,
+			next: '.carrousel-right-homepodcasts',
+			prev: '.carrousel-left-homepodcasts',
+			auto : {
+				/*easing      : "elastic",*/
+				duration    : 1000,
+				timeoutDuration: 2000,
+				pauseOnHover: true
+			},
+			scroll      : {
+				items:1
+				},
+			items: {
+				visible:1
+				}
+		});
+		
+		tpj(function() {
+			tpj( "#slider-range-max-homepodcasts" ).slider({
+				min: 0,
+				max: 3-1,
+				value: 0,
+				slide: function( event, ui ) {
+					if (ui.value>=3-1){
+						var val=0;
+					}else{
+						var val=ui.value-1;
+					}
+					tpj("#carrousel-homepodcasts").trigger('slideTo', val);
+					tpj("#test-homepodcasts" ).text("slider: "+tpj("#slider-range-max-homepodcasts" ).slider( "value" )+"carrousel: "+tpj("#carrousel-homepodcasts").triggerHandler("currentPosition"));
+				}
+			});
+		});
+	});
+</script>
+
+</div>

@@ -51,6 +51,16 @@ class AppKernel extends Kernel
             new Application\Sonata\NotificationBundle\ApplicationSonataNotificationBundle(),
             new Application\Sonata\PageBundle\ApplicationSonataPageBundle(),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+
+            # Misc
+            new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+
+            # RadioSolution
+            new RadioSolution\ProgramBundle\ProgramBundle(),
+            new RadioSolution\PodcastBundle\PodcastBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
