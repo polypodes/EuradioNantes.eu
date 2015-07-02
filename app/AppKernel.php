@@ -65,7 +65,7 @@ class AppKernel extends Kernel
             new RadioSolution\PubBundle\PubBundle(),
             new RadioSolution\SearchBundle\SearchBundle(),
             new RadioSolution\SurveyBundle\SurveyBundle(),
-
+            new RadioSolution\RSSAgregatorBundle\RSSAgregatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

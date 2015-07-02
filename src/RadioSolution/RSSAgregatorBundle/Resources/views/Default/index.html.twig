@@ -1,0 +1,12 @@
+<aside class="widget list">
+<h3>{% if title != '' %}{{ title.name }}{%else%}Revue de presse Européenne{% endif %}</h3>
+
+		<ul>
+			{% for feed in allFeeds %}
+				<li>
+					{{ feed.date }} - {{ feed.name }}<br/>
+					<a href="{{ feed.link }}" alt="{{ feed.title }}" target="_blank">{{ feed.title|truncate(78) }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+</aside>

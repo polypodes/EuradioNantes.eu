@@ -93,6 +93,7 @@ doctrine:
                     StaticContentBundle: ~
                     PubBundle: ~
                     SurveyBundle: ~
+                    RSSAgregatorBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

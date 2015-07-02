@@ -107,3 +107,15 @@ services:
             - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Sondages' }
         arguments: [null, RadioSolution\SurveyBundle\Entity\Survey, "SonataAdminBundle:CRUD"]
 
+    radioSolution.RSSAgregator.RSSfile:
+        class: RadioSolution\RSSAgregatorBundle\Admin\RSSAgregatorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Agrégateur RSS' }
+        arguments: [null, RadioSolution\RSSAgregatorBundle\Entity\RSSfile, "SonataAdminBundle:CRUD"]
+
+    radioSolution.RSSAgregator.RSSagregator:
+        class: RadioSolution\RSSAgregatorBundle\Admin\RSSAgregatorContenerAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Conteneur d’agrégateurs RSS' }
+        arguments: [null, RadioSolution\RSSAgregatorBundle\Entity\RSSagregator, "SonataAdminBundle:CRUD"]
+
