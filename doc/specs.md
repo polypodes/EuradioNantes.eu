@@ -71,14 +71,13 @@ La liste des émissions est disponible sous 3 formats :
 
 	
 Les émissions et programmes sont classés par catégories :
+(1 seule catégorie possible)
 
 - Musical
 - Infos
 - Débats
 
-préciser : 
-- la classification est administrable dans le back-office,
-- dans le front, quel est l'usage / l'UX de cette classification ?
+Cette classification est administrable dans le back-office au niveau de l'émission
 
 #### La musique
 
@@ -121,9 +120,7 @@ Utiliser Elastic Search ou Google Search
 - Youtube
 - Flickr
 
-**Préciser :**
-- Ce ne sont que des liens vers les pages Euradionantes de ces différents réseaux sociaux ?
-- Ce ne sont pas des liens de partage pré-configurés ?
+Ce ne sont que des liens vers les pages Euradionantes de ces différents réseaux sociaux
 
 ### Inscription à la newsletter
 
@@ -138,17 +135,12 @@ Cette page est composée de contenus éditoriaux, des actualités et des podcast
 Les actualités sont ordonnées manuellement.
 Les formats des actualités, entre autre les images, doivent être compatible avec la publication sur Facebook (Opengraph).
 
-### Plusieurs niveaux de mise en forme d’actualités :
+### (description de la HP) Plusieurs niveaux de mise en forme d’actualités :
 
-#### Actualité principale (grande image)
+= En HP on choisit de mettre en avant des blocks de podcasts ou d'actualités
 
-- image
-- date
-- catégorie
-- titre court
-- résumé
+#### Actualité principale (grande image) ou Podcast
 
-Deux ou trois (a définir avec le volume disponible en créa) **actualités secondaires**
 
 - image
 - date
@@ -156,14 +148,22 @@ Deux ou trois (a définir avec le volume disponible en créa) **actualités seco
 - titre court
 - résumé
 
-#### Des actualités courtes, 4-5
+Deux ou trois (a définir avec le volume disponible en créa) **actualités secondaires** ou Podcasts
+
+- image
+- date
+- catégorie
+- titre court
+- résumé
+
+#### Des actualités courtes, 4-5 ou ou Podcasts
 
 - date
 - catégorie
 - titre court
 - résumé
 
-#### Des brèves 6-7
+#### Des brèves 6-7 ou ou Podcasts
 
 - date
 - catégorie
@@ -177,11 +177,10 @@ Deux ou trois (a définir avec le volume disponible en créa) **actualités seco
 - titre court
 - résumé
 
-**TODO** A partir d'ici expliquer/préciser s'il l'on parle de modèles de contenus administrables dans le backoffice ou bien de gabarits de page dans le front-office. Si un contenu est décrit deux ou trois fois (ex : les émissions), préciser s'il s'agit d'un affichage particulier dans le front ou de la liste exhaustive des champs à prévoir dans le back-office. 
 
-## La radio
+## (UX) La radio
 
-Gabarits de pages d’articles géré en arborescence sur un seul niveau n2
+Gabarits de **pages de contenus** gérées en arborescence sur un seul niveau n2
 
 - titre de page
 - titre cours menu
@@ -214,10 +213,12 @@ actualités par ordre chronologique
 
 ### Page détail
 
+(liste complète des champs d'actu :)
+
 - titre de page
 - titre cours menu (non affiché)
 - date
-- catégorie
+- catégories
 - résumé RTE
 - contenu RTE
 - image
@@ -228,7 +229,7 @@ actualités par ordre chronologique
 	- commentaires (pas de limite du nombre de caractères)
 	- captcha
 	- soumettre
-- Actualités liés
+- Actualités ou Podcast liés (s'affiche ainsi :)
 	- titre court
 	- catégorie
 	- résumé
@@ -241,7 +242,7 @@ actualités par ordre chronologique
 
 ### Les émissions
 
-#### Toute la grille
+#### Toute la grille (UX)
 
 - titre
 - texte RTE
@@ -249,10 +250,10 @@ actualités par ordre chronologique
 
 #### Liste programme de la semaine
 
-La gestion de la grille est à calquer sur l'ancienne version et à améliorer si possible. Déterminer comment gérer la récursivité.
+La gestion de la grille est à calquer sur l'ancienne version et à améliorer si possible. Déterminer comment gérer la récursivité (déjà géré on ne change rien).
 
 
-- Affichage par créneaux horaires 
+- Affichage par créneaux horaires, découpage en matinée, après midi, soirée, nuit
 	- titre court
 	- heure de début
 	- heure de fin
@@ -260,15 +261,15 @@ La gestion de la grille est à calquer sur l'ancienne version et à améliorer s
 - navigation par jours
 	- numéro de semaine, suivante / précédente
 	- jour de la semaine en lien
-	- découpage en matinée, après midi, soirée, nuit
-- trie par catégorie (mise en évidence dans la page des ressources triées)
+	- découpage en matinée, après midi, soirée, nuit => limites horaires comme actuellement
+- trie par catégorie (une seule) (mise en évidence dans la page des ressources triées)
 	- musicale
 	- Info
 	- Débat 
 
-#### Les émissions de A à Z
+#### Les émissions de A à Z (c'est une page)
 
-Emissions classées par ordre chronologique
+Emissions classées par ordre alpha
 
 - titre court
 - image
@@ -277,9 +278,9 @@ Emissions classées par ordre chronologique
 	- musicale
 	- Info
 	- Débat 
-- Filtre par langue
+- Filtre par langue => vérifier qu'il est dans le modèle de données 
 
-### Émissions
+### Description du modèle de donnée "Émission"
 
 - titre de page
 - titre cours menu (sur liste)
@@ -309,8 +310,13 @@ Emissions classées par ordre chronologique
 	- résumé
 	- lecteur audio
 - pagination suivant / précédent, nb de page
+- langue
  
-### Podcast
+### Langue
+
+Voir si cela s'applique  l'émission ou au podcast (item d'une émission)
+
+### Modèle de donnée et fonctionnement des Podcasts
 
 Le podcast peut être en ligne dés que publié mais la lecture audio n'est possible que lorsque la date de diffusion est révolue.
 
@@ -328,10 +334,10 @@ Back office : gérer la création des podcasts sur une seule interface (ajout so
 - image
 - lecteur audio
 - URL
-- marqueur
+- marqueurs : [
 	- titre
-	- valeur temporelle
-- télécharger le podcast
+	- valeur temporelle ]
+ - télécharger le podcast
 	- Type de fichier
 	- Poids
 	- lien de téléchargement direct du MP3
@@ -421,7 +427,7 @@ Les titres sont chapeauté "session musicale"
 - pays
 - année de sortie
 
-#### Navigation
+#### Navigation dans "c'est quoi ce titre"
 
 Il est possible de naviguer sur une semaine de programmation. ??? a valider
 
@@ -430,7 +436,7 @@ Il est possible de naviguer sur une semaine de programmation. ??? a valider
 - affichage de l'évènement en cours
 - affichage de l'évènement précédent
 
-### la playlist
+### la playlist (une rubrique)
 
 L’administrateur recherche dans la liste des albums importés et les ajoute à la playlist qu’il a créé. 
 L’interface d'administration permet une recherche de albums par nom.
@@ -456,7 +462,7 @@ L’interface d'administration permet une recherche de albums par nom.
 	- image
 - navigation playlist suivante / précédente
 
-### Les interviews
+### Les interviews (rubrique)
 
 Ce sont des podcasts centrés sur des interviews
 
