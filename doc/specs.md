@@ -1,4 +1,4 @@
-# Cahier des spécification Euradionantes
+# Cahier des spécification EuradioNantes - v2015
 
 *v1.0.0 - 7 juillet 2015*
 
