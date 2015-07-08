@@ -1,5 +1,6 @@
 # Cahier des spécification Euradionantes
-*v1 - 7 juillet 2015*
+
+*v1.0.0 - 7 juillet 2015*
 
 ## Sur toutes les pages
 
@@ -7,25 +8,38 @@
 
 Il existe deux niveaux d'administration sur le site
 
-- les **rédacteurs** accèdent au contenus, peuvent en créer et non le publier
+- les **rédacteurs** accèdent aux contenus, peuvent en créer mais ne peuvent pas les publier
 - Les **administrateurs** gèrent l'ensemble des fonctionnalités
+
+## Workflow de publication
 
 Les contenus peuvent être créés, publiés, dé-publiés, supprimés facilement.
 
-L'URL d'une page est créée dés son enregistrement, elle peut-être modifiée (hors numérotation et identifiant google news).
-Les URLs doivent être écrites en cohérence avec les normes Google News (https://support.google.com/news/publisher/answer/40787?hl=fr ?)
+## Gestion des URLs
+
+- L'URL d'une page est créée dés son enregistrement, elle est toujours complètement modifiable
+- - Les URLs doivent être écrites en cohérence avec les normes Google News (https://support.google.com/news/publisher/answer/40787?hl=fr ?)
+- C'est aux rédacteurs de gérer manuellement la numérotation et l'identifiant Google News, en cohérence avec les normes Google News
+
+## Gestion des medias
 
 Mettre en place un outil d'allègement des images (pagespeed d'Apache ou autre via Cron).
 
+## SEO
+
 Les Méta description et la balise title peuvent être administrées dans les pages.
 
-Mettre en place lors de la migration les principes de re-directions d'URL
+Plan de redirection : Mettre en place lors de la migration les principes de re-directions d'URL
+
+## Navigation
 
 ### Menu principal
 
-**Retour accueil**
+#### Retour accueil
 
-**La radio**, pages de contenu en arborescence n2, il est possible d'ajouter de nouvelles pages à ce niveau d'arborescence et de l'ordonner
+#### La radio
+
+Pages de contenu en arborescence n2, il est possible d'ajouter de nouvelles pages à ce niveau d'arborescence et de l'ordonner
 
 - Le projet Euradionantes
 - La radio-école
@@ -33,7 +47,11 @@ Mettre en place lors de la migration les principes de re-directions d'URL
 - Les partenaires 
 - Qui sommes-nous
 
-**L’actu**, filtre par mots clés créant la navigation, il est possible d'en ajouter
+#### L’actu 
+
+filtre par mots clés créant la navigation
+
+Ces mots-clefs sont une taxonomie pour les pages de type Actualité : ces labels sont administrables par les rédacteurs
 
 - Politique
 - Économie
@@ -43,11 +61,14 @@ Mettre en place lors de la migration les principes de re-directions d'URL
 - Revue de presse
 - Inclassables
 
-**Les émissions**, grille au format PDF, et deux formats d’affichage : programme de la semaine, émission par ordre alphabétique
+#### Les émissions
 
-- Toute la grille, lien vers un PDF
-- Le programme de la semaine, grille horaire des émission jour par jour, avec une navigation sur la semaine (structure actuelle du site à faire évoluer)
-- Toutes les émission par ordre alphabétique, pagination si nécessaire, suivante / précédente et nb de page
+La liste des émissions est disponible sous 3 formats :
+
+- fichier PDF, administrable par les rédacteurs (non généré)
+- page web du programme de la semaine : grille horaire des émission jour par jour, avec une navigation sur la semaine (structure actuelle du site à faire évoluer)
+- page web listant les émissions par ordre alphabétique, avec pagination simple si nécessaire : suivante / précédente et nb de page
+
 	
 Les émissions et programmes sont classés par catégories :
 
@@ -55,7 +76,13 @@ Les émissions et programmes sont classés par catégories :
 - Infos
 - Débats
 
-**La musique**, morceaux et albums classés par grille de diffusion, playlist, label du mois, album de la semaine. Des postcast remontés en session live et interview
+préciser : 
+- la classification est administrable dans le back-office,
+- dans le front, quel est l'usage / l'UX de cette classification ?
+
+#### La musique
+
+morceaux et albums classés par grille de diffusion, playlist, label du mois, album de la semaine. Des postcast remontés en session live et interview
 
 - C’est quoi ce titre, liste des morceaux diffusés par date et heure, morceau en cours d’écoute
 - La playlist, choix de morceaux dans la liste des albums, petit descriptif expliquant les choix, classé par date, pagination
@@ -64,12 +91,12 @@ Les émissions et programmes sont classés par catégories :
 - Le label du mois, un regroupement de morceaux et album, chapeauté d’un descriptif, classé par date
 - L’album de la semaine, un album sélectionné dans la liste, chapeauté d’un descriptif, classé par date 
 
-**Contact**
+#### Contact
 
 - Formulaire
 - Map
 
-**Menu secondaire**
+### Menu secondaire
 
 - Contact
 - Plan du site
