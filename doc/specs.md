@@ -103,25 +103,29 @@ morceaux et albums classés par grille de diffusion, playlist, label du mois, al
 - Crédits
 - Mentions légales
 
-**Le lecteur « en direct » **
+### Le lecteur « en direct »
 
 - lien vers le pop-up de lecture
 - « c’est quoi ce titre ? » 
 
-**Recherche**
+### La Recherche
 
 La page de résultats affiche les réponses par rubriques
 Utiliser Elastic Search ou Google Search
 
 
-**Liens réseaux sociaux**
+### Liens réseaux sociaux
 
 - Twitter
 - Facebook
 - Youtube
 - Flickr
 
-**Inscription à la newsletter**
+**Préciser :**
+- Ce ne sont que des liens vers les pages Euradionantes de ces différents réseaux sociaux ?
+- Ce ne sont pas des liens de partage pré-configurés ?
+
+### Inscription à la newsletter
 
 Utilise l'API Mailchimp, à relier à un compte existant
 
@@ -134,9 +138,9 @@ Cette page est composée de contenus éditoriaux, des actualités et des podcast
 Les actualités sont ordonnées manuellement.
 Les formats des actualités, entre autre les images, doivent être compatible avec la publication sur Facebook (Opengraph).
 
-Plusieurs niveaux de mise en forme d’actualités :
+### Plusieurs niveaux de mise en forme d’actualités :
 
-**Actualité principale** grande image
+#### Actualité principale (grande image)
 
 - image
 - date
@@ -152,20 +156,20 @@ Deux ou trois (a définir avec le volume disponible en créa) **actualités seco
 - titre court
 - résumé
 
-**Des actualités courtes**, 4-5
+#### Des actualités courtes, 4-5
 
 - date
 - catégorie
 - titre court
 - résumé
 
-**Des brèves** 6-7
+#### Des brèves 6-7
 
 - date
 - catégorie
 - titre court
 
-**Les podcasts** peuvent être remontés comme des **actualités** et présent sous une des formes au dessus sur la page d'accueil
+#### Les podcasts peuvent être remontés comme des **actualités** et présent sous une des formes au dessus sur la page d'accueil
 
 - image
 - date
@@ -173,7 +177,9 @@ Deux ou trois (a définir avec le volume disponible en créa) **actualités seco
 - titre court
 - résumé
 
-## La radio
+## Modèles de contenus et Gabarits de page
+
+### La radio
 
 Gabarits de pages d’articles géré en arborescence sur un seul niveau n2
 
@@ -182,7 +188,7 @@ Gabarits de pages d’articles géré en arborescence sur un seul niveau n2
 - contenu RTE
 - URL
 
-## L’actu
+### L’actu
 
 Les actualités peuvent être associées à une ou plusieurs catégorie (case à cocher).
 Il est possible d'associer des actualités ou des podcasts manuellement à une actualités pour une lecture complémentaire
@@ -233,15 +239,15 @@ actualités par ordre chronologique
 	- facebook
 	- j’aime facebook
 
-## Les émissions
+### Les émissions
 
-### Toute la grille
+#### Toute la grille
 
 - titre
 - texte RTE
 - lien Pdf à télécharger, type de fichier, poids
 
-### Liste programme de la semaine
+#### Liste programme de la semaine
 
 La gestion de la grille est à calquer sur l'ancienne version et à améliorer si possible. Déterminer comment gérer la récursivité.
 
@@ -260,7 +266,7 @@ La gestion de la grille est à calquer sur l'ancienne version et à améliorer s
 	- Info
 	- Débat 
 
-### Les émissions de A à Z
+#### Les émissions de A à Z
 
 Emissions classées par ordre chronologique
 
@@ -352,13 +358,9 @@ Back office : gérer la création des podcasts sur une seule interface (ajout so
 - lien retour vers l’émission
 
 
-## La musique
+## "La musique" : Gestion des contenus
 
-Les albums, titres et interprètes, sont récupérés via le flux fourni par l’application de programmation hébergée chez Euradionantes. 
-
-Le site interroge le serveur régulièrement (temps à définir).
-
-Lorsque le morceau est passé à l'antenne, il est rapatrié, comparé avec la base existante.
+Les albums, titres et interprètes, sont récupérés via le flux fourni par l’application de programmation hébergée chez Euradionantes. Le site interroge le serveur régulièrement (temps à définir). Lorsque le morceau est passé à l'antenne, il est rapatrié, comparé avec la base existante.
 Si pas encore référencé une fonctionnalité doit récupérer sur la base d’Amazon les information complémentaires, album, photo, et les autres titres.
 
 ### album
@@ -376,11 +378,13 @@ Si pas encore référencé une fonctionnalité doit récupérer sur la base d’
 - titre
 - infos de l'album
 
+Les titres pour lesquels aucun allbum n'a été trouvé restent orphelins.
+
 ### "C’est quoi ce titre ?" = écoute en live
 
 Les dates et heure de diffusions sont récupérées du serveur de programmation d’Euradionantes.
 Le lecteur en direct est présent dans cette pop-up., on peut donc écouter la radio.
-Si le direct est une émission, l’outil affiche les information de l’émission.
+Si d'après la programmation le direct en cours de diffusion est une émission, l’outil affiche les information de l’émission.
 La page affiche le morceau en cours écoute, celui à venir, et celui juste diffusé.
 Un lien permet de voir tous les morceaux diffusé dans la journée par créneaux horaires.
 
