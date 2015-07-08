@@ -5,19 +5,19 @@
 
 ### Administration
 
-Il existe deux niveau d'administration sur le site
+Il existe deux niveaux d'administration sur le site
 
-- les **rédacteur** accèdent au contenus, peuvent en créer et non le publier
+- les **rédacteurs** accèdent au contenus, peuvent en créer et non le publier
 - Les **administrateurs** gèrent l'ensemble des fonctionnalités
 
 Les contenus peuvent être créés, publiés, dé-publiés, supprimés facilement.
 
 L'URL d'une page est créée dés son enregistrement, elle peut-être modifiée (hors numérotation et identifiant google news).
-Les URLs doivent être écrites en cohérence avec les normes Google News
+Les URLs doivent être écrites en cohérence avec les normes Google News (https://support.google.com/news/publisher/answer/40787?hl=fr ?)
 
 Mettre en place un outil d'allègement des images (pagespeed d'Apache ou autre via Cron).
 
-Les Méta description peuvent être administrées dans les pages
+Les Méta description et la balise title peuvent être administrées dans les pages.
 
 Mettre en place lors de la migration les principes de re-directions d'URL
 
@@ -105,9 +105,9 @@ Utilise l'API Mailchimp, à relier à un compte existant
 
 Cette page est composée de contenus éditoriaux, des actualités et des podcasts formatés comme des actualités.
 Les actualités sont ordonnées manuellement.
-Les formats des actualités, entre autre les images, doivent être compatible avec la publication sur Facebook (Opengraph)
+Les formats des actualités, entre autre les images, doivent être compatible avec la publication sur Facebook (Opengraph).
 
-plusieurs niveaux de mise en forme d’actualités :
+Plusieurs niveaux de mise en forme d’actualités :
 
 **Actualité principale** grande image
 
@@ -204,9 +204,9 @@ actualités par ordre chronologique
 	- twitter
 	- Google +
 	- facebook
-	- j’ailme facebook
+	- j’aime facebook
 
-## Les émission
+## Les émissions
 
 ### Toute la grille
 
@@ -280,6 +280,7 @@ Emissions classées par ordre chronologique
 ### Podcast
 
 Le podcast peut être en ligne dés que publié mais la lecture audio n'est possible que lorsque la date de diffusion est révolue.
+
 Il faut trouver une solution permettant de chapitrer les podcasts. Mettre un marqueur dans la lecture qui affiche une information au survol, permettant d'accéder facilement à un moment clé (commentaire Ronan : il faut du contenu VTT cf W3C). Ce titre de ce marqueur est affiché lorsqu'on l'atteint dans la lecture.
 
 Back office : gérer la création des podcasts sur une seule interface (ajout son, date de diffusion, informations et émission associée, publication)
@@ -327,7 +328,9 @@ Back office : gérer la création des podcasts sur une seule interface (ajout so
 ## La musique
 
 Les albums, titres et interprètes, sont récupérés via le flux fourni par l’application de programmation hébergée chez Euradionantes. 
+
 Le site interroge le serveur régulièrement (temps à définir).
+
 Lorsque le morceau est passé à l'antenne, il est rapatrié, comparé avec la base existante.
 Si pas encore référencé une fonctionnalité doit récupérer sur la base d’Amazon les information complémentaires, album, photo, et les autres titres.
 
@@ -357,6 +360,7 @@ Un lien permet de voir tous les morceaux diffusé dans la journée par créneaux
 #### l'écoute en direct 
 
 Différents flux d'écoute sont disponibles
+
 La demande est : 
 
 - plusieurs formats MP3, OGG, AAC > déterminer si nécessaire pour les différents lecteurs HTML, et comment est fournis le fichier par Euradio
