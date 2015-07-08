@@ -177,7 +177,7 @@ Deux ou trois (a définir avec le volume disponible en créa) **actualités seco
 - titre court
 - résumé
 
-## Modèles de contenus et Gabarits de page
+**TODO** A partir d'ici expliquer/préciser s'il l'on parle de modèles de contenus administrables dans le backoffice ou bien de gabarits de page dans le front-office. Si un contenu est décrit deux ou trois fois (ex : les émissions), préciser s'il s'agit d'un affichage particulier dans le front ou de la liste exhaustive des champs à prévoir dans le back-office. 
 
 ### La radio
 
