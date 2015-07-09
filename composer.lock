@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c42e33a6096a4c42287f3c2dc1b3dc57",
+    "hash": "54e1a90abb2e5a8e696fa174c5dbf58b",
     "packages": [
         {
             "name": "cocur/slugify",
-            "version": "v1.1",
+            "version": "v1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "2b67d4e2b75dbaed2ebefa9eb5683e8940513847"
+                "reference": "5d8e48f750e4ed6528f08fe560a5032a373c3550"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/2b67d4e2b75dbaed2ebefa9eb5683e8940513847",
-                "reference": "2b67d4e2b75dbaed2ebefa9eb5683e8940513847",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/5d8e48f750e4ed6528f08fe560a5032a373c3550",
+                "reference": "5d8e48f750e4ed6528f08fe560a5032a373c3550",
                 "shasum": ""
             },
             "require": {
@@ -29,7 +29,8 @@
                 "latte/latte": "~2.2",
                 "mockery/mockery": "~0.9",
                 "nette/di": "~2.2",
-                "phpunit/phpunit": "~3.7",
+                "phpunit/phpunit": "~4.6",
+                "plumphp/plum": "~0.1",
                 "sami/sami": "~1.3",
                 "satooshi/php-coveralls": "0.6.*",
                 "silex/silex": "~1.2",
@@ -66,7 +67,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2015-03-18 08:21:30"
+            "time": "2015-07-02 20:13:51"
         },
         {
             "name": "dflydev/markdown",
@@ -2617,12 +2618,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "18a76b7bd6e2ff3fe0a4f497c08b648a1ab24bf9"
+                "reference": "413fc12eeef47176114cbd02de0dc7f31931182b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/18a76b7bd6e2ff3fe0a4f497c08b648a1ab24bf9",
-                "reference": "18a76b7bd6e2ff3fe0a4f497c08b648a1ab24bf9",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/413fc12eeef47176114cbd02de0dc7f31931182b",
+                "reference": "413fc12eeef47176114cbd02de0dc7f31931182b",
                 "shasum": ""
             },
             "require": {
@@ -2696,20 +2697,20 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-06-29 13:28:23"
+            "time": "2015-07-07 10:57:02"
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "2.3.3",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "424019957fa65c61b9aad8f212b7f53116148af3"
+                "reference": "31795c9c4ceb7e354818738be8c6dc50dc6460a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/424019957fa65c61b9aad8f212b7f53116148af3",
-                "reference": "424019957fa65c61b9aad8f212b7f53116148af3",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/31795c9c4ceb7e354818738be8c6dc50dc6460a2",
+                "reference": "31795c9c4ceb7e354818738be8c6dc50dc6460a2",
                 "shasum": ""
             },
             "require": {
@@ -2761,7 +2762,7 @@
                 "block",
                 "sonata"
             ],
-            "time": "2015-06-17 11:42:29"
+            "time": "2015-07-03 10:59:55"
         },
         {
             "name": "sonata-project/cache",
@@ -2900,12 +2901,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataClassificationBundle.git",
-                "reference": "10d7eb442922dd84b609fd6bf09a3ce106c441e4"
+                "reference": "f0a60006ec676df2ecde09ac9667d14411f0b726"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/10d7eb442922dd84b609fd6bf09a3ce106c441e4",
-                "reference": "10d7eb442922dd84b609fd6bf09a3ce106c441e4",
+                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/f0a60006ec676df2ecde09ac9667d14411f0b726",
+                "reference": "f0a60006ec676df2ecde09ac9667d14411f0b726",
                 "shasum": ""
             },
             "require": {
@@ -2958,7 +2959,7 @@
                 "tag",
                 "taxonomy"
             ],
-            "time": "2015-06-26 10:19:44"
+            "time": "2015-07-07 10:54:43"
         },
         {
             "name": "sonata-project/core-bundle",
@@ -3035,12 +3036,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDatagridBundle.git",
-                "reference": "f3be409a041083c852af160bdbf2225461f4c69b"
+                "reference": "fec0147e99b3db467152d148126e2f894c9369a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/f3be409a041083c852af160bdbf2225461f4c69b",
-                "reference": "f3be409a041083c852af160bdbf2225461f4c69b",
+                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/fec0147e99b3db467152d148126e2f894c9369a2",
+                "reference": "fec0147e99b3db467152d148126e2f894c9369a2",
                 "shasum": ""
             },
             "require": {
@@ -3084,7 +3085,7 @@
                 "datagrid",
                 "sonata"
             ],
-            "time": "2015-06-26 10:13:20"
+            "time": "2015-07-07 10:54:34"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -3141,12 +3142,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "071236bac32480df2dddccb8d12409a67008c0ff"
+                "reference": "2cd709777b571f7f7e294ad4575f38955e6da963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/071236bac32480df2dddccb8d12409a67008c0ff",
-                "reference": "071236bac32480df2dddccb8d12409a67008c0ff",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/2cd709777b571f7f7e294ad4575f38955e6da963",
+                "reference": "2cd709777b571f7f7e294ad4575f38955e6da963",
                 "shasum": ""
             },
             "require": {
@@ -3206,7 +3207,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2015-06-26 10:05:38"
+            "time": "2015-07-07 10:56:05"
         },
         {
             "name": "sonata-project/easy-extends-bundle",
@@ -3508,12 +3509,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "2b32d558d7381f360ab72526fc3d7e4570e10531"
+                "reference": "6710e7aff3caf8cb8c179a14b020e8e4ceec94eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/2b32d558d7381f360ab72526fc3d7e4570e10531",
-                "reference": "2b32d558d7381f360ab72526fc3d7e4570e10531",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/6710e7aff3caf8cb8c179a14b020e8e4ceec94eb",
+                "reference": "6710e7aff3caf8cb8c179a14b020e8e4ceec94eb",
                 "shasum": ""
             },
             "require": {
@@ -3592,7 +3593,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2015-06-29 12:04:32"
+            "time": "2015-07-07 10:56:53"
         },
         {
             "name": "sonata-project/news-bundle",
@@ -3749,12 +3750,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataPageBundle.git",
-                "reference": "717d02efd2a4e9d1094b8b429b68f03e6165b629"
+                "reference": "8019c7774fb299e7ad1dd75a7fce3dbd601fc052"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/717d02efd2a4e9d1094b8b429b68f03e6165b629",
-                "reference": "717d02efd2a4e9d1094b8b429b68f03e6165b629",
+                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/8019c7774fb299e7ad1dd75a7fce3dbd601fc052",
+                "reference": "8019c7774fb299e7ad1dd75a7fce3dbd601fc052",
                 "shasum": ""
             },
             "require": {
@@ -3818,7 +3819,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2015-06-30 14:35:02"
+            "time": "2015-07-07 10:56:24"
         },
         {
             "name": "sonata-project/seo-bundle",
@@ -4747,11 +4748,11 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "sonata-project/admin-bundle": 20,
+        "sonata-project/classification-bundle": 20,
         "sonata-project/datagrid-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20,
         "sonata-project/media-bundle": 20,
-        "sonata-project/page-bundle": 20,
-        "sonata-project/classification-bundle": 20
+        "sonata-project/page-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

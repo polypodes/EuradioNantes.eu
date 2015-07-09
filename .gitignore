@@ -32,6 +32,17 @@
 /app/phpunit.xml
 /phpunit.xml
 
+# Upgrade temp sql files and Prod sql dumps
+doc/backups/prod
+doc/upgrade/sql/v1_news__post_tag.sql
+doc/upgrade/sql/v1_news__tag.sql
+doc/upgrade/sql/v1_news__post.sql
+doc/upgrade/sql/v1_news__post_tmp.sql
+doc/upgrade/sql/v1_new__post_tmp.sql
+doc/upgrade/sql/v2_news__post_collection.sql
+doc/upgrade/sql/v2_classification__tag.sql
+
+
 # Bin & Build data
 /build/
 /bin/

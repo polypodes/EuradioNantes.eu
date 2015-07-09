@@ -38,6 +38,9 @@ PWD         := $(shell pwd)
 DB_USER	    := $(shell if [ -f app/config/parameters.yml ] ; then cat app/config/parameters.yml | grep 'database_user' | sed 's/database_user: //' | sed 's/^ *//;s/ *$$//' ; fi)
 DB_PASSWORD := $(shell if [ -f app/config/parameters.yml ] ; then cat app/config/parameters.yml | grep 'database_password' | sed 's/database_password: //' | sed 's/null//' | sed 's/^ *//;s/ *$$//' ; fi)
 DB_NAME     := $(shell if [ -f app/config/parameters.yml ] ; then cat app/config/parameters.yml | grep 'database_name' | sed 's/database_name: //' | sed 's/^ *//;s/ *$$//' ; fi)
+DB_v1DUMPSQL := doc/backups/prod/euradionantes_prod.v1.sql
+DB_SQLDIR   := doc/upgrade/sql
+DB_SQLQUIET :=  2>/dev/null
 VENDOR_PATH := $(PWD)/vendor
 BIN_PATH    := $(PWD)/bin
 WEB_PATH    := $(PWD)/web
@@ -94,6 +97,71 @@ data: vendor/autoload.php
 fixtures: vendor/autoload.php
 #	@echo "Install fixtures in db..."
 #	@php app/console dbal:fixtures:load --purge
+
+
+############################################################################
+# v1 to v2 MySQL upgrade
+
+
+importRemote: dropDb
+	@echo
+	@echo "Importing remote v1 sql backup into a new empty db..."
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} -e 'CREATE DATABASE ${DB_NAME}' ${DB_SQLQUIET}
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_v1DUMPSQL} ${DB_SQLQUIET}
+
+mysqlUpgrade: importRemote
+	@echo
+	@echo "Dumping tables before update for news__post__tag, news__tag & news__post..."
+	mysqldump --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} -t news__post_tag > ${DB_SQLDIR}/v1_news__post_tag.sql ${DB_SQLQUIET}
+	mysqldump --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} -t news__tag > ${DB_SQLDIR}/v1_news__tag.sql ${DB_SQLQUIET}
+	mysqldump --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} news__post > ${DB_SQLDIR}/v1_news__post.sql ${DB_SQLQUIET}
+
+	@echo
+	@echo "Exporting collections from news__post..."
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} -e "SELECT CONCAT('UPDATE news__post SET collection_id=', COALESCE(category_id, 'NULL'), ' WHERE id=', id, ';') from news__post" > ${DB_SQLDIR}/v1_news__post_tmp.sql ${DB_SQLQUIET}
+
+	@echo
+	@echo "Removing first line & trailing comma from news__post dump..."
+	tail -n +2 ${DB_SQLDIR}/v1_news__post_tmp.sql > ${DB_SQLDIR}/v2_news__post_collection.sql
+
+	@echo
+	@echo "Preparing v1 db to upgrade (a/c)"
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v1tov2-a.sql ${DB_SQLQUIET}
+
+	@echo
+	@echo "Applying new schema updates using Doctrine..."
+	$(MAKE) schemaDb
+
+	@echo
+	@echo "Preparing updated v1 db to upgrade (b/c)"
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v1tov2-b.sql ${DB_SQLQUIET}
+
+	@echo
+	@echo "Preparing classification__tag SQL script"
+	sed -e "s/news__tag/classification__tag/g" ${DB_SQLDIR}/v1_news__tag.sql > ${DB_SQLDIR}/v2_classification__tag.sql
+
+	@echo
+	@echo "Re-importing news__tag rows into classification__tag prepared dump..."
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v2_classification__tag.sql ${DB_SQLQUIET}
+
+	@echo
+	@echo "Re-importing news__post_tag using raw dump..."
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v1_news__post_tag.sql ${DB_SQLQUIET}
+
+	@echo
+	@echo "Importing classification_collection using prepared SQL upgrade file..."
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v2_classification__collection.sql ${DB_SQLQUIET}
+
+	@echo
+	@echo "Restoring context column in classification__tag and __collection tables (c/c)..."
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v1tov2-c.sql ${DB_SQLQUIET}
+
+	@echo
+	@echo "Re-importing news__post collection joins using prepared dump..."
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v2_news__post_collection.sql ${DB_SQLQUIET}
+
+	@echo
+	@echo "Done."
 
 ############################################################################
 # Generic sf2 tasks:

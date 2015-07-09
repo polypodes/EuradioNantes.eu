@@ -3,6 +3,7 @@
 namespace RadioSolution\PodcastBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use RadioSolution\ProgramBundle\Entity\Program;
 
 /**
  * RadioSolution\PodcastBundle\Entity\Podcast
