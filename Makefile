@@ -161,6 +161,10 @@ mysqlUpgrade: importRemote
 	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v2_news__post_collection.sql ${DB_SQLQUIET}
 
 	@echo
+	@echo "Applying new schema updates using Doctrine..."
+	$(MAKE) schemaDb
+
+	@echo
 	@echo "Done."
 
 ############################################################################
