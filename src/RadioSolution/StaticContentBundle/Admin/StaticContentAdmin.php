@@ -38,7 +38,7 @@ class StaticContentAdmin extends Admin
       ->add('order_content', 'integer', array('label' => $label))
       ->add('image', 'sonata_type_model_list', array('label' => 'Image'), array('link_parameters' => array('provider' => 'sonata.media.provider.image')))
       ->add('introduction', 'textarea', array('label' => 'Introduction', 'required' => false))
-      ->add('body', 'textarea', array('label' => 'Contenu', 'attr' => array('class' => 'tinymce', 'tinymce' => '{"theme":"custom"}')))
+      ->add('body', 'ckeditor', array('label' => 'Contenu', 'attr' => array('config_name' => 'normal')))
       ->add('categoryStaticContent', 'sonata_type_model', array('label' => 'Catégorie', 'required' => false))
     ;
     //$formMapper->setDefaults(array('order_content'=>$maxValue));

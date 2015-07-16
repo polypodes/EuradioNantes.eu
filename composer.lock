@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "54e1a90abb2e5a8e696fa174c5dbf58b",
+    "hash": "e7506a82e764d33e63c48d0e7617134a",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -2622,7 +2622,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/413fc12eeef47176114cbd02de0dc7f31931182b",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/ee435fb4b12451ec6bc53ddec38c39974a822bce",
                 "reference": "413fc12eeef47176114cbd02de0dc7f31931182b",
                 "shasum": ""
             },
@@ -2905,7 +2905,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/f0a60006ec676df2ecde09ac9667d14411f0b726",
+                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/edd5f24121455b5a91d801b1bd70a699a5d45e64",
                 "reference": "f0a60006ec676df2ecde09ac9667d14411f0b726",
                 "shasum": ""
             },
@@ -3513,7 +3513,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/6710e7aff3caf8cb8c179a14b020e8e4ceec94eb",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/0c6103251c8e41b0b72f4f885533d8d54a5b3ef2",
                 "reference": "6710e7aff3caf8cb8c179a14b020e8e4ceec94eb",
                 "shasum": ""
             },
@@ -3754,7 +3754,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/8019c7774fb299e7ad1dd75a7fce3dbd601fc052",
+                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/d8affb42cda251711fb565f867b88c3b79163e20",
                 "reference": "8019c7774fb299e7ad1dd75a7fce3dbd601fc052",
                 "shasum": ""
             },
@@ -4435,6 +4435,61 @@
                 "framework"
             ],
             "time": "2015-06-11 21:15:28"
+        },
+        {
+            "name": "tilleuls/ckeditor-sonata-media-bundle",
+            "version": "v1.0.4",
+            "target-dir": "CoopTilleuls/Bundle/CKEditorSonataMediaBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coopTilleuls/CoopTilleulsCKEditorSonataMediaBundle.git",
+                "reference": "2b7d5ef053cab9c2403e33add173f3305e06c715"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coopTilleuls/CoopTilleulsCKEditorSonataMediaBundle/zipball/2b7d5ef053cab9c2403e33add173f3305e06c715",
+                "reference": "2b7d5ef053cab9c2403e33add173f3305e06c715",
+                "shasum": ""
+            },
+            "require": {
+                "sonata-project/media-bundle": "~2.3"
+            },
+            "suggest": {
+                "egeloen/ckeditor-bundle": "for easy Symfony integration"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "CoopTilleuls\\Bundle\\CKEditorSonataMediaBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Dunglas",
+                    "email": "kevin@les-tilleuls.coop",
+                    "homepage": "http://dunglas.fr"
+                }
+            ],
+            "description": "Integrates SonataMediaBundle with CKEditor",
+            "homepage": "http://les-tilleuls.coop",
+            "keywords": [
+                "CKEditor",
+                "file",
+                "image",
+                "media",
+                "sonata",
+                "upload"
+            ],
+            "time": "2014-10-09 19:04:51"
         },
         {
             "name": "twig/extensions",

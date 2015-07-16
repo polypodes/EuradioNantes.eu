@@ -35,7 +35,7 @@ class AppKernel extends Kernel
             new Sonata\DatagridBundle\SonataDatagridBundle(),
             new Sonata\FormatterBundle\SonataFormatterBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
-            # Sonata deps
+            // Sonata deps
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
@@ -44,18 +44,20 @@ class AppKernel extends Kernel
             # Overrided Sonata bundles
             new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(), // -> overrided by CoopTilleulsCKEditorSonataMediaBundle
             new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
             new Application\Sonata\NotificationBundle\ApplicationSonataNotificationBundle(),
             new Application\Sonata\PageBundle\ApplicationSonataPageBundle(),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
 
-            # Misc
+            // Misc
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
 
-            # RadioSolution
+            // RadioSolution
             new RadioSolution\ProgramBundle\ProgramBundle(),
             new RadioSolution\PodcastBundle\PodcastBundle(),
             new RadioSolution\MenuBundle\MenuBundle(),

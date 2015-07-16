@@ -148,3 +148,67 @@ fos_comment:
 #    resource: "@FOSCommentBundle/Resources/config/routing.yml"
 #    prefix: /api
 #    defaults: { _format: html }
+
+# CKEditor parameters
+ivory_ck_editor:
+    default_config: normal
+    configs:
+        mini:
+            toolbar: [ [ "Source",'-','Bold','Italic','-','Link','Unlink','-','Subscript','Superscript','-','RemoveFormat' ] ]
+            language: '%locale%'
+
+        normal:
+            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Blockquote','-','Link','Unlink','-','RemoveFormat' ], '/', [ 'Undo','Redo','-','PasteFromWord','-','Format','Styles','-','Image','Flash','-','Table','-','SpecialChar''-','ShowBlocks' ] ]
+            #contentsCss: /path/to/style.css
+            #contentsLanguage: fr
+            language: '%locale%'
+            #stylesSet = [
+            #    { name : 'Strong Emphasis', element : 'strong' }
+            #    { name : 'Emphasis', element : 'em' }
+            #]
+            filebrowserBrowseRoute: admin_sonata_media_media_browser
+            filebrowserImageBrowseRoute: admin_sonata_media_media_browser
+            # Display images by default when clicking the image dialog browse button
+            filebrowserImageBrowseRouteParameters:
+                provider: sonata.media.provider.image
+            filebrowserUploadRoute: admin_sonata_media_media_upload
+            filebrowserUploadRouteParameters:
+                provider: sonata.media.provider.file
+            # Upload file as image when sending a file from the image dialog
+            filebrowserImageUploadRoute: admin_sonata_media_media_upload
+            filebrowserImageUploadRouteParameters:
+                provider: sonata.media.provider.image
+                context: default # Optional, to upload in a custom context
+            #extraPlugins: "wordcount"
+
+        full:
+            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Blockquote','-','Link','Unlink','-','RemoveFormat' ], '/', [ 'Format','Styles','-','Image','Flash','-','Table','HorizontalRule','-','SpecialChar'], '/', [ 'Undo','Redo','-','PasteFromWord','PasteText', 'Find','Replace','-','SelectAll','-','SpellChecker','-','Maximize','ShowBlocks' ] ]
+            language: '%locale%'
+            filebrowserBrowseRoute: admin_sonata_media_media_browser
+            filebrowserImageBrowseRoute: admin_sonata_media_media_browser
+            # Display images by default when clicking the image dialog browse button
+            filebrowserImageBrowseRouteParameters:
+                provider: sonata.media.provider.image
+            filebrowserUploadRoute: admin_sonata_media_media_upload
+            filebrowserUploadRouteParameters:
+                provider: sonata.media.provider.file
+            # Upload file as image when sending a file from the image dialog
+            filebrowserImageUploadRoute: admin_sonata_media_media_upload
+            filebrowserImageUploadRouteParameters:
+                provider: sonata.media.provider.image
+                context: default # Optional, to upload in a custom context
+    toolbars:
+        #configs:
+        #    mini: [ [ "Source", "-", "Save" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]
+        #    my_toolbar_2: [ [ "Source" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]
+        #items:
+        #    document: [ 'Source' ]
+        #    clipboard: [ 'Undo','Redo','-','PasteFromWord','PasteText' ]
+        #    editing: [ 'Find','Replace','-','SelectAll','-','SpellChecker' ]
+        #    basicstyles: [ 'Bold','Italic','-','Subscript','Superscript','-','RemoveFormat' ]
+        #    paragraph: [ 'NumberedList','BulletedList','-','Blockquote' ]
+        #    links: [ 'Link','Unlink','Anchor' ]
+        #    insert: [ 'Image','Flash','-','Table','HorizontalRule','-','SpecialChar' ]
+        #    styles: [ 'Styles','Format']
+        #    colors: [ 'TextColor','BGColor' ]
+        #    tools: [ 'Maximize', 'ShowBlocks' ]
