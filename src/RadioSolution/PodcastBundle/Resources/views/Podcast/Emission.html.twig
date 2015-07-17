@@ -1,16 +1,16 @@
     {% set class = 'first'%}
-    
+
     <div class="block group">
-    
+
 		<div class="navigation">
-	    	{{ pagination.render()|raw }}
+	    	{{ knp_pagination_render(pagination) }}
 		</div>
-    				
+
 		<ul class="gallery-list group">
-		
+
 	    {% for entity in pagination %}
 		    <li class="{{ class }}">
-		    
+
 				<a href="/blog/{{ entity.getSlug() }}">
 					<figure>
 						<div class="image">
@@ -25,7 +25,7 @@
 					<source src="{% path entity.filePodcast, 'reference' %}.ogg" type="audio/ogg" />
 					<source src="{% path entity.filePodcast, 'reference' %}" type="audio/mpeg" />
 					Your browser does not support the audio tag.
-				</audio>	
+				</audio>
 				{% if entity.realtimestart %}
 				<div class="heure-podcast">
 					<span>
@@ -34,8 +34,8 @@
 						{{ entity.realtimestart|date('H') }}h{{ entity.realtimestart|date('i') }}
 					</span>
 				</div>
-				{% endif %}	
-									
+				{% endif %}
+
 				<span class="titre-post">
 					<a href="/blog/{{ entity.getSlug() }}">{{ entity.getPostAbstract() | truncate(80, true, "...")  }}</a>
 				</span>
@@ -43,16 +43,16 @@
 					<a href="/blog/{{ entity.getSlug() }}">lire la suite</a>
 				</div>
 			</li>
-			
+
 			{% if  class == 'first'%}
 				{% set class = ''%}
 			{% else %}
 				{% set class = 'first'%}
 			{% endif %}
 	    {% endfor %}
-	    
+
 	    </ul>
-	    
+
 		<div class="navigation">
 	    	{{ pagination.render()|raw }}
 		</div>
