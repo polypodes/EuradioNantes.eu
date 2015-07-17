@@ -60,8 +60,11 @@ sonata_media:
                 - sonata.media.provider.podcast # custom
             # @todo check against actual params in production
             formats:
+                big: { width: 620 ,  quality: 70}
+                medium: { width: 300 , height: 150 , quality: 70}
                 small: { width: 100 , quality: 70}
-                big:   { width: 500 , quality: 70}
+                logo: { width: 189 , quality: 70}
+                pub: { width: 728 , height: 90 , quality: 70}
 
     cdn:
         server:

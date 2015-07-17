@@ -154,11 +154,11 @@ ivory_ck_editor:
     default_config: normal
     configs:
         mini:
-            toolbar: [ [ "Source",'-','Bold','Italic','-','Link','Unlink','-','Subscript','Superscript','-','RemoveFormat' ] ]
+            toolbar: [ [ "Source",'-','Bold','Italic','Subscript','Superscript','-','-','Link','Unlink','-','RemoveFormat' ] ]
             language: '%locale%'
 
         normal:
-            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Blockquote','-','Link','Unlink','-','RemoveFormat' ], '/', [ 'Undo','Redo','-','PasteFromWord','-','Format','Styles','-','Image','Flash','-','Table','-','SpecialChar''-','ShowBlocks' ] ]
+            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Subscript','Superscript','-','Blockquote','-','Link','Unlink','Anchor','-','RemoveFormat' ], '/', [ 'Undo','Redo','-','PasteFromWord','-','Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','-','SpecialChar','-','ShowBlocks' ] ]
             #contentsCss: /path/to/style.css
             #contentsLanguage: fr
             language: '%locale%'
@@ -179,10 +179,12 @@ ivory_ck_editor:
             filebrowserImageUploadRouteParameters:
                 provider: sonata.media.provider.image
                 context: default # Optional, to upload in a custom context
-            #extraPlugins: "wordcount"
+            format_tags: 'p;h1;h2;h3;h4;h5;h6;address'
+            extraPlugins: 'mediaembed' #widget,lineutils,oembed,Audio
+            #removePlugins: 'iframe'
 
-        full:
-            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Blockquote','-','Link','Unlink','-','RemoveFormat' ], '/', [ 'Format','Styles','-','Image','Flash','-','Table','HorizontalRule','-','SpecialChar'], '/', [ 'Undo','Redo','-','PasteFromWord','PasteText', 'Find','Replace','-','SelectAll','-','SpellChecker','-','Maximize','ShowBlocks' ] ]
+        plus:
+            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Blockquote','-','Link','Unlink','Anchor','-','RemoveFormat' ], '/', [ 'Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','HorizontalRule','-','SpecialChar'], '/', [ 'Undo','Redo','-','PasteFromWord','PasteText', 'Find','Replace','-','SelectAll','-','SpellChecker','-','Maximize','ShowBlocks' ] ]
             language: '%locale%'
             filebrowserBrowseRoute: admin_sonata_media_media_browser
             filebrowserImageBrowseRoute: admin_sonata_media_media_browser
@@ -197,6 +199,10 @@ ivory_ck_editor:
             filebrowserImageUploadRouteParameters:
                 provider: sonata.media.provider.image
                 context: default # Optional, to upload in a custom context
+            format_tags: 'p;h1;h2;h3;h4;h5;h6;pre;address;div'
+            extraPlugins: 'mediaembed' #widget,lineutils,oembed,Audio
+            #removePlugins: 'iframe'
+
     toolbars:
         #configs:
         #    mini: [ [ "Source", "-", "Save" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]
@@ -212,3 +218,19 @@ ivory_ck_editor:
         #    styles: [ 'Styles','Format']
         #    colors: [ 'TextColor','BGColor' ]
         #    tools: [ 'Maximize', 'ShowBlocks' ]
+    plugins:
+        #oembed:
+        #    path:     "/bundles/applicationivoryckeditor/ckeditor/plugins/oembed/"
+        #    filename: "plugin.js"
+        mediaembed:
+            path:     "/bundles/applicationivoryckeditor/ckeditor/plugins/mediaembed/"
+            filename: "plugin.js"
+        #widget:
+        #    path:     "/bundles/applicationivoryckeditor/ckeditor/plugins/widget/"
+        #    filename: "plugin.js"
+        #lineutils:
+        #    path:     "/bundles/applicationivoryckeditor/ckeditor/plugins/lineutils/"
+        #    filename: "plugin.js"
+        #Audio:
+        #    path:     "/bundles/applicationivoryckeditor/ckeditor/plugins/Audio/"
+        #    filename: "plugin.js"

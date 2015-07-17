@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e7506a82e764d33e63c48d0e7617134a",
+    "hash": "7f1a7b1cfb25c952a6d4f0df1df4150f",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -1000,17 +1000,17 @@
         },
         {
             "name": "excelwebzone/recaptcha-bundle",
-            "version": "v1.3.0",
+            "version": "V1.4.0",
             "target-dir": "EWZ/Bundle/RecaptchaBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/excelwebzone/EWZRecaptchaBundle.git",
-                "reference": "bd0c0be526ff8ae3a251512cef713a60b522f804"
+                "reference": "140a6e74c87f0705947491088a254a453d8aebea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/excelwebzone/EWZRecaptchaBundle/zipball/bd0c0be526ff8ae3a251512cef713a60b522f804",
-                "reference": "bd0c0be526ff8ae3a251512cef713a60b522f804",
+                "url": "https://api.github.com/repos/excelwebzone/EWZRecaptchaBundle/zipball/140a6e74c87f0705947491088a254a453d8aebea",
+                "reference": "140a6e74c87f0705947491088a254a453d8aebea",
                 "shasum": ""
             },
             "require": {
@@ -1038,7 +1038,7 @@
             "keywords": [
                 "recaptcha"
             ],
-            "time": "2015-05-21 15:11:25"
+            "time": "2015-07-08 12:42:37"
         },
         {
             "name": "friendsofsymfony/comment-bundle",
@@ -1739,6 +1739,74 @@
             "time": "2015-03-09 08:06:57"
         },
         {
+            "name": "knplabs/knp-components",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/knp-components.git",
+                "reference": "6d091c2f16eec2769db38f38e08c7bd5847ce072"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/6d091c2f16eec2769db38f38e08c7bd5847ce072",
+                "reference": "6d091c2f16eec2769db38f38e08c7bd5847ce072",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "doctrine/mongodb-odm": "~1.0@beta",
+                "doctrine/orm": "~2.4",
+                "phpunit/phpunit": "~4.2",
+                "ruflin/elastica": "~1.0",
+                "symfony/event-dispatcher": "~2.5"
+            },
+            "suggest": {
+                "doctrine/common": "to allow usage pagination with Doctrine ArrayCollection",
+                "doctrine/mongodb-odm": "to allow usage pagination with Doctrine ODM MongoDB",
+                "doctrine/orm": "to allow usage pagination with Doctrine ORM",
+                "propel/propel1": "to allow usage pagination with Propel ORM",
+                "ruflin/Elastica": "to allow usage pagination with ElasticSearch Client",
+                "solarium/solarium": "to allow usage pagination with Solarium Client"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Component": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/knp-components/contributors"
+                }
+            ],
+            "description": "Knplabs component library",
+            "homepage": "http://github.com/KnpLabs/knp-components",
+            "keywords": [
+                "components",
+                "knp",
+                "knplabs",
+                "pager",
+                "paginator"
+            ],
+            "time": "2014-10-06 10:38:10"
+        },
+        {
             "name": "knplabs/knp-markdown-bundle",
             "version": "1.2.0",
             "target-dir": "Knp/Bundle/MarkdownBundle",
@@ -1914,6 +1982,67 @@
                 "menu"
             ],
             "time": "2014-08-01 09:57:23"
+        },
+        {
+            "name": "knplabs/knp-paginator-bundle",
+            "version": "2.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
+                "reference": "800eb12f225573869b6f04d77a6e329a6da9110f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/800eb12f225573869b6f04d77a6e329a6da9110f",
+                "reference": "800eb12f225573869b6f04d77a6e329a6da9110f",
+                "shasum": ""
+            },
+            "require": {
+                "knplabs/knp-components": "~1.2",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.0",
+                "twig/twig": "~1.5"
+            },
+            "require-dev": {
+                "symfony/expression-language": "~2.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Knp\\Bundle\\PaginatorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony2 Community",
+                    "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle/contributors"
+                }
+            ],
+            "description": "Paginator bundle for Symfony2 to automate pagination and simplify sorting and other features",
+            "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle",
+            "keywords": [
+                "Symfony2",
+                "bundle",
+                "knp",
+                "knplabs",
+                "pager",
+                "pagination",
+                "paginator"
+            ],
+            "time": "2015-05-20 15:09:02"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2163,16 +2292,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "b287fbbe1ca27847064beff2bad7fb6920bf08cc"
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/b287fbbe1ca27847064beff2bad7fb6920bf08cc",
-                "reference": "b287fbbe1ca27847064beff2bad7fb6920bf08cc",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dc5150cc608f2334c72c3b6a553ec9668a4156b0",
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0",
                 "shasum": ""
             },
             "require": {
@@ -2209,7 +2338,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14.x-dev"
+                    "dev-master": "1.15.x-dev"
                 }
             },
             "autoload": {
@@ -2235,7 +2364,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-06-19 13:29:54"
+            "time": "2015-07-12 13:54:09"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -2618,12 +2747,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "413fc12eeef47176114cbd02de0dc7f31931182b"
+                "reference": "ee435fb4b12451ec6bc53ddec38c39974a822bce"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/ee435fb4b12451ec6bc53ddec38c39974a822bce",
-                "reference": "413fc12eeef47176114cbd02de0dc7f31931182b",
+                "reference": "ee435fb4b12451ec6bc53ddec38c39974a822bce",
                 "shasum": ""
             },
             "require": {
@@ -2651,7 +2780,6 @@
                 "twig/twig": "~1.15"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "~0.5|~1.0",
                 "jms/translation-bundle": "~1.1",
                 "sensio/generator-bundle": "~2.3",
                 "sonata-project/intl-bundle": "~2.1",
@@ -2697,7 +2825,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-07-07 10:57:02"
+            "time": "2015-07-13 08:14:51"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -2901,12 +3029,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataClassificationBundle.git",
-                "reference": "f0a60006ec676df2ecde09ac9667d14411f0b726"
+                "reference": "edd5f24121455b5a91d801b1bd70a699a5d45e64"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/edd5f24121455b5a91d801b1bd70a699a5d45e64",
-                "reference": "f0a60006ec676df2ecde09ac9667d14411f0b726",
+                "reference": "edd5f24121455b5a91d801b1bd70a699a5d45e64",
                 "shasum": ""
             },
             "require": {
@@ -2959,7 +3087,7 @@
                 "tag",
                 "taxonomy"
             ],
-            "time": "2015-07-07 10:54:43"
+            "time": "2015-07-13 07:48:31"
         },
         {
             "name": "sonata-project/core-bundle",
@@ -3509,12 +3637,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "6710e7aff3caf8cb8c179a14b020e8e4ceec94eb"
+                "reference": "0c6103251c8e41b0b72f4f885533d8d54a5b3ef2"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/0c6103251c8e41b0b72f4f885533d8d54a5b3ef2",
-                "reference": "6710e7aff3caf8cb8c179a14b020e8e4ceec94eb",
+                "reference": "0c6103251c8e41b0b72f4f885533d8d54a5b3ef2",
                 "shasum": ""
             },
             "require": {
@@ -3593,7 +3721,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2015-07-07 10:56:53"
+            "time": "2015-07-13 07:51:42"
         },
         {
             "name": "sonata-project/news-bundle",
@@ -3750,12 +3878,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataPageBundle.git",
-                "reference": "8019c7774fb299e7ad1dd75a7fce3dbd601fc052"
+                "reference": "d8affb42cda251711fb565f867b88c3b79163e20"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/d8affb42cda251711fb565f867b88c3b79163e20",
-                "reference": "8019c7774fb299e7ad1dd75a7fce3dbd601fc052",
+                "reference": "d8affb42cda251711fb565f867b88c3b79163e20",
                 "shasum": ""
             },
             "require": {
@@ -3819,7 +3947,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2015-07-07 10:56:24"
+            "time": "2015-07-09 10:45:18"
         },
         {
             "name": "sonata-project/seo-bundle",
@@ -4316,16 +4444,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.1",
+            "version": "v2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "932b6e7499c670f4db6d0b871477a4a3ca161e74"
+                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/932b6e7499c670f4db6d0b871477a4a3ca161e74",
-                "reference": "932b6e7499c670f4db6d0b871477a4a3ca161e74",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/969d709ad428076bf1084e386dc26dd904d9fb84",
+                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84",
                 "shasum": ""
             },
             "require": {
@@ -4434,7 +4562,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-06-11 21:15:28"
+            "time": "2015-07-13 19:27:49"
         },
         {
             "name": "tilleuls/ckeditor-sonata-media-bundle",
@@ -4691,24 +4819,26 @@
         },
         {
             "name": "zendframework/zenddiagnostics",
-            "version": "v1.0.4",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDiagnostics.git",
-                "reference": "b855b48f6539038270a3c0935b6bd2c51fa43f7c"
+                "reference": "07b6a7a313c751045dc57cd8938a05a9b4e004e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDiagnostics/zipball/b855b48f6539038270a3c0935b6bd2c51fa43f7c",
-                "reference": "b855b48f6539038270a3c0935b6bd2c51fa43f7c",
+                "url": "https://api.github.com/repos/zendframework/ZendDiagnostics/zipball/07b6a7a313c751045dc57cd8938a05a9b4e004e8",
+                "reference": "07b6a7a313c751045dc57cd8938a05a9b4e004e8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
+                "doctrine/migrations": "~1.0@dev",
                 "guzzle/http": "3.*",
                 "guzzle/plugin-mock": "3.*",
+                "phpunit/phpunit": "4.7.*",
                 "predis/predis": "0.8.*",
                 "sensiolabs/security-checker": "1.3.*@dev",
                 "symfony/yaml": "v2.3.11",
@@ -4716,6 +4846,7 @@
                 "zendframework/zend-loader": "2.*"
             },
             "suggest": {
+                "doctrine/migrations": "Required by Check\\DoctrineMigration",
                 "ext-bcmath": "Required by Check\\CpuPerformance",
                 "guzzle/http": "Required by Check\\GuzzleHttpService",
                 "predis/predis": "Required by Check\\Redis",
@@ -4746,7 +4877,7 @@
                 "php",
                 "test"
             ],
-            "time": "2014-12-07 18:10:07"
+            "time": "2015-07-09 14:39:58"
         }
     ],
     "packages-dev": [

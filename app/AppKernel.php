@@ -53,9 +53,11 @@ class AppKernel extends Kernel
 
             // Misc
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Application\Ivory\CKEditorBundle\ApplicationIvoryCKEditorBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
             // RadioSolution
             new RadioSolution\ProgramBundle\ProgramBundle(),
