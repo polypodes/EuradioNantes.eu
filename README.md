@@ -54,6 +54,26 @@ $ php app/console sonata:page:update-core-routes --site=1
 $ php app/console sonata:page:create-snapshots --site=1
 ```
 
+## Install from previous instance
+
+### 1/2 - Prepare the db
+
+Fetch ans sql dump from production env, name it `euradionantes_prod.v1.sql` and place it into `./doc/backups/prod`
+
+Create a new empty database with a new working name
+
+Reference this new database name inside the `app/config/parameters.yml` file
+
+Make sure your app can access this databse with a valid SQL user lgin and password
+
+### 2/2 Run the upgrade script:
+
+From the root folder of your instance:
+
+```bash
+$ make mysqlUpgrade
+```
+
 ## License
 
 MIT Licensed.
