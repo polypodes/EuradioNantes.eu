@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc2738e840d9e21446f012d72c47eaba",
+    "hash": "3b2c91b5261381fcd0d1830568ce03b5",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -1039,6 +1039,61 @@
                 "recaptcha"
             ],
             "time": "2015-07-31 23:57:07"
+        },
+        {
+            "name": "exeu/apai-io",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Exeu/apai-io.git",
+                "reference": "a235f863f17332fd386451c762e6b7a112e558a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Exeu/apai-io/zipball/a235f863f17332fd386451c762e6b7a112e558a8",
+                "reference": "a235f863f17332fd386451c762e6b7a112e558a8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ApaiIO": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Eichhorn",
+                    "email": "exeu65@googlemail.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Dejan Spasic",
+                    "email": "dejan.spasic@bitweise.biz",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Amazon Product Advertising PHP Library",
+            "homepage": "https://github.com/Exeu/apai-io",
+            "keywords": [
+                "ECS",
+                "Product Advertising",
+                "amazon",
+                "products",
+                "rest",
+                "soap"
+            ],
+            "time": "2015-01-01 18:41:21"
         },
         {
             "name": "friendsofsymfony/comment-bundle",
@@ -2750,7 +2805,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/b5d0b9cb8b6536c95bdf898a147220c5c2bb5544",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/65a726a95720af7500af72f154c038875b60bbea",
                 "reference": "b5d0b9cb8b6536c95bdf898a147220c5c2bb5544",
                 "shasum": ""
             },

@@ -20,3 +20,6 @@ ecoute:
 onair:
     pattern:  onair
     defaults: { _controller: "ProgramBundle:Program:onair"}
+whoami:
+    pattern:  whoami
+    defaults: { _controller: "ProgramBundle:WhoAmI:index"}
