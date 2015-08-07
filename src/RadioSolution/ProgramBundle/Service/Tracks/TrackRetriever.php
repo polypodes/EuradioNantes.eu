@@ -104,16 +104,21 @@ class TrackRetriever implements ContainerAwareInterface
         $xml         = new \SimpleXMLElement($xmlResponse);
 
         $result = isset($xml->Items->Item->ItemAttributes) ? $xml->Items->Item->ItemAttributes : null;
+
+        // In cas this i not the original Artist' album but a compilation instead
+        if(!$result) { // In cas this i not the original Artist' album but a compilation instead
+            $xml = $this->searchbyAlbumAndTitle($albumName, $title);
+            $result = isset($xml->Items->Item->ItemAttributes) ? $xml->Items->Item->ItemAttributes : null;
+        }
+
         $images = isset($xml->Items->Item->ImageSets) ? $xml->Items->Item->ImageSets : null;
 
-        if (!$albumName) {
-            if (isset($xml->Items->Item->ItemAttributes->ProductGroup) && "Digital Music Album" === strval($xml->Items->Item->ItemAttributes->ProductGroup)) {
-                $albumName = strval($xml->Items->Item->ItemAttributes->Title);
-                $album =  $xml->Items->Item->ItemAttributes;
-            } elseif (isset($xml->Items->Item->RelatedItems->Relationship) && "Parents" === strval($xml->Items->Item->RelatedItems->Relationship)) {
-                $albumName = strval($xml->Items->Item->RelatedItems->RelatedItem->Item->ItemAttributes->Title);
-                $album =  $xml->Items->Item->RelatedItems->RelatedItem->Item->ItemAttributes;
-            }
+        if (isset($xml->Items->Item->ItemAttributes->ProductGroup) && "Digital Music Album" === strval($xml->Items->Item->ItemAttributes->ProductGroup)) {
+            $albumName = strval($xml->Items->Item->ItemAttributes->Title);
+            $album =  $xml->Items->Item->ItemAttributes;
+        } elseif (isset($xml->Items->Item->RelatedItems->Relationship) && "Parents" === strval($xml->Items->Item->RelatedItems->Relationship)) {
+            $albumName = strval($xml->Items->Item->RelatedItems->RelatedItem->Item->ItemAttributes->Title);
+            $album =  $xml->Items->Item->RelatedItems->RelatedItem->Item->ItemAttributes;
         }
         // Tracks list search + second chance for albums images & details
         if (!$images || !$album || !$tracks) {
@@ -135,7 +140,28 @@ class TrackRetriever implements ContainerAwareInterface
             }
         }
 
-        return array($album, $images, $tracks);
+        return array($terms, $album, $images, $tracks);
+    }
+
+
+    public function searchbyAlbumAndTitle($albumName, $title)
+    {
+        $search = new Search();
+        $search
+            ->setCategory('MP3Downloads')// DigitalMusic, MusicTracks, Music, MP3Downloads
+            ->setCondition('All')// New (default) | Used | Collectible | Refurbished | All
+            ->setRelationshipType('Tracks')
+            ->setResponseGroup(array(
+                'RelatedItems',
+                'ItemAttributes',
+                'Images',
+            ))// Tracks won't work here
+            ->setTitle($title)
+            ->setKeywords(sprintf("%s %s", $albumName, $title));
+        $xmlResponse = $this->apaiIO->runOperation($search);
+        $xml         = new \SimpleXMLElement($xmlResponse);
+
+        return $xml;
     }
 
     /**
@@ -259,8 +285,8 @@ class TrackRetriever implements ContainerAwareInterface
         foreach ($discography as $disc) {
             $titles = $disc->Track;
             if (is_array($titles) && !empty($titles)) {
-                $TITLES = str_replace(" ", "", array_map("strtoupper", $titles));
-                if (in_array(strtoupper(str_replace(" ", "", trim($title))), $TITLES)) {
+                $TITLES = str_replace(array(" "), "", array_map("strtoupper", $titles));
+                if (in_array(strtoupper(str_replace(array(" "), "", trim($title))), $TITLES)) {
                     $result = $titles;
                 }
             }

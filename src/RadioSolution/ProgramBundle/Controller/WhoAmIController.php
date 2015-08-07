@@ -2,6 +2,8 @@
 
 namespace RadioSolution\ProgramBundle\Controller;
 
+use RadioSolution\ProgramBundle\Entity\Album;
+use RadioSolution\ProgramBundle\Exception\InvalidAlbumInputException;
 use RadioSolution\ProgramBundle\Service\Tracks\TrackRetriever;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -77,12 +79,31 @@ class WhoAmIController extends Controller
             "THE WAR ON DRUGS - LOST IN THE DREAM",
             "JOY WELLBOY (BEL) - COMME SUR DES ROULETTES -",
             "PAUL SMITH & PETER BREWIS (ANG - A TOWN CALLED LETTER - FROZEN BY SIGHT",
-            "JUANA MOLINA - ERAS - WED 21",
             "BARBAGALLO (FRA) - LA SOIF - Amor de Lonh 2014",
+            "MARTIN CARR (ECO) - I DON'T THINK I'LL MAKE IT - The Breaks 2014",
+            "PUBLIC SERVICE BROADCASTING (ANG) - GO - THE RACE FOR SPACE",
+            "WAMPIRE - LIFE OF LUXURY - BAZAAR",
+            "GIORGIO TUMA FEAT LAETITIA SADIER - THROUGH YOUR HANDS LOVE CAN SHINE - Giorgio Tuma with Laetitia Sadier 2015",
+            "POND - MEDECINE HAT - MAN IT FEELS LIKE SPACE AGAIN",
+            "BECK - BLUE MOON - MORNING PHASE",
+            "JUANA MOLINA - ERAS - WED 21",
             ];
         $terms = array_pop($terms);
 
-    $content = json_encode($retriever->search($terms));
+        $albumModel = new Album();
+        list($terms, $album, $images, $tracks) = $retriever->search($terms);
+        try {
+            $albumModel->fromXml($album);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($albumModel);
+            $em->flush();
+        } catch(InvalidAlbumInputException $e) {
+            $logger = $this->get('logger');
+            $logger->info(sprintf('Trying to process %s using the TrackRetriever', $terms));
+            $logger->error(sprintf('An error occured : %s', $e));
+        }
+        $serializer = $this->container->get('serializer');
+        $content = $serializer->serialize($albumModel, 'json');
 
         return $this->render('ProgramBundle::empty_layout.html.twig', array(
             'content' => $content

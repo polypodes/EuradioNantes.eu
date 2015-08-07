@@ -1,0 +1,32 @@
+RadioSolution\ProgramBundle\Entity\Album:
+  type: entity
+  table: album
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    artist:
+      type: string
+      length: 255
+    label:
+      type: string
+      length: 255
+    manufacturer:
+      type: string
+      length: 255
+    publisher:
+      type: string
+      length: 255
+    releaseDate:
+      type: datetime
+    studio:
+      type: string
+      length: 255
+    title:
+      type: string
+      length: 255
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
