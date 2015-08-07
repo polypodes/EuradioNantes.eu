@@ -75,7 +75,10 @@ class WhoAmIController extends Controller
             "COLD MAILMAN (NOR) - SOMETHING YOU DO - Everything Aflutter 2014",
             "THE WAR ON DRUGS - UNDER THE PRESSURE",
             "THE WAR ON DRUGS - LOST IN THE DREAM",
+            "JOY WELLBOY (BEL) - COMME SUR DES ROULETTES -",
             "PAUL SMITH & PETER BREWIS (ANG - A TOWN CALLED LETTER - FROZEN BY SIGHT",
+            "JUANA MOLINA - ERAS - WED 21",
+            "BARBAGALLO (FRA) - LA SOIF - Amor de Lonh 2014",
             ];
         $terms = array_pop($terms);
 

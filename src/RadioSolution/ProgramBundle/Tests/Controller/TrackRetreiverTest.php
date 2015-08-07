@@ -21,18 +21,15 @@ class TrackRetreiverTest extends WebTestCase
     /**
      * @dataProvider dataProvider
      */
-    /*
     public function testPrepareItems($terms)
     {
-        $this->markTestSkipped();
         $retriever = $this->getRetriever();
         list($artist, $title, $albumName) = $retriever->prepareItems($terms);
 
         $this->assertNotNull($artist);
         $this->assertNotNull($title);
-        // AlbumName may be null
+        // AlbumName may be null at start
     }
-    */
 
     protected function getRetriever()
     {
@@ -91,13 +88,14 @@ class TrackRetreiverTest extends WebTestCase
             ["THE WAR ON DRUGS - LOST IN THE DREAM - "],
             ["THE WAR ON DRUGS - UNDER THE PRESSURE"],
             ["PAUL SMITH & PETER BREWIS (ANG - A TOWN CALLED LETTER - FROZEN BY SIGHT"],
+            ["JOY WELLBOY (BEL) - COMME SUR DES ROULETTES -"],
+            ["JUANA MOLINA - ERAS - WED 21"],
 
             /*
              * These fail:
 
             ["COLD MAILMAN (NOR) - SOMETHING YOU DO - Everything Aflutter 2014"],
             ["THE KOOKS (ANG) [COVER] - YOUNG FOLKS - Album inconnu (07/03/2008 15:1"],
-            ["JOY WELLBOY (BEL) - COMME SUR DES ROULETTES -"],
             ["CLAUDINE LONGET [COVER] - LET'S SPEND THE NIGHT TOGETHER -"],
             ["RADIO ELVIS (FRA) - LA TRAVERSEE - JUSTE AVANT LA RUEE"],
              */
