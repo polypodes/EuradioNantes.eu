@@ -78,7 +78,7 @@ class TrackRetriever implements ContainerAwareInterface
      * @return array
      * @throws \Exception
      */
-    public function albumSearch($terms = "")
+    public function search($terms = "")
     {
         if(empty($terms) || !is_string($terms)) {
             throw new \InvalidArgumentException(sprintf("terms argument passed to %s must be a string and cannot be null", __METHOD__));
@@ -86,13 +86,14 @@ class TrackRetriever implements ContainerAwareInterface
         list($artist, $title, $albumName) = $this->prepareItems($terms);
         $tracks = $album = $images = null;
 
+
+
         $search = new Search();
         $search
             ->setCategory('MP3Downloads')// DigitalMusic, MusicTracks, Music, MP3Downloads
             ->setCondition('All')// New (default) | Used | Collectible | Refurbished | All
             ->setRelationshipType('Tracks')
             ->setResponseGroup(array(
-                'Tracks', // <-- as in documentation, but this just never works
                 'RelatedItems',
                 'ItemAttributes',
                 'Images',
@@ -102,9 +103,19 @@ class TrackRetriever implements ContainerAwareInterface
         $xmlResponse = $this->apaiIO->runOperation($search);
         $xml         = new \SimpleXMLElement($xmlResponse);
 
-        $album = isset($xml->Items->Item->RelatedItems->RelatedItem->Item) ? $xml->Items->Item->RelatedItems->RelatedItem->Item : null;
+        $result = isset($xml->Items->Item->ItemAttributes) ? $xml->Items->Item->ItemAttributes : null;
         $images = isset($xml->Items->Item->ImageSets) ? $xml->Items->Item->ImageSets : null;
 
+        if(!$albumName) {
+            if("Digital Music Album" === strval($xml->Items->Item->ItemAttributes->ProductGroup)) {
+                $albumName = strval($xml->Items->Item->ItemAttributes->Title);
+                $album =  $xml->Items->Item->ItemAttributes;
+            }
+            elseif("Parents" === strval($xml->Items->Item->RelatedItems->Relationship)) {
+                $albumName = strval($xml->Items->Item->RelatedItems->RelatedItem->Item->ItemAttributes->Title);
+                $album =  $xml->Items->Item->RelatedItems->RelatedItem->Item->ItemAttributes;
+            }
+        }
         // Tracks list search + second chance for albums images & details
         if (!$images || !$album || !$tracks ) {
             if($albumName) {

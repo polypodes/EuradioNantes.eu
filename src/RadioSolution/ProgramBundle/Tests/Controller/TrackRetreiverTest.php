@@ -54,7 +54,7 @@ class TrackRetreiverTest extends WebTestCase
     {
         $retriever = $this->getRetriever();
         sleep(1); // otherwise Amazon kicks you for overusing its API.
-        list($album, $images, $tracks) = $retriever->albumSearch($terms);
+        list($album, $images, $tracks) = $retriever->search($terms);
         $this->assertNotNull($album);
         $this->assertNotNull($images);
         $this->assertNotNull($tracks);
@@ -88,6 +88,9 @@ class TrackRetreiverTest extends WebTestCase
             ["BOOGERS (FRA) - I'M THERE - Running in the flame 2014"],
             ["BARBAGALLO (FRA) - LE DERNIER PAYS - Amor de Lonh 2014"],
             ["THE WAR ON DRUGS - LOST IN THE DREAM - LOST IN THE DREAM"],
+            ["THE WAR ON DRUGS - LOST IN THE DREAM - "],
+            ["THE WAR ON DRUGS - UNDER THE PRESSURE"],
+            ["PAUL SMITH & PETER BREWIS (ANG - A TOWN CALLED LETTER - FROZEN BY SIGHT"],
 
             /*
              * These fail:

@@ -73,10 +73,13 @@ class WhoAmIController extends Controller
             "OWLLE (FRA) - FOG - FRANCE",
             "THE DODOS - DARKNESS - Individ",
             "COLD MAILMAN (NOR) - SOMETHING YOU DO - Everything Aflutter 2014",
+            "THE WAR ON DRUGS - UNDER THE PRESSURE",
+            "THE WAR ON DRUGS - LOST IN THE DREAM",
+            "PAUL SMITH & PETER BREWIS (ANG - A TOWN CALLED LETTER - FROZEN BY SIGHT",
             ];
         $terms = array_pop($terms);
 
-    $content = json_encode($retriever->albumSearch($terms));
+    $content = json_encode($retriever->search($terms));
 
         return $this->render('ProgramBundle::empty_layout.html.twig', array(
             'content' => $content
