@@ -13,6 +13,7 @@
 
 namespace RadioSolution\ProgramBundle\Service\Tracks;
 
+use ApaiIO\Operations\Lookup;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use ApaiIO\Configuration\GenericConfiguration;
@@ -166,6 +167,25 @@ class TrackRetriever implements ContainerAwareInterface
         }
 
         return array($album, $images, $tracks);
+    }
+
+    public function findAlbumDetail($ASIN)
+    {
+        $search = new Lookup();
+        $search
+            ->setCondition('All')// New (default) | Used | Collectible | Refurbished | All
+            ->setItemId($ASIN)
+            ->setIdType("ASIN")
+            ->setRelationshipType('Tracks')
+            ->setResponseGroup(array(
+                'RelatedItems',
+                'Small',
+            ))
+        ;
+        $xmlResponse = $this->apaiIO->runOperation($search);
+        $xml         = new \SimpleXMLElement($xmlResponse);
+
+        return $xml;
     }
 
     protected function findTrackListInDiscography($xml, $title)
