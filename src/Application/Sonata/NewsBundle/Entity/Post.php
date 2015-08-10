@@ -29,6 +29,16 @@ class Post extends BasePost
     protected $id;
 
     /**
+     * @var podcast $podcast
+     */
+    protected $podcast;
+
+    /**
+     * @var Application\Sonata\MediaBundle\Entity\Media
+     */
+    protected $image;
+
+    /**
      * Get id
      *
      * @return integer $id
@@ -36,5 +46,65 @@ class Post extends BasePost
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get podcast
+     *
+     * @return Podcast $podcast
+     */
+    public function getPodcast()
+    {
+        return $this->podcast;
+    }
+
+
+    public function getFilePodcast()
+    {
+        return $this->podcast->getFilePodcast()->getProviderReference();
+    }
+
+    public function getMediaPodcast()
+    {
+        if ($this->podcast!=NULL)
+        return $this->podcast->getFilePodcast();
+    }
+
+    /**
+     * Get podcast
+     *
+     * @return Podcast $podcast
+     */
+    public function setPodcast(\RadioSolution\PodcastBundle\Entity\Podcast $podcast)
+    {
+        $this->podcast=$podcast;
+    }
+
+    public function getImage()
+    {
+
+        if(!$this->image){
+
+            if($this->getPodcast()){
+
+                $podcast = $this->getPodcast();
+
+                if($podcast->getEmission()){
+
+                    $this->image =$podcast->getImageEmission();
+
+                }
+
+            }
+
+        }
+
+        return $this->image;
+
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 }
