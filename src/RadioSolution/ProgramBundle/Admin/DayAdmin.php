@@ -12,7 +12,7 @@ class DayAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->add('time_start', null array('label' => 'Date de début'))
+		->add('time_start', null, array('label' => 'Date de début'))
 		;
 	}
 
