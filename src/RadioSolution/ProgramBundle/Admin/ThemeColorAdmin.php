@@ -35,7 +35,7 @@ class ThemeColorAdmin extends Admin
   {
     $errorElement
       ->with('name')
-      ->assertMaxLength(array('limit' => 32))
+      ->assertLength(array('max' => 32))
       ->end()
     ;
   }

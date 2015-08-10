@@ -43,7 +43,7 @@ class SliderAdmin extends Admin
   {
     $errorElement
       ->with('title')
-      ->assertMaxLength(array('limit' => 32))
+      ->assertLength(array('max' => 32))
       ->end()
     ;
   }

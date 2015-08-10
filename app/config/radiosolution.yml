@@ -20,13 +20,13 @@ services:
     radioSolution.program.ExceptionalBroadcast:
         class: RadioSolution\ProgramBundle\Admin\ExceptionalBroadcastAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Émissions exceptionnelles' }
+            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Émissions exceptionnelles', show_in_dashboard: false }
         arguments: [null, RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.WeeklyBroadcast:
         class: RadioSolution\ProgramBundle\Admin\WeeklyBroadcastAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Émissions hebdo' }
+            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Émissions hebdo', show_in_dashboard: false }
         arguments: [null, RadioSolution\ProgramBundle\Entity\WeeklyBroadcast, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.themeColor:

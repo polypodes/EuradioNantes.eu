@@ -35,7 +35,7 @@ class EmissionFrequencyAdmin extends Admin
   {
     $errorElement
       ->with('titre')
-      ->assertMaxLength(array('limit' => 32))
+      ->assertLength(array('max' => 32))
       ->end()
     ;
   }

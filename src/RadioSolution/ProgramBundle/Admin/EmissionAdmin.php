@@ -124,7 +124,10 @@ class EmissionAdmin extends Admin
 
     $errorElement
       ->with('name')
-      ->assertMaxLength(array('limit' => 80))
+      ->assertLength(array('max' => 32))
+      ->end()
+      ->with('description')
+      ->assertNotNull()
       ->end()
     ;
   }
