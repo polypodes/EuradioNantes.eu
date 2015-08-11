@@ -13,13 +13,12 @@
 
 namespace RadioSolution\ProgramBundle\Entity;
 use RadioSolution\ProgramBundle\Exception\InvalidAlbumInputException;
-use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * RadioSolution\ProgramBundle\Entity\Emission.
  */
-class Album
+class Track
 {
     /**
      * @var integer
@@ -27,9 +26,19 @@ class Album
     private $id;
 
     /**
+     * @var Album
+     */
+    private $album;
+
+    /**
      * @var string
      */
     private $artist;
+
+    /**
+     * @var string
+     */
+    private $genre;
 
     /**
      * @var string
@@ -52,6 +61,11 @@ class Album
     private $releaseDate;
 
     /**
+     * @var integer
+     */
+    private $runningTime;
+
+    /**
      * @var string
      */
     private $studio;
@@ -62,9 +76,9 @@ class Album
     private $title;
 
     /**
-     * @var ArrayCollection of Track[]
+     * @var string
      */
-    private $tracks;
+    private $trackSequence;
 
     /**
      * @var \DateTime
@@ -77,36 +91,9 @@ class Album
     private $updated_at;
 
     public function __toString() {
-        return (!empty($this->getTitle())) ? $this->getTitle() : 'Titre non défini';
-    }
+        $str = (isset($this->title)) ? $this->title : 'Titre non défini';
 
-    /**
-     * @param \SimpleXMLElement $xml
-     *
-     * @return $this
-     * @throws InvalidAlbumInputException
-     */
-    public function fromXml(\SimpleXMLElement $xml)
-    {
-        $attrs = get_object_vars($this);
-        unset($attrs["id"], $attrs["created_at"], $attrs["updated_at"], $attrs["tracks"]);
-        $keys = array_map("ucfirst", array_keys($attrs));
-        $values = (array)json_decode(json_encode($xml)); // it's a simple XML obj, no depth.
-        $values["Artist"] = $values["Creator"]; // return both keys
-
-        foreach($keys as $key) {
-            if(!isset($values[$key]) || !is_string($values[$key]) || empty($values[$key])) {
-                throw new InvalidAlbumInputException(
-                    sprintf("In %s, xml input must contain a %s value", __METHOD__, $key));
-            }
-            $attr = lcfirst($key); // mind camelCased attributes likes "releaseDate"
-            $this->$attr = $values[$key];
-        }
-
-        $this->releaseDate = \DateTime::createFromFormat("Y-m-d", $this->releaseDate);
-        $this->created_at = $this->updated_at = new \DateTime();
-
-        return $this;
+        return $str;
     }
 
     /**
@@ -155,6 +142,26 @@ class Album
         $this->genre = $genre;
 
         return $this;
+    }
+
+    /**
+     * Get genre.
+     *
+     * @return string
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
+     * Get label.
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
     }
 
     /**
@@ -362,56 +369,104 @@ class Album
 
         return $this;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tracks = new ArrayCollection();
-    }
 
     /**
-     * Get label
+     * Set runningTime
      *
-     * @return string
+     * @param integer $runningTime
+     *
+     * @return Track
      */
-    public function getLabel()
+    public function setRunningTime($runningTime)
     {
-        return $this->label;
-    }
-
-    /**
-     * Add track
-     *
-     * @param Track $track
-     *
-     * @return Album
-     */
-    public function addTrack(Track $track)
-    {
-        $this->tracks[] = $track;
+        $this->runningTime = $runningTime;
 
         return $this;
     }
 
     /**
-     * Remove track
+     * Get runningTime
      *
-     * @param Track $track
+     * @return integer
      */
-    public function removeTrack(Track $track)
+    public function getRunningTime()
     {
-        $this->tracks->removeElement($track);
+        return $this->runningTime;
     }
 
     /**
-     * Get tracks
+     * Set trackSequence
      *
-     * @return ArrayCollection
+     * @param integer $trackSequence
+     *
+     * @return Track
      */
-    public function getTracks()
+    public function setTrackSequence($trackSequence)
     {
-        return $this->tracks;
+        $this->trackSequence = $trackSequence;
+
+        return $this;
+    }
+
+    /**
+     * Get trackSequence
+     *
+     * @return integer
+     */
+    public function getTrackSequence()
+    {
+        return $this->trackSequence;
+    }
+
+    /**
+     * Set album
+     *
+     * @param Album $album
+     *
+     * @return Track
+     */
+    public function setAlbum(Album $album = null)
+    {
+        $this->album = $album;
+
+        return $this;
+    }
+
+    /**
+     * Get album
+     *
+     * @return Album
+     */
+    public function getAlbum()
+    {
+        return $this->album;
+    }
+
+    /**
+     * @param Album $album
+     * @param string $title
+     * @param int $position
+     *
+     * @return $this
+     * @throws InvalidAlbumInputException
+     */
+    public function fromAlbum(Album $album, $title = "", $position = null)
+    {
+        $this->setArtist($album->getArtist());
+        $this->setLabel($album->getLabel());
+        $this->setManufacturer($album->getManufacturer());
+        $this->setPublisher($album->getPublisher());
+        $this->setReleaseDate($album->getReleaseDate());
+        $this->setStudio($album->getStudio());
+        $this->setAlbum($album);
+        if(!empty($title)) {
+            $this->setTitle($title);
+        }
+        if($position >= 0) {
+            $this->setTrackSequence($position);
+        }
+
+        return $this;
     }
 
     /**

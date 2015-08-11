@@ -41,6 +41,21 @@ services:
             - { name: sonata.admin, manager_type: orm, group: 'Programme', label: 'Programme' }
         arguments: [null, RadioSolution\ProgramBundle\Entity\Program, "SonataAdminBundle:CRUD"]
 
+    radioSolution.program.album:
+        class: RadioSolution\ProgramBundle\Admin\AlbumAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Musique', label: 'Albums' }
+        arguments: [null, RadioSolution\ProgramBundle\Entity\Album, "SonataAdminBundle:CRUD"]
+
+    radioSolution.program.track:
+        class: RadioSolution\ProgramBundle\Admin\TrackAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Musique', label: 'Tracks' }
+        #arguments: [null, RadioSolution\ProgramBundle\Entity\Track, 'PixSortableBehaviorBundle:SortableAdmin']
+        #calls:
+        #    - [ setTranslationDomain, [ProgramBundle]]
+        arguments: [null, RadioSolution\ProgramBundle\Entity\Track, "SonataAdminBundle:CRUD"]
+
     radioSolution.podcast.podcast:
         class: RadioSolution\PodcastBundle\Admin\PodcastAdmin
         tags:

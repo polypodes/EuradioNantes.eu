@@ -250,3 +250,4 @@ stof_doctrine_extensions:
     orm:
         default:
             sortable:      true
+

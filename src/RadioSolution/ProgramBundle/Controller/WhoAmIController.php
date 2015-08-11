@@ -3,6 +3,7 @@
 namespace RadioSolution\ProgramBundle\Controller;
 
 use RadioSolution\ProgramBundle\Entity\Album;
+use RadioSolution\ProgramBundle\Entity\Track;
 use RadioSolution\ProgramBundle\Exception\InvalidAlbumInputException;
 use RadioSolution\ProgramBundle\Service\Tracks\TrackRetriever;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -91,19 +92,43 @@ class WhoAmIController extends Controller
         $terms = array_pop($terms);
 
         $albumModel = new Album();
+        $trackList = array();
         list($terms, $album, $images, $tracks) = $retriever->search($terms);
+        $logger = $this->get('logger');
         try {
+            $logger->info(sprintf('Trying to SAVE %s ALBUM INFOS using the TrackRetriever', $terms));
             $albumModel->fromXml($album);
             $em = $this->getDoctrine()->getManager();
             $em->persist($albumModel);
             $em->flush();
         } catch(InvalidAlbumInputException $e) {
-            $logger = $this->get('logger');
-            $logger->info(sprintf('Trying to process %s using the TrackRetriever', $terms));
-            $logger->error(sprintf('An error occured : %s', $e));
+            $logger->error(sprintf('An error occurred : %s', $e));
+        }
+
+        if($albumModel->getId()) {
+            foreach ($tracks as $position=>$title) {
+                if("titre inconnu" == trim(strtolower($title))) {
+                    $logger->info(
+                        sprintf('INGORING %s - %s TRACK INFOS while processsing %s (album #%s) track list',
+                            $terms, $title, $albumModel->getId()));
+                    continue;
+                }
+                try {
+                    $logger->info(sprintf('Trying to SAVE %s - %s TRACK INFOS using the TrackRetriever', $terms, $title));
+                    $trackModel = new Track();
+                    $trackModel->fromAlbum($albumModel, $title, $position+1); // position is an index's an index
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($trackModel);
+                    $em->flush();
+                    $trackList[] = $trackModel;
+                } catch (InvalidAlbumInputException $e) {
+                    $logger->error(sprintf('An error occurred : %s', $e));
+                }
+            }
         }
         $serializer = $this->container->get('serializer');
-        $content = $serializer->serialize($albumModel, 'json');
+        $content = $serializer->serialize(array($albumModel, $trackList), 'json');
+
 
         return $this->render('ProgramBundle::empty_layout.html.twig', array(
             'content' => $content
