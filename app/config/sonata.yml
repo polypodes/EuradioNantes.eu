@@ -130,6 +130,8 @@ sonata_page:
     direct_publication: true # or %kernel.debug% if you want to publish in dev mode (but not in prod)
 
 sonata_admin:
+    options:
+        use_select2: true
     #assets:
         #javascripts:
         #    - bundles/sonataadmin/vendor/jquery/dist/jquery.min.js
