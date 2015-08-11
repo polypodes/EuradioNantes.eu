@@ -4,6 +4,7 @@ namespace RadioSolution\ProgramBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\ClassificationBundle\Model\Tag as Tag;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * RadioSolution\ProgramBundle\Entity\Emission
@@ -39,6 +40,53 @@ class Emission
      * @var Application\Sonata\MediaBundle\Entity\Media
      */
     private $media;
+
+    /**
+     * @var date $diffusion_start
+     */
+    private $diffusion_start;
+
+    /**
+     * @var date $difusion_stop
+     */
+    private $difusion_stop;
+
+        /**
+     * @var RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast
+     */
+    private $ExceptionalBroadcast;
+
+    /**
+     * @var RadioSolution\ProgramBundle\Entity\WeeklyBroadcast
+     */
+    private $WeeklyBroadcast;
+
+    /**
+     * @var RadioSolution\ProgramBundle\Entity\Program
+     */
+    private $programs;
+
+    /**
+     * @var boolean $archive
+     */
+    private $archive;
+
+    /**
+     * @var RadioSolution\ProgramBundle\Entity\EmissionFrequency
+     */
+    private $frequency;
+
+    /**
+     * @var string $slug
+     */
+    private $slug;
+
+    public function __construct()
+    {
+        $this->ExceptionalBroadcast = new ArrayCollection();
+        $this->WeeklyBroadcast = new ArrayCollection();
+        $this->programs = new ArrayCollection();
+    }
 
     /**
      * to string
@@ -159,21 +207,6 @@ class Emission
     {
         return $this->media;
     }
-    /**
-     * @var RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast
-     */
-    private $ExceptionalBroadcast;
-
-    /**
-     * @var RadioSolution\ProgramBundle\Entity\WeeklyBroadcast
-     */
-    private $WeeklyBroadcast;
-
-    public function __construct()
-    {
-        $this->ExceptionalBroadcast = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->WeeklyBroadcast = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add ExceptionalBroadcast
@@ -236,16 +269,6 @@ class Emission
     {
         return $this->WeeklyBroadcast;
     }
-    /**
-     * @var date $diffusion_start
-     */
-    private $diffusion_start;
-
-    /**
-     * @var date $difusion_stop
-     */
-    private $difusion_stop;
-
 
     /**
      * Set diffusion_start
@@ -288,11 +311,6 @@ class Emission
     {
         return $this->difusion_stop;
     }
-    /**
-     * @var boolean $archive
-     */
-    private $archive;
-
 
     /**
      * Set archive
@@ -313,11 +331,6 @@ class Emission
     {
         return $this->archive;
     }
-    /**
-     * @var RadioSolution\ProgramBundle\Entity\EmissionFrequency
-     */
-    private $frequency;
-
 
     /**
      * Set frequency
@@ -338,11 +351,6 @@ class Emission
     {
         return $this->frequency;
     }
-    /**
-     * @var string $slug
-     */
-    private $slug;
-
 
     /**
      * Set slug
@@ -362,5 +370,16 @@ class Emission
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    public function getPrograms()
+    {
+        return $this->programs;
+    }
+
+    public function setPrograms($programs)
+    {
+        $this->programs = $programs;
+        return $this;
     }
 }

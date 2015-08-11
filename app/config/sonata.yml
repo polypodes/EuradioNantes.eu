@@ -74,9 +74,13 @@ sonata_media:
     filesystem:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
-            create:     false
+            create:     true
             # @todo check against actual params in production
-    #providers:
+
+    providers:
+        #podcast:
+        #    service: sonata.media.provider.podcast
+        #    filesystem: sonata.media.filesystem.podcasts
         #image:
             #resizer: sonata.media.resizer.square
             # @todo check against actual params in productionyy

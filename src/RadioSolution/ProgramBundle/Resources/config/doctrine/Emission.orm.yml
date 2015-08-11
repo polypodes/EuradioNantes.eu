@@ -39,7 +39,7 @@ RadioSolution\ProgramBundle\Entity\Emission:
       targetEntity: Application\Sonata\MediaBundle\Entity\Media
       joinColumn:
         name: id_media
-        referencedColumnName: id   
+        referencedColumnName: id
   oneToMany:
     ExceptionalBroadcast:
       targetEntity: ExceptionalBroadcast
@@ -49,3 +49,8 @@ RadioSolution\ProgramBundle\Entity\Emission:
       targetEntity: WeeklyBroadcast
       cascade: [all]
       mappedBy: Emission
+    programs:
+      targetEntity: Program
+      #cascade: [persist]
+      mappedBy: emission
+      orphanRemoval: true
