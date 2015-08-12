@@ -35,7 +35,7 @@ class TrackAdmin extends Admin
             ->add('label', null, array('label' => 'Label', 'required' => false))
             ->add('manufacturer', null, array('label' => 'Production', 'required' => false))
             ->add('publisher', null, array('label' => 'Édition', 'required' => false))
-            ->add('releaseDate', 'datetime', array('label' => 'Date de sortie', 'required' => false))
+            ->add('releaseDate', 'sonata_type_date_picker', array('label' => 'Date de sortie', 'required' => false))
             ->add('runningTime', 'number', array('label' => 'Durée (secondes)', 'required' => false))
             ->add('studio', null, array('label' => 'Studio', 'required' => false))
             ->add('trackSequence', 'number', array('label' => "Position dans l'album", 'required' => false))

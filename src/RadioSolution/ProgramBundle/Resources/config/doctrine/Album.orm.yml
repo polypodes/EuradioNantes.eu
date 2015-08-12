@@ -30,6 +30,14 @@ RadioSolution\ProgramBundle\Entity\Album:
       nullable: true
       default: NULL
     releaseDate:
+      type: date
+      nullable: true
+      default: NULL
+    featuredFrom:
+      type: date
+      nullable: true
+      default: NULL
+    featuredTo:
       type: datetime
       nullable: true
       default: NULL

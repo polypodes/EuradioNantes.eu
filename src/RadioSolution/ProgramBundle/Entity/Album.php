@@ -52,6 +52,16 @@ class Album
     private $releaseDate;
 
     /**
+     * @var \DateTime
+     */
+    private $featuredFrom;
+
+    /**
+     * @var \DateTime
+     */
+    private $featuredTo;
+
+    /**
      * @var string
      */
     private $studio;
@@ -423,5 +433,53 @@ class Album
         if ($this->getCreatedAt() == null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+    /**
+     * Set featuredFrom
+     *
+     * @param \DateTime $featuredFrom
+     *
+     * @return Album
+     */
+    public function setFeaturedFrom($featuredFrom)
+    {
+        $this->featuredFrom = $featuredFrom;
+
+        return $this;
+    }
+
+    /**
+     * Get featuredFrom
+     *
+     * @return \DateTime
+     */
+    public function getFeaturedFrom()
+    {
+        return $this->featuredFrom;
+    }
+
+    /**
+     * Set featuredTo
+     *
+     * @param \DateTime $featuredTo
+     *
+     * @return Album
+     */
+    public function setFeaturedTo($featuredTo)
+    {
+        $this->featuredTo = $featuredTo;
+
+        return $this;
+    }
+
+    /**
+     * Get featuredTo
+     *
+     * @return \DateTime
+     */
+    public function getFeaturedTo()
+    {
+        return $this->featuredTo;
     }
 }
