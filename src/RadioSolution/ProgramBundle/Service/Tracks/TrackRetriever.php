@@ -37,6 +37,8 @@ class TrackRetriever implements ContainerAwareInterface
      */
     protected $conf = null;
 
+    protected $amazonConf = array();
+
     /**
      * @var ApaiIO|null
      */
@@ -44,22 +46,36 @@ class TrackRetriever implements ContainerAwareInterface
 
     /**
      * @param ContainerInterface $container
-     * @param string             $locale
+     * @param string             $country
      * @param string             $amazon_ws_api_key
      * @param string             $amazon_ws_api_secret_key
      * @param string             $amazon_ws_api_associate_tag
      */
-    public function __construct(ContainerInterface $container, $locale,
+    public function __construct(ContainerInterface $container, $country,
         $amazon_ws_api_key, $amazon_ws_api_secret_key, $amazon_ws_api_associate_tag)
     {
         $this->setContainer($container);
+        $this->amazonConf['country'] = $country;
+        $this->amazonConf['amazon_ws_api_key'] = $amazon_ws_api_key;
+        $this->amazonConf['amazon_ws_api_secret_key'] = $amazon_ws_api_secret_key;
+        $this->amazonConf['amazon_ws_api_associate_tag'] = $amazon_ws_api_associate_tag;
+
+    }
+
+    protected function setUp()
+    {
+        if(isset($this->conf) && isset($this->apaiIO)) {
+            return $this;
+        }
         $this->conf = new GenericConfiguration();
         $this->conf
-            ->setCountry($locale) // mind that we assume that Sf2 locale == Amazon locale
-            ->setAccessKey($amazon_ws_api_key)
-            ->setSecretKey($amazon_ws_api_secret_key)
-            ->setAssociateTag($amazon_ws_api_associate_tag);
+            ->setCountry($this->amazonConf['country']) // mind that we assume that Sf2 locale == Amazon locale
+            ->setAccessKey($this->amazonConf['amazon_ws_api_key'])
+            ->setSecretKey($this->amazonConf['amazon_ws_api_secret_key'])
+            ->setAssociateTag($this->amazonConf['amazon_ws_api_associate_tag']);
         $this->apaiIO = new ApaiIO($this->conf);
+
+        return $this;
     }
 
     /**
@@ -82,6 +98,9 @@ class TrackRetriever implements ContainerAwareInterface
      */
     public function search($terms = "")
     {
+        if(!isset($this->conf) && !isset($this->apaiIO)) {
+            $this->setUp();
+        }
         if (empty($terms) || !is_string($terms)) {
             throw new \InvalidArgumentException(sprintf("terms argument passed to %s must be a string and cannot be null", __METHOD__));
         }
@@ -146,6 +165,9 @@ class TrackRetriever implements ContainerAwareInterface
 
     public function searchbyAlbumAndTitle($albumName, $title)
     {
+        if(!isset($this->conf) && !isset($this->apaiIO)) {
+            $this->setUp();
+        }
         $search = new Search();
         $search
             ->setCategory('MP3Downloads')// DigitalMusic, MusicTracks, Music, MP3Downloads
@@ -216,6 +238,9 @@ class TrackRetriever implements ContainerAwareInterface
      */
     public function tracksSearch($artist = "", $albumName = "", $titlePrecision = false)
     {
+        if(!isset($this->conf) && !isset($this->apaiIO)) {
+            $this->setUp();
+        }
         if (empty($artist)) {
             throw new \InvalidArgumentException(sprintf("artist argument passed to %s must be a string and cannot be null", __METHOD__));
         }
@@ -304,6 +329,9 @@ class TrackRetriever implements ContainerAwareInterface
      */
     public function findAlbumDetail($ASIN)
     {
+        if(!isset($this->conf) && !isset($this->apaiIO)) {
+            $this->setUp();
+        }
         $search = new Lookup();
         $search
             ->setCondition('All')// New (default) | Used | Collectible | Refurbished | All

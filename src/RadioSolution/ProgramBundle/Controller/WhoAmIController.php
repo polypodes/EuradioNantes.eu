@@ -88,6 +88,7 @@ class WhoAmIController extends Controller
             "POND - MEDECINE HAT - MAN IT FEELS LIKE SPACE AGAIN",
             "BECK - BLUE MOON - MORNING PHASE",
             "JUANA MOLINA - ERAS - WED 21",
+            "RATATAT - PRICKS OF BRIGHTNESS - MAGNIFIQUE 2015",
             ];
         $terms = array_pop($terms);
 
@@ -98,13 +99,13 @@ class WhoAmIController extends Controller
         try {
             $logger->info(sprintf('Trying to SAVE %s ALBUM INFOS using the TrackRetriever', $terms));
             $albumModel->fromXml($album);
+            $albumModel->setImagesfromXml($images);
             $em = $this->getDoctrine()->getManager();
             $em->persist($albumModel);
             $em->flush();
         } catch(InvalidAlbumInputException $e) {
             $logger->error(sprintf('An error occurred : %s', $e));
         }
-
         if($albumModel->getId()) {
             foreach ($tracks as $position=>$title) {
                 if("titre inconnu" == trim(strtolower($title))) {

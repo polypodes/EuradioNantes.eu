@@ -38,7 +38,7 @@ RadioSolution\ProgramBundle\Entity\Album:
       nullable: true
       default: NULL
     featuredTo:
-      type: datetime
+      type: date
       nullable: true
       default: NULL
     studio:
@@ -49,6 +49,11 @@ RadioSolution\ProgramBundle\Entity\Album:
     title:
       type: string
       length: 255
+    thumbnailUrl:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
     created_at:
       type: datetime
     updated_at:
@@ -63,5 +68,8 @@ RadioSolution\ProgramBundle\Entity\Album:
           trackSequence: ASC
       orderBy:
         trackSequence: ASC
-
+  manyToMany:
+    playlists:
+      targetEntity: Playlist
+      mappedBy: albums
 

@@ -12,9 +12,9 @@
  */
 
 namespace RadioSolution\ProgramBundle\Entity;
+
 use RadioSolution\ProgramBundle\Exception\InvalidAlbumInputException;
 use Doctrine\Common\Collections\ArrayCollection;
-
 
 /**
  * RadioSolution\ProgramBundle\Entity\Emission.
@@ -40,6 +40,11 @@ class Album
      * @var string
      */
     private $manufacturer;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $playlists;
 
     /**
      * @var string
@@ -72,6 +77,12 @@ class Album
     private $title;
 
     /**
+     * @var
+     * @example http://ecx.images-amazon.com/images/I/61z54MQNt5L._SL75_.jpg
+     */
+    private $thumbnailUrl;
+
+    /**
      * @var ArrayCollection of Track[]
      */
     private $tracks;
@@ -86,26 +97,89 @@ class Album
      */
     private $updated_at;
 
-    public function __toString() {
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->playlists = new ArrayCollection();
+        $this->tracks = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
         return (!empty($this->getTitle())) ? $this->getTitle() : 'Titre non défini';
+    }
+
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return Album
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     /**
      * @param \SimpleXMLElement $xml
      *
      * @return $this
+     */
+    public function setImagesFromXml(\SimpleXMLElement $xml)
+    {
+        $values = (array) json_decode(json_encode($xml));
+        if(
+            !empty($values)
+            && !empty($values["ImageSet"])
+            && !empty($values["ImageSet"]->ThumbnailImage)
+            && !empty($values["ImageSet"]->ThumbnailImage->URL)
+        ) {
+           $this->thumbnailUrl = strval($values["ImageSet"]->ThumbnailImage->URL);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param \SimpleXMLElement $xml
+     *
+     * @return $this
+     *
      * @throws InvalidAlbumInputException
      */
     public function fromXml(\SimpleXMLElement $xml)
     {
         $attrs = get_object_vars($this);
-        unset($attrs["id"], $attrs["created_at"], $attrs["updated_at"], $attrs["tracks"]);
+        $unsetAttrs = array(
+            "id", "created_at", "updated_at", "tracks", "playlists",
+            "featuredFrom", "featuredTo", "thumbnailUrl");
+        foreach($unsetAttrs as $attrKey) {
+            unset($attrs[$attrKey]);
+        }
         $keys = array_map("ucfirst", array_keys($attrs));
-        $values = (array)json_decode(json_encode($xml)); // it's a simple XML obj, no depth.
+        $values = (array) json_decode(json_encode($xml)); // it's a simple XML obj, no depth.
         $values["Artist"] = $values["Creator"]; // return both keys
 
-        foreach($keys as $key) {
-            if(!isset($values[$key]) || !is_string($values[$key]) || empty($values[$key])) {
+        foreach ($keys as $key) {
+            if (!isset($values[$key]) || !is_string($values[$key]) || empty($values[$key])) {
                 throw new InvalidAlbumInputException(
                     sprintf("In %s, xml input must contain a %s value", __METHOD__, $key));
             }
@@ -163,20 +237,6 @@ class Album
     public function setGenre($genre)
     {
         $this->genre = $genre;
-
-        return $this;
-    }
-
-    /**
-     * Set label.
-     *
-     * @param string $label
-     *
-     * @return Album
-     */
-    public function setLabel($label)
-    {
-        $this->label = $label;
 
         return $this;
     }
@@ -278,27 +338,120 @@ class Album
     }
 
     /**
-     * Get title.
+     * Get updatedAt.
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getTitle()
+    public function getUpdatedAt()
     {
-        return $this->title;
+        return $this->updated_at;
     }
 
     /**
-     * Set title.
+     * Set updatedAt.
      *
-     * @param string $title
+     * @param \DateTime $updatedAt
      *
      * @return Album
      */
-    public function setTitle($title)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->title = $title;
+        $this->updated_at = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * Get artist.
+     *
+     * @return string
+     */
+    public function getArtist()
+    {
+        return $this->artist;
+    }
+
+    /**
+     * Set artist.
+     *
+     * @param string $artist
+     *
+     * @return Album
+     */
+    public function setArtist($artist)
+    {
+        $this->artist = $artist;
+
+        return $this;
+    }
+
+    /**
+     * Get label.
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Set label.
+     *
+     * @param string $label
+     *
+     * @return Album
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * Add track.
+     *
+     * @param Track $track
+     *
+     * @return Album
+     */
+    public function addTrack(Track $track)
+    {
+        $this->tracks[] = $track;
+
+        return $this;
+    }
+
+    /**
+     * Remove track.
+     *
+     * @param Track $track
+     */
+    public function removeTrack(Track $track)
+    {
+        $this->tracks->removeElement($track);
+    }
+
+    /**
+     * Get tracks.
+     *
+     * @return ArrayCollection
+     */
+    public function getTracks()
+    {
+        return $this->tracks;
+    }
+
+    /**
+     * set datetimes on create/update.
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 
     /**
@@ -326,117 +479,17 @@ class Album
     }
 
     /**
-     * Get updatedAt.
+     * Get featuredFrom.
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getFeaturedFrom()
     {
-        return $this->updated_at;
+        return $this->featuredFrom;
     }
 
     /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Album
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get artist
-     *
-     * @return string
-     */
-    public function getArtist()
-    {
-        return $this->artist;
-    }
-
-    /**
-     * Set artist
-     *
-     * @param string $artist
-     *
-     * @return Album
-     */
-    public function setArtist($artist)
-    {
-        $this->artist = $artist;
-
-        return $this;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tracks = new ArrayCollection();
-    }
-
-    /**
-     * Get label
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return $this->label;
-    }
-
-    /**
-     * Add track
-     *
-     * @param Track $track
-     *
-     * @return Album
-     */
-    public function addTrack(Track $track)
-    {
-        $this->tracks[] = $track;
-
-        return $this;
-    }
-
-    /**
-     * Remove track
-     *
-     * @param Track $track
-     */
-    public function removeTrack(Track $track)
-    {
-        $this->tracks->removeElement($track);
-    }
-
-    /**
-     * Get tracks
-     *
-     * @return ArrayCollection
-     */
-    public function getTracks()
-    {
-        return $this->tracks;
-    }
-
-    /**
-     * set datetimes on create/update
-     */
-    public function updatedTimestamps()
-    {
-        $this->setUpdatedAt(new \DateTime('now'));
-        if ($this->getCreatedAt() == null) {
-            $this->setCreatedAt(new \DateTime('now'));
-        }
-    }
-
-    /**
-     * Set featuredFrom
+     * Set featuredFrom.
      *
      * @param \DateTime $featuredFrom
      *
@@ -450,17 +503,17 @@ class Album
     }
 
     /**
-     * Get featuredFrom
+     * Get featuredTo.
      *
      * @return \DateTime
      */
-    public function getFeaturedFrom()
+    public function getFeaturedTo()
     {
-        return $this->featuredFrom;
+        return $this->featuredTo;
     }
 
     /**
-     * Set featuredTo
+     * Set featuredTo.
      *
      * @param \DateTime $featuredTo
      *
@@ -474,12 +527,60 @@ class Album
     }
 
     /**
-     * Get featuredTo
+     * Add playlist
      *
-     * @return \DateTime
+     * @param \RadioSolution\ProgramBundle\Entity\Playlist $playlist
+     *
+     * @return Album
      */
-    public function getFeaturedTo()
+    public function addPlaylist(\RadioSolution\ProgramBundle\Entity\Playlist $playlist)
     {
-        return $this->featuredTo;
+        $this->playlists[] = $playlist;
+
+        return $this;
+    }
+
+    /**
+     * Remove playlist
+     *
+     * @param \RadioSolution\ProgramBundle\Entity\Playlist $playlist
+     */
+    public function removePlaylist(\RadioSolution\ProgramBundle\Entity\Playlist $playlist)
+    {
+        $this->playlists->removeElement($playlist);
+    }
+
+    /**
+     * Get playlists
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlaylists()
+    {
+        return $this->playlists;
+    }
+
+    /**
+     * Set thumbnailUrl
+     *
+     * @param string $thumbnailUrl
+     *
+     * @return Album
+     */
+    public function setThumbnailUrl($thumbnailUrl)
+    {
+        $this->thumbnailUrl = $thumbnailUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnailUrl
+     *
+     * @return string
+     */
+    public function getThumbnailUrl()
+    {
+        return $this->thumbnailUrl;
     }
 }

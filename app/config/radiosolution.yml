@@ -51,10 +51,13 @@ services:
         class: RadioSolution\ProgramBundle\Admin\TrackAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'Musique', label: 'Tracks' }
-        #arguments: [null, RadioSolution\ProgramBundle\Entity\Track, 'PixSortableBehaviorBundle:SortableAdmin']
-        #calls:
-        #    - [ setTranslationDomain, [ProgramBundle]]
         arguments: [null, RadioSolution\ProgramBundle\Entity\Track, "SonataAdminBundle:CRUD"]
+
+    radioSolution.program.playlist:
+        class: RadioSolution\ProgramBundle\Admin\PlaylistAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'Musique', label: 'Playlists' }
+        arguments: [null, RadioSolution\ProgramBundle\Entity\Playlist, "SonataAdminBundle:CRUD"]
 
     radioSolution.podcast.podcast:
         class: RadioSolution\PodcastBundle\Admin\PodcastAdmin

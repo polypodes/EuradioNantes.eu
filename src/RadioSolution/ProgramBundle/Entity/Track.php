@@ -12,6 +12,7 @@
  */
 
 namespace RadioSolution\ProgramBundle\Entity;
+
 use RadioSolution\ProgramBundle\Exception\InvalidAlbumInputException;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -90,7 +91,8 @@ class Track
      */
     private $updated_at;
 
-    public function __toString() {
+    public function __toString()
+    {
         $str = (isset($this->title)) ? $this->title : 'Titre non défini';
 
         return $str;
@@ -131,6 +133,16 @@ class Track
     }
 
     /**
+     * Get genre.
+     *
+     * @return string
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
      * Set genre.
      *
      * @param string $genre
@@ -142,16 +154,6 @@ class Track
         $this->genre = $genre;
 
         return $this;
-    }
-
-    /**
-     * Get genre.
-     *
-     * @return string
-     */
-    public function getGenre()
-    {
-        return $this->genre;
     }
 
     /**
@@ -299,30 +301,6 @@ class Track
     }
 
     /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Album
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get updatedAt.
      *
      * @return \DateTime
@@ -347,7 +325,7 @@ class Track
     }
 
     /**
-     * Get artist
+     * Get artist.
      *
      * @return string
      */
@@ -357,7 +335,7 @@ class Track
     }
 
     /**
-     * Set artist
+     * Set artist.
      *
      * @param string $artist
      *
@@ -371,7 +349,17 @@ class Track
     }
 
     /**
-     * Set runningTime
+     * Get runningTime.
+     *
+     * @return integer
+     */
+    public function getRunningTime()
+    {
+        return $this->runningTime;
+    }
+
+    /**
+     * Set runningTime.
      *
      * @param integer $runningTime
      *
@@ -385,17 +373,17 @@ class Track
     }
 
     /**
-     * Get runningTime
+     * Get trackSequence.
      *
      * @return integer
      */
-    public function getRunningTime()
+    public function getTrackSequence()
     {
-        return $this->runningTime;
+        return $this->trackSequence;
     }
 
     /**
-     * Set trackSequence
+     * Set trackSequence.
      *
      * @param integer $trackSequence
      *
@@ -409,17 +397,17 @@ class Track
     }
 
     /**
-     * Get trackSequence
+     * Get album.
      *
-     * @return integer
+     * @return Album
      */
-    public function getTrackSequence()
+    public function getAlbum()
     {
-        return $this->trackSequence;
+        return $this->album;
     }
 
     /**
-     * Set album
+     * Set album.
      *
      * @param Album $album
      *
@@ -433,21 +421,12 @@ class Track
     }
 
     /**
-     * Get album
-     *
-     * @return Album
-     */
-    public function getAlbum()
-    {
-        return $this->album;
-    }
-
-    /**
-     * @param Album $album
+     * @param Album  $album
      * @param string $title
-     * @param int $position
+     * @param int    $position
      *
      * @return $this
+     *
      * @throws InvalidAlbumInputException
      */
     public function fromAlbum(Album $album, $title = "", $position = null)
@@ -459,10 +438,10 @@ class Track
         $this->setReleaseDate($album->getReleaseDate());
         $this->setStudio($album->getStudio());
         $this->setAlbum($album);
-        if(!empty($title)) {
+        if (!empty($title)) {
             $this->setTitle($title);
         }
-        if($position >= 0) {
+        if ($position >= 0) {
             $this->setTrackSequence($position);
         }
 
@@ -470,7 +449,7 @@ class Track
     }
 
     /**
-     * set datetimes on create/update
+     * set datetimes on create/update.
      */
     public function updatedTimestamps()
     {
@@ -478,5 +457,29 @@ class Track
         if ($this->getCreatedAt() == null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+    /**
+     * Get createdAt.
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set createdAt.
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Album
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
     }
 }

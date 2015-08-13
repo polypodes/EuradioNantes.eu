@@ -29,6 +29,7 @@ class AlbumAdmin extends Admin
         $formMapper
             ->with($this->trans('Album'))->end()
             ->with($this->trans('Tracks'))->end()
+            ->with($this->trans('Playlists'))->end()
         ;
 
         $formMapper
@@ -42,6 +43,7 @@ class AlbumAdmin extends Admin
             ->add('featuredFrom', 'sonata_type_date_picker', array('label' => 'Album de la Semaine: du ', 'required' => false))
             ->add('featuredTo', 'sonata_type_date_picker', array('label' => 'au : (inclus)', 'required' => false))
             ->add('studio', null, array('label' => 'Studio', 'required' => false))
+            ->add('thumbnailUrl', 'url', array('label' => 'Vignette', 'required' => false))
             ->end()
             ->with($this->trans('Tracks'))
             /*
@@ -63,17 +65,22 @@ class AlbumAdmin extends Admin
                 'btn_list' => true,
                 'sortable' => 'trackSequence'
             ))
+            ->add(
+                'tracks',
+                'sonata_type_model',
+                array(
+                    'expanded' => true,
+                    'multiple' => true,
+                    'sortable' => 'trackSequence',
+                    'btn_add' => 'Créer',
+                    'compound' => true
+                )
+            )
             */
-
-            ->add('tracks', 'sonata_type_collection',
-                array('label' => 'Tracks', 'required' => false), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'btn_list' => true,
-                    'sortable' => 'trackSequence'
-                ))
-
-
+            ->add('tracks', 'sonata_type_model_autocomplete', array('property'=>'title','multiple'=>true))
+            ->end()
+            ->with($this->trans('Playlists'))
+            ->add('playlists', 'sonata_type_model_autocomplete', array('property'=>'title','multiple'=>true))
             ->end()
         ;
     }
@@ -87,6 +94,8 @@ class AlbumAdmin extends Admin
             ->add('manufacturer')
             ->add('publisher')
             ->add('studio')
+            ->add('featuredFrom')
+            ->add('featuredTo')
         ;
     }
 
