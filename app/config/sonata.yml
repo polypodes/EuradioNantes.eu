@@ -196,6 +196,9 @@ sonata_seo:
             #'xmlns:fb':           "http://www.facebook.com/2008/fbml"
 
 sonata_news:
+    admin:
+        post:
+            class:      Application\Sonata\NewsBundle\Admin\PostAdmin
     title:        "Les blogs d'Euradio"
     link:         http://euradionantes.eu
     description:  "L’Europe vue d'une autre oreille"
