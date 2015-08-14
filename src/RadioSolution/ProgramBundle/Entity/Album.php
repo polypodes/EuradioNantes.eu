@@ -17,7 +17,7 @@ use RadioSolution\ProgramBundle\Exception\InvalidAlbumInputException;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * RadioSolution\ProgramBundle\Entity\Emission.
+ * RadioSolution\ProgramBundle\Entity\Album.
  */
 class Album
 {

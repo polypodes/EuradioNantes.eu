@@ -105,7 +105,7 @@ class TrackRetriever implements ContainerAwareInterface
             throw new \InvalidArgumentException(sprintf("terms argument passed to %s must be a string and cannot be null", __METHOD__));
         }
         list($artist, $title, $albumName) = $this->prepareItems($terms);
-        $tracks = $album = $images = null;
+        $currentTrackTitle = $tracks = $album = $images = null;
 
         $search = new Search();
         $search
@@ -128,6 +128,8 @@ class TrackRetriever implements ContainerAwareInterface
         if(!$result) { // In cas this i not the original Artist' album but a compilation instead
             $xml = $this->searchbyAlbumAndTitle($albumName, $title);
             $result = isset($xml->Items->Item->ItemAttributes) ? $xml->Items->Item->ItemAttributes : null;
+        } else {
+            $currentTrackTitle = strval($result->Title);
         }
 
         $images = isset($xml->Items->Item->ImageSets) ? $xml->Items->Item->ImageSets : null;
@@ -139,6 +141,7 @@ class TrackRetriever implements ContainerAwareInterface
             $albumName = strval($xml->Items->Item->RelatedItems->RelatedItem->Item->ItemAttributes->Title);
             $album =  $xml->Items->Item->RelatedItems->RelatedItem->Item->ItemAttributes;
         }
+
         // Tracks list search + second chance for albums images & details
         if (!$images || !$album || !$tracks) {
             if ($albumName) {
@@ -159,7 +162,17 @@ class TrackRetriever implements ContainerAwareInterface
             }
         }
 
-        return array($terms, $album, $images, $tracks);
+        // make sure we found the current track's title
+        if(empty($currentTrackTitle) && isset($tracks)){
+            foreach ($tracks as $position => $title) {
+                if(trim(strtolower($title)) == trim(strtolower($title))) {
+                    $currentTrackTitle = $title;
+                    break;
+                }
+            }
+        }
+
+        return array($currentTrackTitle, $terms, $album, $images, $tracks);
     }
 
 

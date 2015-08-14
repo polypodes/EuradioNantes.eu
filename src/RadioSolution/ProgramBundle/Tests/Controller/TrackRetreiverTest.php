@@ -53,20 +53,22 @@ class TrackRetreiverTest extends WebTestCase
     {
         $retriever = $this->getRetriever();
         sleep(2); // otherwise Amazon kicks you for overusing its API.
-        list($terms, $album, $images, $tracks) = $retriever->search($terms);
+        list($currentTrackTitle, $terms, $album, $images, $tracks) = $retriever->search($terms);
         $this->assertNotNull($album);
         $this->assertNotNull($images);
+        $this->assertNotNull($currentTrackTitle);
         $this->assertNotNull($tracks);
     }
 
     public function dataProvider()
     {
         return [
+            ["POND - MEDECINE HAT - MAN IT FEELS LIKE SPACE AGAIN"],
+            /*
+            ["LA FELINE (FRA) - LA LIGNE D'HORIZON -"],
             ["THE DODOS - DARKNESS - Individ"],
             ["THE WAR ON DRUGS - LOST IN THE DREAM - LOST IN THE DREAM"],
             ["RATATAT - PRICKS OF BRIGHTNESS - MAGNIFIQUE 2015"],
-            ["POND - MEDECINE HAT - MAN IT FEELS LIKE SPACE AGAIN"],
-            /*
             ["DUTCH UNCLES (ANG) - UPSILON - O SHUDDER"],
             ["[THE LIMINANAS (FRA) - I'VE GOT TROUBLE IN MIND - I've Got Trouble In Mind 2014"],
             ["ALISON MOSSHART [COVER] - WHAT A WONDERFUL WORLD - Sons Of Anarchy Soundtrack 2011"],
@@ -75,6 +77,7 @@ class TrackRetreiverTest extends WebTestCase
             ["OWLLE (FRA) - FOG - FRANCE"],
             ["BIKINI MACHINE (FRA) - EVERYBODY'S IN THE KNOW - Bang on Time 2014"],
             ["ALLAH-LAS - NOTHING TO HIDE - WORSHIP THE SUN"],
+            /*
             ["WITHERED HAND (ECO) - KING OF HOLLYWOOD - New Gods 2013"],
             ["JACK WHITE - TEMPORARY GROUND - LAZARETTO"],
             ["RATATAT - PRICKS OF BRIGHTNESS - MAGNIFIQUE 2015"],

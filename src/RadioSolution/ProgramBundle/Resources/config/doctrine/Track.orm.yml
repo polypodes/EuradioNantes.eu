@@ -58,6 +58,11 @@ RadioSolution\ProgramBundle\Entity\Track:
       type: datetime
     updated_at:
       type: datetime
+  oneToMany:
+    broadcasts:
+      nullable: true
+      targetEntity: Broadcast
+      mappedBy: track
   manyToOne:
     album:
       nullable: true

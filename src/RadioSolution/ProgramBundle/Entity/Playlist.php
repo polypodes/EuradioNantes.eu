@@ -16,7 +16,7 @@ namespace RadioSolution\ProgramBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * RadioSolution\ProgramBundle\Entity\Emission.
+ * RadioSolution\ProgramBundle\Entity\Playlist.
  */
 class Playlist
 {

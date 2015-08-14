@@ -1,0 +1,30 @@
+RadioSolution\ProgramBundle\Entity\Broadcast:
+  type: entity
+  table: broadcast
+  lifecycleCallbacks:
+    prePersist: [ updatedTimestamps ]
+    preUpdate: [ updatedTimestamps ]
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    broadcasted:
+      type: datetime
+      nullable: true
+      default: NULL
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+  manyToOne:
+    track:
+      nullable: true
+      default: NULL
+      targetEntity: Track
+      inversedBy: broadcasts
+      joinColumn:
+        name: track_id
+        referencedColumnName: id
+
+

@@ -14,10 +14,10 @@
 namespace RadioSolution\ProgramBundle\Entity;
 
 use RadioSolution\ProgramBundle\Exception\InvalidAlbumInputException;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * RadioSolution\ProgramBundle\Entity\Emission.
+ * RadioSolution\ProgramBundle\Entity\Track.
  */
 class Track
 {
@@ -35,6 +35,11 @@ class Track
      * @var string
      */
     private $artist;
+
+    /**
+     * @var ArrayCollection of BroadCast[]
+     */
+    private $broadcasts;
 
     /**
      * @var string
@@ -481,5 +486,46 @@ class Track
         $this->created_at = $createdAt;
 
         return $this;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->broadcasts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add broadcast
+     *
+     * @param \RadioSolution\ProgramBundle\Entity\Broadcast $broadcast
+     *
+     * @return Track
+     */
+    public function addBroadcast(\RadioSolution\ProgramBundle\Entity\Broadcast $broadcast)
+    {
+        $this->broadcasts[] = $broadcast;
+
+        return $this;
+    }
+
+    /**
+     * Remove broadcast
+     *
+     * @param \RadioSolution\ProgramBundle\Entity\Broadcast $broadcast
+     */
+    public function removeBroadcast(\RadioSolution\ProgramBundle\Entity\Broadcast $broadcast)
+    {
+        $this->broadcasts->removeElement($broadcast);
+    }
+
+    /**
+     * Get broadcasts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBroadcasts()
+    {
+        return $this->broadcasts;
     }
 }
