@@ -24,7 +24,7 @@ class PodcastAdmin extends Admin
     $formMapper
       ->with('Général')
         ->add('name', null, array('required' => true, 'label' => 'Nom du podcast'))
-        ->add('home_page', null, array('required' => false, 'label' => 'Page d\'accueil'))
+        ->add('home_page', null, array('required' => false, 'label' => 'Page d’accueil'))
         ->add('real_time_start', null, array('required' => true, 'label' => 'Date du podcast'))
       ->end()
       ->with('file')
@@ -58,7 +58,7 @@ class PodcastAdmin extends Admin
   {
   	$errorElement
   	->with('name')
-  	->assertMaxLength(array('limit' => 32))
+  	->assertLength(array('max' => 32))
   	->end()
   	;
   }

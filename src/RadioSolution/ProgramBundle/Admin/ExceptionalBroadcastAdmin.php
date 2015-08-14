@@ -15,7 +15,7 @@ class ExceptionalBroadcastAdmin extends Admin
   {
     $formMapper
       	->add('time_start','datetime', array('label' => 'Date de début')) //, 'data_timezone' => "GMT",'user_timezone' => "GMT"
-      	->add('duration', null, array('label' => 'Durée'))
+      	->add('duration', null, array('label' => 'Durée (HH:mm)'))
     ;
   }
 

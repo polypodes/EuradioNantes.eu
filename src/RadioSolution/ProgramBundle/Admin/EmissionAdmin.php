@@ -19,7 +19,7 @@ class EmissionAdmin extends Admin
     $formMapper
       ->with('Général')
         ->add('name', null, array('label' => 'Nom'))
-        ->add('description', 'textarea', array('attr' => array('class' => 'tinymce', 'tinymce'=>'{"theme":"medium"}')))
+        ->add('description', 'ckeditor', array('config_name' => 'plus'))
         ->add('theme', 'sonata_type_model', array('label' => 'Thème', 'required' => false))
         ->add('group', 'sonata_type_model', array('label' => 'Groupe', 'required' => false))
         ->add('media', 'sonata_type_model_list', array('label' => 'Média', 'required' => false), array('link_parameters' => array('provider'=>'sonata.media.provider.image')))
@@ -124,7 +124,10 @@ class EmissionAdmin extends Admin
 
     $errorElement
       ->with('name')
-      ->assertMaxLength(array('limit' => 80))
+      ->assertLength(array('max' => 32))
+      ->end()
+      ->with('description')
+      ->assertNotNull()
       ->end()
     ;
   }

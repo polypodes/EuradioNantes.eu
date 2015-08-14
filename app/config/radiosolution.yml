@@ -2,43 +2,43 @@ services:
     radioSolution.program.emission:
         class: RadioSolution\ProgramBundle\Admin\EmissionAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programme', label: 'Émissions' }
+            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Émissions' }
         arguments: [null, RadioSolution\ProgramBundle\Entity\Emission, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.emissionTheme:
         class: RadioSolution\ProgramBundle\Admin\EmissionThemeAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programme', label: 'Thèmes' }
+            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Thèmes' }
         arguments: [null, RadioSolution\ProgramBundle\Entity\EmissionTheme, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.emissionFrequency:
         class: RadioSolution\ProgramBundle\Admin\EmissionFrequencyAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programme', label: 'Fréquence' }
+            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Fréquences de diffusion' }
         arguments: [null, RadioSolution\ProgramBundle\Entity\EmissionFrequency, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.ExceptionalBroadcast:
         class: RadioSolution\ProgramBundle\Admin\ExceptionalBroadcastAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programme', label: 'Émissions exceptionnelles' }
+            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Émissions exceptionnelles', show_in_dashboard: false }
         arguments: [null, RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.WeeklyBroadcast:
         class: RadioSolution\ProgramBundle\Admin\WeeklyBroadcastAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programme', label: 'Émissions hebdo' }
+            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Émissions hebdo', show_in_dashboard: false }
         arguments: [null, RadioSolution\ProgramBundle\Entity\WeeklyBroadcast, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.themeColor:
         class: RadioSolution\ProgramBundle\Admin\ThemeColorAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programme', label: 'Couleur du thème' }
+            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Couleurs du thème' }
         arguments: [null, RadioSolution\ProgramBundle\Entity\ThemeColor, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.program:
         class: RadioSolution\ProgramBundle\Admin\ProgramAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programme', label: 'Programme' }
+            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Programmes' }
         arguments: [null, RadioSolution\ProgramBundle\Entity\Program, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.album:
@@ -62,7 +62,7 @@ services:
     radioSolution.podcast.podcast:
         class: RadioSolution\PodcastBundle\Admin\PodcastAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Podcast', label: 'Podcasts' }
+            - { name: sonata.admin, manager_type: orm, group: 'Podcasts', label: 'Podcasts' }
         arguments: [null, RadioSolution\PodcastBundle\Entity\Podcast, "SonataAdminBundle:CRUD"]
 
     radioSolution.menu.menu:

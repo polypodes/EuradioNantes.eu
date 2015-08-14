@@ -3,7 +3,8 @@
 namespace RadioSolution\ProgramBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\NewsBundle\Model\Tag as Tag;
+use Sonata\ClassificationBundle\Model\Tag as Tag;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * RadioSolution\ProgramBundle\Entity\Emission
@@ -41,6 +42,53 @@ class Emission
     private $media;
 
     /**
+     * @var date $diffusion_start
+     */
+    private $diffusion_start;
+
+    /**
+     * @var date $difusion_stop
+     */
+    private $difusion_stop;
+
+        /**
+     * @var RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast
+     */
+    private $ExceptionalBroadcast;
+
+    /**
+     * @var RadioSolution\ProgramBundle\Entity\WeeklyBroadcast
+     */
+    private $WeeklyBroadcast;
+
+    /**
+     * @var RadioSolution\ProgramBundle\Entity\Program
+     */
+    private $programs;
+
+    /**
+     * @var boolean $archive
+     */
+    private $archive;
+
+    /**
+     * @var RadioSolution\ProgramBundle\Entity\EmissionFrequency
+     */
+    private $frequency;
+
+    /**
+     * @var string $slug
+     */
+    private $slug;
+
+    public function __construct()
+    {
+        $this->ExceptionalBroadcast = new ArrayCollection();
+        $this->WeeklyBroadcast = new ArrayCollection();
+        $this->programs = new ArrayCollection();
+    }
+
+    /**
      * to string
      *
      * @return string
@@ -53,7 +101,7 @@ class Emission
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -74,7 +122,7 @@ class Emission
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -94,7 +142,7 @@ class Emission
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -114,7 +162,7 @@ class Emission
     /**
      * Get theme
      *
-     * @return RadioSolution\ProgramBundle\Entity\EmissionTheme 
+     * @return RadioSolution\ProgramBundle\Entity\EmissionTheme
      */
     public function getTheme()
     {
@@ -133,7 +181,7 @@ class Emission
     /**
      * Get group
      *
-     * @return Application\Sonata\UserBundle\Entity\Group 
+     * @return Application\Sonata\UserBundle\Entity\Group
      */
     public function getGroup()
     {
@@ -153,28 +201,13 @@ class Emission
     /**
      * Get media
      *
-     * @return Application\Sonata\MediaBundle\Entity\Media 
+     * @return Application\Sonata\MediaBundle\Entity\Media
      */
     public function getMedia()
     {
         return $this->media;
     }
-    /**
-     * @var RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast
-     */
-    private $ExceptionalBroadcast;
 
-    /**
-     * @var RadioSolution\ProgramBundle\Entity\WeeklyBroadcast
-     */
-    private $WeeklyBroadcast;
-
-    public function __construct()
-    {
-        $this->ExceptionalBroadcast = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->WeeklyBroadcast = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
     /**
      * Add ExceptionalBroadcast
      *
@@ -184,7 +217,7 @@ class Emission
     {
         $this->ExceptionalBroadcast[] = $exceptionalBroadcast;
     }
-    
+
     /**
      * Add ExceptionalBroadcast
      *
@@ -199,7 +232,7 @@ class Emission
     /**
      * Get ExceptionalBroadcast
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getExceptionalBroadcast()
     {
@@ -226,26 +259,16 @@ class Emission
     	$this->WeeklyBroadcast = $weeklyBroadcast;
     	return $this->WeeklyBroadcast;
     }
-    
+
     /**
      * Get WeeklyBroadcast
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getWeeklyBroadcast()
     {
         return $this->WeeklyBroadcast;
     }
-    /**
-     * @var date $diffusion_start
-     */
-    private $diffusion_start;
-
-    /**
-     * @var date $difusion_stop
-     */
-    private $difusion_stop;
-
 
     /**
      * Set diffusion_start
@@ -262,7 +285,7 @@ class Emission
     /**
      * Get diffusion_start
      *
-     * @return date 
+     * @return date
      */
     public function getDiffusionStart()
     {
@@ -282,17 +305,12 @@ class Emission
     /**
      * Get difusion_stop
      *
-     * @return date 
+     * @return date
      */
     public function getDifusionStop()
     {
         return $this->difusion_stop;
     }
-    /**
-     * @var boolean $archive
-     */
-    private $archive;
-
 
     /**
      * Set archive
@@ -307,17 +325,12 @@ class Emission
     /**
      * Get archive
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getArchive()
     {
         return $this->archive;
     }
-    /**
-     * @var RadioSolution\ProgramBundle\Entity\EmissionFrequency
-     */
-    private $frequency;
-
 
     /**
      * Set frequency
@@ -332,17 +345,12 @@ class Emission
     /**
      * Get frequency
      *
-     * @return RadioSolution\ProgramBundle\Entity\EmissionFrequency 
+     * @return RadioSolution\ProgramBundle\Entity\EmissionFrequency
      */
     public function getFrequency()
     {
         return $this->frequency;
     }
-    /**
-     * @var string $slug
-     */
-    private $slug;
-
 
     /**
      * Set slug
@@ -357,10 +365,21 @@ class Emission
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    public function getPrograms()
+    {
+        return $this->programs;
+    }
+
+    public function setPrograms($programs)
+    {
+        $this->programs = $programs;
+        return $this;
     }
 }
