@@ -11,9 +11,7 @@
 
 namespace Application\Sonata\NewsBundle\Admin;
 
-
 use Sonata\AdminBundle\Form\FormMapper;
-
 
 use Sonata\NewsBundle\Admin\PostAdmin as BaseAdmin;
 
@@ -32,40 +30,28 @@ class PostAdmin extends BaseAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        parent::configureFormFields($formMapper);
         $formMapper
             ->with('Post', array(
                     'class' => 'col-md-8'
                 ))
-                ->add('author', 'sonata_type_model_list')
-                ->add('admin_title')
-                ->add('title')
-                ->add('abstract', 'ckeditor', array())
-                ->add('content', 'ckeditor', array())
+                ->add('admin_title',"text", array('required' => false, 'label' => "Titre admin"))
+                ->add('abstract',"ckeditor", array())
+                ->add('content',"ckeditor", array())
             ->end()
             ->with('Status', array(
                     'class' => 'col-md-4'
                 ))
-                ->add('enabled', null, array('required' => false))
-                ->add('image', 'sonata_type_model_list', array('required' => false), array(
-                    'link_parameters' => array(
-                        'context' => 'news'
-                    )
-                ))
-
-                ->add('publicationDateStart', 'sonata_type_datetime_picker', array('dp_side_by_side' => true))
-                ->add('commentsCloseAt', 'sonata_type_datetime_picker', array('dp_side_by_side' => true))
-                ->add('commentsEnabled', null, array('required' => false))
-                ->add('commentsDefaultStatus', 'sonata_news_comment_status', array('expanded' => true))
+                ->add('commentsCloseAt', 'sonata_type_datetime_picker', array('required' => false, 'dp_side_by_side' => true))
             ->end()
-
             ->with('Classification', array(
                 'class' => 'col-md-4'
                 ))
                 ->add('tags', 'sonata_type_model_autocomplete', array(
                     'property' => 'name',
-                    'multiple' => 'true'
+                    'multiple' => 'true',
+                    'required' => false
                 ))
-                ->add('collection', 'sonata_type_model_list', array('required' => false))
             ->end()
         ;
     }
