@@ -29,6 +29,11 @@ class Post extends BasePost
     protected $id;
 
     /**
+     * @var string $admin_title
+     */
+    protected $admin_title;
+
+    /**
      * @var podcast $podcast
      */
     protected $podcast;
@@ -106,5 +111,29 @@ class Post extends BasePost
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * Gets the value of admin_title.
+     *
+     * @return string $admin_title
+     */
+    public function getAdminTitle()
+    {
+        return $this->admin_title;
+    }
+
+    /**
+     * Sets the value of admin_title.
+     *
+     * @param string $admin_title $admin_title the admin title
+     *
+     * @return self
+     */
+    protected function setAdminTitle($admin_title)
+    {
+        $this->admin_title = $admin_title;
+
+        return $this;
     }
 }
