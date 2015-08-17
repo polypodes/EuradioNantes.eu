@@ -16,6 +16,7 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
+        <field name="admin_title" type="text" column="admin_title" />
         <one-to-one field="podcast" target-entity="RadioSolution\PodcastBundle\Entity\Podcast" mapped-by='post' />
         <many-to-one field="image" target-entity="Application\Sonata\MediaBundle\Entity\Media" >
             <join-column name="image_id" referenced-column-name="id" nullable="true"/>
