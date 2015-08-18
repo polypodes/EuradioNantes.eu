@@ -1,0 +1,37 @@
+RadioSolution\ProgramBundle\Entity\Label:
+  type: entity
+  table: music__label
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    date:
+      type: datetime
+    title:
+      type: string
+    resume:
+      type: text
+      nullable: true
+    content:
+      type: text
+      nullable: true
+    slug:
+      type: string
+      nullable: true
+    published:
+      type: boolean
+      nullable: true
+
+  oneToMany:
+    albums:
+      targetEntity: Album
+      cascade: [all]
+      mappedBy: labelId
+
+  oneToOne:
+    image:
+      targetEntity: Application\Sonata\MediaBundle\Entity\Media
+      joinColumn:
+        name: image
+        referencedColumnName: id

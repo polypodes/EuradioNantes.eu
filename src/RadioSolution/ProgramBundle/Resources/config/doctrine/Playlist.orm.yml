@@ -1,6 +1,6 @@
 RadioSolution\ProgramBundle\Entity\Playlist:
   type: entity
-  table: playlist
+  table: music__playlist
   lifecycleCallbacks:
     prePersist: [ updatedTimestamps ]
     preUpdate: [ updatedTimestamps ]

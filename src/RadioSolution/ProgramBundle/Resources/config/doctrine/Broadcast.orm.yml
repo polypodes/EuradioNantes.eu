@@ -1,6 +1,6 @@
 RadioSolution\ProgramBundle\Entity\Broadcast:
   type: entity
-  table: broadcast
+  table: music__broadcast
   lifecycleCallbacks:
     prePersist: [ updatedTimestamps ]
     preUpdate: [ updatedTimestamps ]

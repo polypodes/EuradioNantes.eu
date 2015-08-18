@@ -1,6 +1,6 @@
 RadioSolution\ProgramBundle\Entity\Album:
   type: entity
-  table: album
+  table: music__album
   lifecycleCallbacks:
     prePersist: [ updatedTimestamps ]
     preUpdate: [ updatedTimestamps ]
@@ -72,4 +72,11 @@ RadioSolution\ProgramBundle\Entity\Album:
     playlists:
       targetEntity: Playlist
       mappedBy: albums
-
+  manyToOne:
+    labelId:
+      targetEntity: Label
+      nullable: true
+      inversedBy: albums
+      joinColumn:
+        name: label_id
+        referencedColumnName: id

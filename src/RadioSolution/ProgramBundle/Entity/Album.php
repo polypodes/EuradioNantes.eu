@@ -37,6 +37,12 @@ class Album
     private $label;
 
     /**
+     * Link to Label entity
+     * @var \RadioSolution\ProgramBundle\Entity\Label
+     */
+    private $labelId;
+
+    /**
      * @var string
      */
     private $manufacturer;
@@ -170,7 +176,7 @@ class Album
         $attrs = get_object_vars($this);
         $unsetAttrs = array(
             "id", "created_at", "updated_at", "tracks", "playlists",
-            "featuredFrom", "featuredTo", "thumbnailUrl");
+            "featuredFrom", "featuredTo", "thumbnailUrl", 'labelId');
         foreach($unsetAttrs as $attrKey) {
             unset($attrs[$attrKey]);
         }
@@ -582,5 +588,16 @@ class Album
     public function getThumbnailUrl()
     {
         return $this->thumbnailUrl;
+    }
+
+    public function getLabelId()
+    {
+        return $this->labelId;
+    }
+
+    public function setLabelId($labelId)
+    {
+        $this->labelId = $labelId;
+        return $this;
     }
 }
