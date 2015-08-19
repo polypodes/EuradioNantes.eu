@@ -104,6 +104,27 @@ class Album
     private $updated_at;
 
     /**
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * @var string
+     */
+    private $resume;
+
+    /**
+     * @var string
+     */
+    private $content;
+
+    /**
+     * Only for retreiving data automatically; not stored in database
+     * @var [type]
+     */
+    private $search;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -117,7 +138,9 @@ class Album
      */
     public function __toString()
     {
-        return (!empty($this->getTitle())) ? $this->getTitle() : 'Titre non défini';
+        $title = (!empty($this->getTitle())) ? $this->getTitle() : 'Titre non défini';
+        $artist = (!empty($this->getArtist())) ? $this->getArtist() : 'Artiste non défini';
+        return $title . ' (' . $artist . ')';
     }
 
     /**
@@ -176,7 +199,7 @@ class Album
         $attrs = get_object_vars($this);
         $unsetAttrs = array(
             "id", "created_at", "updated_at", "tracks", "playlists",
-            "featuredFrom", "featuredTo", "thumbnailUrl", 'labelId');
+            "featuredFrom", "featuredTo", "thumbnailUrl", 'labelId', 'slug', 'content', 'resume', 'search');
         foreach($unsetAttrs as $attrKey) {
             unset($attrs[$attrKey]);
         }
@@ -598,6 +621,51 @@ class Album
     public function setLabelId($labelId)
     {
         $this->labelId = $labelId;
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    public function getResume()
+    {
+        return $this->resume;
+    }
+
+    public function setResume($resume)
+    {
+        $this->resume = $resume;
+        return $this;
+    }
+
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    public function setContent($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+
+    public function getSearch()
+    {
+        return $this->search;
+    }
+
+    public function setSearch($terms)
+    {
+        $this->search = $terms;
         return $this;
     }
 }

@@ -1,0 +1,17 @@
+<div>
+    <h1>{{ playlist.title }}</h1>
+
+    {% if playlist.albums|length > 0 %}
+    <ul id="track-list">
+        {% for album in playlist.albums %}
+        <li class="track">
+            <a href="{{ path('album', {'id': album.id}) }}">
+                <h2 class="album-title">{{ album.title }}</h2>
+                <h3 class="album-artist">{{ album.artist }}</h3>
+                <h4 class="album-label">{{ album.label }}</h4>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>

@@ -21,6 +21,7 @@ class LabelAdmin extends Admin
       ->add('published', null, array('label' => 'Publié'))
       ->add('date', 'sonata_type_date_picker', array('label' => 'Date'))
       ->add('title', null, array('label' => 'Titre'))
+      ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
       ->add('resume', 'ckeditor', array('label' => 'Résumé', 'config_name' => 'mini'))
       ->add('content', 'ckeditor', array('label' => 'Contenu', 'config_name' => 'plus'))
       ->add('albums', 'sonata_type_model', array(
@@ -47,8 +48,8 @@ class LabelAdmin extends Admin
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
-      ->addIdentifier('id')
-      ->add('title')
+      //->addIdentifier('id')
+      ->addIdentifier('title')
       ->add('date')
       ->add('published')
       ->add('_action', 'actions', array(
@@ -69,9 +70,9 @@ class LabelAdmin extends Admin
   //{
   //    $this->preUpdate($label);
   //}
-//
-  //public function preUpdate($label)
-  //{
-  //  $label->setAlbums($label->getAlbums());
-  //}
+
+  public function preUpdate($label)
+  {
+    $label->preUpdate();
+  }
 }

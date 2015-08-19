@@ -1,0 +1,13 @@
+<div>
+    <h1>Playlist de la semaine</h1>
+
+    <div id ="playlist-list">
+    {% for playlist in playlists %}
+        <article class="playlist{% if loop.first %} top{% endif %}">
+            <a href="{{ path('playlist', {'id': playlist.id}) }}">
+                <h2 class="playlist-title">{{ playlist.title }}</h2>
+            </a>
+        </article>
+    {% endfor %}
+    </div>
+</div>

@@ -18,10 +18,20 @@ RadioSolution\ProgramBundle\Entity\Label:
       nullable: true
     slug:
       type: string
-      nullable: true
+      gedmo:
+        slug:
+          #separator: -
+          #style: default
+          #unique: true
+          fields:
+            - title
     published:
       type: boolean
       nullable: true
+
+  lifecycleCallbacks:
+    prePersist: [ prePersist ]
+    preUpdate: [ preUpdate ]
 
   oneToMany:
     albums:
@@ -29,9 +39,12 @@ RadioSolution\ProgramBundle\Entity\Label:
       cascade: [all]
       mappedBy: labelId
 
-  oneToOne:
+  manyToOne:
     image:
       targetEntity: Application\Sonata\MediaBundle\Entity\Media
+      nullable: true
       joinColumn:
         name: image
         referencedColumnName: id
+
+

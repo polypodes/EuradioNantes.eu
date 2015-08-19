@@ -1,0 +1,31 @@
+<div>
+    <h1>{{ album.artist }}</h1>
+    <h2>{{ album.title }}</h2>
+
+    <img src="{{ album.thumbnailUrl }}" alt="" class="responsive">
+
+    {{ label.content | raw }}
+
+    <dl>
+        <dt>Label</dt>
+        <dd>{% if album.labelId -%}
+            <a href="{{ path('label', {'slug': album.labelId.slug}) }}">{{ album.labelId.title }}</a>
+        {%- else -%}
+            {{ album.label }}
+        {%- endif %}</dd>
+
+        <dt>Date de sortie</dt>
+        <dd>{{ album.releaseDate|date('d/m/Y') }}</dd>
+
+    </dl>
+
+    {% if album.tracks|length > 0 %}
+    <ul id="track-list">
+        {% for track in album.tracks %}
+        <li class="track">
+            {{ track.trackSequence }} - {{ track.title }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>

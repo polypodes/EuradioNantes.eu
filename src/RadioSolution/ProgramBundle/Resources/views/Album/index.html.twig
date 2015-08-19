@@ -1,0 +1,19 @@
+<div>
+    <h1>Album de la semaine</h1>
+
+    <div id ="album-list">
+    {% for album in albums %}
+        <article class="album{% if loop.first %} top{% endif %}">
+            <a href="{{ path('album', {'id': album.id}) }}">
+                {% if album.thumbnailUrl %}
+                <img src="{{ album.thumbnailUrl }}" alt="" class="responsive">
+                {% endif %}
+                <h2 class="album-title">{{ album.title }}</h2>
+                <h3 class="album-artist">{{ album.artist }}</h3>
+                <h4 class="album-label">{{ album.label }}</h4>
+            </a>
+            <div class="album-resume">{{ label.resume | raw }}</div>
+        </article>
+    {% endfor %}
+    </div>
+</div>

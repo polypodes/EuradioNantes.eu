@@ -4,6 +4,7 @@ namespace RadioSolution\ProgramBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sonata\ClassificationBundle\Model\Tag;
 
 /**
  * RadioSolution\ProgramBundle\Entity\Label
@@ -60,6 +61,19 @@ class Label
         $this->albums = new ArrayCollection();
     }
 
+    public function prePersist()
+    {
+        if (empty($this->slug)) {
+            $this->setSlug(null);
+        }
+    }
+
+    public function preUpdate()
+    {
+        if (empty($this->slug)) {
+            $this->setSlug(null);
+        }
+    }
     /**
      * to string
      *
@@ -102,7 +116,7 @@ class Label
 
     public function getSlug()
     {
-        return $this->slug();
+        return $this->slug;
     }
 
     public function setSlug($slug)

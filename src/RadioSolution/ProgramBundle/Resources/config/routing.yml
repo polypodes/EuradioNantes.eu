@@ -23,3 +23,29 @@ onair:
 whoami:
     pattern:  whoami
     defaults: { _controller: "ProgramBundle:WhoAmI:index"}
+
+labels:
+    path: labels
+    defaults: { _controller: "ProgramBundle:Label:index" }
+
+label:
+    path: label/{slug}
+    defaults: { _controller: "ProgramBundle:Label:show" }
+    requirements:
+        slug: "[a-zA-Z0-9-_/]+"
+
+albums:
+    path: albums
+    defaults: { _controller: "ProgramBundle:Album:index" }
+
+album:
+    path: album/{id}
+    defaults: { _controller: "ProgramBundle:Album:show" }
+
+playlists:
+    path: playlists
+    defaults: { _controller: "ProgramBundle:Playlist:index" }
+
+playlist:
+    path: playlist/{id}
+    defaults: { _controller: "ProgramBundle:Playlist:show" }

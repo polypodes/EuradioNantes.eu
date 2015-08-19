@@ -1,0 +1,17 @@
+<div>
+    <h1>Label européen du mois</h1>
+
+    <div id ="label-list">
+    {% for label in labels %}
+        <article class="label{% if loop.first %} top{% endif %}">
+            <a href="{{ path('label', {'slug': label.slug}) }}">
+                {% if label.image %}
+                {% media label.image, 'small' with {'class': 'responsive'} %}
+                {% endif %}
+                <h2>{{ label.title }}</h2>
+                {{ label.resume | raw }}
+            </a>
+        </article>
+    {% endfor %}
+    </div>
+</div>

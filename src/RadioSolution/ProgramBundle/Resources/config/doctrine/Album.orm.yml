@@ -58,6 +58,22 @@ RadioSolution\ProgramBundle\Entity\Album:
       type: datetime
     updated_at:
       type: datetime
+    slug:
+      type: string
+      gedmo:
+        slug:
+          #separator: -
+          #style: default
+          #unique: true
+          fields:
+            - artist
+            - title
+    resume:
+      type: text
+      nullable: true
+    content:
+      type: text
+      nullable: true
   oneToMany:
     tracks:
       nullable: true
