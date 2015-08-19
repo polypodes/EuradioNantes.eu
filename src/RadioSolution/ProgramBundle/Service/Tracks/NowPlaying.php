@@ -152,7 +152,11 @@ class NowPlaying implements ContainerAwareInterface
             list($code, $albumModel) = $this->saveAlbum($album, $images, $terms);
             switch($code) {
                 case self::NEWLY_SAVED:
-                    $trackList = $this->saveTrackList($albumModel, $terms, $tracks);
+                    if ($tracks) {
+                        $trackList = $this->saveTrackList($albumModel, $terms, $tracks);
+                    } else {
+                        $trackList = $albumModel->getTracks();
+                    }
                     break;
                 case self::ALREADY_EXISTS:
                     $trackList = $albumModel->getTracks();
@@ -160,8 +164,9 @@ class NowPlaying implements ContainerAwareInterface
                 default:
                     throw new InvalidTermsInputException(sprintf("album couldn't be saved in %s", __METHOD__));
             }
-            $currentTrack = $this->getTrackBydTitle($trackList, $currentTrackTitle);
+            $currentTrack = $this->getTrackByTitle($trackList, $currentTrackTitle);
             list($code, $broadcast) = $this->saveBroadcast($currentTrack);
+
             if(empty($broadcast) || $code == self::SOMETHING_TERRIBLE_HAPPENED) {
                 throw new InvalidTrackInputException(sprintf("broadcast couldn't be saved using given track in %s", __METHOD__));
             }
@@ -185,6 +190,7 @@ class NowPlaying implements ContainerAwareInterface
     {
         $albumModel = new AlbumModel();
         if(empty($album) || empty($images) || empty($terms)) {
+            var_dump($album, $images, $terms);
             throw new InvalidAlbumInputException(sprintf("album, images nor terms cannot be null in %s", __METHOD__));
         }
         try {
@@ -268,7 +274,7 @@ class NowPlaying implements ContainerAwareInterface
      * @return null
      * @throws InvalidTrackInputException
      */
-    protected function getTrackBydTitle($trackList = array(), $currentTrackTitle = '')
+    protected function getTrackByTitle($trackList = array(), $currentTrackTitle = '')
     {
         $found = null;
         if(empty($trackList) || empty($currentTrackTitle)) {
