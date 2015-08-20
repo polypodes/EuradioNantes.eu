@@ -42,6 +42,10 @@ album:
     path: album/{id}
     defaults: { _controller: "ProgramBundle:Album:show" }
 
+album_finder:
+    path: album/find/{terms}
+    defaults: { _controller: "ProgramBundle:Album:find" }
+
 playlists:
     path: playlists
     defaults: { _controller: "ProgramBundle:Playlist:index" }

@@ -556,6 +556,22 @@ class Album
     }
 
     /**
+     * Display featured period
+     * @return string [description]
+     */
+    public function getFeaturePeriod()
+    {
+        if (!$this->getFeaturedFrom() || !$this->getFeaturedTo()) {
+            return '';
+        }
+
+        $from = $this->getFeaturedFrom()->format('d/m/Y');
+        $to = $this->getFeaturedTo()->format('d/m/Y');
+
+        return sprintf('Du %s au %s', array($from, $to));
+    }
+
+    /**
      * Add playlist
      *
      * @param \RadioSolution\ProgramBundle\Entity\Playlist $playlist

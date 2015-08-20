@@ -23,6 +23,11 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class AlbumAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_sort_order' => 'DESC', // sort direction
+        '_sort_by' => 'featuredFrom' // field name
+    );
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         // define group zoning
@@ -126,7 +131,9 @@ class AlbumAdmin extends Admin
             ->add('label')
             ->add('manufacturer')
             ->add('publisher')
-            ->add('studio');
+            ->add('studio')
+            ->add('featuredPeriod', 'string', array('label' => 'Album de la semaine'))
+        ;
     }
 
     public function validate(ErrorElement $errorElement, $object)

@@ -18,14 +18,7 @@ class AlbumController extends Controller
      */
     public function indexAction()
     {
-
-        //$em = $this->getDoctrine()->getEntityManager();
-        //$query = $em->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop<:stop AND p.time_start>:start AND p.time_start<p.time_stop  ORDER BY p.time_start ASC")
-        //->setParameters(array('start'=>$start,'stop'=>$stop));
-        //$entities=$query->getResult();
-
         $albums = $this->getDoctrine()->getRepository('ProgramBundle:Album')->findAll();
-        //var_dump($Albums);
 
         return $this->render('ProgramBundle:Album:index.html.twig', compact('albums'));
     }
@@ -33,7 +26,8 @@ class AlbumController extends Controller
     /**
      * Show album from its id
      */
-    public function showAction($id) {
+    public function showAction($id)
+    {
         $album = $this->getDoctrine()->getRepository('ProgramBundle:Album')->find($id);
         if (!$album) {
             throw $this->createNotFoundException('L’album est introuvable.');
@@ -41,4 +35,10 @@ class AlbumController extends Controller
         return $this->render('ProgramBundle:Album:show.html.twig', compact('album'));
     }
 
+    public function findAction($terms)
+    {
+        $retriever = $this->container->get('radiosolution.program.trackRetriever');
+        list($currentTrackTitle, $terms, $album, $images, $tracks) = $retriever->search($terms);
+        die(var_dump($currentTrackTitle, $terms, $album, $images, $tracks));
+    }
 }

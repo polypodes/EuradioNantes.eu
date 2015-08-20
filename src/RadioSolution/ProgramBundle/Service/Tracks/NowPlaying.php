@@ -138,8 +138,11 @@ class NowPlaying implements ContainerAwareInterface
      * @throws InvalidTermsInputException
      * @throws InvalidTrackInputException
      */
-    public function execute()
+    public function execute(string $search = null)
     {
+        if (!empty($search)) {
+            $this->terms = $search;
+        }
         if (!isset($this->retriever)) {
             $this->setUp();
         }

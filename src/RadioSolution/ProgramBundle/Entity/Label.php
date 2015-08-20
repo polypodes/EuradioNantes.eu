@@ -17,11 +17,6 @@ class Label
     private $id;
 
     /**
-     * @var datetime
-     */
-    private $date;
-
-    /**
      * @var string
      */
     private $title;
@@ -34,6 +29,16 @@ class Label
      * @var string
      */
     private $content;
+
+    /**
+     * @var \DateTime
+     */
+    private $featuredFrom;
+
+    /**
+     * @var \DateTime
+     */
+    private $featuredTo;
 
     /**
      * @var RadioSolution\ProgramBundle\Entity\Album
@@ -94,26 +99,6 @@ class Label
         return $this->id;
     }
 
-    /**
-     * Set date
-     *
-     * @param datetime $date
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * Get date
-     *
-     * @return datetime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
     public function getSlug()
     {
         return $this->slug;
@@ -155,6 +140,44 @@ class Label
     {
         $this->content = $content;
         return $this;
+    }
+
+    public function getFeaturedFrom()
+    {
+        return $this->featuredFrom;
+    }
+
+    public function setFeaturedFrom($featuredFrom)
+    {
+        $this->featuredFrom = $featuredFrom;
+        return $this;
+    }
+
+    public function getFeaturedTo()
+    {
+        return $this->featuredTo;
+    }
+
+    public function setFeaturedTo($featuredTo)
+    {
+        $this->featuredTo = $featuredTo;
+        return $this;
+    }
+
+    /**
+     * Display featured period
+     * @return string [description]
+     */
+    public function getFeaturePeriod()
+    {
+        if (!$this->getFeaturedFrom() || !$this->getFeaturedTo()) {
+            return '';
+        }
+
+        $from = $this->getFeaturedFrom()->format('d/m/Y');
+        $to = $this->getFeaturedTo()->format('d/m/Y');
+
+        return sprintf('Du %s au %s', array($from, $to));
     }
 
     public function getPublished()

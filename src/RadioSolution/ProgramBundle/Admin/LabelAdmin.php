@@ -11,15 +11,16 @@ class LabelAdmin extends Admin
 {
 
   protected $datagridValues = array(
-          '_sort_order' => 'DESC', // sort direction
-          '_sort_by' => 'date' // field name
+    '_sort_order' => 'DESC', // sort direction
+    '_sort_by' => 'featuredFrom' // field name
   );
 
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
       ->add('published', null, array('label' => 'Publié'))
-      ->add('date', 'sonata_type_date_picker', array('label' => 'Date'))
+      ->add('featuredFrom', 'sonata_type_date_picker', array('label' => 'Label du mois du'))
+      ->add('featuredTo', 'sonata_type_date_picker', array('label' => 'Au'))
       ->add('title', null, array('label' => 'Titre'))
       ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
       ->add('resume', 'ckeditor', array('label' => 'Résumé', 'config_name' => 'mini'))
@@ -50,7 +51,7 @@ class LabelAdmin extends Admin
     $listMapper
       //->addIdentifier('id')
       ->addIdentifier('title')
-      ->add('date')
+      ->add('featuredPeriod', 'string', array('label' => 'Label du mois'))
       ->add('published')
       ->add('_action', 'actions', array(
         'actions' => array(
