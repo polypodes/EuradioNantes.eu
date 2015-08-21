@@ -11,7 +11,7 @@
 
         {% for album in label.albums %}
         <article class="album">
-            <a href="{{ path('album', {'id': album.id}) }}">
+            <a href="{{ path('album', {'slug': album.slug}) }}">
                 {% if album.thumbnailUrl %}
                 <img src="{{ album.thumbnailUrl }}" alt="">
                 {% endif %}

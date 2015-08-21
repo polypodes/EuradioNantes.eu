@@ -1,5 +1,6 @@
 RadioSolution\ProgramBundle\Entity\Label:
   type: entity
+  repositoryClass: RadioSolution\ProgramBundle\Entity\MusicRepository
   table: music__label
   id:
     id:

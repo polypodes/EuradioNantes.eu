@@ -33,32 +33,34 @@ class PlaylistAdmin extends Admin
 
         $formMapper
             ->with($this->trans('Playlist'))
-            ->add('title', null, array('label' => 'Titre', 'required' => true))
-            ->add('featuredFrom', 'sonata_type_date_picker', array('label' => 'Playlist du ', 'required' => false))
-            ->add('featuredTo', 'sonata_type_date_picker', array('label' => 'au : (inclus)', 'required' => false))
+                ->add('published', null, array('label' => 'Publié'))
+                ->add('title', null, array('label' => 'Titre', 'required' => true))
+                ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
+                ->add('featuredFrom', 'sonata_type_date_picker', array('label' => 'Playlist du '))
+                ->add('featuredTo', 'sonata_type_date_picker', array('label' => 'au : (inclus)'))
             ->end()
             ->with($this->trans('Albums'))
-            /*
-            ->add(
-                'albums',
-                'sonata_type_model',
-                array(
-                    'expanded' => true,
-                    'multiple' => true,
-                    //'sortable' => 'albumSequence',
-                    'btn_add' => 'Créer',
-                    'compound' => true
+                /*
+                ->add(
+                    'albums',
+                    'sonata_type_model',
+                    array(
+                        'expanded' => true,
+                        'multiple' => true,
+                        //'sortable' => 'albumSequence',
+                        'btn_add' => 'Créer',
+                        'compound' => true
+                    )
                 )
-            )
-            ->add('albums', 'sonata_type_collection',
-                array('label' => 'Albums', 'required' => false), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-                'btn_list' => true,
-                'sortable' => 'albumSequence'
-            ))
-            */
-            ->add('albums', 'sonata_type_model_autocomplete', array('property'=>'title','multiple'=>true))
+                ->add('albums', 'sonata_type_collection',
+                    array('label' => 'Albums', 'required' => false), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'btn_list' => true,
+                    'sortable' => 'albumSequence'
+                ))
+                */
+                ->add('albums', 'sonata_type_model_autocomplete', array('property'=>'title','multiple'=>true))
             ->end()
         ;
     }
@@ -75,9 +77,26 @@ class PlaylistAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
             ->addIdentifier('title')
-            ->add('featuredFrom')
-            ->add('featuredTo')
+            ->add('featuredPeriod', 'string', array('label' => 'Album de la semaine'))
+            ->add('published', 'boolean', array('label' => 'Publié'))
         ;
+    }
+
+    public function getBatchActions()
+    {
+        // retrieve the default batch actions (currently only delete)
+        $actions = parent::getBatchActions();
+
+        $actions['publish'] = array(
+            'label' => $this->trans('Publier', array(), 'SonataAdminBundle'),
+            'ask_confirmation' => true
+        );
+        $actions['unpublish'] = array(
+            'label' => $this->trans('Dépublier', array(), 'SonataAdminBundle'),
+            'ask_confirmation' => true
+        );
+
+        return $actions;
     }
 
     public function validate(ErrorElement $errorElement, $object)

@@ -119,10 +119,9 @@ class Album
     private $content;
 
     /**
-     * Only for retreiving data automatically; not stored in database
-     * @var [type]
+     * @var boolean
      */
-    private $search;
+    private $published;
 
     /**
      * Constructor.
@@ -199,7 +198,7 @@ class Album
         $attrs = get_object_vars($this);
         $unsetAttrs = array(
             "id", "created_at", "updated_at", "tracks", "playlists",
-            "featuredFrom", "featuredTo", "thumbnailUrl", 'labelId', 'slug', 'content', 'resume', 'search');
+            "featuredFrom", "featuredTo", "thumbnailUrl", 'labelId', 'slug', 'content', 'resume', 'published');
         foreach($unsetAttrs as $attrKey) {
             unset($attrs[$attrKey]);
         }
@@ -559,7 +558,7 @@ class Album
      * Display featured period
      * @return string [description]
      */
-    public function getFeaturePeriod()
+    public function getFeaturedPeriod()
     {
         if (!$this->getFeaturedFrom() || !$this->getFeaturedTo()) {
             return '';
@@ -568,7 +567,7 @@ class Album
         $from = $this->getFeaturedFrom()->format('d/m/Y');
         $to = $this->getFeaturedTo()->format('d/m/Y');
 
-        return sprintf('Du %s au %s', array($from, $to));
+        return sprintf('Du %s au %s', $from, $to);
     }
 
     /**
@@ -673,15 +672,14 @@ class Album
         return $this;
     }
 
-
-    public function getSearch()
+    public function getPublished()
     {
-        return $this->search;
+        return $this->published;
     }
 
-    public function setSearch($terms)
+    public function setPublished($published)
     {
-        $this->search = $terms;
+        $this->published = $published;
         return $this;
     }
 }

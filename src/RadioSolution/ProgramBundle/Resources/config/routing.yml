@@ -39,8 +39,10 @@ albums:
     defaults: { _controller: "ProgramBundle:Album:index" }
 
 album:
-    path: album/{id}
+    path: album/{slug}
     defaults: { _controller: "ProgramBundle:Album:show" }
+    requirements:
+        slug: "[a-zA-Z0-9-_/]+"
 
 album_finder:
     path: album/find/{terms}
@@ -51,5 +53,7 @@ playlists:
     defaults: { _controller: "ProgramBundle:Playlist:index" }
 
 playlist:
-    path: playlist/{id}
+    path: playlist/{slug}
     defaults: { _controller: "ProgramBundle:Playlist:show" }
+    requirements:
+        slug: "[a-zA-Z0-9-_/]+"

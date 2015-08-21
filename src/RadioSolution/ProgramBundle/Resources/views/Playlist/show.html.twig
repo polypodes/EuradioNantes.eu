@@ -5,7 +5,7 @@
     <ul id="track-list">
         {% for album in playlist.albums %}
         <li class="track">
-            <a href="{{ path('album', {'id': album.id}) }}">
+            <a href="{{ path('album', {'slug': album.slug}) }}">
                 <h2 class="album-title">{{ album.title }}</h2>
                 <h3 class="album-artist">{{ album.artist }}</h3>
                 <h4 class="album-label">{{ album.label }}</h4>

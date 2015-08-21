@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use RadioSolution\ProgramBundle\Entity\Track;
+use RadioSolution\ProgramBundle\Entity\Album;
 
 /**
  * Album controller.
@@ -18,7 +18,7 @@ class AlbumController extends Controller
      */
     public function indexAction()
     {
-        $albums = $this->getDoctrine()->getRepository('ProgramBundle:Album')->findAll();
+        $albums = $this->getDoctrine()->getRepository('ProgramBundle:Album')->findAllFeatured(20);
 
         return $this->render('ProgramBundle:Album:index.html.twig', compact('albums'));
     }
@@ -26,10 +26,10 @@ class AlbumController extends Controller
     /**
      * Show album from its id
      */
-    public function showAction($id)
+    public function showAction(Album $album)
     {
-        $album = $this->getDoctrine()->getRepository('ProgramBundle:Album')->find($id);
-        if (!$album) {
+        //$album = $this->getDoctrine()->getRepository('ProgramBundle:Album')->findPublishedBySlug($slug);
+        if (!$album || !$album->getPublished()) {
             throw $this->createNotFoundException('L’album est introuvable.');
         }
         return $this->render('ProgramBundle:Album:show.html.twig', compact('album'));

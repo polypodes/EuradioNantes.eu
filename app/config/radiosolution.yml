@@ -45,7 +45,7 @@ services:
         class: RadioSolution\ProgramBundle\Admin\AlbumAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'Musique', label: 'Albums' }
-        arguments: [null, RadioSolution\ProgramBundle\Entity\Album, "SonataAdminBundle:CRUD"]
+        arguments: [null, RadioSolution\ProgramBundle\Entity\Album, "ProgramBundle:CRUD"]
 
     radioSolution.program.track:
         class: RadioSolution\ProgramBundle\Admin\TrackAdmin
@@ -57,13 +57,13 @@ services:
         class: RadioSolution\ProgramBundle\Admin\PlaylistAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'Musique', label: 'Playlists' }
-        arguments: [null, RadioSolution\ProgramBundle\Entity\Playlist, "SonataAdminBundle:CRUD"]
+        arguments: [null, RadioSolution\ProgramBundle\Entity\Playlist, "ProgramBundle:CRUD"]
 
     radioSolution.program.label:
         class: RadioSolution\ProgramBundle\Admin\LabelAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'Musique', label: 'Labels' }
-        arguments: [null, RadioSolution\ProgramBundle\Entity\Label, "SonataAdminBundle:CRUD"]
+        arguments: [null, RadioSolution\ProgramBundle\Entity\Label, "ProgramBundle:CRUD"]
 
     radioSolution.podcast.podcast:
         class: RadioSolution\PodcastBundle\Admin\PodcastAdmin

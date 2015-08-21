@@ -50,9 +50,9 @@ class LabelAdmin extends Admin
   {
     $listMapper
       //->addIdentifier('id')
-      ->addIdentifier('title')
+      ->addIdentifier('title', 'string', array('label' => 'Titre'))
       ->add('featuredPeriod', 'string', array('label' => 'Label du mois'))
-      ->add('published')
+      ->add('published', 'boolean', array('label' => 'Publié'))
       ->add('_action', 'actions', array(
         'actions' => array(
           'view' => array(),
@@ -61,6 +61,23 @@ class LabelAdmin extends Admin
       ))
     ;
   }
+
+  public function getBatchActions()
+    {
+        // retrieve the default batch actions (currently only delete)
+        $actions = parent::getBatchActions();
+
+        $actions['publish'] = array(
+            'label' => $this->trans('Publier', array(), 'SonataAdminBundle'),
+            'ask_confirmation' => true
+        );
+        $actions['unpublish'] = array(
+            'label' => $this->trans('Dépublier', array(), 'SonataAdminBundle'),
+            'ask_confirmation' => true
+        );
+
+        return $actions;
+    }
 
   public function validate(ErrorElement $errorElement, $object)
   {

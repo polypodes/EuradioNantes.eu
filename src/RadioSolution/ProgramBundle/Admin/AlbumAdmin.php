@@ -54,6 +54,7 @@ class AlbumAdmin extends Admin
 
         $formMapper
             ->with($this->trans('Album'))
+                ->add('published', null, array('label' => 'Publié'))
                 ->add('title', null, array('label' => 'Titre', 'required' => !$isNew))
                 ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
                 ->add('artist', null, array('label' => 'Artiste', 'required' => false))
@@ -121,6 +122,7 @@ class AlbumAdmin extends Admin
             ->add('studio')
             ->add('featuredFrom')
             ->add('featuredTo')
+            ->add('published')
         ;
     }
 
@@ -133,7 +135,25 @@ class AlbumAdmin extends Admin
             ->add('publisher')
             ->add('studio')
             ->add('featuredPeriod', 'string', array('label' => 'Album de la semaine'))
+            ->add('published', 'boolean', array('label' => 'Publié', 'editable' => true))
         ;
+    }
+
+    public function getBatchActions()
+    {
+        // retrieve the default batch actions (currently only delete)
+        $actions = parent::getBatchActions();
+
+        $actions['publish'] = array(
+            'label' => $this->trans('Publier', array(), 'SonataAdminBundle'),
+            'ask_confirmation' => true
+        );
+        $actions['unpublish'] = array(
+            'label' => $this->trans('Dépublier', array(), 'SonataAdminBundle'),
+            'ask_confirmation' => true
+        );
+
+        return $actions;
     }
 
     public function validate(ErrorElement $errorElement, $object)

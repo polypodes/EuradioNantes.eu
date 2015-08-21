@@ -1,5 +1,6 @@
 RadioSolution\ProgramBundle\Entity\Album:
   type: entity
+  repositoryClass: RadioSolution\ProgramBundle\Entity\MusicRepository
   table: music__album
   lifecycleCallbacks:
     prePersist: [ updatedTimestamps ]
@@ -73,6 +74,9 @@ RadioSolution\ProgramBundle\Entity\Album:
       nullable: true
     content:
       type: text
+      nullable: true
+    published:
+      type: boolean
       nullable: true
   oneToMany:
     tracks:

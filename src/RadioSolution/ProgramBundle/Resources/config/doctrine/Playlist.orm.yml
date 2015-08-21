@@ -1,5 +1,6 @@
 RadioSolution\ProgramBundle\Entity\Playlist:
   type: entity
+  repositoryClass: RadioSolution\ProgramBundle\Entity\MusicRepository
   table: music__playlist
   lifecycleCallbacks:
     prePersist: [ updatedTimestamps ]
@@ -24,6 +25,18 @@ RadioSolution\ProgramBundle\Entity\Playlist:
       type: datetime
     updated_at:
       type: datetime
+    published:
+      type: boolean
+      nullable: true
+    slug:
+      type: string
+      gedmo:
+        slug:
+          #separator: -
+          #style: default
+          #unique: true
+          fields:
+            - title
   manyToMany:
     albums:
       targetEntity: Album

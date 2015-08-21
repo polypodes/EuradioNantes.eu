@@ -56,6 +56,16 @@ class Playlist
     private $updated_at;
 
     /**
+     * @var boolean
+     */
+    private $published;
+
+    /**
+     * @var string
+     */
+    private $slug;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -244,6 +254,44 @@ class Playlist
     {
         $this->featuredTo = $featuredTo;
 
+        return $this;
+    }
+
+    /**
+     * Display featured period
+     * @return string [description]
+     */
+    public function getFeaturedPeriod()
+    {
+        if (!$this->getFeaturedFrom() || !$this->getFeaturedTo()) {
+            return '';
+        }
+
+        $from = $this->getFeaturedFrom()->format('d/m/Y');
+        $to = $this->getFeaturedTo()->format('d/m/Y');
+
+        return sprintf('Du %s au %s', $from, $to);
+    }
+
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    public function setPublished($published)
+    {
+        $this->published = $published;
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
         return $this;
     }
 }

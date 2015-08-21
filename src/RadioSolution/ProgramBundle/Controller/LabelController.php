@@ -19,7 +19,7 @@ class LabelController extends Controller
      */
     public function indexAction()
     {
-        $labels = $this->getDoctrine()->getRepository('ProgramBundle:Label')->findByPublished(true);
+        $labels = $this->getDoctrine()->getRepository('ProgramBundle:Label')->findAllFeatured(20);
 
         return $this->render('ProgramBundle:Label:index.html.twig', compact('labels'));
     }
@@ -29,10 +29,10 @@ class LabelController extends Controller
      * $slug   string
      */
     public function showAction(Label $label) {
-        //$label = $this->getDoctrine()->getRepository('ProgramBundle:Label')->find($id);
-        //if (!$label) {
-        //    throw $this->createNotFoundException('Le label est introuvable.');
-        //}
+        //$label = $this->getDoctrine()->getRepository('ProgramBundle:Label')->findPublishedBySlug($slug);
+        if (!$label || !$label->getPublished()) {
+            throw $this->createNotFoundException('Le label est introuvable.');
+        }
         return $this->render('ProgramBundle:Label:show.html.twig', compact('label'));
     }
 

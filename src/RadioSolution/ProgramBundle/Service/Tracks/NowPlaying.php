@@ -200,6 +200,7 @@ class NowPlaying implements ContainerAwareInterface
             $this->logger->info(sprintf('Trying to SAVE %s ALBUM INFOS using the TrackRetriever', $terms));
             $albumModel->fromXml($album);
             $albumModel->setImagesfromXml($images);
+            $albumModel->setPublished(true);
 
             $exists = $this->albumExistsYet($albumModel);
             if('RadioSolution\ProgramBundle\Entity\Album' === get_class($exists)) {

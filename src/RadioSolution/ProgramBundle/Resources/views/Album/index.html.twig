@@ -4,7 +4,7 @@
     <div id ="album-list">
     {% for album in albums %}
         <article class="album{% if loop.first %} top{% endif %}">
-            <a href="{{ path('album', {'id': album.id}) }}">
+            <a href="{{ path('album', {'slug': album.slug}) }}">
                 {% if album.thumbnailUrl %}
                 <img src="{{ album.thumbnailUrl }}" alt="" class="responsive">
                 {% endif %}
@@ -12,7 +12,7 @@
                 <h3 class="album-artist">{{ album.artist }}</h3>
                 <h4 class="album-label">{{ album.label }}</h4>
             </a>
-            <div class="album-resume">{{ label.resume | raw }}</div>
+            <div class="album-resume">{{ album.resume | raw }}</div>
         </article>
     {% endfor %}
     </div>
