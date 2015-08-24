@@ -3,7 +3,7 @@
 namespace RadioSolution\StaticContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\NewsBundle\Model\Tag as Tag;
+use Sonata\ClassificationBundle\Model\Tag as Tag;
 
 /**
  * RadioSolution\StaticContentBundle\Entity\CategoryStaticContent
@@ -32,7 +32,7 @@ class CategoryStaticContent
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -53,7 +53,7 @@ class CategoryStaticContent
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -73,7 +73,7 @@ class CategoryStaticContent
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -98,7 +98,7 @@ class CategoryStaticContent
     /**
      * Get image
      *
-     * @return Application\Sonata\MediaBundle\Entity\Media 
+     * @return Application\Sonata\MediaBundle\Entity\Media
      */
     public function getImage()
     {
@@ -123,7 +123,7 @@ class CategoryStaticContent
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -148,7 +148,7 @@ class CategoryStaticContent
     /**
      * Get parent
      *
-     * @return RadioSolution\StaticContentBundle\Entity\CategoryStaticContent 
+     * @return RadioSolution\StaticContentBundle\Entity\CategoryStaticContent
      */
     public function getParent()
     {

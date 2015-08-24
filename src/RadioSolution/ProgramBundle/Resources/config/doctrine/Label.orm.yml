@@ -1,0 +1,57 @@
+RadioSolution\ProgramBundle\Entity\Label:
+  type: entity
+  repositoryClass: RadioSolution\ProgramBundle\Entity\MusicRepository
+  table: music__label
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+    resume:
+      type: text
+      nullable: true
+    content:
+      type: text
+      nullable: true
+    featuredFrom:
+      type: date
+      nullable: true
+      default: NULL
+    featuredTo:
+      type: date
+      nullable: true
+      default: NULL
+    slug:
+      type: string
+      gedmo:
+        slug:
+          #separator: -
+          #style: default
+          #unique: true
+          fields:
+            - title
+    published:
+      type: boolean
+      nullable: true
+
+  lifecycleCallbacks:
+    prePersist: [ prePersist ]
+    preUpdate: [ preUpdate ]
+
+  oneToMany:
+    albums:
+      targetEntity: Album
+      cascade: [all]
+      mappedBy: labelId
+
+  manyToOne:
+    image:
+      targetEntity: Application\Sonata\MediaBundle\Entity\Media
+      nullable: true
+      joinColumn:
+        name: image
+        referencedColumnName: id
+
+

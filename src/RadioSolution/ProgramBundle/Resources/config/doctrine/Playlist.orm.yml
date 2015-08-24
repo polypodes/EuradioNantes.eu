@@ -1,0 +1,52 @@
+RadioSolution\ProgramBundle\Entity\Playlist:
+  type: entity
+  repositoryClass: RadioSolution\ProgramBundle\Entity\MusicRepository
+  table: music__playlist
+  lifecycleCallbacks:
+    prePersist: [ updatedTimestamps ]
+    preUpdate: [ updatedTimestamps ]
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+    featuredFrom:
+      type: date
+      nullable: true
+      default: NULL
+    featuredTo:
+      type: date
+      nullable: true
+      default: NULL
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+    published:
+      type: boolean
+      nullable: true
+    slug:
+      type: string
+      gedmo:
+        slug:
+          #separator: -
+          #style: default
+          #unique: true
+          fields:
+            - title
+  manyToMany:
+    albums:
+      targetEntity: Album
+      inversedBy: playlists
+      joinTable:
+        name: albums_playlists
+        joinColumns:
+          playlist_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          album_id:
+            referencedColumnName: id
+

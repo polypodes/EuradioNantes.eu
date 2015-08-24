@@ -3,7 +3,7 @@
 namespace RadioSolution\StaticContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\NewsBundle\Model\Tag as Tag;
+use Sonata\ClassificationBundle\Model\Tag as Tag;
 
 /**
  * RadioSolution\StaticContentBundle\Entity\StaticContent
@@ -29,11 +29,11 @@ class StaticContent
      * @var string $body
      */
     private $body;
-    
+
     private $categoryStaticContent;
-    
+
     private $order_content;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -54,7 +54,7 @@ class StaticContent
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class StaticContent
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -96,7 +96,7 @@ class StaticContent
     /**
      * Get introduction
      *
-     * @return string 
+     * @return string
      */
     public function getIntroduction()
     {
@@ -116,7 +116,7 @@ class StaticContent
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -141,7 +141,7 @@ class StaticContent
     /**
      * Get CategoryStaticContent
      *
-     * @return RadioSolution\StaticContentBundle\Entity\CategoryStaticContent 
+     * @return RadioSolution\StaticContentBundle\Entity\CategoryStaticContent
      */
     public function getCategoryStaticContent()
     {
@@ -166,7 +166,7 @@ class StaticContent
     /**
      * Get date_add
      *
-     * @return date 
+     * @return date
      */
     public function getDateAdd()
     {
@@ -191,7 +191,7 @@ class StaticContent
     /**
      * Get image
      *
-     * @return Application\Sonata\MediaBundle\Entity\Media 
+     * @return Application\Sonata\MediaBundle\Entity\Media
      */
     public function getImage()
     {
@@ -216,17 +216,17 @@ class StaticContent
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
         return $this->slug;
     }
-    
+
     public function getOrderContent(){
     	return $this->order_content;
     }
-    
+
     public function setOrderContent($order_content){
     	$this->order_content=$order_content;
     }

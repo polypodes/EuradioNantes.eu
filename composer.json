@@ -49,7 +49,10 @@
         "egeloen/ckeditor-bundle": "~2.5",
         "tilleuls/ckeditor-sonata-media-bundle": "^1.0",
         "knplabs/knp-paginator-bundle": "^2.4",
-        "twig/extensions": "^1.2"
+        "twig/extensions": "^1.2",
+        "exeu/apai-io": "^1.8",
+        "gedmo/doctrine-extensions": "2.3.*",
+        "stof/doctrine-extensions-bundle": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

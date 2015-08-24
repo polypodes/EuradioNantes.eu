@@ -1,0 +1,24 @@
+<div>
+    <h1>{{ label.title }}</h1>
+
+    {% media label.image, 'big' with {'class': 'responsive'} %}
+    {{ label.content | raw }}
+
+
+    {% if label.albums|length > 0 %}
+
+        <h3>Les albums</h3>
+
+        {% for album in label.albums %}
+        <article class="album">
+            <a href="{{ path('album', {'slug': album.slug}) }}">
+                {% if album.thumbnailUrl %}
+                <img src="{{ album.thumbnailUrl }}" alt="">
+                {% endif %}
+                <h3>{{ album.title }}</h3>
+            </a>
+        </article>
+        {% endfor %}
+
+    {% endif %}
+</div>

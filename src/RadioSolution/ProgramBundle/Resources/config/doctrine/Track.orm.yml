@@ -1,0 +1,74 @@
+RadioSolution\ProgramBundle\Entity\Track:
+  type: entity
+  table: music__track
+  lifecycleCallbacks:
+    prePersist: [ updatedTimestamps ]
+    preUpdate: [ updatedTimestamps ]
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    artist:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    genre:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    label:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    manufacturer:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    publisher:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    releaseDate:
+      type: datetime
+      nullable: true
+      default: NULL
+    runningTime:
+      type: integer
+      nullable: true
+      default: NULL
+    studio:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    title:
+      type: string
+      length: 255
+    trackSequence:
+      type: integer
+      nullable: true
+      default: NULL
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+  oneToMany:
+    broadcasts:
+      nullable: true
+      targetEntity: Broadcast
+      mappedBy: track
+  manyToOne:
+    album:
+      nullable: true
+      default: NULL
+      targetEntity: Album
+      inversedBy: tracks
+      joinColumn:
+        name: album_id
+        referencedColumnName: id

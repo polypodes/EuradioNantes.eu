@@ -1,0 +1,102 @@
+RadioSolution\ProgramBundle\Entity\Album:
+  type: entity
+  repositoryClass: RadioSolution\ProgramBundle\Entity\MusicRepository
+  table: music__album
+  lifecycleCallbacks:
+    prePersist: [ updatedTimestamps ]
+    preUpdate: [ updatedTimestamps ]
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    artist:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    label:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    manufacturer:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    publisher:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    releaseDate:
+      type: date
+      nullable: true
+      default: NULL
+    featuredFrom:
+      type: date
+      nullable: true
+      default: NULL
+    featuredTo:
+      type: date
+      nullable: true
+      default: NULL
+    studio:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    title:
+      type: string
+      length: 255
+    thumbnailUrl:
+      type: string
+      length: 255
+      nullable: true
+      default: NULL
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+    slug:
+      type: string
+      gedmo:
+        slug:
+          #separator: -
+          #style: default
+          #unique: true
+          fields:
+            - artist
+            - title
+    resume:
+      type: text
+      nullable: true
+    content:
+      type: text
+      nullable: true
+    published:
+      type: boolean
+      nullable: true
+  oneToMany:
+    tracks:
+      nullable: true
+      targetEntity: Track
+      mappedBy: album
+      options:
+        orderBy:
+          trackSequence: ASC
+      orderBy:
+        trackSequence: ASC
+  manyToMany:
+    playlists:
+      targetEntity: Playlist
+      mappedBy: albums
+  manyToOne:
+    labelId:
+      targetEntity: Label
+      nullable: true
+      inversedBy: albums
+      joinColumn:
+        name: label_id
+        referencedColumnName: id
