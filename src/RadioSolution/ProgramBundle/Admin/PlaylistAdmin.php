@@ -78,7 +78,7 @@ class PlaylistAdmin extends Admin
         $listMapper
             ->addIdentifier('title')
             ->add('featuredPeriod', 'string', array('label' => 'Album de la semaine'))
-            ->add('published', 'boolean', array('label' => 'Publié'))
+            ->add('published', 'boolean', array('label' => 'Publié', 'editable' => true))
         ;
     }
 

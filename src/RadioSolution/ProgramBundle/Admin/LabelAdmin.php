@@ -52,7 +52,7 @@ class LabelAdmin extends Admin
       //->addIdentifier('id')
       ->addIdentifier('title', 'string', array('label' => 'Titre'))
       ->add('featuredPeriod', 'string', array('label' => 'Label du mois'))
-      ->add('published', 'boolean', array('label' => 'Publié'))
+      ->add('published', 'boolean', array('label' => 'Publié', 'editable' => true))
       ->add('_action', 'actions', array(
         'actions' => array(
           'view' => array(),
