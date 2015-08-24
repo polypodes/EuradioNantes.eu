@@ -18,6 +18,11 @@ use Sonata\NewsBundle\Admin\PostAdmin as BaseAdmin;
 class PostAdmin extends BaseAdmin
 {
 
+    protected $choices = array(
+                    "actualite" => "actualité",
+                    "podcast" => "podcast"
+    );
+
     protected $datagridValues = array(
         '_sort_order' => 'DESC', // reverse order (default = 'ASC')
         '_sort_by' => 'publicationDateStart'  // name of the ordered field
@@ -30,26 +35,13 @@ class PostAdmin extends BaseAdmin
     {
         $limit = 500; // limit => fastest loading, do we really want to link new post with OLD content ?
 
-
-        //change order for list, first are the recent ones, maybe add a LIMIT ?
-        $em = $this->modelManager->getEntityManager('RadioSolution\PodcastBundle\Entity\Podcast');
-        $podcasts = $em->createQueryBuilder()
-                      ->add('select', 'p')
-                      ->add('from', 'RadioSolution\PodcastBundle\Entity\Podcast p')
-                      ->add('orderBy', 'p.real_time_start DESC')
-                      ->setMaxResults($limit);
-                      ;
-
         $em = $this->modelManager->getEntityManager('Application\Sonata\NewsBundle\Entity\Post');
-        $news = $em->createQueryBuilder()
-                      ->add('select', 'n')
-                      ->add('from', 'Application\Sonata\NewsBundle\Entity\Post n')
-                      ->add('orderBy', 'n.publicationDateStart DESC')
-                      ->setMaxResults($limit);
-                      ;
+        $repo = $em->getRepository('Application\Sonata\NewsBundle\Entity\Post');
 
-
-
+        //get related lists
+        $podcasts= $repo->getPostByCategory("podcast");
+        $news= $repo->getPostByCategory();
+    
         parent::configureFormFields($formMapper);
         $formMapper
             ->with('Post', array(
@@ -63,6 +55,7 @@ class PostAdmin extends BaseAdmin
                     'class' => 'col-md-4'
                 ))
                 ->add('commentsCloseAt', 'sonata_type_datetime_picker', array('required' => false, 'dp_side_by_side' => true))
+                ->add('type',"choice", array('required' => false, 'label' => "Type","choices" => $this->choices))
             ->end()
             ->with('Classification', array(
                 'class' => 'col-md-4'

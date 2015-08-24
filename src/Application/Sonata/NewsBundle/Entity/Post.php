@@ -34,6 +34,8 @@ class Post extends BasePost
      */
     protected $short_title;
 
+    protected $type;
+
     /**
      * @var podcast $podcast
      */
@@ -149,7 +151,7 @@ class Post extends BasePost
      *
      * @return self
      */
-    protected function setRelatedNews($related_new)
+    public function setRelatedNews($related_new)
     {
         $this->related_news[] = $related_new;
 
@@ -179,5 +181,32 @@ class Post extends BasePost
     public function getRelatedPodcasts()
     {
         return $this->related_podcasts;
+    }
+
+    /**
+     * Gets the value of type.
+     *
+     * @return mixed
+     */
+    public function getType()
+    {
+        if(empty($this->type)){
+            return "actualite";
+        }
+        return $this->type;
+    }
+
+    /**
+     * Sets the value of type.
+     *
+     * @param mixed $type the type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }
