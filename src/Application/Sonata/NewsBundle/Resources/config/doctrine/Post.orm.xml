@@ -17,10 +17,12 @@
             <generator strategy="AUTO"/>
         </id>
         <field name="short_title" type="text" column="short_title" nullable="true"/>
+        <field name="type"   type="string"  column="type"    default="actualite" nullable="false"/>
         <one-to-one field="podcast" target-entity="RadioSolution\PodcastBundle\Entity\Podcast" mapped-by='post' />
         <many-to-one field="image" target-entity="Application\Sonata\MediaBundle\Entity\Media" >
             <join-column name="image_id" referenced-column-name="id" nullable="true"/>
         </many-to-one>
+
         <many-to-many field="related_news" target-entity="Application\Sonata\NewsBundle\Entity\Post">
             <join-table name="news_related_news">
                 <join-columns>
@@ -31,14 +33,16 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <one-to-many field="related_podcasts" target-entity="RadioSolution\PodcastBundle\Entity\Podcast" mapped-by="post">
-            <cascade>
-                <cascade-persist/>
-            </cascade>
-            <order-by>
-                <order-by-field name="real_time_start" direction="DESC" />
-            </order-by>
-        </one-to-many>
+        <many-to-many field="related_podcasts" target-entity="Application\Sonata\NewsBundle\Entity\Post">
+            <join-table name="news_related_podcasts">
+                <join-columns>
+                    <join-column name="new_id" referenced-column-name="id" nullable="false" unique="false" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="new_podcast_related_id" referenced-column-name="id" nullable="false"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
 
     </entity>
 </doctrine-mapping>
