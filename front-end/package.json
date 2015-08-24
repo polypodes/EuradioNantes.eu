@@ -1,0 +1,42 @@
+{
+  "name": "euradio_front-end",
+  "version": "1.0.0",
+  "description": "front-end part of euradionantes.eu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run serve & npm run watch",
+    "build": "npm run jade & npm run sass & npm run webpack & npm run imagemin",
+    "sass": "if [[ \"${NODE_ENV}\" == \"production\" ]]; then pleeease-compile; else node-sass ./src/index.scss ./dist/assets/main.css; fi",
+    "jade": "jade --pretty ./src/*.jade -o ./dist",
+    "webpack": "webpack",
+    "imagemin": "imagemin ./src/images/* ./dist/assets/images",
+    "serve": "browser-sync start --no-open --server dist",
+    "cms": "echo \"waiting for implementing it\"",
+    "watch": "npm run watch:jade & npm run watch:sass & npm run watch:js",
+    "watch:jade": "nodemon --ext jade --watch src/ --exec \"npm run jade && browser-sync reload\"",
+    "watch:sass": "nodemon --ext scss --watch src/ --exec \"npm run sass && browser-sync reload\"",
+    "watch:js": "nodemon --ext js --watch src/ --exec \"npm run webpack && browser-sync reload\"",
+    "clean": "rm -rf ./dist"
+  },
+  "author": "LesPolypodes <contact@lespolypodes.com>",
+  "license": "ISC",
+  "dependencies": {
+    "amd-define-factory-patcher-loader": "^1.0.0",
+    "babel": "^5.8.19",
+    "babel-core": "^5.8.20",
+    "babel-loader": "^5.3.2",
+    "bootstrap-sass": "^3.3.5",
+    "browser-sync": "^2.8.1",
+    "csslint": "^0.10.0",
+    "expose-loader": "^0.7.0",
+    "imagemin-cli": "^1.0.0",
+    "jade": "^1.11.0",
+    "node-sass": "^3.2.0",
+    "nodemon": "^1.4.0",
+    "npm-watch": "0.0.0",
+    "pleeease": "^3.4.0",
+    "pleeease-cli": "^3.2.8",
+    "webpack": "^1.10.5"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "rules": {
+    "indent": [
+      2,
+      2
+    ],
+    "quotes": [
+      2,
+      "single"
+    ],
+    "linebreak-style": [
+      2,
+      "unix"
+    ],
+    "semi": [
+      2,
+      "always"
+    ],
+    "no-use-before-define": [2, "nofunc"],
+    "no-var": 1,
+    "prefer-const": 1,
+    "max-statements":[2, 15],
+    "max-depth":[1, 2],
+    "complexity":[2, 5],
+    "max-len":[2, 65],
+    "max-params":[2, 3],
+    "max-nested-callbacks":[2, 0],
+    "smells/no-switch": 1,
+    "smells/no-complex-switch-case": 1,
+    "smells/no-setinterval": 1,
+    "smells/no-this-assign": 1,
+    "smells/no-complex-string-concat": 1,
+    "smells/no-complex-chaining": 1
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "ecmaFeatures": { 
+    "modules": true
+  },
+  "globals": {
+    "$": false,
+    "angular": false
+  },
+  "plugins": [
+    "smells"
+  ]
+}

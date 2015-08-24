@@ -1,0 +1,7 @@
+{
+  "sass": true,
+  "in": ["./src/index.scss"],
+  "out": "./dist/assets/main.css",
+  "sourcemaps": false,
+  "browsers": ["ie 9", "Safari 6", "Chrome 30", "Firefox 25"]
+}
