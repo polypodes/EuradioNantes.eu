@@ -30,9 +30,9 @@ class Post extends BasePost
     protected $id;
 
     /**
-     * @var string $admin_title
+     * @var string $short_title
      */
-    protected $admin_title;
+    protected $short_title;
 
     /**
      * @var podcast $podcast
@@ -43,6 +43,10 @@ class Post extends BasePost
      * @var Application\Sonata\MediaBundle\Entity\Media
      */
     protected $image;
+
+    protected $related_news;
+
+    protected $related_podcasts;
 
     /**
      * Get id
@@ -115,26 +119,65 @@ class Post extends BasePost
     }
 
     /**
-     * Gets the value of admin_title.
+     * Gets the value of short_title.
      *
-     * @return string $admin_title
+     * @return string $short_title
      */
-    public function getAdminTitle()
+    public function getShortTitle()
     {
-        return $this->admin_title;
+        return $this->short_title;
     }
 
     /**
-     * Sets the value of admin_title.
+     * Sets the value of short_title.
      *
-     * @param string $admin_title $admin_title the admin title
+     * @param string $short_title $short_title the short title
      *
      * @return self
      */
-    public function setAdminTitle($admin_title)
+    public function setShortTitle($short_title)
     {
-        $this->admin_title = $admin_title;
+        $this->short_title = $short_title;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of related_news.
+     *
+     * @param mixed $related_news the related news
+     *
+     * @return self
+     */
+    protected function setRelatedNews($related_new)
+    {
+        $this->related_news[] = $related_new;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of related_news.
+     *
+     * @return mixed
+     */
+    public function getRelatedNews()
+    {
+        return $this->related_news;
+    }
+
+
+
+    public function setRelatedPodcasts($related_podcast)
+    {
+        $this->related_podcast[] = $related_podcast;
+
+        return $this;
+    }
+
+
+    public function getRelatedPodcasts()
+    {
+        return $this->related_podcasts;
     }
 }
