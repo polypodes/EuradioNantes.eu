@@ -24,7 +24,7 @@
     "complexity":[2, 5],
     "max-len":[2, 65],
     "max-params":[2, 3],
-    "max-nested-callbacks":[2, 0],
+    "max-nested-callbacks":[2, 1],
     "smells/no-switch": 1,
     "smells/no-complex-switch-case": 1,
     "smells/no-setinterval": 1,

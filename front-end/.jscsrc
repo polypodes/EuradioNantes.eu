@@ -90,7 +90,6 @@
         "value": 120,
         "allExcept": ["urlComments"]
     },
-    "requireSpaceAfterLineComment": false,
     "requireLineFeedAtFileEnd": true,
     "disallowMultipleLineBreaks": true,
     "disallowMixedSpacesAndTabs": true,

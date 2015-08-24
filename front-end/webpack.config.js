@@ -22,8 +22,11 @@ var config = {
 };
 
 // minfiying if builded in production
-if(process.env.NODE_ENV === 'production') {
-  config.plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
+if (process.env.NODE_ENV === 'production') {
+  var options = {minimize: true};
+  var uglify = new webpack.optimize.UglifyJsPlugin(options);
+
+  config.plugins.push(uglify);
 }
 
 module.exports = config;

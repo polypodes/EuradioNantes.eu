@@ -75,8 +75,8 @@ vendor/autoload.php:
 
 integration:
 	@echo
-	@cd integration
-	@gulp build
+	@cd front-end
+	@npm install
 	@cd ../
 
 dumps:

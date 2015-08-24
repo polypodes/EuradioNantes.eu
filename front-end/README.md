@@ -14,6 +14,10 @@ curl "https://nodejs.org/dist/latest/node-${VERSION:-$(wget -qO- https://nodejs.
 
 ```
 
+scss_lint via gem :
+
+`gem install scss_lint`
+
 
 ## How to install this project
 
@@ -42,7 +46,7 @@ then
 ## How to serve this project
 
 
-`npm run start`
+`npm start`
 
 
 ## How to copy front-end assets to Symfony web directory
@@ -54,6 +58,12 @@ then
 
 This repo use git pre-commit hook, if test and lint failed commit is aborted until you fix lint/test issues
 
+List of lint/test tools:
+
+- eslint
+- jscs
+- scss-lint
+
 ### How to execute test/lint
 
-`npm run test`
+`npm test`

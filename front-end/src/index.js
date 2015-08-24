@@ -6,10 +6,10 @@ import common from './bases/common.js';
 ////////////////////////////////////////
 
 [
-    common
-    // append here your dependencies
+  common
+  // append here your dependencies
 
-  ].map(dependency => dependency());
+].map(dependency => dependency());
 
 ////////////////////////////////////////
 // below - shit to remove in prod     //
