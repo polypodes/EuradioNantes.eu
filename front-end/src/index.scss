@@ -32,6 +32,12 @@
 //                  (_  )                     ` __.:'
 
 
+////////////////////////////////////////
+// Config for bootstrap               //
+////////////////////////////////////////
+
+@import './bases/variables';
+
 /////////////////////////////////////////////////////////////////////////////
 // Libs/framework                                                          //
 /////////////////////////////////////////////////////////////////////////////
@@ -51,8 +57,8 @@
 // @import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons';
 
 // Core CSS
-// @import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding';
-// @import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type';
+@import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding';
+@import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type';
 // @import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/code';
 @import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid';
 // @import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tables';
@@ -89,8 +95,8 @@
 // @import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/carousel';
 
 // Utility classes
-// @import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities';
-// @import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities';
+@import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities';
+@import './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities';
 
 
 ////////////////////////////////////////
@@ -98,6 +104,7 @@
 ////////////////////////////////////////
 
 @import './bases/bases';
+@import './footer/footer';
 
 ////////////////////////////////////////
 // Temporary shitty stuffs to remove :
@@ -107,6 +114,11 @@
 ////////////////////////////////////////
 
 html:after {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  font-size: $font-size-base;
+  color: $col07;
   content: 'mobile';
 
   @media (min-width: $container-md) {

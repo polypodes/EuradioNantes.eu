@@ -1,0 +1,46 @@
+////////////////////////////////////////
+// Custom reset                       //
+////////////////////////////////////////
+
+// remove margin top of heading
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-top: 0;
+}
+
+h1,
+.h1 {
+  margin-bottom: 26px;
+}
+
+h2,
+.h2 {
+  margin-bottom: $bs;
+  line-height: 33px;
+}
+
+.chapo {
+  font-weight: 700;
+}
+
+p,
+blockquote {
+  margin-bottom: ($bs * 2);
+}
+
+blockquote {
+  font-family: Georgia, arial, serif;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 25px;
+}

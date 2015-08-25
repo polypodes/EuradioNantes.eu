@@ -1,0 +1,80 @@
+////////////////////////////////////////
+// Footer                             //
+////////////////////////////////////////
+
+// Mobile first
+.footer {
+
+  // variables
+  $duration: .3s;
+  $cubic: ease;
+
+  padding-top: $bs;
+  padding-bottom: ($bs * 2);
+  line-height: ($bs * 2);
+  text-align: center;
+  background-color: $col06;
+
+  // reset
+  ul {
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  &-logo {
+    margin-bottom: 40px;
+  }
+
+  &-link {
+    @include font01-bold();
+    color: $col01;
+    transition: color $duration $cubic;
+  }
+
+  &-link:hover,
+  &-link:focus {
+    color: darken($col01, 20%);
+    text-decoration: none;
+    transition: color $duration $cubic;
+  }
+}
+
+@media (min-width: $container-md) {
+  .footer {
+    padding-bottom: $bs;
+
+    li {
+      display: inline-block;
+    }
+
+    // scss-lint:disable MergeableSelector
+    li + li {
+      margin-left: $bs;
+    }
+
+    &-logo {
+      margin-bottom: $bs;
+    }
+  }
+}
+
+@media (min-width: $container-lg) {
+  .footer {
+    padding-bottom: $bs;
+    text-align: left;
+
+    &-logo {
+      float: left;
+      margin-right: ($bs * 2);
+      margin-bottom: 0;
+    }
+
+    ul {
+      padding-top: 27px;
+    }
+  }
+}
