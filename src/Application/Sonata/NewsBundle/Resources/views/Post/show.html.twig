@@ -1,0 +1,9 @@
+<div>
+    <h1>{{ actu.title }}</h1>
+    <h2>{{ actu.shorttitle }}</h2>
+    <h3>{{ actu.type }}</h3>
+{% thumbnail actu.image, 'small' %}
+
+    {{ actu.content | raw }}
+
+</div>

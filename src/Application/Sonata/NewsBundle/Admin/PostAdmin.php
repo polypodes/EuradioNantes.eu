@@ -51,6 +51,7 @@ class PostAdmin extends BaseAdmin
                 ->add('abstract',"ckeditor", array())
                 ->add('content',"ckeditor", array())
             ->end()
+            
             ->with('Status', array(
                     'class' => 'col-md-4'
                 ))
@@ -65,6 +66,7 @@ class PostAdmin extends BaseAdmin
                     'multiple' => 'true',
                     'required' => false
                 ))
+                ->add('slug',"text", array('required' => false, 'label' => "Slug"))
             ->end()
             ->with('Liaisons', array(
                 'class' => 'col-md-4'
@@ -82,6 +84,8 @@ class PostAdmin extends BaseAdmin
                     "query" => $podcasts
                 ))
             ->end()
+
+            
         ;
 
     }
