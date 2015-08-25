@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of the <name> project.
  *
@@ -32,4 +31,14 @@ class PostRepository extends BasePostRepository
     return $news;
 
   }
+
+  public function listAll($order = 'DESC',$limit = 10){
+    $q = $this->createQueryBuilder('p')
+            ->addOrderBy('p.publicationDateStart', $order)
+            ->setMaxResults($limit)
+    ;
+    $news = $q->getQuery()->getResult();
+    return $news;
+  }
+
 }

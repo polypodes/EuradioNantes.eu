@@ -2,6 +2,11 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
+# Sonata Override
+NewsBundle:
+    resource: "@SonataNewsBundle/Resources/config/routing.yml"
+    prefix:   /
+
 # RadioSolution
 ProgramBundle:
     resource: "@ProgramBundle/Resources/config/routing.yml"

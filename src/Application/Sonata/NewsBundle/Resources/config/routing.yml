@@ -1,0 +1,9 @@
+listeactus:
+    path:  actualites
+    defaults: { _controller: "SonataNewsBundle:Post:index" }
+actualite:
+    path:  actualite/{id}
+    defaults: { _controller: "SonataNewsBundle:Post:show" }
+    requirements:
+        id: \d+
+
