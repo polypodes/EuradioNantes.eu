@@ -48,3 +48,5 @@ doc/upgrade/sql/v2_classification__tag.sql
 /bin/
 /dumps/
 
+# Mac
+.DS_Store
