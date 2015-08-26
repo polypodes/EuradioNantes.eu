@@ -33,7 +33,6 @@ class PostAdmin extends BaseAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $limit = 500; // limit => fastest loading, do we really want to link new post with OLD content ?
 
         $em = $this->modelManager->getEntityManager('Application\Sonata\NewsBundle\Entity\Post');
         $repo = $em->getRepository('Application\Sonata\NewsBundle\Entity\Post');
@@ -42,22 +41,33 @@ class PostAdmin extends BaseAdmin
         $podcasts= $repo->getPostByCategory("podcast");
         $news= $repo->getPostByCategory();
     
-        parent::configureFormFields($formMapper);
+        //parent::configureFormFields($formMapper); //can't use parent cause we cant change field order in formmaper after 
         $formMapper
             ->with('Post', array(
                     'class' => 'col-md-8'
                 ))
+                ->add('author', 'sonata_type_model_list')
+                ->add('title')
                 ->add('short_title',"text", array('required' => false, 'label' => "Titre court"))
-                ->add('abstract',"ckeditor", array())
-                ->add('content',"ckeditor", array())
+                ->add('abstract', "ckeditor", array())
+                ->add('content', 'ckeditor', array())
             ->end()
-            
             ->with('Status', array(
                     'class' => 'col-md-4'
                 ))
-                ->add('commentsCloseAt', 'sonata_type_datetime_picker', array('required' => false, 'dp_side_by_side' => true))
+                ->add('enabled', null, array('required' => false))
+                ->add('image', 'sonata_type_model_list', array('required' => false), array(
+                    'link_parameters' => array(
+                        'context' => 'news'
+                    )
+                ))
                 ->add('type',"choice", array('required' => false, 'label' => "Type","choices" => $this->choices))
+                ->add('publicationDateStart', 'sonata_type_datetime_picker', array('dp_side_by_side' => true,'required' => false))
+                ->add('commentsCloseAt', 'sonata_type_datetime_picker', array('dp_side_by_side' => true,'required' => false))
+                ->add('commentsEnabled', null, array('required' => false))
+                ->add('commentsDefaultStatus', 'sonata_news_comment_status', array('expanded' => true))
             ->end()
+
             ->with('Classification', array(
                 'class' => 'col-md-4'
                 ))
@@ -67,6 +77,7 @@ class PostAdmin extends BaseAdmin
                     'required' => false
                 ))
                 ->add('slug',"text", array('required' => false, 'label' => "Slug"))
+                ->add('collection', 'sonata_type_model_list', array('required' => false))
             ->end()
             ->with('Liaisons', array(
                 'class' => 'col-md-4'
@@ -84,10 +95,7 @@ class PostAdmin extends BaseAdmin
                     "query" => $podcasts
                 ))
             ->end()
-
-            
         ;
-
     }
 
 }
