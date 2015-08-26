@@ -254,3 +254,7 @@ stof_doctrine_extensions:
         default:
             sortable:      true
             sluggable:     true
+
+hype_mailchimp:
+    api_key: %mailchimp_api_key%
+    default_list: %mailchimp_default_list%
