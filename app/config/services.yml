@@ -5,14 +5,14 @@ parameters:
 
 services:
     twig.extension.text:
-       class: Twig_Extensions_Extension_Text
-       tags:
-           - { name: twig.extension }
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
 
     twig.extension.intl:
-       class: Twig_Extensions_Extension_Intl
-       tags:
-           - { name: twig.extension }
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
 
     #debug.twig.extension:
     #    class: Twig_Extensions_Extension_Debug
@@ -23,3 +23,13 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
             - [ setAnnotationReader, [ @annotation_reader ] ]
+
+    radiosolution.podcast.form.type.podcast_marker:
+        class: RadioSolution\PodcastBundle\Form\Type\PodcastMarkerType
+        tags:
+            - { name: form.type, alias: podcast_marker }
+
+    radiosolution.podcast.form.type.podcast_player:
+        class: RadioSolution\PodcastBundle\Form\Type\PodcastPlayerType
+        tags:
+            - { name: form.type, alias: podcast_player }

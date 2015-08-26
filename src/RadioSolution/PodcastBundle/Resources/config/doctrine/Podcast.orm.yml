@@ -17,6 +17,9 @@ RadioSolution\PodcastBundle\Entity\Podcast:
     dlAuth:
       type: boolean
       default: true
+    markers:
+      type: json_array
+      nullable: true
   oneToOne:
     filePodcast:
       targetEntity: Application\Sonata\MediaBundle\Entity\Media

@@ -30,15 +30,20 @@ class Podcast
      */
     private $filePodcast;
 
-    
     private $dlAuth;
-    
+
     /**
      * @var Application\Sonata\NewsBundle\Entity\Post
      */
     private $post;
-    
+
     private $home_page;
+
+    /**
+     * Marqueurs temporels de lecture du Podcast
+     * @var array
+     */
+    private $markers;
 
 
     public function __construct()
@@ -47,13 +52,13 @@ class Podcast
     	$this->dlAuth = true;
 
     }
-    
-    
-    
+
+
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +78,7 @@ class Podcast
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -93,15 +98,15 @@ class Podcast
     /**
      * Get real_time_start
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getRealTimeStart()
     {
         return $this->real_time_start;
     }
 
-   
-    
+
+
     /**
      * Set dlauth
      *
@@ -111,7 +116,7 @@ class Podcast
     {
     	$this->dlAuth = $dlAuth;
     }
-    
+
     /**
      * Get filePodcast
      *
@@ -121,10 +126,10 @@ class Podcast
     {
     	return $this->dlAuth;
     }
-    
-    
-    
-    
+
+
+
+
     /**
      * Set filePodcast
      *
@@ -138,7 +143,7 @@ class Podcast
     /**
      * Get filePodcast
      *
-     * @return Application\Sonata\MediaBundle\Entity\Media 
+     * @return Application\Sonata\MediaBundle\Entity\Media
      */
     public function getFilePodcast()
     {
@@ -158,24 +163,24 @@ class Podcast
     /**
      * Get post
      *
-     * @return Application\Sonata\NewsBundle\Entity\Post 
+     * @return Application\Sonata\NewsBundle\Entity\Post
      */
     public function getPost()
     {
         return $this->post;
     }
-    public function getPostTitle()
-    {
-    	return $this->post->getTitle();
-    }
-    public function getPostAbstract()
-    {
-    	return $this->post->getAbstract();
-    }
-    public function getPostImage()
-    {
-    	return $this->post->getImage();
-    }
+    //public function getPostTitle()
+    //{
+    //	return $this->post->getTitle();
+    //}
+    //public function getPostAbstract()
+    //{
+    //	return $this->post->getAbstract();
+    //}
+    //public function getPostImage()
+    //{
+    //	return $this->post->getImage();
+    //}
     public function getSlug()
     {
     	return $this->post->getYear().'/'.$this->post->getMonth().'/'.$this->post->getDay().'/'.$this->post->getSlug();
@@ -183,7 +188,7 @@ class Podcast
     public  function __toString(){
     	return $this->getName();
     }
-    
+
 
     /**
      * @var RadioSolution\ProgramBundle\Entity\Program
@@ -204,28 +209,39 @@ class Podcast
     /**
      * Get program
      *
-     * @return RadioSolution\ProgramBundle\Entity\Program 
+     * @return RadioSolution\ProgramBundle\Entity\Program
      */
     public function getProgram()
     {
         return $this->program;
-    } 
-    
+    }
+
     public function getEmission()
     {
         return $this->program->getEmission()->getName();
     }
-    
+
     public function getImageEmission()
     {
     	return $this->program->getEmission()->getMedia();
     }
-    
+
     public function getHomePage(){
     	return $this->home_page;
     }
-    
+
     public function setHomePage($homePage){
     	$this->home_page=$homePage;
+    }
+
+    public function getMarkers()
+    {
+        return $this->markers;
+    }
+
+    public function setMarkers($markers)
+    {
+        $this->markers = $markers;
+        return $this;
     }
 }

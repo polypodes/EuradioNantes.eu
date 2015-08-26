@@ -1,0 +1,17 @@
+{# src/RadioSolution/PodcastBundle/Resources/views/Form/podcast_marker.html.twig #}
+{% block podcast_marker_widget %}
+    {% spaceless %}
+        <div class="row">
+            <div class="col-xs-3">
+                {# form_label(form.time) #}
+                {{ form_widget(form.children.time, {'attr': {'placeholder': 'mm:ss'}}) }}
+                {{ form_errors(form.children.time) }}
+            </div>
+            <div class="col-xs-9">
+                {# form_label(form.time) #}
+                {{ form_widget(form.children.label, {'attr': {'placeholder': form.children.label.vars.label}}) }}
+                {{ form_errors(form.children.label) }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
