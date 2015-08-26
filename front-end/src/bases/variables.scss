@@ -24,6 +24,13 @@ $col08: #55acee;
 $col09: #3b5998;
 $col10: #dd4b39;
 
+////////////////////////////////////////
+// Helpers mixins                     //
+////////////////////////////////////////
+
+@mixin ttu() {
+  text-transform: uppercase;
+}
 
 ////////////////////////////////////////
 // Fonts                              //
@@ -32,14 +39,16 @@ $col10: #dd4b39;
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 // font mixins
-@mixin font01-regular() {
+@mixin font01-regular($size: $font-size-base) {
   font-family: 'Open Sans', arial, sans-serif;
   font-weight: 400;
+  font-size: $size;
 }
 
-@mixin font01-bold() {
+@mixin font01-bold($size: $font-size-base) {
   font-family: 'Open Sans', arial, sans-serif;
   font-weight: 700;
+  font-size: $size;
 }
 
 ////////////////////////////////////////
@@ -70,3 +79,49 @@ $headings-font-family:    inherit !default;
 $headings-font-weight:    700 !default;
 $headings-line-height:    40px !default;
 $headings-color:          inherit !default;
+
+////////////////////////////////////////
+// Aniamtions                         //
+////////////////////////////////////////
+
+@keyframes slideInRight {
+  from {
+    visibility: visible;
+    transform: translate3d(100vw, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    visibility: hidden;
+    transform: translate3d(100vw, 0, 0);
+  }
+}
+
+@keyframes slideInRightLevel2 {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutRightLevel2 {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}

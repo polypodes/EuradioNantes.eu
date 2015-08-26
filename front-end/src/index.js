@@ -1,12 +1,14 @@
 // modules
 import common from './bases/common.js';
+import header from './header/header.js';
 
 ////////////////////////////////////////
 // Dependencies init                  //
 ////////////////////////////////////////
 
 [
-  common
+  common,
+  header
   // append here your dependencies
 
 ].map(dependency => dependency());

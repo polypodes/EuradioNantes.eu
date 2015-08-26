@@ -1,2 +1,34 @@
-header
-  h2 ici header
+header.header
+  img(src="./assets/images/logo-header.svg", alt="Logo d'EuradioNantes").header-logo
+  button.header-menu-button menu
+  button.header-menu-back ‹ Retour
+  div.header-menu
+    nav
+      ul.header-items
+        li
+          a(href="radio.html", title="Lien vers la page La Radio").header-link.header-link-has-children La radio
+          ul
+            li
+              a(href="radio.html", title="Lien vers la page La Radio").header-link Lorem ipsum 1
+            li
+              a(href="radio.html", title="Lien vers la page La Radio").header-link Loreat
+            li
+              a(href="radio.html", title="Lien vers la page La Radio").header-link ipsum dolorm
+        li
+          a(href="actu.html", title="Lien vers la page La Radio").header-link L'actu
+        li
+          a(href="emissions.html", title="Lien vers la page La Radio").header-link.header-link-has-children Les Émissions
+          ul
+            li
+              a(href="radio.html", title="Lien vers la page La Radio").header-link Lorem ipsum 2
+            li
+              a(href="radio.html", title="Lien vers la page La Radio").header-link Loreat
+            li
+              a(href="radio.html", title="Lien vers la page La Radio").header-link ipsum dolorm
+        li
+          a(href="musique.html", title="Lien vers la page La Radio").header-link La musique
+        li
+          a(href="contact.html", title="Lien vers la page La Radio").header-link Contact
+    form.header-search
+      input(type="search", placeholder="Recherche")
+      input(type="submit", value="")
