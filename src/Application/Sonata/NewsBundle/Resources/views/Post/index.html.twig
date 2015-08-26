@@ -3,14 +3,13 @@
     <h1>Les dernieres actus</h1>
     <div id ="actus-list">
     {% for actu in news %}
-        {{ dump(sonata_news_permalink(actu))}}
         <article class="actu">
-            <a href="{{ path('actualite', { 'id': actu.id }) }}">
+             <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(actu) }) }}">
                 <h2 class="actu-title">{{ actu.title }}</h2>
                 <h3 class="actu-short-title">{{ actu.shorttitle }}</h2>
                 <span class="actu-type">{{ actu.type }}</span>
                 <div class="actu-resume">{{ actu.abstract }}</div>
-            </a>
+            </a> 
         </article>
     {% endfor %}
     </div>

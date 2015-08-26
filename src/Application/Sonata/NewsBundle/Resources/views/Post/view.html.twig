@@ -1,0 +1,10 @@
+
+<div>
+    <h1>{{ post.title }}</h1>
+    <h2>{{ post.shorttitle }}</h2>
+    <h3>{{ post.type }}</h3>
+{% thumbnail post.image, 'small' %}
+
+    {{ post.content | raw }}
+
+</div>
