@@ -18,8 +18,8 @@ class ProgramAdmin extends Admin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->add('time_start','datetime', array('label' => 'Date de début'))//, 'data_timezone' => "GMT",'user_timezone' => "GMT"
-      ->add('time_stop','datetime', array('label' => 'Date de fin'))//, 'data_timezone' => "GMT",'user_timezone' => "GMT"
+      ->add('time_start','sonata_type_datetime_picker', array('label' => 'Date de début'))
+      ->add('time_stop','sonata_type_datetime_picker', array('label' => 'Date de fin'))
       ->add('podcast', 'sonata_type_model_list', array('label' => 'Podcast', 'required' => false), array())
       ->add('emission', 'sonata_type_model_list', array('label' => 'Émission', 'required' =>true), array())
     ;
@@ -28,20 +28,18 @@ class ProgramAdmin extends Admin
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
-      ->add('id')
-      ->add('emission')
-      ->add('time_start')
+      ->add('emission', null, array('label' => 'Émission'))
+      ->add('time_start', null, array('label' => 'Date de début'))
     ;
   }
 
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
-      ->addIdentifier('id')
-      ->add('emission')
-      ->add('time_start')
-      ->add('time_stop')
-      ->add('collision')
+      ->add('emission', null, array('label' => 'Émission'))
+      ->add('time_start', null, array('label' => 'Date de début'))
+      ->add('time_stop', null, array('label' => 'Date de fin'))
+      ->add('collision', null, array('label' => 'Collision'))
       ->add('_action', 'actions', array(
       		'actions' => array(
       				'view' => array(),

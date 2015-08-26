@@ -21,59 +21,66 @@ class EmissionController extends Controller
      * @Route("/", name="")
      * @Template()
      */
-	
+
 	public function indexAction()
 	{
-		$condition1='';
-		$condition2='';
-		$condition3='';
-		$getTheme='';
-		$getFrequency='';
-		$getArchive='';
-		if (isset($_GET['theme']) && $_GET['theme']!="") {
-			$getTheme=$_GET['theme'];
-			if ($getTheme!="")$condition1="AND  e.theme= $getTheme";
-		}
-		if (isset($_GET['frequency']) && $_GET['frequency']!="") {
-			$getFrequency=$_GET['frequency'];
-			if ($getFrequency!="")$condition2="AND  e.frequency= $getFrequency";
-		}
-		if (isset($_GET['archive']) && $_GET['archive']!="") {
-			$getArchive=$_GET['archive'];
-			if ($getArchive!="")$condition3="AND  e.archive= $getArchive";
-		}else{
-			$condition3="AND  e.archive=0";
-		}
-		$em = $this->getDoctrine()->getEntityManager();
-		$query = $em->createQuery("SELECT e FROM ProgramBundle:Emission e WHERE e.name!='' $condition1 $condition2 $condition3 ORDER BY e.id DESC")
-		->setMaxResults(1000);
-		//->setParameter('archiveEmission', '0');
-		$entities=$query->getResult();
-		 
-		$query = $em->createQuery("SELECT e FROM ProgramBundle:EmissionTheme e");
-		$theme=$query->getResult();
-		 
-		$query = $em->createQuery("SELECT e FROM ProgramBundle:EmissionFrequency e");
-		$frequency=$query->getResult();
-		 
-		$paginator = $this->get('knp_paginator');
-	
-		$pagination = $paginator->paginate(
-				$entities,
-				$this->get('request')->query->get('page', 1),
-				6
-		);
-	
-		return $this->render('ProgramBundle:Emission:index.html.twig',array(
-				'pagination'=>$pagination,
-				'frequencies'=>$frequency,
-				'themes'=>$theme,
-				'gt'=>$getTheme,
-				'gf'=>$getFrequency,
-				'ga' => $getArchive));
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $query = $this
+            ->getDoctrine()
+            ->getRepository('ProgramBundle:Emission')
+            ->createQueryBuilder('e')
+            //->where('e.name <> "" ')
+            ->orderBy('e.name', 'ASC')
+        ;
+
+        if (!empty($_GET['theme'])) {
+            $query = $query
+                ->andWhere('e.theme = :theme')
+                ->setParameter('theme', $_GET['theme'])
+            ;
+        }
+        if (!empty($_GET['frequency'])) {
+            $query = $query
+                ->andWhere('e.frequency = :frequency')
+                ->setParameter('frequency', $_GET['frequency'])
+            ;
+        }
+        if (!empty($_GET['archive'])) {
+            $query = $query
+                ->andWhere('e.archive = :archive')
+                ->setParameter('archive', $_GET['archive'])
+            ;
+        } else{
+            $query = $query->andWhere('e.archive = 0');
+        }
+
+        $query = $query->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+
+        $entities = $paginator->paginate(
+            $query,
+            $this->get('request')->query->get('page', 1),
+            6
+        );
+
+		$themes = $this
+            ->getDoctrine()
+            ->getRepository('ProgramBundle:EmissionTheme')
+            ->findAll()
+        ;
+
+        $frequencies = $this
+            ->getDoctrine()
+            ->getRepository('ProgramBundle:EmissionFrequency')
+            ->findAll()
+        ;
+
+		return $this->render('ProgramBundle:Emission:index.html.twig', compact('entities','frequencies','themes'));
 	}
-	
-	
+
+
     /**
      * Finds and displays a Emission entity.
      *
@@ -83,39 +90,34 @@ class EmissionController extends Controller
     public function showAction($name)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $entities = $em->getRepository('ProgramBundle:Emission')->findBySlug($name);
+        $entity = $em->getRepository('ProgramBundle:Emission')->findOneBySlug($name);
 
-        if (!$entities) {
+        if (!$entity) {
             throw $this->createNotFoundException('Unable to find Emission entity.');
         }
-        
-        
-        return $this->render('ProgramBundle:Emission:show.html.twig',array(
-        	'entity'	=> $entities[0]
+
+        return $this->render('ProgramBundle:Emission:show.html.twig', array(
+        	'entity'	=> $entity
         ));
-        /*
-        return array(
-            'entities'	=> $entity,
-        );
-        */
     }
-    
+
     public function showRssAction($name)
     {
     	$dateNow =new \DateTime();
     	$domain = $this->get('request')->server->get('HTTP_HOST');
     	$em = $this->getDoctrine()->getEntityManager();
-    	$emission = $em->getRepository('ProgramBundle:Emission')->findBySlug($name);
-    	$query = $em->createQuery("SELECT p FROM PodcastBundle:Podcast p JOIN p.program pr WHERE p.real_time_start<:dateNow AND pr.emission=:idEmission ORDER BY p.real_time_start DESC")
-    	->setMaxResults(10)
-    	->setParameter('dateNow', $dateNow)
-    	->setParameter('idEmission',$emission[0]->getId());
-    	$podcast=$query->getResult();
 
-    	return $this->render('ProgramBundle:Emission:show.rss.twig',array(
-    			'emission'      => $emission[0],
-    			'podcasts'      	=> $podcast,
-    			'domain'		=> $domain,
-    	));
+        if (!$emission = $em->getRepository('ProgramBundle:Emission')->findOneBySlug($name)) {
+            throw $this->createNotFoundException('Unable to find Emission entity.');
+        }
+
+    	$query = $em
+            ->createQuery("SELECT p FROM PodcastBundle:Podcast p JOIN p.program pr WHERE p.real_time_start < :dateNow AND pr.emission = :idEmission ORDER BY p.real_time_start DESC")
+        	->setMaxResults(10)
+        	->setParameter('dateNow', $dateNow)
+        	->setParameter('idEmission',$emission->getId())
+        ;
+    	$podcasts = $query->getResult();
+    	return $this->render('ProgramBundle:Emission:show.rss.twig', compact('emission','podcasts','domain'));
     }
 }

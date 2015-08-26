@@ -2,12 +2,15 @@
     <h1>Playlist de la semaine</h1>
 
     <div id ="playlist-list">
-    {% for playlist in playlists %}
+        {% for playlist in playlists %}
         <article class="playlist{% if loop.first %} top{% endif %}">
             <a href="{{ path('playlist', {'slug': playlist.slug}) }}">
                 <h2 class="playlist-title">{{ playlist.title }}</h2>
             </a>
         </article>
-    {% endfor %}
+        {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(playlists) }}
+        </div>
     </div>
 </div>

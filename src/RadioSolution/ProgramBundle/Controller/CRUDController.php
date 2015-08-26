@@ -25,7 +25,7 @@ class CRUDController extends SonataCRUDController
         }
 
         return new RedirectResponse(
-          $this->admin->generateUrl('list',$this->admin->getFilterParameters())
+          $this->admin->generateUrl('list', $this->admin->getFilterParameters())
         );
     }
 
@@ -45,7 +45,7 @@ class CRUDController extends SonataCRUDController
         }
 
         return new RedirectResponse(
-          $this->admin->generateUrl('list',$this->admin->getFilterParameters())
+          $this->admin->generateUrl('list', $this->admin->getFilterParameters())
         );
     }
 
@@ -65,5 +65,32 @@ class CRUDController extends SonataCRUDController
         }
 
         return true;
+    }
+
+    public function batchActionArchive(ProxyQueryInterface $selectedModelQuery)
+    {
+        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
+        {
+            throw new AccessDeniedException();
+        }
+
+        $selectedModels = $selectedModelQuery->execute();
+
+        $modelManager = $this->admin->getModelManager();
+        try {
+            foreach ($selectedModels as $selectedModel) {
+                $selectedModel->setArchive(true);
+                $modelManager->update($selectedModel);
+            }
+
+            $this->addFlash('sonata_flash_success', 'flash_batch_archive_success');
+        } catch (\Exception $e) {
+            $this->addFlash('sonata_flash_error', $e->getMessage());
+            return false;
+        }
+
+        return new RedirectResponse(
+          $this->admin->generateUrl('list', $this->admin->getFilterParameters())
+        );
     }
 }

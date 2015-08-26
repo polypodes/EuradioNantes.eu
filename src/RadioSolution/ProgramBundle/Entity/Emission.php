@@ -47,9 +47,9 @@ class Emission
     private $diffusion_start;
 
     /**
-     * @var date $difusion_stop
+     * @var date $diffusion_stop
      */
-    private $difusion_stop;
+    private $diffusion_stop;
 
         /**
      * @var RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast
@@ -297,9 +297,9 @@ class Emission
      *
      * @param date $difusionStop
      */
-    public function setDifusionStop($difusionStop)
+    public function setDiffusionStop($diffusionStop)
     {
-        $this->difusion_stop = $difusionStop;
+        $this->diffusion_stop = $diffusionStop;
     }
 
     /**
@@ -307,9 +307,9 @@ class Emission
      *
      * @return date
      */
-    public function getDifusionStop()
+    public function getDiffusionStop()
     {
-        return $this->difusion_stop;
+        return $this->diffusion_stop;
     }
 
     /**

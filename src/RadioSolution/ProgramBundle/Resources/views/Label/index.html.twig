@@ -2,7 +2,7 @@
     <h1>Label européen du mois</h1>
 
     <div id ="label-list">
-    {% for label in labels %}
+        {% for label in labels %}
         <article class="label{% if loop.first %} top{% endif %}">
             <a href="{{ path('label', {'slug': label.slug}) }}">
                 {% if label.image %}
@@ -12,6 +12,9 @@
                 {{ label.resume | raw }}
             </a>
         </article>
-    {% endfor %}
+        {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(labels) }}
+        </div>
     </div>
 </div>

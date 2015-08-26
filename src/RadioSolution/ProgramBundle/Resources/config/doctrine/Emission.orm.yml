@@ -13,8 +13,9 @@ RadioSolution\ProgramBundle\Entity\Emission:
       type: text
     diffusion_start:
       type: date
-    difusion_stop:
+    diffusion_stop:
       type: date
+      column: difusion_stop
     archive:
       type: boolean
     slug:
