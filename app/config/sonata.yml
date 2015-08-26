@@ -68,7 +68,7 @@ sonata_media:
 
     cdn:
         server:
-            path: /uploads/media # http://media.sonata-project.org/
+            path: http://www.euradionantes.eu/uploads/media # http://media.sonata-project.org/
             # @todo check against actual params in production
 
     filesystem:

@@ -1,22 +1,22 @@
-    {% set class = 'first'%}
+
 
     <div class="block group">
 
 		<div class="navigation">
-	    	{{ knp_pagination_render(pagination) }}
+	    	{{ knp_pagination_render(emissions) }}
 		</div>
 
 		<ul class="gallery-list group">
-
-	    {% for entity in pagination %}
+		{% set class = 'first'%}
+	    {% for entity in emissions %}
 		    <li class="{{ class }}">
 
-				<a href="/blog/{{ entity.getSlug() }}">
+				<a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}">
 					<figure>
 						<div class="image">
-							{%media entity.getPostImage() ,'medium' with {'title': entity.getPostTitle()}%}
+							{% media entity.post.image ,'medium' with {'title': entity.post.title} %}
 							<h2>
-								<span>{{ entity.getPostTitle() }}</span>
+								<span>{{ entity.post.title }}</span>
 							</h2>
 						</div>
 					</figure>
@@ -31,16 +31,16 @@
 					<span>
 						{{ entity.realtimestart|date('d/m') }}<br/>
 						{{ entity.realtimestart|date('Y') }}<br/>
-						{{ entity.realtimestart|date('H') }}h{{ entity.realtimestart|date('i') }}
+						{{ entity.realtimestart|date('H\\hi') }}
 					</span>
 				</div>
 				{% endif %}
 
 				<span class="titre-post">
-					<a href="/blog/{{ entity.getSlug() }}">{{ entity.getPostAbstract() | truncate(80, true, "...")  }}</a>
+					<a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}">{{ entity.post.abstract() | truncate(80, true, "...")  }}</a>
 				</span>
 				<div class="plus">
-					<a href="/blog/{{ entity.getSlug() }}">lire la suite</a>
+					<a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}">lire la suite</a>
 				</div>
 			</li>
 
@@ -54,7 +54,7 @@
 	    </ul>
 
 		<div class="navigation">
-	    	{{ pagination.render()|raw }}
+	    	{{ knp_pagination_render(emissions) }}
 		</div>
 
 	</div>

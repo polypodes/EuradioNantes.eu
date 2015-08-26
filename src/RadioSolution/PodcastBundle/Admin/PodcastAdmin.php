@@ -22,15 +22,31 @@ class PodcastAdmin extends Admin
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
-      ->with('Général')
+
+      ->with('Podcast', array(
+            'class' => 'col-md-8'
+        ))
         ->add('name', null, array('required' => true, 'label' => 'Nom du podcast'))
         ->add('home_page', null, array('required' => false, 'label' => 'Page d’accueil'))
         ->add('real_time_start', 'sonata_type_datetime_picker', array('required' => true, 'label' => 'Date de diffusion du podcast'))
-      ->end()
-      ->with('file')
         ->add('filePodcast', 'sonata_type_model_list', array('required' => true, 'label' => 'Media podcast'), array('link_parameters' => array('provider'=>'sonata.media.provider.podcast')))
         ->add('dlAuth', null, array('required' => false, 'data' => true, 'label' => 'Autoriser le téléchargement ?'))
-        ->add('post', 'sonata_type_model_list', array('required' => true, 'label' => 'Post associé'))
+      ->end()
+      ->with('Marqueurs temporels', array(
+        'class' => 'col-md-4'
+      ))
+        ->add('player', 'podcast_player', array('label' => false, 'mapped' => false))
+        ->add('markers', 'collection', array(
+          'required' => false,
+          'type' => 'podcast_marker',
+          'label' => 'Marqueurs',
+          'allow_add' => 'Ajouter un marqueur',
+          'allow_delete' => true,
+          'prototype' => true
+        ))
+      ->end()
+      ->with('Article')
+        ->add('post', 'sonata_type_admin', array('label' => false))
       ->end()
     ;
   }

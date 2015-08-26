@@ -40,6 +40,8 @@ twig:
     form:
         resources:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
+            - 'PodcastBundle:Form:podcast_player.html.twig'
+            - 'PodcastBundle:Form:podcast_marker.html.twig'
 
 # Assetic Configuration
 assetic:
