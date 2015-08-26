@@ -38,11 +38,11 @@ const $level2           = selectAll('.header-menu ul > li > ul');
  */
 function documentLoaded() {
 
-  on($menuBtn, toggleMenu, 'click', 'touchstart');
-  on($goBackBtn, hideLevel2, 'click', 'touchstart');
+  on($menuBtn, toggleMenu, 'click');
+  on($goBackBtn, hideLevel2, 'click');
 
   each($linkWithChildren, ($elt) => {
-    on($elt, showLevel2, 'click', 'touchstart');
+    on($elt, toggleLevel2, 'click');
   });
 }
 
@@ -69,17 +69,32 @@ function toggleMenu() {
  * @param  {event} event from addEventListener
  * @return {void}
  */
-function showLevel2(event) {
+function toggleLevel2(event) {
   event.preventDefault();
 
   const $li = event.target.parentNode;
   const $ul = $li.querySelector('ul');
 
-  $ul.classList.add('header-level2-show');
-  $menuItems.classList.add('header-level2');
+  $ul.classList.toggle('header-level2-show');
+  $menuItems.classList.toggle('header-level2');
 
   // show go back button
-  $goBackBtn.classList.add('header-menu-back-show');
+  $goBackBtn.classList.toggle('header-menu-back-show');
+
+  const hideUL = () => {
+    cl('hide event');
+    $ul.classList.remove('header-level2-show');
+    $goBackBtn.classList.remove('header-menu-back-show');
+
+    document.removeEventListener('click', hideUL);
+  };
+
+  // close panel on click (desktop)
+  if (select('.header-level2-show') !== null) {
+    setTimeout(() => {
+      document.addEventListener('click', hideUL);
+    }, 100);
+  }
 }
 
 /**

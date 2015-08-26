@@ -2,6 +2,11 @@
 // Custom reset                       //
 ////////////////////////////////////////
 
+// menu mobile
+body {
+  overflow-x: hidden;
+}
+
 // remove margin top of heading
 h1,
 h2,
@@ -43,4 +48,30 @@ blockquote {
   font-size: 16px;
   font-style: italic;
   line-height: 25px;
+}
+
+////////////////////////////////////////
+// Form/input stuffs                  //
+////////////////////////////////////////
+
+input {
+  @include font01-bold();
+  color: $col06;
+}
+
+::-webkit-input-placeholder {
+  color: $col04;
+}
+
+// scss-lint:disable VendorPrefix
+:-moz-placeholder {
+  color: $col04;
+}
+
+::-moz-placeholder {
+  color: $col04;
+}
+
+:-ms-input-placeholder {
+  color: $col04;
 }
