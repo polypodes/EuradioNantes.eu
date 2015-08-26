@@ -3,6 +3,7 @@
 namespace RadioSolution\ProgramBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -17,9 +18,18 @@ class PlaylistController extends Controller
      * Lists all Playlist entities
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $playlists = $this->getDoctrine()->getRepository('ProgramBundle:Playlist')->findAllFeatured(20);
+        //$playlists = $this->getDoctrine()->getRepository('ProgramBundle:Playlist')->findAllFeatured(20);
+
+        $query = $this->getDoctrine()->getRepository('ProgramBundle:Playlist')->queryPublishedOrderedByFeaturedFrom()->getQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $playlists = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
 
         return $this->render('ProgramBundle:Playlist:index.html.twig', compact('playlists'));
     }

@@ -27,7 +27,7 @@ class EmissionAdmin extends Admin
         ->add('frequency', 'sonata_type_model', array('label' => 'Fréquence', 'required' => false))
       ->end()
       ->with('Diffusions')
-        ->add('difusion_stop','date', array('label' => 'Date d’arrêt de diffusion'))//'data_timezone' => "GMT",'user_timezone' => "GMT"
+        ->add('diffusion_stop','sonata_type_date_picker', array('label' => 'Date d’arrêt de diffusion'))
         ->add('ExceptionalBroadcast', 'sonata_type_collection', array('label' => 'Diffusion exceptionnelle', 'required' => false, 'by_reference' =>true), array(
           'edit' => 'inline',
 			    'inline' => 'table',
@@ -43,21 +43,34 @@ class EmissionAdmin extends Admin
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
-      ->add('name')
-      ->add('theme')
-      ->add('difusion_stop')
-      ->add('archive')
+      ->add('name', null, array('label' => 'Nom'))
+      ->add('theme', null, array('label' => 'Thème'))
+      ->add('diffusion_stop', null, array('label' => 'Arrêt de la diffusion'))
+      ->add('archive', null, array('label' => 'Archivé'))
     ;
   }
 
   protected function configureListFields(ListMapper $listMapper)
   {
     $listMapper
-      ->addIdentifier('name')
-      ->add('theme')
-      ->add('difusion_stop')
-      ->add('archive')
+      ->addIdentifier('name', null, array('label' => 'Nom'))
+      ->add('theme', null, array('label' => 'Thème'))
+      ->add('diffusion_stop', null, array('label' => 'Arrêt de la diffusion'))
+      ->add('archive', null, array('label' => 'Archivé'))
     ;
+  }
+
+  public function getBatchActions()
+  {
+      // retrieve the default batch actions (currently only delete)
+      $actions = parent::getBatchActions();
+
+      $actions['archive'] = array(
+          'label' => $this->trans('Archiver', array(), 'SonataAdminBundle'),
+          'ask_confirmation' => true
+      );
+
+      return $actions;
   }
 
   public function validate(ErrorElement $errorElement, $object)
@@ -105,7 +118,7 @@ class EmissionAdmin extends Admin
   			$timestamp+=$timeStampDay;
   			$dateDay=date("N",$timestamp);
   		}
-  		for($timestamp;$timestamp<$object->getDifusionStop()->getTimestamp();$timestamp+=$timeStampWeek){
+  		for($timestamp;$timestamp<$object->getDiffusionStop()->getTimestamp();$timestamp+=$timeStampWeek){
   			$value->setEmission($object);
   			$program=new Program();
   			$program->setTimeStart($newDate->setTimestamp($timestamp+$value->getHour()->setTimezone(new \DateTimeZone('GMT'))->getTimestamp()));

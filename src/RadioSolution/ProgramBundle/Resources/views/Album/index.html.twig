@@ -2,7 +2,7 @@
     <h1>Album de la semaine</h1>
 
     <div id ="album-list">
-    {% for album in albums %}
+        {% for album in albums %}
         <article class="album{% if loop.first %} top{% endif %}">
             <a href="{{ path('album', {'slug': album.slug}) }}">
                 {% if album.thumbnailUrl %}
@@ -14,6 +14,9 @@
             </a>
             <div class="album-resume">{{ album.resume | raw }}</div>
         </article>
-    {% endfor %}
+        {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(albums) }}
+        </div>
     </div>
 </div>

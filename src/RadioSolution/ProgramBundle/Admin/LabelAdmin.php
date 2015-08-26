@@ -63,21 +63,21 @@ class LabelAdmin extends Admin
   }
 
   public function getBatchActions()
-    {
-        // retrieve the default batch actions (currently only delete)
-        $actions = parent::getBatchActions();
+  {
+      // retrieve the default batch actions (currently only delete)
+      $actions = parent::getBatchActions();
 
-        $actions['publish'] = array(
-            'label' => $this->trans('Publier', array(), 'SonataAdminBundle'),
-            'ask_confirmation' => true
-        );
-        $actions['unpublish'] = array(
-            'label' => $this->trans('Dépublier', array(), 'SonataAdminBundle'),
-            'ask_confirmation' => true
-        );
+      $actions['publish'] = array(
+          'label' => $this->trans('Publier', array(), 'SonataAdminBundle'),
+          'ask_confirmation' => true
+      );
+      $actions['unpublish'] = array(
+          'label' => $this->trans('Dépublier', array(), 'SonataAdminBundle'),
+          'ask_confirmation' => true
+      );
 
-        return $actions;
-    }
+      return $actions;
+  }
 
   public function validate(ErrorElement $errorElement, $object)
   {

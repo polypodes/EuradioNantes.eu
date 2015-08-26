@@ -17,21 +17,21 @@ class MusicRepository extends EntityRepository
      *
      * @return array
      */
-    public function findAllFeatured($limit = 20, $orderBy = 'DESC')
+    public function findAllFeatured($limit = 20, $direction = 'DESC')
     {
-        return $this->queryPublishedOrderedByFeaturedFrom($limit, $orderBy)
+        return $this->queryPublishedOrderedByFeaturedFrom($limit, $direction)
             ->getQuery()
             ->getResult()
         ;
     }
 
-    private function queryPublishedOrderedByFeaturedFrom($limit = 20, $orderBy = 'DESC')
+    public function queryPublishedOrderedByFeaturedFrom($limit = 20, $direction = 'DESC')
     {
         return $this->createQueryBuilder('e')
             ->where('e.published = true')
             ->andWhere('e.featuredFrom is not NULL and e.featuredTo is not NULL')
-            ->addOrderBy('e.featuredFrom', $orderBy)
-            ->setMaxResults($limit)
+            ->addOrderBy('e.featuredFrom', $direction)
+            //->setMaxResults($limit)
         ;
     }
 
@@ -43,7 +43,7 @@ class MusicRepository extends EntityRepository
         ;
     }
 
-    private function queryByIdAndPublished($id)
+    public function queryByIdAndPublished($id)
     {
         return $this->createQueryBuilder('e')
             ->where('e.published = true')
@@ -60,7 +60,7 @@ class MusicRepository extends EntityRepository
         ;
     }
 
-    private function queryBySlugAndPublished($slug)
+    public function queryBySlugAndPublished($slug)
     {
         return $this->createQueryBuilder('e')
             ->where('e.published = true')
