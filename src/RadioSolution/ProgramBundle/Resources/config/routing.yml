@@ -57,3 +57,7 @@ playlist:
     defaults: { _controller: "ProgramBundle:Playlist:show" }
     requirements:
         slug: "[a-zA-Z0-9-_/]+"
+
+broadcast:
+    path: c-est-quoi-ce-titre
+    defaults: { _controller: "ProgramBundle:Broadcast:index" }

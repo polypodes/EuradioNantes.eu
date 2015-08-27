@@ -1,0 +1,51 @@
+<div class="inner-wrap">
+	<div class="page-content">
+		<section class="entry group">
+			<div class="entry-content programme">
+				<h3 style="text-align: center;">C’est quoi ce titre&nbsp;?</h3>
+
+				<div class="broadcast-nav">
+					{% if start == now %}
+					<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day">hier</a>
+					<span>Aujourd'hui</span>
+					{% else %}
+					<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day">Jour précédent</a>
+					<span>{{ start|localizeddate('full', 'none', 'fr-FR') }}</span>
+					<a href="{{ path('broadcast') }}?day={{ start|date_modify('+1 day')|date('Y-m-d') }}" id="next_day">Jour suivant</a>
+					{% endif %}
+				</div>
+
+				{% if entities|length > 0 %}
+				<table>
+					<thead>
+						<tr>
+							<th>Heure de diffusion</th>
+							<th>Titre de la chanson</th>
+							<th>Artiste</th>
+							<th>Album</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for elem in entities %}
+						<tr class="broadcast-elem">
+							<td class="broadcast-track-time"><time datetime="{{ elem.broadcasted|date('Y-m-d H:i:s' )}}">{{ elem.broadcasted|date('H:i')}}</time></td>
+							<td class="broadcast-track-title">{{ elem.track.title }}</td>
+							<td class="broadcast-track-artist">{{ elem.track.artist }}</td>
+							<td class="broadcast-track-album">
+								{%- if elem.track.album.featuredFrom is not null and elem.track.album.featuredTo is not null -%}
+									<a href="{{ path('album', {'slug': elem.track.album.slug}) }}">{{ elem.track.album.title }}</a>
+								{%- else -%}
+									{{ elem.track.album.title }}
+								{%- endif -%}
+							</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<p><em>Aucune information disponible</em></p>
+				{% endif %}
+			</div>
+		</section>
+	</div>
+</div>

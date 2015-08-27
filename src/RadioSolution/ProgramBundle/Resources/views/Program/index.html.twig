@@ -32,8 +32,8 @@
 						    	{% for entity in value.entities %}
 								<li class="item">
 									<div class="time">
-										{{ entity.timeStart|date('H:i:s') }} -
-										{{ entity.timeStop|date('H:i:s') }}
+										{{ entity.timeStart|date('H:i') }} -
+										{{ entity.timeStop|date('H:i') }}
 									</div>
 									<div class="image-emission_programme">
 										<a href="{{ path('emission', {'name': entity.slug}) }}">
