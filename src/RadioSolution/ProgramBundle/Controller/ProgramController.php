@@ -65,22 +65,27 @@ class ProgramController extends Controller
                 'date' => $day,
                 'tot' => array(
                     'label' => 'Tôt',
+                    'desc' => 'Avant 7h00',
                     'entities' => array()
                 ),
                 'am' => array(
                     'label' => 'Matinée',
+                    'desc' => '7h00 - 12h00',
                     'entities' => array()
                 ),
                 'pm' => array(
                     'label' => 'Après-midi',
+                    'desc' => '12h00 - 18h00',
                     'entities' => array()
                 ),
                 'soir' => array(
                     'label' => 'Soirée',
+                    'desc' => '18h00 - 21h00',
                     'entities' => array()
                 ),
                 'nuit' => array(
                     'label' => 'Nuit',
+                    'desc' => 'Après 21h00',
                     'entities' => array()
                 ),
             );

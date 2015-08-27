@@ -24,6 +24,9 @@
 						<li id="{{ key }}" class="group">
 							<div class="header">
 								<h4>{{ value.label }}</h4>
+								{% if value.desc is defined %}
+								<b>{{ value.desc }}</b>
+							{% endif %}
 							</div>
 							<ol class="">
 						    	{% for entity in value.entities %}
