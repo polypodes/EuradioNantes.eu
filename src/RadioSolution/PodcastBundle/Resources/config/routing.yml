@@ -4,6 +4,6 @@ PodcastBundle_homepage:
 #PodcastBundle_show:
 #    path:  /podcast/{id}
 #    defaults: { _controller: "PodcastBundle:Podcast:show" }
-PodcastBundle_date:
-    path:  /podcasts-date/{date}
-    defaults: { _controller: "PodcastBundle:Podcast:indexDate" }
+#PodcastBundle_date:
+#    path:  /podcasts-date/{date}
+#    defaults: { _controller: "PodcastBundle:Podcast:indexDate" }
