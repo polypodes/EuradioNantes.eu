@@ -60,7 +60,7 @@ class PodcastController extends Controller
     }
 
     /**
-     * Lists all Podcast entities.
+     * Lists all Podcast entities of a given date.
      */
     public function indexDateAction($date)
     {
