@@ -157,6 +157,7 @@ class Podcast
      */
     public function setPost(\Application\Sonata\NewsBundle\Entity\Post $post)
     {
+        $post->setType('podcast');
         $this->post = $post;
     }
 
