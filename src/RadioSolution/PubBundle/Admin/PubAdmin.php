@@ -33,7 +33,7 @@ class PubAdmin extends Admin
   {
     $listMapper
       ->addIdentifier('name', null, array('label' => 'Nom'))
-      ->add('enable', null, array('label' => 'Activé'))
+      ->add('enable', null, array('label' => 'Activé', 'editable' => true))
       ->add('order_pub', null, array('label' => 'Ordre'))
     ;
   }
