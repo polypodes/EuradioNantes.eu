@@ -11,9 +11,7 @@
     margin: 0 auto;
 
     columns: 2;
-    -webkit-columns: 2;
     column-gap: 15px;
-    -webkit-column-gap: 15px;
   }
 
   &-btn-more {
@@ -55,9 +53,7 @@
       width: 100%;
 
       columns: 2;
-      -webkit-columns: 2;
       column-gap: 30px;
-      -webkit-column-gap: 30px;
     }
 
     &-col02,
@@ -69,9 +65,7 @@
       width: 100%;
 
       columns: 3;
-      -webkit-columns: 3;
       column-gap: 15px;
-      -webkit-column-gap: 15px;
     }
   }
 }

@@ -15,9 +15,12 @@ import {selectAll, each, on} from '../util/util';
  * common helper function example
  * this is a trivial example
  */
-// function genUuid() {
-//   // ...
-// }
+function changeLocation(event, $elt) {
+  const $url = $elt
+    .querySelector('[data-clickable-target="true"]');
+  const path = $url.getAttribute('href');
+  location.pathname = path;
+}
 
 ////////////////////////////////////////
 // Public API                         //
@@ -31,12 +34,9 @@ function init() {
   const $clickableElts = selectAll('[data-clickable="true"]');
 
   each($clickableElts, ($elt) => {
-    $elt.addEventListener('click', () => {
-      const $url = $elt.querySelector('[data-clickable-target]');
-      const path = $url.getAttribute('href');
-      const host = location.host;
-      location = `${host}/${path}`;
-    }, 'true');
+    $elt.addEventListener('click',
+      changeLocation.bind(null, event, $elt),
+    'true');
   });
 }
 

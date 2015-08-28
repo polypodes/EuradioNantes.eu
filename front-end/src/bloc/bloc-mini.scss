@@ -8,6 +8,10 @@
   margin-bottom: 15px;
   color: $col01;
 
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+
   &-inner {
     min-height: 122px;
     background-color: $col06;
@@ -20,7 +24,7 @@
   &-text {
     padding-top: 18px;
     padding-right: 18px;
-    padding-bottom: 25px;
+    padding-bottom: 18px;
     padding-left: 14px;
   }
 
@@ -58,9 +62,5 @@
 @media (min-width: $screen-md-min) {
   .bloc-mini {
     max-width: 175px;
-
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
   }
 }

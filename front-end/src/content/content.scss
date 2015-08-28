@@ -4,7 +4,43 @@
 
 // Mobile first
 .content {
-  
+  padding-bottom: ($bs * 2);
+
+  &-main {
+    @include make-xs-column(12);
+    max-width: 850px;
+    padding: 15px 20px;
+    padding-bottom: 30px;
+    margin: 0 auto;
+    margin-bottom: ($bs * 2);
+    background-color: $col01;
+  }
+
+  &-aside {
+    width: 100%;
+    max-width: 570px;
+    padding-bottom: 0;
+    margin: 0 auto;
+    margin-bottom: ($bs * 2);
+    overflow: hidden;
+  }
+
+  &-aside-inner {
+    columns: 2;
+    column-gap: 15px;
+  }
+
+  &-title {
+    @include font01-bold(28px);
+    margin-bottom: 26px;
+    line-height: 30px;
+  }
+
+  &-img {
+    margin-right: -20px;
+    margin-bottom: 30px;
+    margin-left: -20px;
+  }
 }
 
 ////////////////////////////////////////
@@ -14,5 +50,59 @@
 @media (min-width: $screen-md-min) {
   .content {
 
+    &-main {
+      @include make-md-column(9);
+      padding: 30px 40px;
+      padding-bottom: 40px;
+    }
+
+    &-aside {
+      @include make-md-column(3, 0);
+      padding-left: 30px;
+    }
+
+    &-aside-inner {
+      columns: 1;
+    }
+
+    .bloc-mini {
+      max-width: inherit;
+    }
+
+    .bloc-mini-inner {
+      min-height: inherit;
+    }
+
+    &-bottom {
+      width: 100%;
+      margin: 0 auto;
+
+      columns: 3;
+      column-gap: 30px;
+    }
+
+    &-img {
+      margin-right: -40px;
+      margin-bottom: 48px;
+      margin-left: -40px;
+    }
+
+    &-title {
+      @include font01-bold(36px);
+      line-height: 40px;
+    }
+  }
+}
+
+////////////////////////////////////////
+// Desktop                            //
+////////////////////////////////////////
+
+@media (min-width: $screen-lg-min) {
+  .content {
+
+    &-bottom {
+      columns: 4;
+    }
   }
 }
