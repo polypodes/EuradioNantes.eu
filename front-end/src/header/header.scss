@@ -4,6 +4,7 @@
 
 // Mobile first
 .header {
+  background-color: $col01;
 
   &-search {
     position: relative;
@@ -97,6 +98,7 @@
       right: 0;
       bottom: 0;
       left: 0;
+      z-index: 1;
       padding-top: ($bs * 8);
       overflow: hidden;
       text-align: left;
@@ -110,8 +112,8 @@
       position: fixed;
       top: ($bs / 2);
       right: 9px;
-      z-index: 1;
-      background-color: rgba($col01, .9);
+      z-index: 2;
+      background-color: transparent;
       border: 0;
       outline: 0;
 
@@ -159,7 +161,7 @@
       position: fixed;
       top: ($bs * 6);
       right: $bs;
-      z-index: 1;
+      z-index: 2;
       height: ($bs * 1.5);
       padding: 0 ($bs / 2);
       color: $col01;
@@ -167,10 +169,12 @@
       border: 0;
       outline: none;
       opacity: 0;
+      visibility: hidden;
       transition: opacity .4s cubic-bezier(.215, .610, .355, 1);
 
       &-show {
         opacity: 1;
+        visibility: visible;
         transition: opacity .4s cubic-bezier(.215, .610, .355, 1);
       }
     }
@@ -306,6 +310,7 @@
       border-radius: 3px;
       opacity: 0;
       visibility: hidden;
+      box-shadow: 0 6px 15px -6px $col03;
       transition: all $duration $besier;
 
       li + li {

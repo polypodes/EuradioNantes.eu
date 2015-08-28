@@ -5,6 +5,7 @@
 // menu mobile
 body {
   overflow-x: hidden;
+  background-color: $col02;
 }
 
 // remove margin top of heading
@@ -74,4 +75,12 @@ input {
 
 :-ms-input-placeholder {
   color: $col04;
+}
+
+////////////////////////////////////////
+// misc                               //
+////////////////////////////////////////
+
+[data-clickable="true"] {
+  cursor: pointer;
 }

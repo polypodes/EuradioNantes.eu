@@ -106,6 +106,10 @@
 @import './bases/bases';
 @import './footer/footer';
 @import './header/header';
+@import './player/player';
+@import './bloc/bloc-content';
+@import './bloc/bloc-mini';
+@import './actu/actu';
 
 ////////////////////////////////////////
 // Temporary shitty stuffs to remove :
@@ -122,11 +126,11 @@ html:after {
   color: $col07;
   content: 'mobile';
 
-  @media (min-width: $container-md) {
+  @media (min-width: $screen-md-min) {
     content: 'tablet';
   }
 
-  @media (min-width: $container-lg) {
+  @media (min-width: $screen-lg-min) {
     content: 'desktop';
   }
 }

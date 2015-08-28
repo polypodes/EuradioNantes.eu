@@ -1,0 +1,27 @@
+section.player
+  .container.player-container
+    span.player-status En direct
+    svg.player-svg
+      circle(cx="52", cy="52", r="52").player-circle-03
+      circle(cx="52", cy="52", r="42").player-circle-02
+      circle(cx="52", cy="52", r="32").player-circle-01
+      g(transform="translate(20, 33) scale(1.25)").player-play
+        path(d="M21.3871246,27.178247 C20.0687521,28.1843734 19,27.6594313 19,26.0057181 L19,2.99428189 C19,1.34058566 20.0622351,0.810653091 21.3871246,1.82175298 L35.6128754,12.678247 C36.9312479,13.6843734 36.9377649,15.3106531 35.6128754,16.321753 L21.3871246,27.178247 Z").player-play-path
+      g(transform="translate(-12, 33) scale(1.25)").player-pause.player-hide
+        path(d="M57.8,25.45 C56.25,25.45 55,24.25 55,22.775 L55,5.675 C55,4.2 56.25,3 57.8,3 C59.35,3 60.6,4.2 60.6,5.675 L60.6,22.775 C60.6,24.25 59.35,25.45 57.8,25.45")
+        path(d="M44.8,25.45 C43.25,25.45 42,24.25 42,22.775 L42,5.675 C42,4.2 43.25,3 44.8,3 C46.35,3 47.6,4.2 47.6,5.675 L47.6,22.775 C47.6,24.25 46.35,25.45 44.8,25.45")
+    div.player-infos
+      span.player-suptitle Now playing
+      span.player-track Jim O'Rourke - That Weekend
+    a(href="#", title="Lien vers la page c'était quoi ce titre").player-what › C'était quoi ce titre ?
+    div.player-social
+      a(href="#", target="_blank" title="Lien vers la page facebook d'Euradionantes").player-social-link
+        img(src="./assets/images/facebook.svg", alt="Icone facebook")
+      a(href="#", target="_blank" title="Lien vers la page twitter d'Euradionantes").player-social-link
+        img(src="./assets/images/twitter.svg", alt="Icone twitter")
+      a(href="#", target="_blank" title="Lien vers la page youtube d'Euradionantes").player-social-link
+        img(src="./assets/images/youtube.svg", alt="Icone youtube")
+      a(href="#", target="_blank" title="Lien vers la page flickr d'Euradionantes").player-social-link
+        img(src="./assets/images/flickr.svg", alt="Icone flickr")
+      a(href="#", target="_blank" title="Envoyer un email à Euradionantes").player-social-link
+        img(src="./assets/images/mail.svg", alt="Icone mail")

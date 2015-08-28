@@ -1,6 +1,7 @@
 // modules
 import common from './bases/common.js';
 import header from './header/header.js';
+import bloc from './bloc/bloc.js';
 
 ////////////////////////////////////////
 // Dependencies init                  //
@@ -8,7 +9,8 @@ import header from './header/header.js';
 
 [
   common,
-  header
+  header,
+  bloc
   // append here your dependencies
 
 ].map(dependency => dependency());
