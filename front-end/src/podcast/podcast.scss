@@ -2,6 +2,13 @@
 // Podcast                            //
 ////////////////////////////////////////
 
+.podcast-list {
+  .podcast-item {
+    padding-top: $bs;
+    border-bottom: 1px solid $col02;
+  }
+}
+
 .podcast {
   padding-top: 5px;
   margin-top: 60px;
@@ -15,11 +22,9 @@
 
   &-item {
     position: relative;
-    padding-top: $bs;
     padding-bottom: ($bs / 2);
     padding-left: ($bs * 2.25);
     margin-bottom: ($bs / 2);
-    border-bottom: 1px solid $col02;
 
     &-title {
       margin-bottom: 6px;
@@ -46,6 +51,7 @@
       position: absolute;
       top: 0;
       left: ($bs * 2.45);
+      display: none;
       color: $col05;
     }
 
@@ -95,14 +101,15 @@
 }
 
 @media (min-width: $screen-md-min) {
-  .podcast {
-    &-item {
+  .podcast-list {
+    .podcast-item {
       padding-top: 0;
       padding-right: ($bs * 6.5);
 
       &-date {
         right: 0;
         left: inherit;
+        display: block;
       }
     }
   }
