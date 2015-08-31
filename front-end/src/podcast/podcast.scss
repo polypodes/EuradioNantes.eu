@@ -1,0 +1,109 @@
+////////////////////////////////////////
+// Podcast                            //
+////////////////////////////////////////
+
+.podcast {
+  padding-top: 5px;
+  margin-top: 60px;
+  border-top: 4px solid $col06;
+
+  &-title {
+    @include font01-bold(24px);
+    margin-bottom: 35px;
+    line-height: 33px;
+  }
+
+  &-item {
+    position: relative;
+    padding-top: $bs;
+    padding-bottom: ($bs / 2);
+    padding-left: ($bs * 2.25);
+    margin-bottom: ($bs / 2);
+    border-bottom: 1px solid $col02;
+
+    &-title {
+      margin-bottom: 6px;
+      font-size: 16px;
+      line-height: 25px;
+    }
+
+    &-text {
+      margin-bottom: 22px;
+    }
+
+    &-more {
+      @include font01-bold(13px);
+      font-size: 13px;
+    }
+
+    &-more,
+    &-more:hover {
+      color: $col07;
+    }
+
+    &-date {
+      @include font01-bold(12px);
+      position: absolute;
+      top: 0;
+      left: ($bs * 2.45);
+      color: $col05;
+    }
+
+    &-player {
+      display: block;
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    &-control {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 35px;
+      height: 35px;
+      text-align: center;
+      background-color: $col07;
+      border: 0;
+      border-radius: 100%;
+    }
+
+    &-control:after {
+      position: absolute;
+      top: 8px;
+      right: 11px;
+      display: inline-block;
+      width: 12px;
+      height: 18px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      content: '';
+    }
+
+    &-control:focus {
+      outline: none;
+    }
+
+    &-play:after {
+      background-image: url('./images/play-white.svg');
+    }
+
+    &-pause:after {
+      background-image: url('./images/pause-white.svg');
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .podcast {
+    &-item {
+      padding-top: 0;
+      padding-right: ($bs * 6.5);
+
+      &-date {
+        right: 0;
+        left: inherit;
+      }
+    }
+  }
+}

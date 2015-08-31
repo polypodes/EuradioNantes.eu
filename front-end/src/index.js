@@ -2,6 +2,7 @@
 import common from './bases/common.js';
 import header from './header/header.js';
 import bloc from './bloc/bloc.js';
+import podcast from './podcast/podcast.js';
 
 ////////////////////////////////////////
 // Dependencies init                  //
@@ -10,7 +11,8 @@ import bloc from './bloc/bloc.js';
 [
   common,
   header,
-  bloc
+  bloc,
+  podcast
   // append here your dependencies
 
 ].map(dependency => dependency());

@@ -52,6 +52,23 @@ function each(array, callback) {
 }
 
 /**
+ * find a node in HTMLCollection of node
+ * @param  {HTMLCollection} HTMLCollection
+ * @param  {string} className: ex: Lorem-ipsum (without dot)
+ * @return {HTMLnode || false} If node found it return
+ * the node else it return false
+ */
+function findNode(HTMLCollection, className) {
+  for (let i = HTMLCollection.length - 1; i >= 0; i--) {
+    if (HTMLCollection[i].classList.contains(className)) {
+      return HTMLCollection[i];
+    }
+  }
+
+  return false;
+};
+
+/**
  * equivalent of jquery 'ready'
  * @param  {Function} callback
  * @return {void}
@@ -73,7 +90,9 @@ function documentReady(callback) {
  * @return {void}
  */
 function on(elt, callback, ...events) {
-  events.map((event) => elt.addEventListener(event, callback));
+  /*eslint-disable */
+  events.map((event) => elt.addEventListener(event, callback.bind(this, elt)));
+  /*eslint-enable */
 }
 
 export default {
@@ -82,5 +101,6 @@ export default {
   each,
   on,
   select,
-  selectAll
+  selectAll,
+  findNode
 };

@@ -22,7 +22,8 @@
 
   &-twitter,
   &-facebook,
-  &-google {
+  &-google,
+  &-flickr {
     display: block;
     float: left;
     width: 33.333%;
@@ -73,6 +74,14 @@
     }
   }
 
+  &-flickr {
+    background-color: $col11;
+
+    &:hover {
+      background-color: darken($col11, 10%);
+    }
+  }
+
   &-aside {
     @include make-xs-column(12, 0);
     @include font01-bold();
@@ -104,7 +113,8 @@
 
     &-twitter,
     &-facebook,
-    &-google {
+    &-google,
+    &-flickr {
       width: 66px;
     }
 

@@ -1,0 +1,20 @@
+extends ./bases/default
+
+block content
+  .content.container
+    section.content-main
+      include ./breadcrumb/breadcrumb
+      span.bloc-content-cat Musique
+      span.bloc-content-date QUOTIDIENNE
+      h1.content-title La revue de presse européenne
+      figure.content-img
+        img(src="//lorempixel.com/850/510" srcset="//lorempixel.com/450/270 480w, //lorempixel.com/850/510 720w", alt="Image de l'article").bloc-content-img.img-responsive
+      p.chapo.
+        Small batch mumblecore bicycle rights mustache, single-origin coffee Bushwick twee kogi YOLO pickled. Aesthetic sartorial Wes Anderson farm-to-table church-key. Cronut American Apparel vegan seitan bitters, hoodie mlkshk whatever mustache Carles.
+      p.
+        Street art Blue Bottle aesthetic +1. Pug pickled Banksy post-ironic fixie biodiesel, High Life leggings. Ethical lumbersexual raw denim, mustache distillery organic Truffaut flexitarian DIY. Polaroid taxidermy crucifix, put a bird on it banjo Brooklyn Neutra asymmetrical cred Carles raw denim. Cronut squid aesthetic, shabby chic iPhone organic chia messenger bag distillery McSweeney's literally bicycle rights Shoreditch put a bird on it. Cliche authentic drinking vinegar quinoa, stumptown chillwave Marfa leggings. 3 wolf moon kogi YOLO tilde Pinterest. Odd Future cronut aesthetic fixie, you probably haven't heard of them gluten-free listicle Tumblr.
+      include ./podcast/podcast
+      include ./share/share
+    include ./sidebar/sidebar
+    include ./pagination/pagination
+    
