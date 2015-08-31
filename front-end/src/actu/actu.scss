@@ -27,6 +27,7 @@
     color: $col01;
     text-align: center;
     background-color: $col07;
+    transition: all .3s ease;
 
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
@@ -36,6 +37,8 @@
     &:focus {
       color: darken($col01, 5%);
       text-decoration: none;
+      background-color: saturate($col07, 10%);
+      transition: all .3s ease;
     }
   }
 }

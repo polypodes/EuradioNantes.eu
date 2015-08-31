@@ -1,5 +1,5 @@
 ////////////////////////////////////////
-// Bloc content (actu/emission/podcast//                            //
+// Bloc content (actu/emission/podcast//
 ////////////////////////////////////////
 
 // Mobile first
@@ -7,10 +7,25 @@
   max-width: 570px;
   margin: 0 auto;
   margin-bottom: 25px;
+  cursor: pointer;
 
   -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
   break-inside: avoid;
+
+  &.bloc-podcast .bloc-content-figure:after {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    z-index: 1;
+    display: block;
+    width: 13px;
+    height: 18px;
+    background-image: url('./images/play-white.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: '';
+  }
 
   &-inner {
     background-color: $col01;
@@ -51,20 +66,26 @@
     margin-bottom: 0;
   }
 
+  // scss-lint:disable VendorPrefix
   &-figure {
-    // display: block;
-    // width: 100%;
+    position: relative;
     overflow: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
+  // scss-lint:disable VendorPrefix
   &-img {
     width: 100%;
     transform: scale(1);
-    transition: transform .3s ease;
+    transition: transform 1s ease;
+    -webkit-backface-visibility: hidden;
+
+    transform-origin: bottom;
   }
 
   &-figure:hover &-img {
-    transform: scale(1.1);
-    transition: transform .3s ease;
+    transform: scale(1.03);
+    transition: transform 1s ease;
+    -webkit-backface-visibility: hidden;
   }
 }
