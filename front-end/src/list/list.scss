@@ -1,0 +1,37 @@
+////////////////////////////////////////
+// List                               //
+////////////////////////////////////////
+
+.list {
+  // background-color: red;
+  .bloc-content-figure {
+    @include make-md-column(4, 0);
+  }
+
+  .bloc-content-text {
+    @include make-md-column(8, 15);
+    max-height: 150px;
+    padding-top: ($bs / 2);
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .list {
+    .bloc-content-text {
+      max-height: 129px;
+    }
+
+    .bloc-content-cat,
+    .bloc-content-date {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .list {
+    .bloc-content-text {
+      padding-top: $bs;
+    }
+  }
+}

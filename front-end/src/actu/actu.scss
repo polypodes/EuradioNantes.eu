@@ -1,74 +1,103 @@
 ////////////////////////////////////////
-// Actu page scss                     //
+// Page actu                          //
 ////////////////////////////////////////
 
-.actu {
-  padding-bottom: ($bs * 3);
+.actu-list {
+  @include make-xs-column(12);
+  @include make-md-column(9, 0);
 
-  &-col03 {
-    width: 100%;
-    max-width: 570px;
-    margin: 0 auto;
-
-    columns: 2;
-    column-gap: 15px;
+  .content-aside {
+    @include make-md-column(2, 0);
   }
 
-  &-btn-more {
-    @include font01-bold(18px);
+  .bloc-content {
+    @include clearfix();
+    max-width: inherit;
+    background-color: $col01;
+  }
+
+  .bloc-content-figure {
+    @include make-md-column(8, 0);
+  }
+
+  .bloc-content-text {
+    @include make-md-column(4, 20);
+    max-height: 240px;
+    padding-top: $bs;
+    overflow: hidden;
+  }
+
+  &-title {
+    display: inline-block;
+    margin-bottom: ($bs / 4);
+  }
+
+  &-counter {
+    @include font01-bold(16px);
+    display: inline-block;
+    margin-bottom: $bs;
+    color: $col05;
+  }
+
+  &-filters {
+    padding-left: 0;
+    margin-bottom: ($bs * 2);
+  }
+
+  &-filter {
+    @include font01-bold(12px);
     @include ttu();
-    display: block;
-    width: 100%;
-    height: 64px;
-    max-width: 570px;
-    margin: 0 auto;
-    margin-bottom: 25px;
-    line-height: 64px;
-    color: $col01;
-    text-align: center;
+    display: inline-block;
+    height: 21px;
+    padding: 1px 10px;
+    margin-bottom: 4px;
+    list-style-type: none;
     background-color: $col07;
-    transition: all .3s ease;
+    border-radius: 3px;
+  }
 
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
+  // scss-lint:disable MergeableSelector
+  &-filter a {
+    color: $col01;
+  }
 
-    &:hover,
-    &:focus {
-      color: darken($col01, 5%);
-      text-decoration: none;
-      background-color: saturate($col07, 10%);
-      transition: all .3s ease;
-    }
+  &-filter-selected {
+    position: relative;
+    background-color: $col06;
+  }
+
+  &-filter-selected:after {
+    position: absolute;
+    right: 0;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    border-color: $col06 transparent transparent;
+    border-style: solid;
+    border-width: 4px 3.5px 0;
+    content: '';
   }
 }
 
 @media (min-width: $screen-md-min) {
-  .actu {
+  .actu-list {
 
-    &-main,
-    &-side {
-      @include make-md-column(6, 0);
+    &-title {
+      margin-bottom: $bs;
     }
 
-    &-col01,
-    &-col02 {
-      width: 100%;
-
-      columns: 2;
-      column-gap: 30px;
-    }
-
-    &-col02,
-    &-col03 {
-      padding-left: 30px;
-    }
-
-    &-col03 {
-      width: 100%;
-
-      columns: 3;
-      column-gap: 15px;
+    &-counter {
+      padding-left: 15px;
+      margin-bottom: 0;
     }
   }
 }
+
+@media (min-width: $screen-lg-min) {
+  .bloc-content-text {
+    max-height: 290px;
+  }
+}
+

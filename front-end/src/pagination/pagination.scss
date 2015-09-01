@@ -3,11 +3,9 @@
 ////////////////////////////////////////
 
 .pagination {
-  @include make-xs-column(12);
-  @include make-md-column(9);
-  @include font01-bold(16px);
+  @include make-md-column(12);
+  @include font01-bold(14px);
   position: relative;
-  max-width: 850px;
   padding: 18px 21px;
   margin-bottom: $bs;
   background-color: $col01;
@@ -17,6 +15,7 @@
     width: 100px;
     padding-left: 0;
     margin: 0 auto;
+    text-align: center;
   }
 
   &-link {
@@ -24,6 +23,7 @@
     list-style-type: none;
 
     a {
+      padding-right: 7px;
       color: $col07;
     }
   }
@@ -36,7 +36,11 @@
   &-next {
     position: absolute;
     top: 18px;
+    width: 30%;
+    overflow: hidden;
     color: $col07;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &-prev {
@@ -45,5 +49,18 @@
 
   &-next {
     right: 21px;
+    text-align: right;
+  }
+}
+
+
+@media (min-width: $screen-md-min) {
+  .pagination {
+    max-width: 850px;
+    font-size: 16px;
+
+    &-link a {
+      padding-right: 0;
+    }
   }
 }
