@@ -1,0 +1,213 @@
+////////////////////////////////////////
+// Grille                             //
+////////////////////////////////////////
+
+.grille {
+
+  &-pagination {
+    @include make-xs-column(12, 0);
+    padding: 13px 20px 16px;
+    margin-bottom: ($bs * 2);
+    background-color: $col01;
+  }
+
+  &-pagination-next,
+  &-pagination-prev {
+    @include make-xs-column(12, 0);
+    @include make-sm-column(3, 0);
+    @include font01-bold(18px);
+    padding-top: 2px;
+    overflow: hidden;
+    color: $col07;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-pagination-next {
+    text-align: center;
+  }
+
+  &-pagination-choose {
+    @include make-xs-column(12, 0);
+    @include make-sm-column(6, 0);
+  }
+
+  &-pagination-choose-field {
+    position: relative;
+  }
+
+  &-pagination-choose-label {
+    @include font01-bold();
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  &-pagination-choose-submit {
+    @include font01-regular(12px);
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 42px;
+    height: 26px;
+    padding-right: 8px;
+    color: $col01;
+    text-align: left;
+    background-color: $col07;
+    border: 0;
+  }
+
+  &-pagination-choose-input {
+    text-indent: 3px;
+  }
+
+  &-week-wrap {
+    @include make-md-column(12, 0);
+  }
+
+  &-week,
+  .actu-list-filters {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .actu-list-filters {
+    padding-left: 16px;
+    margin-top: 5px;
+  }
+
+  &-list {
+    @include make-xs-column(12, 0);
+    margin-bottom: ($bs * 2);
+  }
+
+  &-list-title {
+    display: inline-block;
+  }
+
+  &-list-schedule {
+    @include font01-bold();
+    display: inline-block;
+    padding-left: 15px;
+    color: $col05;
+  }
+
+  &-list-item {
+    position: relative;
+    margin-bottom: 4px;
+    background-color: $col01;
+  }
+
+  &-list-item-child + &-list-item-child {
+    margin-top: -3px;
+  }
+
+  // scss-lint:disable MergeableSelector
+  &-list-item-child {
+    border-left: 12px solid $col04;
+
+    .grille-list-text-suptitle,
+    .grille-list-text-title,
+    .grille-list-hour {
+      font-size: 12px;
+    }
+
+    .grille-list-text-suptitle {
+      padding-top: 5px;
+    }
+  }
+
+  &-list-podcast {
+    display: none;
+  }
+
+  &-list-hour {
+    @include font01-bold(12px);
+    position: absolute;
+    top: 5px;
+    right: 0;
+    width: 110px;
+    padding-right: 15px;
+    color: $col05;
+    text-align: right;
+  }
+
+  &-list-img,
+  &-list-text {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  &-list-text {
+    width: 60%;
+    padding-top: 5px;
+    padding-left: 13px;
+  }
+
+  &-list-text-suptitle {
+    @include ttu();
+    @include font01-regular(10px);
+    display: block;
+    line-height: 14px;
+    color: $col07;
+  }
+
+  &-list-text-title {
+    @include font01-regular(18px);
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 0;
+    overflow: hidden;
+    line-height: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .grille {
+
+    &-pagination-choose {
+      text-align: center;
+    }
+
+    &-pagination-choose-field {
+      display: inline-block;
+      width: 105px;
+      padding-left: 5px;
+    }
+
+    &-list-hour,
+    &-list-img,
+    &-list-text,
+    &-list-text-title {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    &-list-podcast {
+      position: relative;
+      top: -1px;
+      right: inherit;
+      display: inline-block;
+      padding-left: 7px;
+      color: $col07;
+    }
+
+    &-list-text-suptitle {
+      display: block;
+    }
+
+    &-list-text-title {
+      width: auto;
+    }
+
+    &-list-hour {
+      @include font01-bold(14px);
+      position: relative;
+      width: 150px;
+      padding-top: 10px;
+    }
+  }
+}
+

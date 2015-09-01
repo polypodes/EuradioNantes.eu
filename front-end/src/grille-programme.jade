@@ -1,0 +1,109 @@
+extends ./bases/default
+
+block content
+  .content.container
+    section.actu-list.grille
+      include ./breadcrumb/breadcrumb
+      h1 Les programmes du lundi 25 mai 2015
+      div.grille-pagination 
+        a(href="#", title="afficher la semaine précédente").grille-pagination-prev ‹ Semaine précédente
+        form.grille-pagination-choose 
+          label.grille-pagination-choose-label Accéder directement à une semaine
+          div.grille-pagination-choose-field
+            input(type="number", placeholder="Ex. 15").grille-pagination-choose-input
+            input(type="submit", value="Voir").grille-pagination-choose-submit
+        a(href="#", title="afficher la semaine suivante").grille-pagination-next Semaine suivante ›
+      div.grille-week-wrap
+        h2.grille-week Semaine 25
+        ul.actu-list-filters
+          li.actu-list-filter.actu-list-filter-selected
+            a(href="#", title="") Lundi
+          li.actu-list-filter
+            a(href="#", title="") Mardi
+          li.actu-list-filter
+            a(href="#", title="") Mercredi
+          li.actu-list-filter
+            a(href="#", title="") Jeudi
+          li.actu-list-filter
+            a(href="#", title="") Vendredi
+          li.actu-list-filter
+            a(href="#", title="") Samedi
+          li.actu-list-filter
+            a(href="#", title="") Dimanche
+      div.grille-list
+        h2.grille-list-title Matinée
+        span.grille-list-schedule 8h00 - 12h00
+        - for(var i = 0; i < 4; i++) {
+        article.grille-list-item
+          span.grille-list-hour 8h00 - 8h26
+          img(src="//placehold.it/100x50").grille-list-img
+          div.grille-list-text
+            span.grille-list-text-suptitle Politique
+            a(href="#", title="").grille-list-text-title Quand on arrive en ville
+        - }
+      div.grille-list
+        h2.grille-list-title Après-midi
+        span.grille-list-schedule 12h00 - 18h30
+        - for(var i = 0; i < 9; i++) {
+        article.grille-list-item
+          span.grille-list-hour 8h00 - 8h26
+          img(src="//placehold.it/100x50").grille-list-img
+          div.grille-list-text
+            span.grille-list-text-suptitle Politique
+            a(href="#", title="").grille-list-text-title Quand on arrive en ville
+        - }
+      div.grille-list
+        h2.grille-list-title Soirée
+        span.grille-list-schedule 18h30 - 21h00
+        - for(var i = 0; i < 3; i++) {
+        article.grille-list-item
+          span.grille-list-hour 8h00 - 8h26
+          img(src="//placehold.it/100x50").grille-list-img
+          div.grille-list-text
+            span.grille-list-text-suptitle Politique
+            a(href="#", title="").grille-list-text-title Quand on arrive en ville
+        - }
+      div.grille-list
+        h2.grille-list-title Nuit
+        span.grille-list-schedule 21h00 - 8h00
+        article.grille-list-item
+          span.grille-list-hour 8h00 - 8h26
+          img(src="//placehold.it/100x50").grille-list-img
+          div.grille-list-text
+            span.grille-list-text-suptitle Politique
+            a(href="#", title="").grille-list-text-title Quand on arrive en ville
+        article.grille-list-item.grille-list-item-child
+          span.grille-list-hour 8h00 - 8h26
+          img(src="//placehold.it/100x50").grille-list-img
+          div.grille-list-text
+            span.grille-list-text-suptitle Politique
+            a(href="#", title="").grille-list-text-title Quand on arrive en ville
+        article.grille-list-item.grille-list-item-child
+          span.grille-list-hour 8h00 - 8h26
+          img(src="//placehold.it/100x50").grille-list-img
+          div.grille-list-text
+            span.grille-list-text-suptitle Politique
+            a(href="#", title="").grille-list-text-title Quand on arrive en ville
+        article.grille-list-item
+          span.grille-list-hour 8h00 - 8h26
+          img(src="//placehold.it/100x50").grille-list-img
+          div.grille-list-text
+            span.grille-list-text-suptitle Politique
+            a(href="#", title="").grille-list-text-title Quand on arrive en ville
+        article.grille-list-item
+          span.grille-list-hour 8h00 - 8h26
+          img(src="//placehold.it/100x50").grille-list-img
+          div.grille-list-text
+            span.grille-list-text-suptitle Politique
+            a(href="#", title="").grille-list-text-title Quand on arrive en ville
+            a(href="#", title="consulter la playlist").grille-list-podcast Consulter la playlist
+      div.grille-pagination 
+        a(href="#", title="afficher la semaine précédente").grille-pagination-prev ‹ Semaine précédente
+        form.grille-pagination-choose 
+          label.grille-pagination-choose-label Accéder directement à une semaine
+          div.grille-pagination-choose-field
+            input(type="number", placeholder="Ex. 15").grille-pagination-choose-input
+            input(type="submit", value="Voir").grille-pagination-choose-submit
+        a(href="#", title="afficher la semaine suivante").grille-pagination-next Semaine suivante ›
+    include ./sidebar/sidebar
+    
