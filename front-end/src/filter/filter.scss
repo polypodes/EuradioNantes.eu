@@ -20,7 +20,7 @@
 
   &-fields {
     @include make-xs-column(12);
-    @include make-sm-column(4, 0);
+    @include make-sm-column(3.75, 0);
     padding-right: $bs;
     margin-bottom: 5px;
   }
@@ -34,6 +34,7 @@
   }
 
   &-submit {
+    display: inline-block;
     width: 155px;
     padding-right: 9px;
     margin-top: 24px;
@@ -44,6 +45,13 @@
 
   &-quick {
     margin-bottom: ($bs * 2);
+  }
+
+  &-delete {
+    @include font01-regular(14px);
+    display: inline-block;
+    padding-left: 18px;
+    color: $col07;
   }
 
   &-quick-select {
