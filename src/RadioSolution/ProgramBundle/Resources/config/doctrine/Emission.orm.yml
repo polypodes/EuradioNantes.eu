@@ -26,6 +26,11 @@ RadioSolution\ProgramBundle\Entity\Emission:
       joinColumn:
         name: id_theme
         referencedColumnName: id
+    collection:
+      targetEntity: Application\Sonata\ClassificationBundle\Entity\Collection
+      joinColumn:
+        name: collection_id
+        referencedColumnName: id
     frequency:
       targetEntity: EmissionFrequency
       joinColumn:

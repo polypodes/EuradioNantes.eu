@@ -20,7 +20,8 @@ class EmissionAdmin extends Admin
       ->with('Général')
         ->add('name', null, array('label' => 'Nom'))
         ->add('description', 'ckeditor', array('config_name' => 'plus'))
-        ->add('theme', 'sonata_type_model', array('label' => 'Thème', 'required' => false))
+        //->add('theme', 'sonata_type_model', array('label' => 'Thème', 'required' => false))
+        ->add('collection', 'sonata_type_model', array('label' => 'Catégorie', 'required' => true), array('context' => 'emission')) // sonata_category_selector
         ->add('group', 'sonata_type_model', array('label' => 'Groupe', 'required' => false))
         ->add('media', 'sonata_type_model_list', array('label' => 'Média', 'required' => false), array('link_parameters' => array('provider'=>'sonata.media.provider.image')))
         ->add('archive', null, array('required' => false))
@@ -44,7 +45,8 @@ class EmissionAdmin extends Admin
   {
     $datagridMapper
       ->add('name', null, array('label' => 'Nom'))
-      ->add('theme', null, array('label' => 'Thème'))
+      //->add('theme', null, array('label' => 'Thème'))
+      ->add('collection', null, array('label' => 'Catégorie'))
       ->add('diffusion_stop', null, array('label' => 'Arrêt de la diffusion'))
       ->add('archive', null, array('label' => 'Archivé'))
     ;
@@ -54,7 +56,8 @@ class EmissionAdmin extends Admin
   {
     $listMapper
       ->addIdentifier('name', null, array('label' => 'Nom'))
-      ->add('theme', null, array('label' => 'Thème'))
+      //->add('theme', null, array('label' => 'Thème'))
+      ->add('collection', null, array('label' => 'Catégorie'))
       ->add('diffusion_stop', null, array('label' => 'Arrêt de la diffusion'))
       ->add('archive', null, array('label' => 'Archivé'))
     ;

@@ -32,6 +32,11 @@ class Emission
     private $theme;
 
     /**
+     * @var Application\Sonata\ClassificationBundle\Entity\Collection
+     */
+    private $collection;
+
+    /**
      * @var RadioSolution\ProgramBundle\Entity\EmissionFrequency
      */
     private $group;
@@ -158,8 +163,7 @@ class Emission
     {
         $this->theme = $theme;
     }
-
-    /**
+   /**
      * Get theme
      *
      * @return RadioSolution\ProgramBundle\Entity\EmissionTheme
@@ -168,6 +172,19 @@ class Emission
     {
         return $this->theme;
     }
+
+    public function getCollection()
+    {
+        return $this->collection;
+    }
+
+    public function setCollection($collection)
+    {
+        $this->collection = $collection;
+        return $this;
+    }
+
+
     /**
      * Set group
      *
