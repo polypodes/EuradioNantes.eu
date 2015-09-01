@@ -25,7 +25,7 @@
 					<a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}">
 						<figure>
 							<div class="image">
-								{%media entity.post.image ,'medium' with {'title': entity.post.title} %}
+								{% media entity.post.image ,'medium' with {'title': entity.post.title} %}
 								<h2>
 									<span>{{ entity.post.title }}</span>
 								</h2>

@@ -115,10 +115,8 @@ class PodcastController extends Controller
             throw $this->createNotFoundException('Unable to find Podcast entity.');
         }
 
-
-
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
         );
     }
 
