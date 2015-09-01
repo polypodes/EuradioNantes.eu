@@ -13,6 +13,15 @@
     max-height: 150px;
     padding-top: ($bs / 2);
   }
+
+  .bloc-content {
+    position: relative;
+  }
+
+  .bloc-content-date {
+    position: absolute;
+    right: 15px;
+  }
 }
 
 @media (min-width: $screen-md-min) {
@@ -23,7 +32,7 @@
 
     .bloc-content-cat,
     .bloc-content-date {
-      margin-bottom: 0;
+      margin-bottom: ($bs / 4);
     }
   }
 }

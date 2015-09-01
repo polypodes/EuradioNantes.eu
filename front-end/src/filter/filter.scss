@@ -1,0 +1,53 @@
+////////////////////////////////////////
+// Filter bloc                        //
+////////////////////////////////////////
+
+.filter {
+  padding: 15px 20px 20px;
+  margin-bottom: 26px;
+  background-color: $col01;
+
+  &-label {
+    @include font01-bold();
+    display: inline-block;
+    padding-right: 13px;
+    margin-bottom: 5px;
+  }
+
+  &-fields-group {
+    @include clearfix();
+  }
+
+  &-fields {
+    @include make-xs-column(12);
+    @include make-sm-column(4, 0);
+    padding-right: $bs;
+    margin-bottom: 5px;
+  }
+
+  &-select {
+    width: 100%;
+    height: 30px;
+    background-color: $col01;
+    border-color: $col04;
+    border-radius: 3px;
+  }
+
+  &-submit {
+    width: 155px;
+    padding-right: 9px;
+    margin-top: 24px;
+    color: $col01;
+    background-color: $col07;
+    border: 0;
+  }
+
+  &-quick {
+    margin-bottom: ($bs * 2);
+  }
+
+  &-quick-select {
+    display: inline-block;
+    width: 250px;
+  }
+}

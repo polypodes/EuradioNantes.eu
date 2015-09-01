@@ -64,6 +64,10 @@
     content: '';
     transform: rotate(-90deg);
   }
+
+  &-active {
+    color: $col07;
+  }
 }
 
 // Mobile & tablet
