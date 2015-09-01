@@ -191,7 +191,7 @@ class Post extends BasePost
     public function getType()
     {
         if(empty($this->type)){
-            return "actualite";
+            return empty($this->getPodcast()) ? 'actualite' : 'podcast';
         }
         return $this->type;
     }

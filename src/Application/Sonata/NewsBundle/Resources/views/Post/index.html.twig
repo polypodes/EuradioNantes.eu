@@ -1,16 +1,33 @@
-{{ dump(news) }}
 <div>
-    <h1>Les dernieres actus</h1>
-    <div id ="actus-list">
-    {% for actu in news %}
-        <article class="actu">
-             <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(actu) }) }}">
-                <h2 class="actu-title">{{ actu.title }}</h2>
-                <h3 class="actu-short-title">{{ actu.shorttitle }}</h2>
-                <span class="actu-type">{{ actu.type }}</span>
-                <div class="actu-resume">{{ actu.abstract }}</div>
-            </a> 
+    <h1>Toutes les actualités</h1>
+
+    <div id="news-collection">
+        <a href="{{ path('listeactus') }}" class="post-cat{% if not app.request.get('collection') %} active{% endif %}">Tout</a>
+        {% for cat in collection %}
+        <a href="{{ path('listeactus', {'collection': cat.id}) }}" class="post-cat{% if cat.id == app.request.get('collection') %} active{% endif %}">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+    <div id ="news-list">
+        {% for post in news %}
+        <article class="news">
+            <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}">
+                {% if post.image -%}
+                    <figure>{% media post.image ,'medium' %}</figure>
+                {%- endif %}
+                <div class="entry-meta">
+                    {% if post.collection -%}
+                        <strong>{{ post.collection.name }}</strong>
+                    {%- endif %}
+
+                    <time datetime="{{ post.publicationDateStart | date('Y-m-d H:i') }}">{{ post.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+                </div>
+                <h2 class="post-title">{{ post.title }}</h2>
+                <div class="post-resume">{{ post.abstract }}</div>
+            </a>
         </article>
-    {% endfor %}
+        {% endfor %}
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(news) }}
     </div>
 </div>

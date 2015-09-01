@@ -1,10 +1,125 @@
+<article class="entry group">
+    <div class="entry-content group">
+        <div class="entry-meta">
+            {% if post.collection %}
+                <strong>{{ post.collection.name }}</strong>
+            {% endif %}
+            {#{ 'published_under'|transchoice(post.tags|length, {}, 'SonataNewsBundle') }#}
+             {#% for tag in post.tags%}
+                 <a href="{{ url('sonata_news_tag', {'tag': tag.slug} ) }}">{{ tag.name }}</a>
+                 {% if not loop.last%}, {%endif%}
+            {% endfor %#}
 
-<div>
-    <h1>{{ post.title }}</h1>
-    <h2>{{ post.shorttitle }}</h2>
-    <h3>{{ post.type }}</h3>
-{% thumbnail post.image, 'small' %}
+            {% if post.podcast %}
+            <time datetime="{{ post.podcast.realTimeStart | date('Y-m-d H:i') }}">{{ post.podcast.realTimeStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+            {% else %}
+            <time datetime="{{ post.publicationDateStart | date('Y-m-d H:i') }}">{{ post.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+            {% endif %}
+        </div>
 
-    {{ post.content | raw }}
+        <h1>{{ post.title }}</h1>
 
-</div>
+        {% if post.image %}
+            <figure class="entry-thumb">
+                <img src="{% path post.image, 'small' %}" srcset="{% path post.image, 'medium' %} 1000w, {% path post.image, 'big' %} 2000w" alt="yah">
+                {# media post.image ,'big' #}
+            </figure>
+        {% endif %}
+
+        <div id="post-body">
+            {{ post.content|raw }}
+        </div>
+
+
+        {{ include('PodcastBundle:Podcast:player.html.twig', {'podcast': post.podcast}) }}
+
+
+        {% render(controller('SonataNewsBundle:Post:comments', {'postId': post.id})) %}
+
+        <div id="form-wrapper">
+             <div class="post-form">
+                {% if post.iscommentable %}
+                    {% render(controller('SonataNewsBundle:Post:addCommentForm', {
+                        'postId': post.id,
+                        'form': form,
+                        'title' : post.title~' - Podcast - Eur@dioNantes'
+                    })) %}
+                {% else %}
+                    <div>
+                        {{ 'message_comments_are_closed'|trans({}, 'SonataNewsBundle') }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</article>
+
+<script type='text/javascript'>
+
+/*jQuery(function($){
+
+    $(document).ready(function(){
+
+        $('#post-body audio').each(function(index){
+
+            var src = $(this).attr('src');
+
+            if(src != ""){
+
+                $(this).html('');
+
+                if(src.substr((src.length-3), 3) == 'ogg'){
+
+                    var oggsource = '<source src="'+src+'" type="audio/ogg">';
+                    var mp3source = '<source src="'+src.substr(0, (src.length-4))+'" type="audio/mpeg">';
+                    var qtfallback = 'QT_WriteOBJECT("'+src.substr(0, (src.length-4))+'", "300", "30", "")';
+
+                }else{
+
+                    var oggsource = '<source src="'+src+'.ogg" type="audio/ogg">';
+                    var mp3source = '<source src="'+src+'" type="audio/mpeg">';
+                    var qtfallbackContent = 'QT_WriteOBJECT("'+src+'", "300", "30", "");';
+
+                }
+
+                var qtfallbackContent = '<a href="'+src+'" target="_blank"><img src="http://www.euradionantes.eu/images/timeline/play.png" /></a>';
+
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.innerHTML = qtfallbackContent;
+
+                $(this).append(oggsource);
+                $(this).append(mp3source);
+                $(this).append(qtfallbackContent);
+
+
+                $(this).removeAttr('src');
+                $(this).removeAttr('type');
+                $(this).removeAttr('width');
+                $(this).removeAttr('height');
+                $(this).attr('tabindex', 0);
+                $(this).attr('controls', 'controls');
+
+            }
+
+        });
+
+        $("#show_pre").click(function(index) {
+
+            if($("div #export_code").is(":visible")){
+                $("div #export_code").hide("slow");
+            }else{
+                $("div #export_code").show("slow");
+                $("div #export_code pre").contents().select();
+            }
+        });
+
+
+
+    });
+
+
+    //$("pre:data").focus(function() { $(this).select(); });
+
+});*/
+</script>

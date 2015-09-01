@@ -14,13 +14,15 @@ namespace Application\Sonata\NewsBundle\Admin;
 use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\NewsBundle\Admin\PostAdmin as BaseAdmin;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 class PostAdmin extends BaseAdmin
 {
 
     protected $choices = array(
-                    "actualite" => "actualité",
-                    "podcast" => "podcast"
+        "actualite" => "actualité",
+        "podcast" => "podcast"
     );
 
     protected $datagridValues = array(
@@ -40,8 +42,8 @@ class PostAdmin extends BaseAdmin
         //get related lists
         $podcasts= $repo->getPostByCategory("podcast");
         $news= $repo->getPostByCategory();
-    
-        //parent::configureFormFields($formMapper); //can't use parent cause we cant change field order in formmaper after 
+
+        //parent::configureFormFields($formMapper); //can't use parent cause we cant change field order in formmaper after
         $formMapper
             ->with('Post', array(
                     'class' => 'col-md-8'
@@ -77,7 +79,7 @@ class PostAdmin extends BaseAdmin
                     'required' => false
                 ))
                 ->add('slug',"text", array('required' => false, 'label' => "Slug"))
-                ->add('collection', 'sonata_type_model_list', array('required' => false))
+                ->add('collection', 'sonata_type_model_list', array('required' => true))
             ->end()
             ->with('Liaisons', array(
                 'class' => 'col-md-4'
@@ -95,6 +97,28 @@ class PostAdmin extends BaseAdmin
                     "query" => $podcasts
                 ))
             ->end()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->add('custom', 'string', array('template' => 'SonataNewsBundle:Admin:list_post_custom.html.twig', 'label' => 'Post'))
+            ->add('type', null, array('label' => 'Type', 'values' => $this->choices))
+            ->add('commentsEnabled', null, array('editable' => true))
+            ->add('publicationDateStart')
+        ;
+    }
+
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        parent::configureDatagridFilters($datagridMapper);
+
+        $datagridMapper
+            ->add('type')
         ;
     }
 

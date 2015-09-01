@@ -15,30 +15,39 @@ use Sonata\NewsBundle\Entity\BasePostRepository;
 class PostRepository extends BasePostRepository
 {
 
-  public function getPostByCategory($category = "actualite", $limit = 500){
-    $news = $this->createQueryBuilder('p')
-            ->where('p.type = :category')
-            ->setParameter('category', $category)
-            ->addOrderBy('p.publicationDateStart', 'DESC')
-            ->setMaxResults($limit)
+  public function getPostsByType($type = "actualite"){
+    $query = $this->createQueryBuilder('p')
+        ->where('p.type = :category')
+        ->setParameter('category', $type)
+        ->addOrderBy('p.publicationDateStart', 'DESC')
+        //->setMaxResults($limit)
+    ;
+    if ($type == "actualite") { //for old records with no type
+        $query
+            ->orWhere('p.type = :type')
+            ->setParameter('type', "")
         ;
-    if($category == "actualite"){ //for old records with no type
-        $news
-            ->orWhere('p.type = :category')
-            ->setParameter('category', "")
-            ;
     }
-    return $news;
-
+    return $query;
   }
 
-  public function listAll($order = 'DESC',$limit = 10){
+  public function listAll($order = 'DESC', $limit = 10){
     $q = $this->createQueryBuilder('p')
-            ->addOrderBy('p.publicationDateStart', $order)
-            ->setMaxResults($limit)
+        ->addOrderBy('p.publicationDateStart', $order)
+        ->setMaxResults($limit)
     ;
-    $news = $q->getQuery()->getResult();
-    return $news;
+    $posts = $q->getQuery()->getResult();
+    return $posts;
+  }
+
+  public function getPostsByCollection($collection = null, $order = 'DESC')
+  {
+    $q = $this->createQueryBuilder('p')
+        ->where('p.collection = :collection')
+        ->setParameter('collection', $collection)
+        ->addOrderBy('p.publicationDateStart', $order)
+    ;
+    return $q;
   }
 
 }
