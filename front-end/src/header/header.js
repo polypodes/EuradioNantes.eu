@@ -6,7 +6,6 @@
 // Requirements                       //
 ////////////////////////////////////////
 import {
-  cl,
   documentReady,
   each,
   on,
@@ -43,6 +42,7 @@ function documentLoaded() {
 
   each($linkWithChildren, ($elt) => {
     on($elt, toggleLevel2, 'click');
+    $elt.addEventListener('click', toggleLevel2);
   });
 }
 
@@ -82,7 +82,6 @@ function toggleLevel2(event) {
   $goBackBtn.classList.toggle('header-menu-back-show');
 
   const hideUL = () => {
-    cl('hide event');
     $ul.classList.remove('header-level2-show');
     $goBackBtn.classList.remove('header-menu-back-show');
 
