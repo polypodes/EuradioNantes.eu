@@ -1,0 +1,184 @@
+////////////////////////////////////////
+// Share block                        //
+////////////////////////////////////////
+
+// mobile first
+.share {
+
+  &-title {
+    @include make-xs-column(12, 0);
+    @include font01-bold();
+    @include ttu();
+    padding: 15px 11px;
+    line-height: $bs;
+    color: $col01;
+    text-align: center;
+    background-color: $col07;
+  }
+
+  &-buttons {
+    @include make-xs-column(12, 0);
+  }
+
+  &-twitter,
+  &-facebook,
+  &-google,
+  &-flickr,
+  &-embeded,
+  &-download {
+    display: block;
+    float: left;
+    width: 33.333%;
+    height: 50px;
+    line-height: 50px;
+    color: $col01;
+    text-align: center;
+    transition: background-color .3s ease;
+
+    &:hover {
+      transition: background-color .3s ease;
+    }
+
+    img {
+      height: 33px;
+      transform: scale3d(.85, .85, .85);
+      transition: transform .3s ease;
+    }
+
+    // scss-lint:disable MergeableSelector
+    &:hover img {
+      transform: scale3d(1, 1, 1);
+      transition: transform .3s ease;
+    }
+  }
+
+  &-twitter {
+    background-color: $col08;
+
+    &:hover {
+      background-color: darken($col08, 10%);
+    }
+  }
+
+  &-facebook {
+    background-color: $col09;
+
+    &:hover {
+      background-color: darken($col09, 10%);
+    }
+  }
+
+  &-google {
+    background-color: $col10;
+
+    &:hover {
+      background-color: darken($col10, 10%);
+    }
+  }
+
+  &-flickr {
+    background-color: $col11;
+
+    &:hover {
+      background-color: darken($col11, 10%);
+    }
+  }
+
+  &-embeded {
+    background-color: $col06;
+
+    &:hover {
+      background-color: darken($col06, 10%);
+    }
+  }
+
+  &-download {
+    background-color: $col07;
+
+    &:hover {
+      background-color: darken($col07, 10%);
+    }
+  }
+
+  &-aside {
+    @include make-xs-column(12, 0);
+    @include font01-bold();
+    padding-top: 10px;
+  }
+
+  &-aside-link {
+    @include font01-regular();
+
+    &,
+    &:hover,
+    &:focus {
+      color: $col07;
+    }
+  }
+
+  ////////////////////////////////////////
+  // Share embed version                //
+  ////////////////////////////////////////
+  &-embed {
+
+    &-inner {
+      @include make-xs-column(12, 0);
+      @include font01-bold(18px);
+      padding: ($bs * 1.5);
+      background-color: $col02;
+    }
+
+    &-title {
+      display: block;
+      margin-bottom: 17px;
+    }
+
+    &-input {
+      @include font01-regular(18px);
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .share {
+    margin-top: ($bs * 3);
+
+    &-title {
+      @include make-md-column(3.65, 0);
+    }
+
+    &-buttons {
+      @include make-md-column(3.9, 0);
+    }
+
+    &-twitter,
+    &-facebook,
+    &-google,
+    &-flickr,
+    &-embeded,
+    &-download {
+      width: 66px;
+    }
+
+    &-aside {
+      @include make-md-column(4, 0);
+      padding-top: 6px;
+      padding-left: 17px;
+    }
+
+    &-embed {
+
+      .share-title {
+        @include make-md-column(3, 0);
+      }
+
+      .share-buttons {
+        @include make-md-column(5.4, 0);
+      }
+
+      .share-aside {
+        @include make-md-column(3, 0);
+      }
+    }
+  }
+}

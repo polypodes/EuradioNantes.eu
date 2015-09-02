@@ -1,0 +1,58 @@
+////////////////////////////////////////
+// Bloc newsletter                    //
+////////////////////////////////////////
+
+.bloc-newsletter {
+  @include font01-bold();
+  position: relative;
+  padding: 10px 15px;
+  margin-top: 40px;
+  color: $col01;
+  background-color: $col06;
+
+  &-title {
+    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &-text {
+    line-height: 15px;
+
+    p {
+      margin-bottom: 8px;
+    }
+  }
+
+  &-field {
+    position: relative;
+    height: 90px;
+  }
+
+  &-email,
+  &-submit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &-submit {
+    @include font01-regular(12px);
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    bottom: 0;
+    width: 84px;
+    height: 26px;
+    padding: 0;
+    color: $col01;
+    text-align: left;
+    background-color: $col07;
+    border: 0;
+  }
+
+  &-email {
+    padding-right: 100px;
+  }
+}

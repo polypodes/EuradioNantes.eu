@@ -105,6 +105,24 @@
 
 @import './bases/bases';
 @import './footer/footer';
+@import './header/header';
+@import './home/home';
+@import './player/player';
+@import './bloc/bloc-content';
+@import './bloc/bloc-mini';
+@import './actu/actu';
+@import './content/content';
+@import './breadcrumb/breadcrumb';
+@import './share/share';
+@import './comment/comment';
+@import './bloc/bloc-newsletter';
+@import './share/share-mini';
+@import './podcast/podcast';
+@import './pagination/pagination';
+@import './list/list';
+@import './filter/filter';
+@import './grille/grille';
+@import './author/author';
 
 ////////////////////////////////////////
 // Temporary shitty stuffs to remove :
@@ -113,19 +131,19 @@
 // as possible…
 ////////////////////////////////////////
 
-html:after {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  font-size: $font-size-base;
-  color: $col07;
-  content: 'mobile';
+// html:after {
+//   position: fixed;
+//   right: 0;
+//   bottom: 0;
+//   font-size: $font-size-base;
+//   color: $col07;
+//   content: 'mobile';
 
-  @media (min-width: $container-md) {
-    content: 'tablet';
-  }
+//   @media (min-width: $screen-md-min) {
+//     content: 'tablet';
+//   }
 
-  @media (min-width: $container-lg) {
-    content: 'desktop';
-  }
-}
+//   @media (min-width: $screen-lg-min) {
+//     content: 'desktop';
+//   }
+// }

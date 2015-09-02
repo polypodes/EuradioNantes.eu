@@ -1,0 +1,66 @@
+////////////////////////////////////////
+// Bloc mini home                     //
+////////////////////////////////////////
+
+// Mobile first
+.bloc-mini {
+  margin: 0 auto;
+  margin-bottom: 15px;
+  color: $col01;
+
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+
+  &-inner {
+    min-height: 122px;
+    background-color: $col06;
+  }
+
+  .bloc-podcast &-inner {
+    background-color: $col07;
+  }
+
+  &-text {
+    padding-top: 18px;
+    padding-right: 18px;
+    padding-bottom: 18px;
+    padding-left: 14px;
+  }
+
+  &-date,
+  &-cat {
+    @include font01-regular(11px);
+    display: inline-block;
+    margin-bottom: 2px;
+    line-height: 15px;
+  }
+
+  &-cat {
+    @include ttu();
+  }
+
+  &-date {
+    margin-left: 4px;
+  }
+
+  &-title {
+    @include font01-bold(13px);
+    margin-bottom: 10px;
+    line-height: 15px;
+
+    a {
+      color: $col01;
+    }
+  }
+
+  &-intro {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .bloc-mini {
+    max-width: 175px;
+  }
+}

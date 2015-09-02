@@ -1,0 +1,65 @@
+////////////////////////////////////////
+// Pagination                         //
+////////////////////////////////////////
+
+.pagination {
+  @include make-md-column(12);
+  @include font01-bold(14px);
+  position: relative;
+  padding: 18px 21px;
+  margin-bottom: $bs;
+  background-color: $col01;
+
+  &-links {
+    display: block;
+    width: 100px;
+    padding-left: 0;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &-link {
+    display: inline-block;
+    list-style-type: none;
+
+    a {
+      padding-right: 7px;
+      color: $col07;
+    }
+  }
+
+  &-link-active a {
+    color: $col06;
+  }
+
+  &-prev,
+  &-next {
+    position: absolute;
+    top: 18px;
+    width: 30%;
+    overflow: hidden;
+    color: $col07;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-prev {
+    left: 21px;
+  }
+
+  &-next {
+    right: 21px;
+    text-align: right;
+  }
+}
+
+
+@media (min-width: $screen-md-min) {
+  .pagination {
+    font-size: 16px;
+
+    &-link a {
+      padding-right: 0;
+    }
+  }
+}

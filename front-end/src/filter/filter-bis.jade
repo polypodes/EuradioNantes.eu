@@ -1,0 +1,23 @@
+div.filter
+  h2 Naviguer parmi les émissions
+  form.filter-fields-group
+    div.filter-fields
+      label.filter-label Thèmes
+      div
+        select.filter-select
+          option Sélectionnez un thème
+          option ou pas
+    div.filter-fields
+      label.filter-label Périodicité
+      div
+        select.filter-select
+          option Sélectionnez une périodicité
+          option ou pas
+    div
+      input(type="submit", value="Filter les émissions").filter-submit
+      a(href="#", title="supprimer le filtre").filter-delete Supprimer le filtre
+div.filter-quick
+  label.filter-label Accès rapide aux émissions
+  select.filter-select.filter-quick-select
+    option Sélectionnez une émission
+    option ou pas

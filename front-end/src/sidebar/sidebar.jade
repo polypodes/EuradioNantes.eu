@@ -1,0 +1,28 @@
+aside.content-aside
+  .content-aside-inner
+    article(data-clickable="true").bloc-mini.bloc-podcast
+      .bloc-mini-inner
+        div.bloc-mini-text
+          span.bloc-mini-cat Culture
+          span.bloc-mini-date 12/08
+          h2.bloc-mini-title
+            a(href="#", data-clickable-target="true", title="Lien vers l'article") The Feather, Jaune Orange
+    - for(var i = 4; i > 0; i--) {
+    article(data-clickable="true").bloc-mini
+      .bloc-mini-inner
+        div.bloc-mini-text
+          span.bloc-mini-cat Culture
+          span.bloc-mini-date 12/08
+          h2.bloc-mini-title 
+            a(href="#", data-clickable-target="true", title="Lien vers l'article") The Feather, Jaune Orange
+    - }
+    - for(var i = 4; i > 0; i--) {
+    article(data-clickable="true").bloc-mini.bloc-podcast
+      .bloc-mini-inner
+        div.bloc-mini-text
+          span.bloc-mini-cat Culture
+          span.bloc-mini-date 12/08
+          h2.bloc-mini-title 
+            a(href="#", data-clickable-target="true", title="Lien vers l'article") The Feather, Jaune Orange
+    - }
+    include ../bloc/bloc-newsletter

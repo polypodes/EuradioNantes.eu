@@ -2,6 +2,12 @@
 // Custom reset                       //
 ////////////////////////////////////////
 
+// menu mobile
+body {
+  overflow-x: hidden;
+  background-color: $col02;
+}
+
 // remove margin top of heading
 h1,
 h2,
@@ -30,7 +36,9 @@ h2,
 }
 
 .chapo {
+  font-size: 16px;
   font-weight: 700;
+  line-height: 25px;
 }
 
 p,
@@ -43,4 +51,124 @@ blockquote {
   font-size: 16px;
   font-style: italic;
   line-height: 25px;
+}
+
+@media (min-width: $screen-md-min) {
+  blockquote {
+    position: relative;
+    padding: 0 55px;
+    border-left: 0;
+
+    &:before,
+    &:after {
+      position: absolute;
+      top: 20%;
+      display: block;
+      width: 40px;
+      height: 40px;
+      background-image: url('./images/arrow.svg');
+      background-size: cover;
+    }
+
+    &:before {
+      left: 0;
+      content: '';
+    }
+
+    &:after {
+      right: 0;
+      content: '';
+      transform: rotate(180deg);
+    }
+  }
+}
+
+////////////////////////////////////////
+// Form/input stuffs                  //
+////////////////////////////////////////
+
+input,
+textarea {
+  @include font01-bold();
+  width: 100%;
+  padding: 5px;
+  text-indent: 8px;
+  background-color: $col01;
+  border: 1px solid $col04;
+  border-radius: 3px;
+}
+
+input {
+  height: ($bs * 1.5);
+  color: $col06;
+}
+
+textarea {
+  min-height: 150px;
+}
+
+@media (min-width: $screen-md-min) {
+  textarea {
+    min-height: 195px;
+  }
+}
+
+::-webkit-input-placeholder {
+  color: $col04;
+}
+
+// scss-lint:disable VendorPrefix
+:-moz-placeholder {
+  color: $col04;
+}
+
+::-moz-placeholder {
+  color: $col04;
+}
+
+:-ms-input-placeholder {
+  color: $col04;
+}
+
+.g-recaptcha {
+  margin-top: 16px;
+  transform: scale(.785);
+
+  transform-origin: left top;
+}
+
+////////////////////////////////////////
+// misc                               //
+////////////////////////////////////////
+
+[data-clickable="true"] {
+  cursor: pointer;
+}
+
+.ico-info {
+  &:after {
+    display: inline-block;
+    width: $bs;
+    height: $bs;
+    margin-right: 8px;
+    vertical-align: middle;
+    background-image: url('./images/info.svg');
+    background-size: cover;
+    content: '';
+  }
+}
+
+.ico-newsletter {
+  float: left;
+
+  &:after {
+    display: inline-block;
+    width: 31px;
+    height: 30px;
+    margin-right: 8px;
+    vertical-align: middle;
+    background-image: url('./images/mail.svg');
+    background-size: cover;
+    content: '';
+  }
 }

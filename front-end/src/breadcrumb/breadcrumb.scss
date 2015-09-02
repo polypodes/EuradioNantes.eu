@@ -1,0 +1,29 @@
+////////////////////////////////////////
+// Breadcrumb style                   //
+////////////////////////////////////////
+
+// Mobile first
+.breadcrumb {
+  @include make-xs-column(12, 0);
+  margin-bottom: 18px;
+
+  &-item {
+    @include font01-regular(12px);
+    line-height: 17px;
+  }
+
+  // scss-lint:disable MergeableSelector
+  &-item + &-item:before {
+    padding: 0 3px;
+    color: $col06;
+    content: '›';
+  }
+
+  a {
+    color: $col07;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

@@ -1,2 +1,42 @@
-header
-  h2 ici header
+header.header
+  .container
+    a(href="/", title="Lien vers la page d'accueil d'Euradionantes")
+      img(src="./assets/images/logo-header.svg", alt="Logo d'EuradioNantes").header-logo
+    button.header-menu-button
+      svg(width="22" height="40")
+        line(x1="1", y1="15", x2="22", y2="15").line-01
+        line(x1="1", y1="22", x2="22", y2="22").line-02
+        line(x1="1", y1="30", x2="22", y2="30").line-03
+    button.header-menu-back ‹ Retour
+    div.header-menu
+      nav.header-menu-nav
+        ul.header-items
+          li
+            a(href="home.html", title="Lien vers la page d'accueil d'Euradionantes").header-link.header-link-home
+          li
+            a(href="radio.html", title="Lien vers la page La Radio").header-link.header-link-has-children La radio
+            ul.header-menu-level2
+              li
+                a(href="radio.html", title="Lien vers la page La Radio").header-link Lorem ipsum 1
+              li
+                a(href="radio.html", title="Lien vers la page La Radio").header-link Loreat
+              li
+                a(href="radio.html", title="Lien vers la page La Radio").header-link ipsum dolorm
+          li
+            a(href="actu.html", title="Lien vers la page La Radio").header-link L'actu
+          li
+            a(href="emissions.html", title="Lien vers la page La Radio").header-link.header-link-has-children.header-active Les Émissions
+            ul.header-menu-level2
+              li
+                a(href="radio.html", title="Lien vers la page La Radio").header-link Lorem ipsum 2
+              li
+                a(href="radio.html", title="Lien vers la page La Radio").header-link Loreat
+              li
+                a(href="radio.html", title="Lien vers la page La Radio").header-link ipsum dolorm
+          li
+            a(href="musique.html", title="Lien vers la page La Radio").header-link La musique
+          li
+            a(href="contact.html", title="Lien vers la page La Radio").header-link Contact
+      form.header-search
+        input(type="search", placeholder="Recherche").header-search-input
+        input(type="submit", value="").header-search-submit

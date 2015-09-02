@@ -1,0 +1,10 @@
+div.pagination
+  a(href="#").pagination-prev ‹ Page précédente 
+  ul.pagination-links
+    - for(var i  = 1; i < 5; i++) {
+    li.pagination-link 
+      a(href="#", title="lien vers la page numéro #{i}") #{i}
+    - }
+    li.pagination-link.pagination-link-active
+      a(href="#", title="lien vers la page numéro 5") 5
+  a(href="#").pagination-next Page suivante ›

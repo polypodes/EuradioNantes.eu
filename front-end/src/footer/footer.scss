@@ -43,7 +43,7 @@
   }
 }
 
-@media (min-width: $container-md) {
+@media (min-width: $screen-md-min) {
   .footer {
     padding-bottom: $bs;
 
@@ -62,7 +62,7 @@
   }
 }
 
-@media (min-width: $container-lg) {
+@media (min-width: $screen-lg-min) {
   .footer {
     padding-bottom: $bs;
     text-align: left;

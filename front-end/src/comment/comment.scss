@@ -1,0 +1,168 @@
+////////////////////////////////////////
+// Comment block style                //
+////////////////////////////////////////
+
+// mobile first
+.comment {
+  @include make-xs-column(12, 0);
+  padding-top: 5px;
+  margin-top: ($bs * 2);
+  border-top: 4px solid $col06;
+
+  // reset
+  ul {
+    padding-left: 0;
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  ////////////////////////////////////////
+  // Title                              //
+  ////////////////////////////////////////
+  &-title,
+  &-title2 {
+    @include font01-bold(24px);
+    line-height: 33px;
+  }
+
+  &-title {
+    margin-bottom: 44px;
+  }
+
+  ////////////////////////////////////////
+  // Comment list                       //
+  ////////////////////////////////////////
+
+  &-item {
+    margin-bottom: $bs;
+    border-bottom: 1px solid $col02;
+
+    p {
+      margin-bottom: $bs;
+    }
+  }
+
+  &-item:last-of-type {
+    margin-bottom: ($bs * 2);
+    border-bottom: 0;
+  }
+
+  &-info {
+    margin-bottom: 15px;
+  }
+
+  &-author {
+    @include font01-bold(13px);
+    margin-bottom: 0;
+    font-style: italic;
+    line-height: $bs;
+  }
+
+  &-date {
+    @include font01-regular(13px);
+    font-style: italic;
+    line-height: $bs;
+  }
+
+  &-more {
+    @include font01-bold();
+    width: 100%;
+    height: ($bs * 2);
+    margin-bottom: ($bs * 1.5);
+    line-height: 19px;
+    color: $col07;
+    background-color: $col02;
+    border: 1px solid $col03;
+    border-radius: 3px;
+  }
+
+  ////////////////////////////////////////
+  // Form post comment                  //
+  ////////////////////////////////////////
+
+  &-title2 {
+    margin-bottom: 14px;
+  }
+
+  &-message {
+    height: 36px;
+    padding: 11px;
+    padding-top: 9px;
+    margin-bottom: 20px;
+    background-color: $col02;
+    border-radius: 3px;
+  }
+
+  &-label {
+    @include font01-bold();
+    display: inline-block;
+    margin-bottom: 7px;
+  }
+
+  &-textarea {
+    margin-bottom: $bs;
+  }
+
+  &-input {
+    margin-bottom: ($bs / 2);
+  }
+
+  &-submit {
+    height: ($bs * 2);
+    color: $col01;
+    background-color: $col07;
+    border: 0;
+    transition: background-color .3s ease;
+
+    &:hover {
+      background-color: saturate($col07, 15%);
+      transition: background-color .3s ease;
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .comment {
+
+    &-item {
+      @include make-md-column(12, 0);
+    }
+
+    &-info {
+      @include make-md-column(3.75);
+      text-align: right;
+    }
+
+    &-text {
+      @include make-md-column(8.25);
+    }
+
+    &-textarea {
+      @include make-md-column(7, 0);
+    }
+
+    &-inputs {
+      @include make-md-column(5, 0);
+      padding-top: 22px;
+      padding-left: 22px;
+    }
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .comment {
+
+    &-textarea {
+      @include make-md-column(8, 0);
+    }
+
+    &-inputs {
+      @include make-md-column(4, 0);
+      padding-top: 22px;
+      padding-left: 22px;
+    }
+  }
+}
+

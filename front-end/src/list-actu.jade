@@ -1,0 +1,51 @@
+extends ./bases/default
+
+block content
+  .content.container
+    section.actu-list
+      include ./breadcrumb/breadcrumb
+      h1.actu-list-title Toutes les actualités
+      span.actu-list-counter Page 2 sur 5
+      ul.actu-list-filters
+        li.actu-list-filter.actu-list-filter-selected
+          a(href="#", title="") Tout
+        li.actu-list-filter
+          a(href="#", title="") culture
+        li.actu-list-filter
+          a(href="#", title="") politique
+        li.actu-list-filter
+          a(href="#", title="") économie
+        li.actu-list-filter
+          a(href="#", title="") Société
+        li.actu-list-filter
+          a(href="#", title="") événements
+        li.actu-list-filter
+          a(href="#", title="") Revue de presse
+        li.actu-list-filter
+          a(href="#", title="") Inclassables
+      article(data-clickable="true").bloc-content
+        .bloc-content-inner
+          figure.bloc-content-figure
+            img(src="//lorempixel.com/555/312", srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article").bloc-content-img.img-responsive
+          div.bloc-content-text
+            span.bloc-content-cat Culture
+            span.bloc-content-date 15 juillet 2015
+            h2.bloc-content-title 
+              a(href="#", data-clickable-target="true", title="Lien vers l'article") Les Lorem ipsum en concert à Bruxelles
+            p Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at 
+      div.list
+        - for(var i = 5; i > 0; i--) {
+        article(data-clickable="true").bloc-content
+          .bloc-content-inner
+            figure.bloc-content-figure
+              img(src="//lorempixel.com/570/312", srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article").bloc-content-img.img-responsive
+            div.bloc-content-text
+              span.bloc-content-cat Culture
+              span.bloc-content-date 15 juillet 2015
+              h2.bloc-content-title 
+                a(href="#", data-clickable-target="true", title="Lien vers l'article") The Feather, Jaune Orange
+              p Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi.
+        - }
+      include ./pagination/pagination
+    include ./sidebar/sidebar
+    

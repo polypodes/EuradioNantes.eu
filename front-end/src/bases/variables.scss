@@ -15,15 +15,25 @@ $col03: #d2d5d6;
 $col04: #bdc3c7;
 $col05: #7d8c8d;
 
+
 // primary colors
 $col06: #282245;
-$col07: #d32354;
+// $col06: #362057;
+$col07: #eb1d5d;
 
 // social buttons colors
 $col08: #55acee;
 $col09: #3b5998;
 $col10: #dd4b39;
+$col11: #ff0084;
 
+////////////////////////////////////////
+// Helpers mixins                     //
+////////////////////////////////////////
+
+@mixin ttu() {
+  text-transform: uppercase;
+}
 
 ////////////////////////////////////////
 // Fonts                              //
@@ -32,14 +42,23 @@ $col10: #dd4b39;
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 // font mixins
-@mixin font01-regular() {
+@mixin font01-regular($size: $font-size-base) {
   font-family: 'Open Sans', arial, sans-serif;
   font-weight: 400;
+  font-size: $size;
 }
 
-@mixin font01-bold() {
+@mixin font01-bold($size: $font-size-base) {
   font-family: 'Open Sans', arial, sans-serif;
   font-weight: 700;
+  font-size: $size;
+}
+
+@mixin outline() {
+  &:focus {
+    border: 1px solid $col07;
+    outline: 0;
+  }
 }
 
 ////////////////////////////////////////
@@ -70,3 +89,49 @@ $headings-font-family:    inherit !default;
 $headings-font-weight:    700 !default;
 $headings-line-height:    40px !default;
 $headings-color:          inherit !default;
+
+////////////////////////////////////////
+// Animations                         //
+////////////////////////////////////////
+
+@keyframes slideInRight {
+  from {
+    visibility: visible;
+    transform: translate3d(100vw, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    visibility: hidden;
+    transform: translate3d(100vw, 0, 0);
+  }
+}
+
+@keyframes slideInRightLevel2 {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutRightLevel2 {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
