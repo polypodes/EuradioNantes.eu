@@ -1,0 +1,31 @@
+////////////////////////////////////////
+// Author bloc                        //
+////////////////////////////////////////
+
+.author {
+  margin-bottom: ($bs * 2);
+
+  &-img,
+  &-text {
+    display: inline-block;
+  }
+
+  &-img {
+    border-radius: 100%;
+  }
+
+  &-text {
+    padding-left: ($bs / 2);
+  }
+
+  &-sup {
+    @include font01-regular(12px);
+    font-style: italic;
+    color: $col04;
+  }
+
+  &-title {
+    @include font01-bold(14px);
+    color: $col06;
+  }
+}

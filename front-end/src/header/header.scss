@@ -52,6 +52,10 @@
     transition: color .3s ease;
   }
 
+  &-link-home {
+    display: none;
+  }
+
   &-link-has-children:after {
     position: absolute;
     top: 17px;
@@ -288,9 +292,21 @@
       }
 
       // scss-lint:disable MergeableSelector
-      li + li {
-        margin-left: ($bs * 1.5);
+      li {
+        margin-right: ($bs * 1.5);
       }
+
+      li:first-of-type {
+        margin-right: 15px;
+      }
+    }
+
+    &-link-home {
+      top: 2px;
+      display: block;
+      width: 24px;
+      height: 21px;
+      background-image: url('./images/home.svg');
     }
 
     &-link-has-children:after {

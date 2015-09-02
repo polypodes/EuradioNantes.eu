@@ -122,6 +122,7 @@
 @import './list/list';
 @import './filter/filter';
 @import './grille/grille';
+@import './author/author';
 
 ////////////////////////////////////////
 // Temporary shitty stuffs to remove :
@@ -130,19 +131,19 @@
 // as possible…
 ////////////////////////////////////////
 
-html:after {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  font-size: $font-size-base;
-  color: $col07;
-  content: 'mobile';
+// html:after {
+//   position: fixed;
+//   right: 0;
+//   bottom: 0;
+//   font-size: $font-size-base;
+//   color: $col07;
+//   content: 'mobile';
 
-  @media (min-width: $screen-md-min) {
-    content: 'tablet';
-  }
+//   @media (min-width: $screen-md-min) {
+//     content: 'tablet';
+//   }
 
-  @media (min-width: $screen-lg-min) {
-    content: 'desktop';
-  }
-}
+//   @media (min-width: $screen-lg-min) {
+//     content: 'desktop';
+//   }
+// }
