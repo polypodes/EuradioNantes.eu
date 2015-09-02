@@ -15,7 +15,7 @@
     "webpack": "if [[ \"${NODE_ENV}\" == \"production\" ]]; then webpack -p; else webpack; fi",
     "imagemin": "imagemin ./src/images/* ./dist/assets/images",
     "serve": "browser-sync start --no-open --server dist",
-    "cms": "echo \"waiting for implementing it\"",
+    "cms": "npm run build && cp -r dist/assets ../web",
     "watch": "npm run watch:jade & npm run watch:sass & npm run watch:js",
     "watch:jade": "nodemon --ext jade --watch src/ --exec \"npm run jade && browser-sync reload\"",
     "watch:sass": "nodemon --ext scss --watch src/ --exec \"npm run sass && browser-sync reload\"",
