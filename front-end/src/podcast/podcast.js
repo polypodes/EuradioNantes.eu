@@ -104,6 +104,7 @@ function initPlayer($player) {
     progressColor: '#C42456',
     // progressColor: '#C42456',
     cursorColor: '#282245',
+    backend: 'MediaElement',
     height: 90,
     minimap: true
   });
