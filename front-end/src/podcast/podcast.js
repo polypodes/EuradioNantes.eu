@@ -66,7 +66,8 @@ function initPlayer($player) {
 
 function secondsToMinutes(_seconds) {
   const minutes = Math.floor(_seconds / 60);
-  const seconds = ('0' + (_seconds - minutes * 60)).slice(-2); // force two digits format 00 to 09
+  // force two digits format 00 to 09
+  const seconds = ('0' + (_seconds - minutes * 60)).slice(-2);
   return `${minutes}:${seconds}s`;
 };
 
@@ -74,9 +75,18 @@ function addAnnotation($parent, title, text, startAt) {
   const timeFormated = secondsToMinutes(startAt);
   console.log(startAt);
   $parent.querySelector('.podcast-player-list').innerHTML += `
-    <div data-annotation-start="${startAt}" data-annotation-title="${title}" data-annotation-text="${text}" class="podcast-player-list-item">
-      <span class="podcast-player-list-start">à ${timeFormated}</span>
-      <button class="podcast-item-control podcast-item-play podcast-player-list-play"></button>
+    <div data-annotation-start="${startAt}"
+      data-annotation-title="${title}"
+      data-annotation-text="${text}"
+      class="podcast-player-list-item">
+      <span class="podcast-player-list-start">
+        à ${timeFormated}
+      </span>
+      <button class="
+        podcast-item-control
+        podcast-item-play
+        podcast-player-list-play">
+      </button>
       <span class="podcast-player-list-title">${title}</span>
     </div>
   `;
@@ -144,7 +154,12 @@ function initPlayer($player) {
     for (let i = 0; i < $items.length; i++) {
       $items[i].addEventListener('click', function(event) {
         const $elt = event.target;
-        let startAt = parseInt($elt.parentElement.getAttribute('data-annotation-start'));
+        var startAt = 0;
+        if (typeof $elt.getAttribute('data-annotation-start') === 'object') {
+          startAt = parseInt($elt.getAttribute('data-annotation-start'));
+        } else {
+          startAt = parseInt($elt.parentElement.getAttribute('data-annotation-start'));
+        }
         wavesurfer.play(startAt);
       });
     }
@@ -162,17 +177,10 @@ function initPlayer($player) {
   // display info when ok
   wavesurfer.on('region-click', function (region, e) {
     e.stopPropagation();
-    console.log('region clicked');
-    // showNote(region);
-    // Play on click, loop on shift click
     region.play();
   });
 
   wavesurfer.on('region-in', showNote);
-
-  // function removeNote() {
-  //   document.querySelector('#subtitle').textContent = '';
-  // }
 
   function showNote (region) {
     const title = region.data.title;
