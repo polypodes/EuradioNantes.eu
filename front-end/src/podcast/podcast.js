@@ -66,30 +66,37 @@ function initPlayer($player) {
 
 function secondsToMinutes(_seconds) {
   const minutes = Math.floor(_seconds / 60);
-  const seconds = ('0' + (_seconds - minutes * 60)).slice(-2); // force two digits format 00 to 09
+  // force two digits format 00 to 09
+  const seconds = ('0' + (_seconds - minutes * 60)).slice(-2);
   return `${minutes}:${seconds}s`;
 };
 
 function addAnnotation($parent, title, text, startAt) {
   const timeFormated = secondsToMinutes(startAt);
-  console.log(startAt);
+
   $parent.querySelector('.podcast-player-list').innerHTML += `
-    <div data-annotation-start="${startAt}" data-annotation-title="${title}" data-annotation-text="${text}" class="podcast-player-list-item">
-      <span class="podcast-player-list-start">à ${timeFormated}</span>
-      <button class="podcast-item-control podcast-item-play podcast-player-list-play"></button>
+    <div data-annotation-start="${startAt}"
+      data-annotation-title="${title}"
+      data-annotation-text="${text}"
+      class="podcast-player-list-item">
+      <span class="podcast-player-list-start">
+        à ${timeFormated}
+      </span>
+      <button class="
+        podcast-item-control
+        podcast-item-play
+        podcast-player-list-play">
+      </button>
       <span class="podcast-player-list-title">${title}</span>
     </div>
   `;
 }
 
 function initPlayer($player) {
-  let wavesurfer = Object.create(WaveSurfer);
-  let source = $player.getAttribute('data-player-src');
-  let data = JSON.parse($player.getAttribute('data-player-regions'));
-
-  // console.log($player);
-  // console.log(source);
-  // console.log(data);
+  const wavesurfer = Object.create(WaveSurfer);
+  const source = $player.getAttribute('data-player-src');
+  let data = $player.getAttribute('data-player-regions');
+  data = JSON.parse(data);
 
   wavesurfer.init({
     container: $player,
@@ -102,10 +109,9 @@ function initPlayer($player) {
   });
 
   wavesurfer.on('ready', function () {
-    console.log('ready');
 
     // construct annotation list
-    let $annotation = document.createElement('div');
+    const $annotation = document.createElement('div');
     $annotation.classList.add('podcast-player-bloc');
     $annotation.innerHTML = `
       <div class="podcast-player-list">
@@ -142,18 +148,23 @@ function initPlayer($player) {
     const $items = $player.querySelectorAll('.podcast-player-list-item');
 
     for (let i = 0; i < $items.length; i++) {
-      $items[i].addEventListener('click', function(event) {
+      $items[i].addEventListener('click', function (event) {
         const $elt = event.target;
-        let startAt = parseInt($elt.parentElement.getAttribute('data-annotation-start'));
+        let startAt = 0;
+        if (typeof $elt.getAttribute('data-annotation-start') === 'object') {
+          startAt = parseInt($elt.parentElement.getAttribute('data-annotation-start'));
+        } else {
+          startAt = parseInt($elt.getAttribute('data-annotation-start'));
+        }
         wavesurfer.play(startAt);
       });
     }
 
-    wavesurfer.on('play', function() {
+    wavesurfer.on('play', function () {
       $button.classList.remove('podcast-item-play');
       $button.classList.add('podcast-item-pause');
     });
-    wavesurfer.on('pause', function() {
+    wavesurfer.on('pause', function () {
       $button.classList.add('podcast-item-play');
       $button.classList.remove('podcast-item-pause');
     });
@@ -162,19 +173,12 @@ function initPlayer($player) {
   // display info when ok
   wavesurfer.on('region-click', function (region, e) {
     e.stopPropagation();
-    console.log('region clicked');
-    // showNote(region);
-    // Play on click, loop on shift click
     region.play();
   });
 
   wavesurfer.on('region-in', showNote);
 
-  // function removeNote() {
-  //   document.querySelector('#subtitle').textContent = '';
-  // }
-
-  function showNote (region) {
+  function showNote(region) {
     const title = region.data.title;
     const text = region.data.text;
     const $title = $player.querySelector('.podcast-player-title');
@@ -190,11 +194,7 @@ function initPlayer($player) {
     $item.classList.add('podcast-player-item-active');
 
     // scroll to active item
-    console.log($player.querySelector('.podcast-player-list'));
     $player.querySelector('.podcast-player-list').scrollTop = $item.offsetTop - 90;
-
-    console.log($item.offsetTop);
-    console.log($item.offsetHeight);
     $title.innerHTML = title;
     $text.innerHTML = text;
 

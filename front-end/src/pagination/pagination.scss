@@ -3,7 +3,7 @@
 ////////////////////////////////////////
 
 .pagination {
-  @include make-md-column(12);
+  @include make-md-column(8.95);
   @include font01-bold(14px);
   position: relative;
   padding: 18px 21px;

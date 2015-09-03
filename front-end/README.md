@@ -67,3 +67,31 @@ List of lint/test tools:
 ### How to execute test/lint
 
 `npm test`
+
+### Image size
+
+**page actu:**
+**page emission:**
+**page podcast:**
+450x270 480w
+850x510 1900w
+
+**bottom**
+**page emissions filtrées:**
+**page emissions:**
+**page home - bloc-mini:**
+**page liste-actu - bloc-mini top:**
+450x246 480w
+570x312 992w
+300x165 1900w
+
+** page home - top:**
+450x246 480w
+570x312 992w
+470x215 1200w
+570x312 1900w
+
+**page liste-actu - bloc top:**
+450x246 480w
+570x312 992w
+570x312 1900w
