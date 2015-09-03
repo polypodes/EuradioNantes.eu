@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="description", content="")
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
+
+    title 'Hello world!'
+    link(rel="shortcut icon", href="./assets/favicon.ico", type="image/x-icon")
+    link(href="./assets/main.css", rel="stylesheet")
+
+    //- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    //- Safely remove this block if you are not targeting IE8
+    //-[if lt IE 9]
+      script(src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js")
+      script(src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js")
+    //-[endif]
+    //-[if lt IE 8]
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    //-[endif]
+  //- HTML BODY
+  body
+    include ./podcast/podcast-iframe
+    script(src="//www.google.com/recaptcha/api.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.42/wavesurfer.min.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.41/plugin/wavesurfer.regions.min.js")
+    script(src="./assets/bundle.js")
