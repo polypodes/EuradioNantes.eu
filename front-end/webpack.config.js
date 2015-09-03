@@ -12,10 +12,6 @@ var config = {
         test: path.join(__dirname, 'src'),
         loader: 'babel-loader'
       }
-      // {
-      //   test: require.resolve('bootstrap-sass'),
-      //   loader: 'expose?bootstrap'
-      // },
     ]
   },
   plugins: []

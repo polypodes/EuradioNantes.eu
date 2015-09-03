@@ -9,21 +9,47 @@
   }
 }
 
+.wavesurfer-region {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-color: transparent transparent transparent #000000;
+    content: '';
+  }
+
+  &:after {
+    position: absolute;
+    top: 0;
+    left: -2px;
+    width: 28px;
+    height: 17px;
+    font-size: 18px;
+    line-height: 7px;
+    letter-spacing: -.5px;
+    color: $col01;
+    text-align: center;
+    cursor: pointer;
+    background-color: $col06;
+    border-radius: 3px;
+    content: '...';
+  }
+}
+
 .podcast {
   padding-top: 5px;
   margin-top: 60px;
   border-top: 4px solid $col06;
 
-  &-title {
-    @include font01-bold(24px);
-    margin-bottom: 35px;
-    line-height: 33px;
-  }
-
   &-item {
     position: relative;
     padding-bottom: ($bs / 2);
-    padding-left: ($bs * 2.25);
     margin-bottom: ($bs / 2);
 
     &-title {
@@ -63,7 +89,7 @@
 
     &-control {
       position: absolute;
-      top: 0;
+      top: 25px;
       left: 0;
       display: block;
       width: 35px;
@@ -98,6 +124,85 @@
       background-image: url('./images/pause-white.svg');
     }
   }
+
+  &-title {
+    @include font01-bold(24px);
+    margin-bottom: 35px;
+    line-height: 33px;
+  }
+
+  &-player {
+    position: relative;
+    padding-left: 54px;
+    margin-bottom: ($bs * 2);
+
+    &-list {
+      height: 160px;
+      padding-right: 7px;
+      margin-top: ($bs / 2);
+      overflow: scroll;
+    }
+
+    &-list::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &-list::-webkit-scrollbar-thumb {
+      background-color: $col02;
+      outline: 1px solid $col02;
+    }
+
+    &-list-item {
+      height: 54px;
+      border-bottom: 1px solid $col02;
+    }
+
+    &-item-active &-list-title {
+      font-weight: bold;
+    }
+
+    &-list-start {
+      @include font01-bold(12px);
+      display: inline-block;
+      padding-top: 17px;
+      color: $col05;
+      vertical-align: top;
+    }
+
+    &-list-play {
+      position: relative;
+      top: inherit;
+      left: inherit;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-top: 14px;
+      vertical-align: top;
+    }
+
+    &-list-play:after {
+      top: 4px;
+      right: 6px;
+      display: inline-block;
+      width: 8px;
+      height: 12px;
+    }
+
+    &-list-title {
+      @include font01-regular(12px);
+      display: inline-block;
+      width: 70%;
+      padding-top: 17px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      vertical-align: top;
+    }
+
+    &-info {
+      // background-color: red;
+    }
+  }
 }
 
 @media (min-width: $screen-md-min) {
@@ -110,6 +215,31 @@
         right: 0;
         left: inherit;
         display: block;
+      }
+    }
+  }
+
+  .podcast {
+    &-player {
+
+      &-bloc {
+        height: 160px;
+      }
+
+      &-list,
+      &-info {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      &-list {
+        width: 40%;
+      }
+
+      &-info {
+        width: 58%;
+        padding-top: 7px;
+        padding-left: 30px;
       }
     }
   }

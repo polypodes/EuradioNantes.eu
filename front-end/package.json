@@ -45,6 +45,7 @@
     "pleeease": "^3.4.0",
     "pleeease-cli": "^3.2.8",
     "w3cjs": "^0.3.0",
+    "wavesurfer.js": "^1.0.42",
     "webpack": "^1.10.5"
   }
 }
