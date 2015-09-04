@@ -1,0 +1,3 @@
+newsletter_subscription:
+    path:  newsletter/subscribe
+    defaults: { _controller: "SiteBundle:Newsletter:subscribe" }

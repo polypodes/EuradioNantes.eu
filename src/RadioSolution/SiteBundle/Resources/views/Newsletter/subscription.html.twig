@@ -1,0 +1,15 @@
+<article class="bloc-newsletter">
+  <h2 class="bloc-newsletter-title">Euradionantes partout ailleurs</h2>
+  <div class="bloc-newsletter-text">
+    <i class="ico-newsletter"></i>
+    <p>Recevez les infos et les <br>podcasts d'Euradionantes</p>
+    <form action="{{ url('newsletter_subscription') }}" method="POST" class="bloc-newsletter-field">
+      <!--<input id="{{form.email.vars.id}}" name="{{form.email.vars.full_name}}" type="email" placeholder="Votre email" class="bloc-newsletter-email" value="{{form.email.vars.value}}">-->
+      {{ form_widget(form.email, {"attr": { 'placeholder': 'Votre email', 'class': 'bloc-newsletter-email'}}) }}
+      <input type="submit" value="Je m'abonne" class="bloc-newsletter-submit">
+    {{ form_end(form) }}
+    <div class="bloc-newsletter-social">
+      {{ include(':Social:links.html.twig') }}
+    </div>
+  </div>
+</article>
