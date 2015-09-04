@@ -132,7 +132,7 @@ class PodcastController extends Controller
         ;
 
         $paginator = $this->get('knp_paginator');
-        $emissions = $paginator->paginate(
+        $podcasts = $paginator->paginate(
             $query,
             $this->get('request')->query->get('page', $page),
             6
@@ -141,7 +141,7 @@ class PodcastController extends Controller
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage->setTitle($title);
 
-        return $this->render('PodcastBundle:Podcast:emission.html.twig', compact('emissions'));
+        return $this->render('PodcastBundle:Podcast:emission.html.twig', compact('podcasts'));
 
     }
 }

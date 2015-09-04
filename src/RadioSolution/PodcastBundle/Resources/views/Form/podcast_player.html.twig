@@ -5,7 +5,7 @@
     {% if media is not null %}
         {# dump(media) #}
         <audio controls="controls">
-            <source src="{% path media, 'reference' %}.ogg" type="audio/ogg" />
+            <!--<source src="{% path media, 'reference' %}.ogg" type="audio/ogg" />-->
             <source src="{% path media, 'reference' %}" type="audio/mp3" />
             <a href="{% path media, 'reference' %}" target="_blank"><img src="{% path media, 'small' %}" /></a>
         </audio>

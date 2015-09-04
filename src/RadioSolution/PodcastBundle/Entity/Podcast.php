@@ -40,6 +40,11 @@ class Podcast
     private $home_page;
 
     /**
+     * @var RadioSolution\ProgramBundle\Entity\Program
+     */
+    private $program;
+
+    /**
      * Marqueurs temporels de lecture du Podcast
      * @var array
      */
@@ -52,8 +57,6 @@ class Podcast
     	$this->dlAuth = true;
 
     }
-
-
 
     /**
      * Get id
@@ -189,13 +192,6 @@ class Podcast
     public  function __toString(){
     	return $this->getName();
     }
-
-
-    /**
-     * @var RadioSolution\ProgramBundle\Entity\Program
-     */
-    private $program;
-
 
     /**
      * Set program
