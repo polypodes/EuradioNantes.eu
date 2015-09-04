@@ -1,4 +1,5 @@
-    <section class="entry group">
+
+{#    <section class="entry group">
         <div class="entry-content emission">
             <div style="position:absolute;right:0;top:0;">
                 <a style="float:right;" title="S'abonner à notre flux RSS." class="icn-orange rss" href="/rss/emission/{{ entity.slug }}" target="_blank">S'abonner à notre flux RSS.</a>
@@ -30,3 +31,109 @@
             </div>
         </div>
     </section>
+#}
+
+<section class="content-main">
+  <div class="breadcrumb"><a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span></div>
+
+  {% if entity.theme %}
+  <span class="bloc-content-cat">{{ entity.theme.name }}</span>
+  {% endif %}
+  {% if entity.frequency %}
+  <span class="bloc-content-date">{{ entity.frequency.titre }}</span>
+  {% endif %}
+
+  <h1 class="content-title">{{ entity.name }}</h1>
+
+  {% if entity.media %}
+  <figure class="content-img"><img src="{% path entity.media, 'large' %}" srcset="{% path entity.media, 'large_mobile' %} 480w, {% path entity.media, 'large' %} 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
+  {% endif %}
+  <!--<p class="chapo">Small batch mumblecore bicycle rights mustache, single-origin coffee Bushwick twee kogi YOLO pickled. Aesthetic sartorial Wes Anderson farm-to-table church-key. Cronut American Apparel vegan seitan bitters, hoodie mlkshk whatever mustache Carles.</p>-->
+
+  {{ entity.description|raw }}
+
+  {{ render(controller('PodcastBundle:Podcast:emission', { 'id': entity.id, 'page': app.request.get('page'), 'title': entity.name ~ ' - Émission - Eur@dioNantes' })) }}
+
+  {{ include(':Social:share.html.twig') }}
+</section>
+
+<aside class="content-aside">
+  <div class="content-aside-inner">
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"><a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article class="bloc-newsletter">
+      <h2 class="bloc-newsletter-title">Euradionantes partout ailleurs</h2>
+      <div class="bloc-newsletter-text"><i class="ico-newsletter"></i>
+        <p>Recevez les infos et les <br>podcasts d'Euradionantes</p>
+        <form class="bloc-newsletter-field">
+          <input type="email" placeholder="Votre email" class="bloc-newsletter-email">
+          <input type="submit" value="Je m'abonne" class="bloc-newsletter-submit">
+        </form>
+        <div class="bloc-newsletter-social">
+          {{ include(':Social:links.html.twig') }}
+        </div>
+      </div>
+    </article>
+  </div>
+</aside>

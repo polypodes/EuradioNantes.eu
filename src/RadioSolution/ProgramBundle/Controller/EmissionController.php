@@ -24,7 +24,7 @@ class EmissionController extends Controller
 
 	public function indexAction()
 	{
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $query = $this
             ->getDoctrine()
@@ -89,7 +89,7 @@ class EmissionController extends Controller
      */
     public function showAction($name)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('ProgramBundle:Emission')->findOneBySlug($name);
 
         if (!$entity) {
@@ -105,7 +105,7 @@ class EmissionController extends Controller
     {
     	$dateNow =new \DateTime();
     	$domain = $this->get('request')->server->get('HTTP_HOST');
-    	$em = $this->getDoctrine()->getEntityManager();
+    	$em = $this->getDoctrine()->getManager();
 
         if (!$emission = $em->getRepository('ProgramBundle:Emission')->findOneBySlug($name)) {
             throw $this->createNotFoundException('Unable to find Emission entity.');

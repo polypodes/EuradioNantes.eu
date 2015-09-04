@@ -1,4 +1,4 @@
-	<section class="entry group">
+  {#<section class="entry group">
 		<div class="entry-content emissions">
 			<h3>Les émissions d'Eur@dioNantes</h3>
             <form action="{{ path(app.request.attributes.get('_route')) }}"  method="get">
@@ -69,5 +69,159 @@
                 {{ knp_pagination_render(entities) }}
         	</div>
         </div>
-    </section>
+    </section>#}
 
+<section class="actu-list">
+  <div class="breadcrumb">
+    <a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span>
+    {{ sonata_block_render_event('breadcrumb', { 'context': sonata_seo_context is defined ? sonata_seo_context : 'homepage' , 'current_uri': app.request.requestUri }) }}
+  </div>
+  <h1 class="actu-list-title">Les émissions de A à Z</h1>
+  <div class="filter">
+    <h2>Naviguer parmi les émissions</h2>
+    <form action="{{ path(app.request.attributes.get('_route')) }}" class="filter-fields-group">
+      <div class="filter-fields">
+        <label class="filter-label">Thèmes</label>
+        <div>
+          <select name="theme" class="filter-select">
+            <option value="">Sélectionnez un thème</option>
+            {% for theme in themes %}
+            <option value="{{ theme.id }}"{% if app.request.get('theme') == theme.id %} selected{% endif %}>{{ theme.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="filter-fields">
+        <label class="filter-label">Périodicité</label>
+        <div>
+          <select class="filter-select" name="frequency">
+            <option value="">Sélectionnez une périodicité</option>
+            {% for frequency in frequencies  %}
+            <option value="{{ frequency.id }}"{% if app.request.get('frequency') == frequency.id %} selected{% endif %}>{{ frequency.titre }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="filter-fields">
+        <input type="submit" value="Filter les émissions" class="filter-submit">
+      </div>
+    </form>
+  </div>
+  <div class="filter-quick">
+    <label class="filter-label">Accès rapide aux émissions</label>
+    <select class="filter-select filter-quick-select">
+      <option>Sélectionnez une émission</option>
+      <option>ou pas</option>
+    </select>
+  </div>
+  <section class="list">
+    {% for entity in entities %}
+    <article data-clickable="true" class="bloc-content">
+      <div class="bloc-content-inner">
+        {% if entity.media -%}
+        <figure class="bloc-content-figure"><img src="{% path entity.media, 'large' %}" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
+        {%- endif %}
+        <div class="bloc-content-text">
+          {% if entity.theme %}
+          <span class="bloc-content-cat">{{ entity.theme.name }}</span>
+          {% endif %}
+          {% if entity.frequency %}
+          <span class="bloc-content-date">{{ entity.frequency.titre }}</span>
+          {% endif %}
+          <h2 class="bloc-content-title">
+            <a href="{{ path('emission', {'name': entity.slug}) }}" data-clickable-target="true" title="Lien vers l'article">{{ entity.name }}</a>
+          </h2>
+          <p>{{ entity.description| striptags | truncate(200, true, "...") | raw }}</p>
+        </div>
+      </div>
+    </article>
+
+    {% else %}
+    <p><em>Aucun résultat</em></p>
+
+    {% endfor %}
+  </section>
+
+  {{ knp_pagination_render(entities) }}
+
+</section>
+<aside class="content-aside">
+  <div class="content-aside-inner">
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"><a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article id="newsletter-subscription" class="bloc-newsletter">
+      <h2 class="bloc-newsletter-title">Euradionantes partout ailleurs</h2>
+      <div class="bloc-newsletter-text"><i class="ico-newsletter"></i>
+        <p>Recevez les infos et les <br>podcasts d'Euradionantes</p>
+        <form class="bloc-newsletter-field">
+          <input type="email" placeholder="Votre email" class="bloc-newsletter-email">
+          <input type="submit" value="Je m'abonne" class="bloc-newsletter-submit">
+        </form>
+        <div class="bloc-newsletter-social">
+          {{ include(':Social:links.html.twig') }}
+        </div>
+      </div>
+    </article>
+  </div>
+</aside>
