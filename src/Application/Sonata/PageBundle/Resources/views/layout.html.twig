@@ -1,0 +1,142 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends 'ApplicationSonataPageBundle::base_layout.html.twig' %}
+
+{% block sonata_page_container %}
+  {# sonata_page_render_container('header', 'global') #}
+  <header class="header">
+    <div class="container">
+      <a href="/" title="Lien vers la page d'accueil d'Euradionantes"><img src="{{ asset('/assets/images/logo-header.svg') }}" alt="Logo d'EuradioNantes" class="header-logo"></a>
+      <button class="header-menu-button">
+        <svg width="22" height="40">
+          <line x1="1" y1="15" x2="22" y2="15" class="line-01"></line>
+          <line x1="1" y1="22" x2="22" y2="22" class="line-02"></line>
+          <line x1="1" y1="30" x2="22" y2="30" class="line-03"></line>
+        </svg>
+      </button>
+      <button class="header-menu-back">‹ Retour</button>
+      <div class="header-menu">
+        <nav class="header-menu-nav">
+          <ul class="header-items">
+            <li><a href="home.html" title="Lien vers la page d'accueil d'Euradionantes" class="header-link header-link-home"></a></li>
+            <li><a href="radio.html" title="Lien vers la page La Radio" class="header-link header-link-has-children">La radio</a>
+              <ul class="header-menu-level2">
+                <li><a href="radio.html" title="Lien vers la page La Radio" class="header-link">Lorem ipsum 1</a></li>
+                <li><a href="radio.html" title="Lien vers la page La Radio" class="header-link">Loreat</a></li>
+                <li><a href="radio.html" title="Lien vers la page La Radio" class="header-link">ipsum dolorm</a></li>
+              </ul>
+            </li>
+            <li><a href="actu.html" title="Lien vers la page La Radio" class="header-link">L’actu</a></li>
+            <li><a href="emissions.html" title="Lien vers la page La Radio" class="header-link header-link-has-children header-active">Les Émissions</a>
+              <ul class="header-menu-level2">
+                <li><a href="radio.html" title="Lien vers la page La Radio" class="header-link">Lorem ipsum 2</a></li>
+                <li><a href="radio.html" title="Lien vers la page La Radio" class="header-link">Loreat</a></li>
+                <li><a href="radio.html" title="Lien vers la page La Radio" class="header-link">ipsum dolorm</a></li>
+              </ul>
+            </li>
+            <li><a href="musique.html" title="Lien vers la page La Radio" class="header-link">La musique</a></li>
+            <li><a href="contact.html" title="Lien vers la page La Radio" class="header-link">Contact</a></li>
+          </ul>
+        </nav>
+        <form class="header-search">
+          <input type="search" placeholder="Recherche" class="header-search-input">
+          <input type="submit" value="" class="header-search-submit">
+        </form>
+      </div>
+    </div>
+  </header>
+
+  {% block broadcast_player %}
+  <section class="player">
+    <div class="container player-container">
+      <h3 class="player-status">En direct</h3>
+      <svg class="player-svg">
+        <circle cx="52" cy="52" r="52" class="player-circle-03"></circle>
+        <circle cx="52" cy="52" r="42" class="player-circle-02"></circle>
+        <circle cx="52" cy="52" r="32" class="player-circle-01"></circle>
+        <g transform="translate(20, 33) scale(1.25)" class="player-play">
+          <path d="M21.3871246,27.178247 C20.0687521,28.1843734 19,27.6594313 19,26.0057181 L19,2.99428189 C19,1.34058566 20.0622351,0.810653091 21.3871246,1.82175298 L35.6128754,12.678247 C36.9312479,13.6843734 36.9377649,15.3106531 35.6128754,16.321753 L21.3871246,27.178247 Z" class="player-play-path"></path>
+        </g>
+        <g transform="translate(-12, 33) scale(1.25)" class="player-pause player-hide">
+          <path d="M57.8,25.45 C56.25,25.45 55,24.25 55,22.775 L55,5.675 C55,4.2 56.25,3 57.8,3 C59.35,3 60.6,4.2 60.6,5.675 L60.6,22.775 C60.6,24.25 59.35,25.45 57.8,25.45"></path>
+          <path d="M44.8,25.45 C43.25,25.45 42,24.25 42,22.775 L42,5.675 C42,4.2 43.25,3 44.8,3 C46.35,3 47.6,4.2 47.6,5.675 L47.6,22.775 C47.6,24.25 46.35,25.45 44.8,25.45"></path>
+        </g>
+      </svg>
+      <div class="player-infos"><span class="player-suptitle">Now playing</span><span class="player-track">Jim O’Rourke - That Weekend</span></div><a href="#" title="Lien vers la page c'était quoi ce titre" class="player-what">› C’était quoi ce titre ?</a>
+      {{ include(':Social:links_player.html.twig') }}
+    </div>
+  </section>
+  {% endblock %}
+
+  {# if page is defined %}
+      <div class="row">
+          {% if page.name != 'global'%}
+              {{ sonata_page_render_container('content_top', 'global') }}
+          {% endif %}
+          {{ sonata_page_render_container('content_top', page) }}
+      </div>
+  {% endif #}
+
+  {# block sonata_page_breadcrumb %}
+      <div class="breadcrumb">
+          {% if sonata_seo_context is not defined %}
+              {% set sonata_seo_context = 'homepage' %}
+          {% endif %}
+          {{ sonata_block_render_event('breadcrumb', { 'context': sonata_seo_context, 'current_uri': app.request.requestUri }) }}
+      </div>
+  {% endblock #}
+
+  {% if sonata_seo_context is not defined %}
+      {% set sonata_seo_context = 'homepage' %}
+  {% endif %}
+
+  <main class="">
+      <div class="{{ sonata_seo_context == 'homepage' ? 'home' : 'content' }} container">
+          {% block page_content %}
+              {% if content is defined %}
+                  {{ content|raw }}
+              {% else %}
+                  {% set content = block('content') %}
+                  {% if content|length > 0 %}
+                      {{ content|raw }}
+                  {% elseif page is defined %}
+                      {{ sonata_page_render_container('content', page) }}
+                  {% endif %}
+              {% endif %}
+          {% endblock %}
+      </div>
+  </main>
+
+  {# if page is defined %}
+      <div class="row">
+          {{ sonata_page_render_container('content_bottom', page) }}
+
+          {% if page.name != 'global'%}
+              {{ sonata_page_render_container('content_bottom', 'global') }}
+          {% endif %}
+      </div>
+  {% endif #}
+
+  <footer class="footer">
+    <div class="container">
+      {# sonata_page_render_container('footer', 'global') #}
+      <a href="/" title="Lien vers la page d'accueil d'Euradionantes"><img src="{{ asset('assets/images/logo-footer.svg') }}" alt="logo d'Euradionantes" class="footer-logo"></a>
+      <ul>
+        <li><a href="contact.html" title="lien vers la page de contact" class="footer-link">Contact</a></li>
+        <li><a href="plan-du-site.html" title="lien vers la page plan du site" class="footer-link">Plan du site</a></li>
+        <li><a href="credits.html" title="lien vers la page de crédits" class="footer-link">Crédits</a></li>
+        <li><a href="mentions-legales.html" title="lien vers la page des mentions légales" class="footer-link">Mentions légales</a></li>
+        <li><a href="partenaires.html" title="lien vers la page des partenaires" class="footer-link">Partenaires</a></li>
+        <li><a href="soutenir.html" title="lien vers la page soutenir Euradio" class="footer-link">Soutenir Euradionantes</a></li>
+      </ul>
+    </div>
+  </footer>
+{% endblock %}
