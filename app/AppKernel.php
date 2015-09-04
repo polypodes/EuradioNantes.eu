@@ -60,7 +60,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Hype\MailchimpBundle\HypeMailchimpBundle(),
-
+            //new Nomaya\SocialBundle\NomayaSocialBundle(),
 
             // RadioSolution
             new RadioSolution\ProgramBundle\ProgramBundle(),
@@ -73,6 +73,7 @@ class AppKernel extends Kernel
             new RadioSolution\SearchBundle\SearchBundle(),
             new RadioSolution\SurveyBundle\SurveyBundle(),
             new RadioSolution\RSSAgregatorBundle\RSSAgregatorBundle(),
+            new RadioSolution\SiteBundle\SiteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

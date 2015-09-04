@@ -53,7 +53,8 @@
         "exeu/apai-io": "^1.8",
         "gedmo/doctrine-extensions": "2.3.*",
         "stof/doctrine-extensions-bundle": "^1.1",
-        "ahmedsamy/hype-mailchimp-bundle": "dev-master"
+        "ahmedsamy/hype-mailchimp-bundle": "dev-master",
+        "nomaya/social-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
