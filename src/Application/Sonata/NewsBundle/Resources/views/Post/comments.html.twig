@@ -1,0 +1,32 @@
+{#
+
+/*
+ * This file is part of the Sonata package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+#}
+
+<div class="sonata-blog-comment-container">
+    <h3 class="comment-title">{{ 'title_comments'|trans({}, 'SonataNewsBundle') }}</h3>
+
+    {% for comment in pager.results -%}
+        <article class="comment-item">
+          <div class="comment-info">
+            <h4 class="comment-author">{{ comment.name }}</h4>{# comment.url #}
+            <span class="comment-date">{{ comment.createdAt | format_date }}</span>
+          </div>
+          <div class="comment-text">
+            <p>{{ comment.message|nl2br }}</p>
+          </div>
+        </article>
+
+        <button class="comment-more">La suite des commentaires</button>
+    {%- else -%}
+        <p><em>{{ 'no_comments_available'|trans({}, 'SonataNewsBundle') }}</em></p>
+    {%- endfor %}
+</div>

@@ -1,0 +1,44 @@
+{#
+
+/*
+ * This file is part of the Sonata package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+#}
+
+
+<h3 class="comment-title2">Commenter, réagir</h3>{#'title_leave_comment'|trans({}, 'SonataNewsBundle') #}
+<div class="comment-message"><i class="ico-info"></i><span>Tous les champs sont obligatoires.</span></div>
+
+
+<form action="{{ url('sonata_news_add_comment', {'id': post_id}) }}" method="POST" role="form">
+
+    <div class="comment-textarea">
+      <label class="comment-label" for="{{form.message.vars.id}}">Votre commentaire</label>
+      <textarea id="{{form.message.vars.id}}" name="{{form.message.vars.full_name}}" placeholder="Votre message ou commentaire" required></textarea>
+      {{ form_errors(form.message, {'attr': {'class': 'comment-errors'}}) }}
+    </div>
+    <div class="comment-inputs">
+      <div class="comment-input">
+        <label class="comment-label" for="{{form.name.vars.id}}">Votre nom ou pseudo</label>
+        <input type="text" id="{{form.name.vars.id}}" name="{{form.name.vars.full_name}}" placeholder="" required>
+        {{ form_errors(form.name, {'attr': {'class': 'comment-errors'}}) }}
+      </div>
+      <div class="comment-input">
+        <label class="comment-label" for="{{form.email.vars.id}}">Votre adresse e-mail</label>
+        <input type="email" id="{{form.email.vars.id}}" name="{{form.name.vars.full_name}}" placeholder="" required>
+        {{ form_errors(form.email, {'attr': {'class': 'comment-errors'}}) }}
+      </div>
+      <div class="comment-input">
+        <div data-sitekey="6LeHx_4SAAAAAGmoCxyy9ZP6UOKWjwMk7BFssfuW" class="g-recaptcha"></div>
+      </div>
+    </div>
+    <input type="submit" value="Envoyer votre commentaire" class="comment-submit">
+    {# 'btn_add_comment'|trans({}, 'SonataNewsBundle') #}
+    {{ dump(form) }}
+</form>

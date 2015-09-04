@@ -40,8 +40,8 @@ class PostAdmin extends BaseAdmin
         $repo = $em->getRepository('Application\Sonata\NewsBundle\Entity\Post');
 
         //get related lists
-        $podcasts= $repo->getPostByCategory("podcast");
-        $news= $repo->getPostByCategory();
+        $podcasts = $repo->getPostsByType('podcast');
+        $news = $repo->getPostsByType('actualite');
 
         //parent::configureFormFields($formMapper); //can't use parent cause we cant change field order in formmaper after
         $formMapper
