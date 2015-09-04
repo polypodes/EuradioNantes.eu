@@ -20,12 +20,14 @@ RadioSolution\ProgramBundle\Entity\Program:
       nullable: true
       default: NULL
       targetEntity: RadioSolution\PodcastBundle\Entity\Podcast
+      inversedBy: program
       joinColumn:
         name: id_podcast
         referencedColumnName: id
   manyToOne:
     emission:
       targetEntity: Emission
+      inversedBy: programs
       joinColumn:
         name: id_emmission
         referencedColumnName: id
