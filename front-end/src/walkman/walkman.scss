@@ -1,0 +1,148 @@
+.walkman-container {
+    padding: 20px;
+}
+
+.walkman-track-title,
+.playlist-title {
+    color: $col07;
+    text-transform: uppercase;
+    font-size: .9em;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+// The main container
+.walkman {
+
+    & {
+        background-color: #fff;
+    }
+
+    &-main {
+        margin-top: 70px;
+    }
+
+    &-header {
+        background-color: $col06;
+        padding: 10px;
+        height: 70px;
+        width: 100%;
+        top: 0;
+        overflow: hidden;
+        position: fixed;
+    }
+
+    &-logo {
+        width: 160px;
+    }
+
+    &-player-svg {
+        position: absolute;
+        top: -16px;
+        right: 16px;
+        left: auto;
+    }
+    &-now {
+        background-color: $col02;
+    }
+
+    &-playlist {
+        background-color: #FFF;
+        padding-bottom: 0;
+        overflow: auto;
+    }
+
+    &-footer {
+        background-color: #FFF;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+}
+
+
+
+
+// The show that’s on air (if there is one)
+.show {
+
+    & {
+        margin-bottom: 20px;
+        font-size: .9em;
+        @include clearfix;
+    }
+
+    &-image {
+        float: left;
+        margin-right: 10px;
+    }
+
+    &-info {
+        @include list-unstyled;
+    }
+
+    &-time {
+        font-weight: bold;
+        color: $col05
+    }
+}
+
+
+
+
+// Track that is now playing
+.track {
+
+    & {
+        // margin-bottom: 10px;
+        @include clearfix;
+    }
+
+    &-image {
+        float: left;
+        margin-right: 10px;
+    }
+
+    &-artist,
+    &-album {
+        color: $col05;
+    }
+
+    &-artist {
+        font-weight: bold;
+    }
+
+    &-album {
+        font-size: .8em;
+        font-style: italic;
+    }
+
+    &-info {
+        @include list-unstyled;
+    }
+}
+
+
+
+.playlist {
+
+    &-list {
+        @include list-unstyled;
+        font-size: .9em;
+        margin: 0 -20px 0 -20px;
+    }
+    &-item {
+        border-bottom: 1px solid $col02;
+        padding: 5px 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    &-item-time {
+        color: $col05;
+        font-weight: bold;
+        margin-right: 15px;
+    }
+}
