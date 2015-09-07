@@ -16,7 +16,7 @@ namespace RadioSolution\ProgramBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use RadioSolution\ProgramBundle\Service\Tracks\TrackRetriever;
+use RadioSolution\ProgramBundle\Service\Tracks\NowPlaying;
 
 /**
  * Class NowPlayingCommand
@@ -25,7 +25,7 @@ use RadioSolution\ProgramBundle\Service\Tracks\TrackRetriever;
 class NowPlayingCommand extends ContainerAwareCommand
 {
     /**
-     * @var TrackRetriever
+     * @var NowPlaying
      */
     protected $nowPlaying = null;
 
@@ -50,14 +50,21 @@ class NowPlayingCommand extends ContainerAwareCommand
     {
         $this->nowPlaying = $this->getContainer()->get("radiosolution.program.nowPlaying");
         $terms = $this->nowPlaying->fetchTerms()->getTerms();
+        $now = new \DateTime();
+        $now = $now->format('d/m/Y H:i:s');
         if(isset($terms)) {
-            $output->writeln(sprintf("Fetched terms %s being processed through Amazon Product API...", $terms));
-            list($currentTrack, $broadcast, $terms, $album, $tracks) = $this->nowPlaying->execute();
-            $output->writeln(sprintf('Album %d "%s" processed', $album->getId(), $album->getTitle()));
-            $output->writeln(sprintf('new Broadcast %d "%s" added', $broadcast->getId(), $currentTrack->getTitle()));
+            try {
+                list($currentTrack, $broadcast, $terms, $album, $tracks) = $this->nowPlaying->execute();
+            } catch (\Exception $e) {
+                $output->writeln(sprintf('%s -- ERROR %s', $now, $e->getMessage()));
+                return null;
+            }
+            $output->writeln(sprintf("%s -- SUCCESS processing terms '%s' => Album #%d '%s' => Broadcast #%d => Track #%s '%s'",
+                $now, $terms, $album->getId(), $album->getTitle(), $broadcast->getId(),
+                $currentTrack->getId(), $currentTrack->getTitle()));
 
         } else {
-            $output->writeln(sprintf("terms in unreachable or is invalid"));
+            $output->writeln(sprintf("%s -- SKIPPED terms are invalid => Not processed", $now));
         }
 
         return null;
