@@ -120,86 +120,34 @@
     </article>
 
     {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
-
-    <article class="bloc-newsletter">
-      <h2 class="bloc-newsletter-title">Euradionantes partout ailleurs</h2>
-      <div class="bloc-newsletter-text"><i class="ico-newsletter"></i>
-        <p>Recevez les infos et les <br>podcasts d'Euradionantes</p>
-        <form class="bloc-newsletter-field">
-          <input type="email" placeholder="Votre email" class="bloc-newsletter-email">
-          <input type="submit" value="Je m'abonne" class="bloc-newsletter-submit">
-        </form>
-        <div class="bloc-newsletter-social">
-          {{ include(':Social:links.html.twig') }}
-        </div>
-      </div>
-    </article>
   </div>
 </aside>
+
+{% if post.relatedPosts %}
 <div class="content-bottom">
-  <article data-clickable="true" class="bloc-content">
+  {% for rel in post.relatedPosts %}
+  <article data-clickable="true" class="bloc-content{% if rel.type == 'podcast' %} bloc-podcast{% endif %}">
     <div class="bloc-content-inner">
-      <figure class="bloc-content-figure"><img src="//lorempixel.com/570/312" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
-      <div class="bloc-content-text"><span class="bloc-content-cat">Culture</span><span class="bloc-content-date">15 juillet 2015</span>
-        <h2 class="bloc-content-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        <p class="bloc-content-intro">Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et, suscipit vehicula odio.</p>
+      {% if rel.image -%}
+        <figure class="bloc-content-figure"><img src="{% path rel.image, 'list_tablet' %}" srcset="{% path rel.image, 'list_mobile' %} 480w, {% path rel.image, 'list_tablet' %} 1900w" alt="Illustration de l'article « {{ rel.title }} »" class="bloc-content-img img-responsive"></figure>
+      {%- endif %}
+      <div class="bloc-content-text">
+        {% if rel.collection -%}
+          <span class="bloc-content-cat">{{ rel.collection.name }}</span>
+        {%- endif %}
+        {% if rel.podcast -%}
+          <time datetime="{{ rel.podcast.realTimeStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ rel.podcast.realTimeStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+        {%- else -%}
+          <time datetime="{{ rel.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ rel.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+        {%- endif %}
+        <h2 class="bloc-content-title">
+          <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(rel) }) }}" data-clickable-target="true" title="Lire l'article « {{ rel.title }} »">{{ rel.title }}</a>
+        </h2>
+        <p class="bloc-content-intro">{{ post.abstract|truncate(80, true, '…') | raw }}</p>
       </div>
     </div>
   </article>
-  <article data-clickable="true" class="bloc-content bloc-podcast">
-    <div class="bloc-content-inner">
-      <figure class="bloc-content-figure"><img src="//lorempixel.com/570/312" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
-      <div class="bloc-content-text"><span class="bloc-content-cat">Culture</span><span class="bloc-content-date">15 juillet 2015</span>
-        <h2 class="bloc-content-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">Sur la plage abandonnée</a></h2>
-      </div>
-    </div>
-  </article>
-  <article data-clickable="true" class="bloc-content">
-    <div class="bloc-content-inner">
-      <figure class="bloc-content-figure"><img src="//lorempixel.com/570/312" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
-      <div class="bloc-content-text"><span class="bloc-content-cat">Culture</span><span class="bloc-content-date">15 juillet 2015</span>
-        <h2 class="bloc-content-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-      </div>
-    </div>
-  </article>
-  <article data-clickable="true" class="bloc-content">
-    <div class="bloc-content-inner">
-      <figure class="bloc-content-figure"><img src="//lorempixel.com/570/312" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
-      <div class="bloc-content-text"><span class="bloc-content-cat">Culture</span><span class="bloc-content-date">15 juillet 2015</span>
-        <h2 class="bloc-content-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-      </div>
-    </div>
-  </article>
-  <article data-clickable="true" class="bloc-content">
-    <div class="bloc-content-inner">
-      <figure class="bloc-content-figure"><img src="//lorempixel.com/570/312" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
-      <div class="bloc-content-text"><span class="bloc-content-cat">Culture</span><span class="bloc-content-date">15 juillet 2015</span>
-        <h2 class="bloc-content-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-      </div>
-    </div>
-  </article>
-  <article data-clickable="true" class="bloc-content">
-    <div class="bloc-content-inner">
-      <figure class="bloc-content-figure"><img src="//lorempixel.com/570/312" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
-      <div class="bloc-content-text"><span class="bloc-content-cat">Culture</span><span class="bloc-content-date">15 juillet 2015</span>
-        <h2 class="bloc-content-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-      </div>
-    </div>
-  </article>
-  <article data-clickable="true" class="bloc-content">
-    <div class="bloc-content-inner">
-      <figure class="bloc-content-figure"><img src="//lorempixel.com/570/312" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
-      <div class="bloc-content-text"><span class="bloc-content-cat">Culture</span><span class="bloc-content-date">15 juillet 2015</span>
-        <h2 class="bloc-content-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-      </div>
-    </div>
-  </article>
-  <article data-clickable="true" class="bloc-content">
-    <div class="bloc-content-inner">
-      <figure class="bloc-content-figure"><img src="//lorempixel.com/570/312" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
-      <div class="bloc-content-text"><span class="bloc-content-cat">Culture</span><span class="bloc-content-date">15 juillet 2015</span>
-        <h2 class="bloc-content-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-      </div>
-    </div>
-  </article>
+
+  {% endfor %}
 </div>
+{% endif %}

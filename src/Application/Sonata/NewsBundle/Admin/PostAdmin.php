@@ -81,20 +81,14 @@ class PostAdmin extends BaseAdmin
                 ->add('slug',"text", array('required' => false, 'label' => "Slug"))
                 ->add('collection', 'sonata_type_model_list', array('required' => true))
             ->end()
-            ->with('Liaisons', array(
+            ->with('Articles associés', array(
                 'class' => 'col-md-4'
                 ))
-                ->add('related_news', 'sonata_type_model', array(
-                    'required' => false,
+                ->add('relatedPosts', 'sonata_type_model_autocomplete', array(
+                    'label' => 'Actualités et Podcasts associés',
+                    'property' => 'title',
                     'multiple' => true,
-                    'label' => "Actualités",
-                    "query" => $news
-                ))
-                ->add('related_podcasts', 'sonata_type_model', array(
-                    'required' => false,
-                    'multiple' => true,
-                    'label' => "Podcasts",
-                    "query" => $podcasts
+                    'required' => false
                 ))
             ->end()
         ;
