@@ -66,6 +66,7 @@ class AlbumAdmin extends Admin
                 ->add('featuredTo', 'sonata_type_date_picker', array('label' => 'au : (inclus)', 'required' => false))
                 ->add('studio', null, array('label' => 'Studio', 'required' => false))
                 ->add('thumbnailUrl', 'url', array('label' => 'Vignette', 'required' => false))
+                ->add('image', 'sonata_type_model_list', array('label' => 'Image principale'), array('link_parameters' => array('provider' => 'sonata.media.provider.image')))
             ->end()
             ->with($this->trans('Description'))
                 ->add('resume', 'ckeditor', array('label' => 'Résumé', 'required' => false, 'config_name' => 'mini'))

@@ -100,3 +100,9 @@ RadioSolution\ProgramBundle\Entity\Album:
       joinColumn:
         name: label_id
         referencedColumnName: id
+    image:
+      targetEntity: Application\Sonata\MediaBundle\Entity\Media
+      nullable: true
+      joinColumn:
+        name: image
+        referencedColumnName: id

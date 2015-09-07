@@ -89,6 +89,11 @@ class Album
     private $thumbnailUrl;
 
     /**
+     * @var Application\Sonata\MediaBundle\Entity\Media
+     */
+    private $image;
+
+    /**
      * @var ArrayCollection of Track[]
      */
     private $tracks;
@@ -174,13 +179,20 @@ class Album
     public function setImagesFromXml(\SimpleXMLElement $xml)
     {
         $values = (array) json_decode(json_encode($xml));
-        if(
-            !empty($values)
+        if (!empty($values)
             && !empty($values["ImageSet"])
-            && !empty($values["ImageSet"]->ThumbnailImage)
-            && !empty($values["ImageSet"]->ThumbnailImage->URL)
+            && !empty($values["ImageSet"]->LargeImage)
+            && !empty($values["ImageSet"]->LargeImage->URL)
         ) {
-           $this->thumbnailUrl = strval($values["ImageSet"]->ThumbnailImage->URL);
+            $this->thumbnailUrl = strval($values["ImageSet"]->LargeImage->URL);
+            // enregistrer l'image principale en tant que Media
+            //$media = new \Application\Sonata\MediaBundle\Entity\Media();
+            //$basePath = $this->getRequest()->server->get('DOCUMENT_ROOT');
+            //$media->setBinaryContent($this->thumbnailUrl);
+            //$media->setContext('default');
+            //$media->setProviderName('sonata.media.provider.image');
+
+            //$this->image = $media;
         }
 
         return $this;
@@ -198,7 +210,7 @@ class Album
         $attrs = get_object_vars($this);
         $unsetAttrs = array(
             "id", "created_at", "updated_at", "tracks", "playlists",
-            "featuredFrom", "featuredTo", "thumbnailUrl", 'labelId', 'slug', 'content', 'resume', 'published');
+            "featuredFrom", "featuredTo", "thumbnailUrl", 'labelId', 'slug', 'content', 'resume', 'published', 'image');
         foreach($unsetAttrs as $attrKey) {
             unset($attrs[$attrKey]);
         }
@@ -626,6 +638,17 @@ class Album
     public function getThumbnailUrl()
     {
         return $this->thumbnailUrl;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
     }
 
     public function getLabelId()
