@@ -38,6 +38,8 @@ class PlaylistAdmin extends Admin
                 ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
                 ->add('featuredFrom', 'sonata_type_date_picker', array('label' => 'Playlist du '))
                 ->add('featuredTo', 'sonata_type_date_picker', array('label' => 'au : (inclus)'))
+                ->add('resume', 'ckeditor', array('label' => 'Résumé', 'required' => false, 'config_name' => 'mini'))
+                ->add('content', 'ckeditor', array('label' => 'Description', 'required' => false, 'config_name' => 'plus'))
             ->end()
             ->with($this->trans('Albums'))
                 /*

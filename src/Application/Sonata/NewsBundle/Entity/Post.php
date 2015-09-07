@@ -46,9 +46,7 @@ class Post extends BasePost
      */
     protected $image;
 
-    protected $related_news;
-
-    protected $related_podcasts;
+    protected $relatedPosts;
 
     /**
      * Get id
@@ -144,43 +142,27 @@ class Post extends BasePost
         return $this;
     }
 
-    /**
-     * Sets the value of related_news.
-     *
-     * @param mixed $related_news the related news
-     *
-     * @return self
-     */
-    public function setRelatedNews($related_new)
+    public function addRelatedPost($post)
     {
-        $this->related_news[] = $related_new;
-
-        return $this;
+        $this->relatedPosts[] = $post;
     }
 
-    /**
-     * Gets the value of related_news.
-     *
-     * @return mixed
-     */
-    public function getRelatedNews()
+    public function removedRelatedPost($post)
     {
-        return $this->related_news;
+        $this->relatedPosts->removeElement($post);
     }
 
-
-
-    public function setRelatedPodcasts($related_podcast)
+    public function setRelatedPosts($relatedPost)
     {
-        $this->related_podcast[] = $related_podcast;
+        $this->relatedPosts = $relatedPost;
 
         return $this;
     }
 
 
-    public function getRelatedPodcasts()
+    public function getRelatedPosts()
     {
-        return $this->related_podcasts;
+        return $this->relatedPosts;
     }
 
     /**

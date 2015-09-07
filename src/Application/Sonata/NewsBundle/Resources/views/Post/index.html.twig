@@ -25,7 +25,7 @@
         <h2 class="bloc-content-title">
           <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(top) }) }}" data-clickable-target="true" title="Lire l'article « {{ top.title }} »">{{ top.title }}</a>
         </h2>
-        <p>{{ top.abstract }}</p>
+        {{ top.abstract|raw }}
       </div>
     </div>
   </article>
@@ -45,7 +45,7 @@
           <h2 class="bloc-content-title">
             <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}" data-clickable-target="true" title="Lire l'article « {{ post.title }} »">{{ post.title }}</a>
           </h2>
-          <p>{{ post.abstract }}</p>
+          {{ post.abstract|raw }}
         </div>
       </div>
     </article>
@@ -123,19 +123,8 @@
         </div>
       </div>
     </article>
-    <article class="bloc-newsletter">
-      <h2 class="bloc-newsletter-title">Euradionantes partout ailleurs</h2>
-      <div class="bloc-newsletter-text">
-        <i class="ico-newsletter"></i>
-        <p>Recevez les infos et les <br>podcasts d'Euradionantes</p>
-        <form class="bloc-newsletter-field">
-          <input type="email" placeholder="Votre email" class="bloc-newsletter-email">
-          <input type="submit" value="Je m'abonne" class="bloc-newsletter-submit">
-        </form>
-        <div class="bloc-newsletter-social">
-          {{ include(':Social:links.html.twig') }}
-        </div>
-      </div>
-    </article>
+
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
+
   </div>
 </aside>

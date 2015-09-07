@@ -1,4 +1,4 @@
-<article class="bloc-newsletter">
+<article id="newsletter-subscription" class="bloc-newsletter">
   <h2 class="bloc-newsletter-title">Euradionantes partout ailleurs</h2>
   <div class="bloc-newsletter-text">
     <i class="ico-newsletter"></i>
@@ -8,6 +8,20 @@
       {{ form_widget(form.email, {"attr": { 'placeholder': 'Votre email', 'class': 'bloc-newsletter-email'}}) }}
       <input type="submit" value="Je m'abonne" class="bloc-newsletter-submit">
     {{ form_end(form) }}
+    {% if app.session.flashbag.has('newsletter_success') -%}
+      {%- for flashMessage in app.session.flashbag.get('newsletter_success') -%}
+        <div class="newsletter-flash-success">
+            {{ flashMessage }}
+        </div>
+      {%- endfor -%}
+    {%- endif %}
+    {% if app.session.flashbag.has('newsletter_error') -%}
+      {%- for flashMessage in app.session.flashbag.get('newsletter_error') -%}
+        <div class="newsletter-flash-error">
+            {{ flashMessage }}
+        </div>
+      {%- endfor -%}
+    {%- endif %}
     <div class="bloc-newsletter-social">
       {{ include(':Social:links.html.twig') }}
     </div>
