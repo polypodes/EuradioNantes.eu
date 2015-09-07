@@ -163,9 +163,23 @@ mysqlUpgrade: importRemote
 	@echo
 	@echo "Applying new schema updates using Doctrine..."
 	$(MAKE) schemaDb
+	$(MAKE) updateHost
 
 	@echo
 	@echo "Done."
+
+updateHost:
+	@echo
+	@echo "Updating vhost in SonataPage for 'http://euradionantes/"
+	mysql --user ${DB_USER} --password=${DB_PASSWORD} -e 'UPDATE `page__site` SET `host` = "euradionantes" WHERE `page__site`.`id` = 3;' ${DB_NAME} ${DB_SQLQUIET}
+	@echo "Host updated."
+
+rePublish:
+	@echo
+	@echo "Re-pulishing the all Sonata Page based website"
+	php app/console sonata:page:update-core-routes --site=all
+	php app/console sonata:page:create-snapshots --site=all
+
 
 ############################################################################
 # Generic sf2 tasks:
