@@ -24,19 +24,56 @@ class NewsletterController extends Controller
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $data = $form->getData();
-                die(var_dump($data));
+                //die(var_dump($data));
 
                 $mc = $this->get('hype_mailchimp');
-                $res = $mc
-                    ->getList()
-                    ->subscribe($data['email'])
-                ;
+                try {
+                    $format = 'html'; //receive newsletters in HTML
+                    $doubleOptin = false; // do not send an email to confirm subscription
+                    $res = $mc
+                        ->getList()
+                        ->subscribe($data['email'], $format, $doubleOptin)
+                    ;
 
-                die(var_dump($res));
+                    if (!empty($res['euid'])) {
+                        // success message
+                        $this->get('session')->getFlashBag()->add(
+                            'newsletter_success',
+                            'Votre adresse e-mail a bien été ajoutée'
+                        );
+                    } elseif(!empty($res['status']) && $res['status'] == 'error' && !empty($res['name'])) {
+                        switch($res['name']) {
+                            case 'Email_NotExists':
+                                $message = 'Votre adresse e-mail est incorrecte ou n’existe pas';
+                                break;
+                            case 'List_AlreadySubscribed':
+                                $message = 'Votre adresse e-mail est déjà présente dans la liste des abonnés';
+                                break;
+                            case 'List_DoesNotExist':
+                                $message = 'Erreur, la liste d’abonnement n’existe pas';
+                                break;
+                            default:
+                                $message = 'Erreur !' . $res['error'];
+
+                        }
+                        $this->get('session')->getFlashBag()->add(
+                            'newsletter_error',
+                            $message
+                        );
+                    } else {
+                        $this->get('session')->getFlashBag()->add(
+                            'newsletter_error',
+                            'Une erreur est survenue lors de votre inscription (%s)<br>' . var_dump($res)
+                        );
+                    }
+
+                } catch(\Exception $e) {
+                    var_dump($e);
+                }
             }
 
-            $referer = $this->getRequest()->headers->get('referer');
-            die(var_dump($referer));
+            $referer = $this->getRequest()->headers->get('referer') . '#newsletter-subscription';
+            //die(var_dump($referer));
             return $this->redirect($referer);
         }
 
