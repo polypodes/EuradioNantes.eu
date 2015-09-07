@@ -260,12 +260,15 @@ stats: quality build
 	@bin/phpmd src text codesize,unusedcode
 	@bin/pdepend --summary-xml=build/pdepend/summary.xml --jdepend-chart=build/pdepend/jdepend.svg --overview-pyramid=build/pdepend/pyramid.svg src
 
-update: vendor/autoload.php
-	@$(MAKE) explain
-	@$(MAKE) pull
+deploy: vendor/autoload.php update
+	@composer install --optimize-autoloader
 	@$(MAKE) schemaDb
 	@$(MAKE) clear
 	@$(MAKE) done
+
+update: vendor/autoload.php
+	@$(MAKE) explain
+	@$(MAKE) pull
 
 robot:
 	@echo "User-agent: *" > $(WEB_PATH)/robots.txt
