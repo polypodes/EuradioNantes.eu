@@ -1,0 +1,72 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="description", content="")
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
+
+    title Écouter Euradio Nantes
+    link(rel="shortcut icon", href="./assets/favicon.ico", type="image/x-icon")
+    link(href="./assets/main.css", rel="stylesheet")
+
+    //- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    //- Safely remove this block if you are not targeting IE8
+    //-[if lt IE 9]
+      script(src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js")
+      script(src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js")
+    //-[endif]
+    //-[if lt IE 8]
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    //-[endif]
+  //- HTML BODY
+  body.walkman
+    header.walkman-header
+        img(src="./assets/images/logo-header-inverted.svg", alt="Logo d'EuradioNantes").walkman-logo
+        h1.sr-only Écouter Euradio Nantes
+        svg.player-svg.walkman-player-svg
+          circle(cx="52", cy="52", r="52").player-circle-03
+          circle(cx="52", cy="52", r="42").player-circle-02
+          circle(cx="52", cy="52", r="32").player-circle-01
+          g(transform="translate(20, 33) scale(1.25)").player-play
+            path(d="M21.3871246,27.178247 C20.0687521,28.1843734 19,27.6594313 19,26.0057181 L19,2.99428189 C19,1.34058566 20.0622351,0.810653091 21.3871246,1.82175298 L35.6128754,12.678247 C36.9312479,13.6843734 36.9377649,15.3106531 35.6128754,16.321753 L21.3871246,27.178247 Z").player-play-path
+          g(transform="translate(-12, 33) scale(1.25)").player-pause.player-hide
+            path(d="M57.8,25.45 C56.25,25.45 55,24.25 55,22.775 L55,5.675 C55,4.2 56.25,3 57.8,3 C59.35,3 60.6,4.2 60.6,5.675 L60.6,22.775 C60.6,24.25 59.35,25.45 57.8,25.45")
+            path(d="M44.8,25.45 C43.25,25.45 42,24.25 42,22.775 L42,5.675 C42,4.2 43.25,3 44.8,3 C46.35,3 47.6,4.2 47.6,5.675 L47.6,22.775 C47.6,24.25 46.35,25.45 44.8,25.45")
+
+    main.walkman-main
+        .walkman-container.walkman-now
+            section.walkman-show
+                h2.sr-only Émission à l’écoute
+                .show
+                    img(src="//lorempixel.com/85/43", alt="").show-image
+                    ul.show-info
+                        li.show-time
+                            time 8h00 - 8h26
+                        li.show-name L’invité d’actualité lorem ipsum
+            section.walkman-track
+                h2.walkman-track-title En ce moment
+                .track
+                    img(src="//lorempixel.com/86/86", alt="").track-image
+                    ul.track-info
+                        li.track-title
+                            strong Where Am I This Time (2013)
+                        li.track-artist Al Von Stramm
+                        li.track-album Album : See Daisy
+
+        section.walkman-container.walkman-playlist
+            h2.playlist-title Vous avez entendu
+            - var n = 0
+            ol.playlist-list
+                - for (var i = 0; i < 30; ++i) {
+                    li.playlist-item
+                        time.playlist-item-time 3:20&nbsp;
+                        strong Titre du track&nbsp;
+                        span.playlist-track-title Nom artiste&nbsp;
+                        span.playlist-album Titre du track lorem ipsim fragirit colidet
+
+                - }
+
+    footer.walkman-container.walkman-footer
+        a(href="#") « Les morceaux précédents
