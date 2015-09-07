@@ -1,5 +1,6 @@
 {
   "sass": true,
+  "autoprefixer": true,
   "in": ["./src/index.scss"],
   "out": "./dist/assets/main.css",
   "sourcemaps": false,
