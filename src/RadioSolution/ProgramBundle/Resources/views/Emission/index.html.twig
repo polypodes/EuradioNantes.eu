@@ -1,82 +1,11 @@
-  {#<section class="entry group">
-		<div class="entry-content emissions">
-			<h3>Les émissions d'Eur@dioNantes</h3>
-            <form action="{{ path(app.request.attributes.get('_route')) }}"  method="get">
-                <div class="first-dropdown">
-                    <h4>Thèmes</h4>
-                    <select data-placeholder="Choisissez un thème" class="chzn-select" name="theme">
-                        <option value="">Choisissez un thème</option>
-                        {% for theme in themes %}
-                        <option value="{{ theme.id }}"{% if app.request.get('theme') == theme.id %} selected{% endif %}>{{ theme.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="second-dropdown">
-                	<h4>Périodicité</h4>
-                	<select data-placeholder="Choisissez une périodicité" style="width:200px;" class="chzn-select" tabindex="8"  name="frequency">
-                        <option value="">Choisissez une périodicité</option>
-                        {% for frequency in frequencies  %}
-                        <option value="{{ frequency.id }}"{% if app.request.get('frequency') == frequency.id %} selected{% endif %}>{{ frequency.titre }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="third-dropdown">
-                    <h4>Archive</h4>
-                	<input type="checkbox" name="archive" value="1" {% if app.request.get('archive') == 1 %} checked="checked"{% endif %}/>
-                </div>
-
-                <input class="btn-selectionner submit-emission-filter" type="submit" value="Sélectionner">
-                <a href="{{ path('emissions') }}">Supprimer le filtre</a>
-            </form>
-
-            <div class="navigation">
-               {{ knp_pagination_render(entities) }}
-            </div>
-
-            <div class="emissions-list group">
-                {% set class = 'first'%}
-                {% for entity in entities %}
-                <article class="emission {{ class }}">
-					<figure class="image">
-                        <a href="{{ path('emission', {'name': entity.slug}) }}">
-							{% if entity.media() -%}
-								{%thumbnail entity.media ,'medium' %}
-							{%- else -%}
-								<img src="/upload/default.jpg" alt="podcast à la une" />
-							{%- endif %}
-						</a>
-					</figure>
-                    {% if entity.theme %}
-                    <span class="emission-theme">{{ entity.theme.name }}</span>
-                    {% endif %}
-                    {% if entity.frequency %}
-                    <span class="emission-frequency">{{ entity.frequency.titre }}</span>
-                    {% endif %}
-                    <a href="{{ path('emission', {'name': entity.slug}) }}">
-                        <h2><span>{{ entity.name }}</span></h2>
-    					<p>{{ entity.description| striptags | truncate(200, true, "...") | raw }}</p>
-					</a>
-				</article>
-				{% if  class == 'first'%}
-					{% set class = '' %}
-				{% else %}
-					{% set class = 'first'%}
-				{% endif %}
-                {% endfor %}
-            </div>
-
-            <div class="navigation">
-                {{ knp_pagination_render(entities) }}
-        	</div>
-        </div>
-    </section>#}
-
 <section class="actu-list">
   <div class="breadcrumb">
     <a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span>
     {{ sonata_block_render_event('breadcrumb', { 'context': sonata_seo_context is defined ? sonata_seo_context : 'homepage' , 'current_uri': app.request.requestUri }) }}
   </div>
+
   <h1 class="actu-list-title">Les émissions de A à Z</h1>
+
   <div class="filter">
     <h2>Naviguer parmi les émissions</h2>
     <form action="{{ path(app.request.attributes.get('_route')) }}" class="filter-fields-group">
@@ -107,6 +36,7 @@
       </div>
     </form>
   </div>
+
   <div class="filter-quick">
     <label class="filter-label">Accès rapide aux émissions</label>
     <select class="filter-select filter-quick-select">
@@ -114,6 +44,7 @@
       <option>ou pas</option>
     </select>
   </div>
+
   <section class="list">
     {% for entity in entities %}
     <article data-clickable="true" class="bloc-content">
@@ -143,8 +74,8 @@
   </section>
 
   {{ knp_pagination_render(entities) }}
-
 </section>
+
 <aside class="content-aside">
   <div class="content-aside-inner">
     <article data-clickable="true" class="bloc-mini bloc-podcast">
@@ -210,18 +141,7 @@
         </div>
       </div>
     </article>
-    <article id="newsletter-subscription" class="bloc-newsletter">
-      <h2 class="bloc-newsletter-title">Euradionantes partout ailleurs</h2>
-      <div class="bloc-newsletter-text"><i class="ico-newsletter"></i>
-        <p>Recevez les infos et les <br>podcasts d'Euradionantes</p>
-        <form class="bloc-newsletter-field">
-          <input type="email" placeholder="Votre email" class="bloc-newsletter-email">
-          <input type="submit" value="Je m'abonne" class="bloc-newsletter-submit">
-        </form>
-        <div class="bloc-newsletter-social">
-          {{ include(':Social:links.html.twig') }}
-        </div>
-      </div>
-    </article>
+
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
   </div>
 </aside>

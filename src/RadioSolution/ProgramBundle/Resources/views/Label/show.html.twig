@@ -1,24 +1,103 @@
-<div>
-    <h1>{{ label.title }}</h1>
+<section class="content-main">
+  <div class="breadcrumb"><a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span></div>
 
-    {% media label.image, 'big' with {'class': 'responsive'} %}
-    {{ label.content | raw }}
+  <h1 class="content-title">{{ label.title }}</h1>
 
+  {% if label.image %}
+  <figure class="content-img"><img src="{% path label.image, 'large' %}" srcset="{% path label.image, 'large_mobile' %} 480w, {% path label.image, 'large' %} 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
+  {% endif %}
+  <!--<p class="chapo">Small batch mumblecore bicycle rights mustache, single-origin coffee Bushwick twee kogi YOLO pickled. Aesthetic sartorial Wes Anderson farm-to-table church-key. Cronut American Apparel vegan seitan bitters, hoodie mlkshk whatever mustache Carles.</p>-->
 
-    {% if label.albums|length > 0 %}
+  {{ label.content|raw }}
 
-        <h3>Les albums</h3>
+  {% if label.albums -%}
+    <article class="podcast podcast-list">
+      <div class="podcast-title">Les albums</div>
 
-        {% for album in label.albums %}
-        <article class="album">
-            <a href="{{ path('album', {'slug': album.slug}) }}">
-                {% if album.thumbnailUrl %}
-                <img src="{{ album.thumbnailUrl }}" alt="">
-                {% endif %}
-                <h3>{{ album.title }}</h3>
-            </a>
-        </article>
-        {% endfor %}
+      {% for entity in label.albums %}
+        <div class="podcast-item">
+          {% if entity.image -%}
+            <figure class="bloc-content-figure"><img src="{% path entity.image, 'list_tablet' %}" srcset="{% path entity.image, 'list_mobile' %} 480w, {% path entity.image, 'list_tablet' %} 992w, {% path entity.image, 'list_desktop' %} 1900w" alt="Illustration du label « {{ entity.title }} »" class="bloc-content-img img-responsive"></figure>
+            {% elseif entity.thumbnailUrl %}
+            <figure class="bloc-content-figure"><img src="{{ entity.thumbnailUrl }}" alt="Illustration du label « {{ entity.title }} »" class="bloc-content-img img-responsive"></figure>
+          {%- endif %}
+          <h3 class="podcast-item-title"><a href="{{ path('album', {'slug': entity.slug}) }}">{{ entity.title }}</a></h3>
+          <p class="podcast-item-text">{{ entity.resume| truncate(80, true, "…") }}</p>
+        </div>
 
-    {% endif %}
-</div>
+      {% endfor %}
+    </article>
+  {%- endif %}
+
+  {{ include(':Social:share.html.twig') }}
+</section>
+
+<aside class="content-aside">
+  <div class="content-aside-inner">
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"><a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
+  </div>
+</aside>

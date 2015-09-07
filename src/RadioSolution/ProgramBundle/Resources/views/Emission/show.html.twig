@@ -1,38 +1,3 @@
-
-{#    <section class="entry group">
-        <div class="entry-content emission">
-            <div style="position:absolute;right:0;top:0;">
-                <a style="float:right;" title="S'abonner à notre flux RSS." class="icn-orange rss" href="/rss/emission/{{ entity.slug }}" target="_blank">S'abonner à notre flux RSS.</a>
-            </div>
-
-            {% if entity.theme %}
-            <span class="emission-theme">{{ entity.theme.name }}</span>
-            {% endif %}
-            {% if entity.frequency %}
-            <span class="emission-frequency">{{ entity.frequency.titre }}</span>
-            {% endif %}
-
-            <h1>{{ entity.name }}</h1>
-
-            <figure class="picture-infos">
-                {% if entity.media %}
-                    {% thumbnail entity.media ,'medium' %}
-                {% else %}
-                    <img src="/upload/default.jpg" alt="" />
-                {% endif %}
-            </figure>
-
-            {{ entity.description|raw }}
-
-            <div class="block group">
-                <h3>Les derniers podcasts de l’émission</h3>
-
-                {{ render(controller('PodcastBundle:Podcast:emission', { 'id': entity.id, 'page': app.request.get('page'), 'title': entity.name ~ ' - Émission - Eur@dioNantes' })) }}
-            </div>
-        </div>
-    </section>
-#}
-
 <section class="content-main">
   <div class="breadcrumb"><a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span></div>
 
@@ -122,18 +87,7 @@
         </div>
       </div>
     </article>
-    <article class="bloc-newsletter">
-      <h2 class="bloc-newsletter-title">Euradionantes partout ailleurs</h2>
-      <div class="bloc-newsletter-text"><i class="ico-newsletter"></i>
-        <p>Recevez les infos et les <br>podcasts d'Euradionantes</p>
-        <form class="bloc-newsletter-field">
-          <input type="email" placeholder="Votre email" class="bloc-newsletter-email">
-          <input type="submit" value="Je m'abonne" class="bloc-newsletter-submit">
-        </form>
-        <div class="bloc-newsletter-social">
-          {{ include(':Social:links.html.twig') }}
-        </div>
-      </div>
-    </article>
+
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
   </div>
 </aside>
