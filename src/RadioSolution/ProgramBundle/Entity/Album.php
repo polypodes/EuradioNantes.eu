@@ -216,7 +216,11 @@ class Album
         }
         $keys = array_map("ucfirst", array_keys($attrs));
         $values = (array) json_decode(json_encode($xml)); // it's a simple XML obj, no depth.
-        $values["Artist"] = $values["Creator"]; // return both keys
+        if (!empty($values["Artist"])) {
+            $values["Creator"] = $values["Artist"]; // return both keys
+        } elseif(!empty($values["Creator"])) {
+            $values["Artist"] = $values["Creator"]; // return both keys
+        }
 
         foreach ($keys as $key) {
             if (!isset($values[$key]) || !is_string($values[$key]) || empty($values[$key])) {

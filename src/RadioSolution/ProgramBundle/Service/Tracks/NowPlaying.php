@@ -96,6 +96,8 @@ class NowPlaying implements ContainerAwareInterface
 
     /**
      * @param ContainerInterface|NULL $container
+     *
+     * @return NowPlaying
      */
     public function setContainer(ContainerInterface $container = null)
     {
@@ -115,11 +117,11 @@ class NowPlaying implements ContainerAwareInterface
     }
 
     /**
-     * @return $this
+     * @return NowPlaying
      */
     public function fetchTerms()
     {
-        $this->terms = file_get_contents($this->nowPlayingUrl);
+        $this->terms = trim(file_get_contents($this->nowPlayingUrl));
         $unProcessable = array(
             "EuradioNantes - La diversite europeenne au creux de l'oreille"
         );
@@ -130,7 +132,6 @@ class NowPlaying implements ContainerAwareInterface
 
         return $this;
     }
-
 
     /**
      * @return array [$currentTrack, $broadcast, $this->terms, $albumModel, $trackList]
@@ -150,6 +151,15 @@ class NowPlaying implements ContainerAwareInterface
             $this->fetchTerms();
         }
 
+        /** @var Broadcast */
+        $broadcast = null;
+        /** @var Track */
+        $currentTrack = null;
+        /** @var AlbumModel */
+        $albumModel = null;
+
+        $code = false;
+
         if(isset($this->terms)) {
             list($currentTrackTitle, $terms, $album, $images, $tracks) = $this->retriever->search($this->terms);
             list($code, $albumModel) = $this->saveAlbum($album, $images, $terms);
@@ -167,7 +177,20 @@ class NowPlaying implements ContainerAwareInterface
                 default:
                     throw new InvalidTermsInputException(sprintf("album couldn't be saved in %s", __METHOD__));
             }
+
+            if(empty($trackList)) {
+                throw new InvalidTrackInputException(sprintf('trackList not found in %s', __METHOD__));
+            }
+            elseif(empty($currentTrackTitle)) {
+                throw new InvalidTrackInputException(sprintf('currentTrackTitle is empty in %s', __METHOD__));
+            }
+
             $currentTrack = $this->getTrackByTitle($trackList, $currentTrackTitle);
+
+            if (empty($currentTrack)) {
+                throw new InvalidTrackInputException(sprintf("No '%s' track found in '%s' found album, using given '%s' terms in %s", $currentTrackTitle, $albumModel->getTitle(), $terms, __METHOD__));
+            }
+
             list($code, $broadcast) = $this->saveBroadcast($currentTrack);
 
             if(empty($broadcast) || $code == self::SOMETHING_TERRIBLE_HAPPENED) {
@@ -191,11 +214,16 @@ class NowPlaying implements ContainerAwareInterface
      */
     protected function saveAlbum($album, $images, $terms)
     {
-        $albumModel = new AlbumModel();
-        if(empty($album) || empty($images) || empty($terms)) {
-            var_dump($album, $images, $terms);
-            throw new InvalidAlbumInputException(sprintf("album, images nor terms cannot be null in %s", __METHOD__));
+        if(empty($terms)) {
+            throw new InvalidAlbumInputException(sprintf("terms are null in %s", __METHOD__));
         }
+        elseif(empty($album)) {
+            throw new InvalidAlbumInputException(sprintf("album is null in %s", __METHOD__));
+        }
+        elseif(empty($images)) {
+            throw new InvalidAlbumInputException(sprintf("images list is null in %s", __METHOD__));
+        }
+        $albumModel = new AlbumModel();
         try {
             $this->logger->info(sprintf('Trying to SAVE %s ALBUM INFOS using the TrackRetriever', $terms));
             $albumModel->fromXml($album);
@@ -242,6 +270,26 @@ class NowPlaying implements ContainerAwareInterface
         );
     }
 
+
+    /**
+     * @link http://stackoverflow.com/a/976712/490589
+     * @param \DateTime $start_date
+     * @param \DateTime $end_date
+     * @param \DateTime $date_to_check
+     *
+     * @return bool
+     */
+    public function checkInRange($start_date, $end_date, $date_to_check)
+    {
+        // Convert to timestamp
+        $start_ts = strtotime($start_date);
+        $end_ts = strtotime($end_date);
+        $user_ts = strtotime($date_to_check);
+
+        // Check that user date is between start & end
+        return (($user_ts >= $start_ts) && ($user_ts <= $end_ts));
+    }
+
     /**
      * @param Track $track
      *
@@ -250,7 +298,29 @@ class NowPlaying implements ContainerAwareInterface
      */
     protected function saveBroadCast($track)
     {
+        /** @var Broadcast */
+        $lastBroadcast = $this
+            ->container->get('doctrine')->getManager()
+            ->getRepository('ProgramBundle:Broadcast')
+            ->createQueryBuilder('b')
+            ->orderBy('b.created_at', 'DESC')
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+
+        /** @var Track */
+        $lastBroadcastedTrack = $lastBroadcast->getTrack();
+
+        if (!empty($lastBroadcastedTrack && !empty($track))) {
+            //die(dump([$track->getId(), $lastBroadcastedTrack->getId()]));
+            if($track->getId() === $lastBroadcastedTrack->getId()) {
+                return array(self::ALREADY_EXISTS, $lastBroadcast);
+            }
+        }
+
         $broadcast = new Broadcast();
+
         if(empty($track)) {
             throw new InvalidTrackInputException(sprintf("track entity cannot be null in %s", __METHOD__));
         }
@@ -282,7 +352,7 @@ class NowPlaying implements ContainerAwareInterface
     {
         $found = null;
         if(empty($trackList) || empty($currentTrackTitle)) {
-            throw new InvalidTrackInputException(sprintf('trackList or currentTrackTitle are empty', __METHOD__));
+            throw new InvalidTrackInputException(sprintf('trackList or currentTrackTitle are empty in %s', __METHOD__));
         }
 
         foreach($trackList as $track) {
