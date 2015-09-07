@@ -41,6 +41,16 @@ class Playlist
     private $title;
 
     /**
+     * @var string
+     */
+    private $resume;
+
+    /**
+     * @var string
+     */
+    private $content;
+
+    /**
      * @var ArrayCollection of Album[]
      */
     private $albums;
@@ -292,6 +302,28 @@ class Playlist
     public function setSlug($slug)
     {
         $this->slug = $slug;
+        return $this;
+    }
+
+    public function getResume()
+    {
+        return $this->resume;
+    }
+
+    public function setResume($resume)
+    {
+        $this->resume = $resume;
+        return $this;
+    }
+
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    public function setContent($content)
+    {
+        $this->content = $content;
         return $this;
     }
 }
