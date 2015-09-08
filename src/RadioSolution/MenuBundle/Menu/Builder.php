@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace  RadioSolution\MenuBundle\Menu;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,150 +9,159 @@ use Knp\Menu\FactoryInterface;
 
 class Builder extends Controller
 {
-    public function mainMenu(FactoryInterface $factory, array $options )
+    public function mainMenu(FactoryInterface $factory, array $options)
     {
-    	//$domain = $this->get('request')->server->get('HTTP_HOST');
-    	$options['idmenu']=1;
+    	$options['idmenu'] = 1;
     	$em = $this->getDoctrine()->getEntityManager();
-    	
+
     	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
     	$menu = $factory->createItem($menu);
-    	
-    	$items = $em->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
-    	->setParameters(array(
-     		'id_menu'=> $options['idmenu'],
-		))->getResult();
-    	
-    	foreach ($items as $key=>$values){
-    	    if(strpos($values->getUrl(),'http://')===false){$ext='/';}else{$ext='';}
+        //$menu->setattributes(array(
+        //    'currentClass' => 'header-active',
+        //    'firstClass' => false,
+        //    'lastClass' => false,
+        //));
+        $menu->setChildrenAttribute('class', 'header-items');
 
-    		$item=$menu->addChild($values->getName(), array('uri' => $ext.$values->getUrl()));
-    		
-    		
-    		//echo preg_quote($ext.$values->getUrl(), '/').'<br clear="all" />';
-    		
-    		if(preg_match('/.*'.preg_quote(str_replace('.', '', $ext.$values->getUrl()), '/').'.*/i', $this->container->get('request')->getRequestUri())){
-    		
-    			$item->setCurrent(true);
-    			
+    	$items = $em
+            ->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
+        	->setParameters(array(
+         		'id_menu' => $options['idmenu'],
+    		))
+            ->getResult()
+        ;
+
+    	foreach ($items as $key => $values) {
+    	    $url = (preg_match('@^(http://|[/#])@', $values->getUrl()) ? '' : '/') . $values->getUrl();
+
+    		$item = $menu->addChild($values->getName(), array('uri' => $url));
+            $item->setLinkAttribute('class', 'header-link');
+
+            if (in_array($url, array('/', '/accueil'))) {
+                 $item->setLinkAttribute('class', $item->getLinkAttribute('class') . ' header-link-home');
+                 $item->setLabel('');
+            }
+            if (strpos($this->container->get('request')->getRequestUri(), $url) !== false) {
+                $item->setLinkAttribute('class', $item->getLinkAttribute('class') . ' header-active');
     		}
 
-    		$this->addChild($em,$values,$item,$options['idmenu']);
+    		$this->addChild($em, $values, $item, $options['idmenu'], 'header-link');
+
+            $item->setChildrenAttribute('class', 'header-menu-level2');
     	}
+
+
+
     	return $menu;
     }
-    
-    protected function addChild($em, $entityItem, $item, $idmenu){
-    	//$domain = $this->get('request')->server->get('HTTP_HOST');
-    	$items = $em->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent= :id_parent ORDER BY i.order_item ASC' )
-    	->setParameters(array(
-    			'id_menu'=> $idmenu,
+
+    protected function addChild($em, $entityItem, $item, $idmenu, $class = ''){
+    	$items = $em
+            ->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent= :id_parent ORDER BY i.order_item ASC' )
+        	->setParameters(array(
+    			'id_menu' => $idmenu,
     			'id_parent' => $entityItem->getId(),
-    	))->getResult();
-    	
-    	
-    	
-    	foreach ($items as $key=>$values){
-    	
-    	    if(strpos($values->getUrl(),'http://')===false){$ext='/';}else{$ext='';}
-    		$subitem = $item->addChild($values->getName(), array('uri' => $ext.$values->getUrl()));
-    		
+        	))
+            ->getResult()
+        ;
 
-    		//echo str_replace(array('\-', '\.'), array('-', ''), preg_quote($ext.$values->getUrl(), '/')).'<br clear="all" />';
-    		
-    		
-    		//echo $ext.$values->getUrl().'|||';
-    		
-    		//if($ext.$values->getUrl() == './categorie/teams-europennes'){
-    			//echo '<div style="position:absolute; background-color:white;">';
-    			//echo $ext.$values->getUrl().'<br/>';
-    			//echo $this->container->get('request')->getRequestUri().'<br/>';
-    			//echo '/.*'.preg_quote(str_replace('.', '', $ext.$values->getUrl()), '/').'.*/i'.'<br/>';
-    			//echo '</div>';
-    		
-    		//	}		
-			
-			
-    		if(preg_match('/.*'.preg_quote(str_replace('.', '', $ext.$values->getUrl()), '/').'.*/i', $this->container->get('request')->getRequestUri())){
-    		
-    			$item->setCurrent(true);
-    			$subitem->setCurrent(true);
-    		
-    		}
+        if (!empty($items)) {
+            $item->setLinkAttribute('class',  $item->getLinkAttribute('class') . ' header-link-has-children');
+        }
 
+    	foreach ($items as $key => $values) {
+            $url = (preg_match('@^(http://|[/#])@', $values->getUrl()) ? '' : '/') . $values->getUrl();
+    		$subitem = $item->addChild($values->getName(), array('uri' => $url));
+            if (!empty($class)) $subitem->setLinkAttribute('class', $class);
 
-    		$this->addChild($em,$values,$subitem,$idmenu);
+            if (strpos($this->container->get('request')->getRequestUri(), $url) !== false) {
+                $subitem->setLinkAttribute('class', $subitem->getLinkAttribute('class') . ' header-active');
+                $item->setLinkAttribute('class', $item->getLinkAttribute('class') . ' header-active');
+            }
+
+            // no recursivity
+    		//$this->addChild($em, $values, $subitem, $idmenu);
     	}
     }
-    
-    public function footerMenu(FactoryInterface $factory, array $options )
+
+    public function footerMenu(FactoryInterface $factory, array $options)
     {
     	//$domain = $this->get('request')->server->get('HTTP_HOST');
-    	$options['idmenu']=4;
+    	$options['idmenu'] = 4;
     	$em = $this->getDoctrine()->getEntityManager();
-    	
+
     	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
     	$menu = $factory->createItem($menu);
-    	
-    	$items = $em->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
-    	->setParameters(array(
-     		'id_menu'=> $options['idmenu'],
-		))->getResult();
-    	
+
+    	$items = $em
+            ->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
+        	->setParameters(array(
+         		'id_menu'=> $options['idmenu'],
+    		))
+            ->getResult()
+        ;
+
     	foreach ($items as $key=>$values){
-    		if(strpos($values->getUrl(),'http://')===false){$ext='/';}else{$ext='';}
-    		$item=$menu->addChild($values->getName(), array('uri' => $ext.$values->getUrl()));
-    		$this->addChild($em,$values,$item,$options['idmenu']);
+    		$url = (preg_match('@^(http://|[/#])@', $values->getUrl()) ? '' : '/') . $values->getUrl();
+    		$item = $menu->addChild($values->getName(), array('uri' => $url));
+            $item->setLinkAttribute('class', 'footer-link');
+    		//$this->addChild($em, $values, $item, $options['idmenu'], 'footer-link');
     	}
     	return $menu;
     }
-    
-    public function surfooterMenu(FactoryInterface $factory, array $options )
+
+    public function surfooterMenu(FactoryInterface $factory, array $options)
     {
     	//$domain = $this->get('request')->server->get('HTTP_HOST');
-    	$options['idmenu']=6;
+    	$options['idmenu'] = 6;
     	$em = $this->getDoctrine()->getEntityManager();
-    	
+
     	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
     	$menu = $factory->createItem($menu);
-    	
-    	$items = $em->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
-    	->setParameters(array(
-     		'id_menu'=> $options['idmenu'],
-		))->getResult();
-    	
+
+    	$items = $em
+            ->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
+        	->setParameters(array(
+         		'id_menu' => $options['idmenu'],
+    		))
+            ->getResult()
+        ;
+
     	foreach ($items as $key=>$values){
-    		if(strpos($values->getUrl(),'http://')===false){$ext='/';}else{$ext='';}
-    		$item=$menu->addChild($values->getName(), array('uri' => $ext.$values->getUrl()));
-    		$this->addChild($em,$values,$item,$options['idmenu']);
+    		$ext = strpos($values->getUrl(),'http://') === false ? '/' : '';
+    		$item = $menu->addChild($values->getName(), array('uri' => $ext . $values->getUrl()));
+    		$this->addChild($em, $values, $item, $options['idmenu']);
     	}
     	return $menu;
     }
-     
-    
-    
-    
+
+
+
+
     public function footerLinks(FactoryInterface $factory, array $options )
     {
     	$domain = $this->get('request')->server->get('HTTP_HOST');
-    	$options['idmenu']=5;
+    	$options['idmenu'] = 5;
     	$em = $this->getDoctrine()->getEntityManager();
-    	
+
     	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
     	$menu = $factory->createItem($menu);
-    	
-    	$items = $em->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
-    	->setParameters(array(
-     		'id_menu'=> $options['idmenu'],
-		))->getResult();
-    	
+
+    	$items = $em
+            ->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
+        	->setParameters(array(
+         		'id_menu' => $options['idmenu'],
+    		))
+            ->getResult()
+        ;
+
     	foreach ($items as $key=>$values){
-    		if(strpos($values,'http://')){$ext='';}else{$ext='/';}
-    		$item=$menu->addChild($values->getName(), array('uri' => $ext.$values->getUrl()));
-    		$this->addChild($em,$values,$item,$options['idmenu']);
+    		$ext = strpos($values->getUrl(),'http://') === false ? '/' : '';
+    		$item = $menu->addChild($values->getName(), array('uri' => $ext . $values->getUrl()));
+    		$this->addChild($em, $values, $item, $options['idmenu']);
     	}
     	return $menu;
     }
-    
-    
+
+
 }

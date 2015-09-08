@@ -9,6 +9,11 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class MenuAdmin extends Admin
 {
+  //protected $datagridValues = array(
+  //  '_sort_order' => 'ASC', // sort direction
+  //  '_sort_by' => 'featuredFrom' // field name
+  //);
+
   protected function configureFormFields(FormMapper $formMapper)
   {
     $formMapper
