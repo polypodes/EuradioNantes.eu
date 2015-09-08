@@ -25,7 +25,7 @@ file that was distributed with this source code.
       <button class="header-menu-back">‹ Retour</button>
       <div class="header-menu">
         <nav class="header-menu-nav">
-          <ul class="header-items">
+          {#<ul class="header-items">
             <li><a href="home.html" title="Lien vers la page d'accueil d'Euradionantes" class="header-link header-link-home"></a></li>
             <li><a href="radio.html" title="Lien vers la page La Radio" class="header-link header-link-has-children">La radio</a>
               <ul class="header-menu-level2">
@@ -44,7 +44,9 @@ file that was distributed with this source code.
             </li>
             <li><a href="musique.html" title="Lien vers la page La Radio" class="header-link">La musique</a></li>
             <li><a href="contact.html" title="Lien vers la page La Radio" class="header-link">Contact</a></li>
-          </ul>
+          </ul>#}
+          {% set menuItem = knp_menu_get('MenuBundle:Builder:mainMenu', {}, {'idmenu': 1 }) %}
+          {{ knp_menu_render(menuItem) }}
         </nav>
         <form class="header-search">
           <input type="search" placeholder="Recherche" class="header-search-input">
@@ -129,14 +131,16 @@ file that was distributed with this source code.
     <div class="container">
       {# sonata_page_render_container('footer', 'global') #}
       <a href="/" title="Lien vers la page d'accueil d'Euradionantes"><img src="{{ asset('assets/images/logo-footer.svg') }}" alt="logo d'Euradionantes" class="footer-logo"></a>
-      <ul>
+      {#<ul>
         <li><a href="contact.html" title="lien vers la page de contact" class="footer-link">Contact</a></li>
         <li><a href="plan-du-site.html" title="lien vers la page plan du site" class="footer-link">Plan du site</a></li>
         <li><a href="credits.html" title="lien vers la page de crédits" class="footer-link">Crédits</a></li>
         <li><a href="mentions-legales.html" title="lien vers la page des mentions légales" class="footer-link">Mentions légales</a></li>
         <li><a href="partenaires.html" title="lien vers la page des partenaires" class="footer-link">Partenaires</a></li>
         <li><a href="soutenir.html" title="lien vers la page soutenir Euradio" class="footer-link">Soutenir Euradionantes</a></li>
-      </ul>
+      </ul>#}
+      {% set menuFooter = knp_menu_get('MenuBundle:Builder:footerMenu', {}, {'idmenu': 4 }) %}
+      {{ knp_menu_render(menuFooter) }}
     </div>
   </footer>
 {% endblock %}
