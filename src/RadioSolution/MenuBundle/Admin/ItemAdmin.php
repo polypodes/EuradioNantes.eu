@@ -34,6 +34,7 @@ class ItemAdmin extends Admin
   {
     $listMapper
       ->addIdentifier('name', null, array('label' => 'Nom'))
+      ->add('url', null, array('label' => 'URL'))
       ->add('menu', null, array('label' => 'Menu'))
       ->add('parent', null, array('label' => 'Parent'))
       ->add('order_item', null, array('label' => 'Ordre'))
