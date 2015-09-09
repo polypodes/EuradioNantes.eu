@@ -65,6 +65,7 @@ sonata_media:
                 list_desktop: { width: 300, height: 165, quality: 80}
                 list_mobile: { width: 450, height: 246, quality: 80}
                 list_tablet: { width: 570, height: 312, quality: 80}
+                list_program: { width: 100, height: 50, quality: 80}
 
                 #big: { width: 850, height: 510,  quality: 80}
                 #medium: { width: 450, height: 270,  quality: 80}
