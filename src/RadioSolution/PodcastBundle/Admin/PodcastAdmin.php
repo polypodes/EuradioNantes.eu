@@ -24,7 +24,7 @@ class PodcastAdmin extends Admin
     $formMapper
 
       ->with('Podcast', array(
-            'class' => 'col-md-8'
+            'class' => 'col-md-6'
         ))
         ->add('name', null, array('required' => true, 'label' => 'Nom du podcast'))
         ->add('home_page', null, array('required' => false, 'label' => 'Page d’accueil'))
@@ -32,8 +32,9 @@ class PodcastAdmin extends Admin
         ->add('filePodcast', 'sonata_type_model_list', array('required' => true, 'label' => 'Media podcast'), array('link_parameters' => array('provider'=>'sonata.media.provider.podcast')))
         ->add('dlAuth', null, array('required' => false, 'data' => true, 'label' => 'Autoriser le téléchargement ?'))
       ->end()
+
       ->with('Marqueurs temporels', array(
-        'class' => 'col-md-4'
+        'class' => 'col-md-6'
       ))
         ->add('player', 'podcast_player', array('label' => false, 'mapped' => false))
         ->add('markers', 'collection', array(
@@ -45,9 +46,14 @@ class PodcastAdmin extends Admin
           'prototype' => true
         ))
       ->end()
-      ->with('Article')
+
+      ->with('Article', array(
+            'class' => 'col-md-12'
+        ))
         ->add('post', 'sonata_type_admin', array('label' => false))
       ->end()
+
+
     ;
   }
 

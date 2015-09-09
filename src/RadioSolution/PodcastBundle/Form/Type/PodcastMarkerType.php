@@ -14,8 +14,10 @@ class PodcastMarkerType extends AbstractType
     {
         $builder
             //->setAttribute('display_table', $options['display_table'])
-            ->add('time', 'text', array('label' => 'Temps'))
-            ->add('label', 'text', array('label' => 'Label'))
+            ->add('start', 'text', array('label' => 'Début'))
+            ->add('end', 'text', array('label' => 'Fin'))
+            ->add('title', 'text', array('label' => 'Titre'))
+            ->add('text', 'textarea', array('label' => 'Description'))
         ;
     }
 
