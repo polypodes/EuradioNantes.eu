@@ -1,18 +1,34 @@
-			<div class="on-air">
-				<a  href="/ecoute" onclick="window.open(this.href,'Window title','width=1010,height=495,left=320,top=445');return false;" >
-				
-				<div class="player-bt">
-					<span class="title">
-					En direct<br/> 
-						<marquee scrollamount="2">{% for onair  in onairs %}{{ onair }}{% endfor %}</marquee>
-					</span>
-				 </div>
-				</a> 
+<section class="player">
+  <div class="container player-container">
+    <h3 class="player-status">En direct</h3>
+    <svg class="player-svg">
+      <circle cx="52" cy="52" r="52" class="player-circle-03"></circle>
+      <circle cx="52" cy="52" r="42" class="player-circle-02"></circle>
+      <circle cx="52" cy="52" r="32" class="player-circle-01"></circle>
+      <g transform="translate(20, 33) scale(1.25)" class="player-play">
+        <path d="M21.3871246,27.178247 C20.0687521,28.1843734 19,27.6594313 19,26.0057181 L19,2.99428189 C19,1.34058566 20.0622351,0.810653091 21.3871246,1.82175298 L35.6128754,12.678247 C36.9312479,13.6843734 36.9377649,15.3106531 35.6128754,16.321753 L21.3871246,27.178247 Z" class="player-play-path"></path>
+      </g>
+      <g transform="translate(-12, 33) scale(1.25)" class="player-pause player-hide">
+        <path d="M57.8,25.45 C56.25,25.45 55,24.25 55,22.775 L55,5.675 C55,4.2 56.25,3 57.8,3 C59.35,3 60.6,4.2 60.6,5.675 L60.6,22.775 C60.6,24.25 59.35,25.45 57.8,25.45"></path>
+        <path d="M44.8,25.45 C43.25,25.45 42,24.25 42,22.775 L42,5.675 C42,4.2 43.25,3 44.8,3 C46.35,3 47.6,4.2 47.6,5.675 L47.6,22.775 C47.6,24.25 46.35,25.45 44.8,25.45"></path>
+      </g>
+    </svg>
+    <div class="player-infos">
+    	<span class="player-suptitle">Now playing</span>
+    	<span class="player-track">{{ onair }}</span>
+    </div>
+    <a href="{{ path('ecoute') }}" title="Lien vers la page c'était quoi ce titre" class="player-what">› C’était quoi ce titre ?</a>
+    {{ include(':Social:links_player.html.twig') }}
+  </div>
+</section>
+<script>
+	var elements = document.querySelectorAll('.player-svg');
+	Array.prototype.forEach.call(elements, function(el, i){
+		el.addEventListener('click', function(e) {
+			e.preventDefault();
+			//console.log(e.target.getAttribute('href'));
+			window.open('{{ path('ecoute') }}', 'Le direct - Euradionantes','width=1010,height=495,left=320,top=445');
 
-						<!-- 
-				<span class="title">Indian Summer</span>
-				<span class="subtitle">Chicha Libre</span>
-				-->
-				
-				</a>
-			</div> <!-- .on-air -->
+		});
+	});
+</script>

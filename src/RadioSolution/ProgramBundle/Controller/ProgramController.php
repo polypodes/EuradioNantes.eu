@@ -26,15 +26,21 @@ class ProgramController extends Controller
         $timestampDay = 60*60*24;
         $timestampWeek = $timestampDay*7;
 
-        $start = new \Datetime('now');
-        $start->setTime(0, 0);
 
-        if (isset($_GET['week'])) {
+        if (!empty($_GET['date'])) {
+            $start = new \Datetime($_GET['date']);
+            if ($start->format('W') != 1) {
+                $start->setISODate($start->format('Y'), $start->format('W'), 1);
+            }
+        } elseif (!empty($_GET['week'])) {
+            $start = new \Datetime();
             $start->setISODate($start->format('Y'), $_GET['week'], 1);
-            $weekNumber = $_GET['week'];
-        } else {
-            $weekNumber = date("W");
         }
+        if (empty($start)) {
+            $start = new \Datetime('now');
+            $start->setTime(0, 0);
+        }
+        $weekNumber = $start->format('W');
 
         // find programs on current week
         $dayNumber = $start->format('w');
@@ -47,11 +53,9 @@ class ProgramController extends Controller
         $stop = clone $start;
         $stop->modify('+7 days');
 
-
-
         $em = $this->getDoctrine()->getEntityManager();
         $query = $em
-            ->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop < :stop AND p.time_start >= :start AND p.time_start < p.time_stop  ORDER BY p.time_start ASC")
+            ->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop < :stop AND p.time_start >= :start AND p.time_start < p.time_stop  ORDER BY p.time_start ASC, p.time_stop DESC")
             ->setParameters(array('start' => $start, 'stop' => $stop))
         ;
         $results = $query->getResult();
@@ -116,30 +120,43 @@ class ProgramController extends Controller
 
     public function onairAction()
     {
-        $onairs = array();
-        $onairs[] = "";
+        $em = $this->getDoctrine()->getEntityManager();
 
+        $url = $this->container->getParameter('nowPlayingUrl');
+        $file = fopen($url, 'r');
+        $content = fgets($file);
 
-        $file = fopen('http://www.euradionantes.eu/uploads/onair/now_playing.txt', 'r');
-        $onairs[] = fgets($file);
+        if ($content == "EuradioNantes - La diversite europeenne au creux de l'oreille") {
+            $program = $em
+                ->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop > :now AND p.time_start >= :now AND p.time_start < p.time_stop  ORDER BY p.time_start ASC, p.time_stop DESC")
+                ->setParameters(array('now' => new \Datetime()))
+                ->setMaxResults(1)
+                ->getOneOrNullResult()
+            ;
+            //var_dump($result);
+            if ($program) {
+                $content = $program->getEmission()->getName();
+            }
 
-        //$onairs[] = "Titre;Artiste;album.jpg";
-        //$onairs[] = "Titre - Artiste";
-
-        $tab = array();
-        $tab = explode(';', $onairs[1]);
-
-        if(count($tab) == 3){
-
-            //echo $onairs[1];
-            $onairs[1] = $tab[0]." - ".$tab[1];
-            //echo $onairs[1];
-
+        } else {
+            $broadcast = $em
+                ->createQuery("SELECT b FROM ProgramBundle:Broadcast b WHERE b.broadcasted > :mindate ORDER BY b.broadcasted DESC")
+                ->setParameters(array('mindate' => new \Datetime('-1 hour')))
+                ->setMaxResults(1)
+                ->getOneOrNullResult()
+            ;
+            //var_dump($result);
+            if ($broadcast) {
+                $track = $broadcast->getTrack();
+                $content = $track->getArtist() . ' - ' . $track->getTitle() . ' - ' . $track->getAlbum()->getTitle();
+            }
         }
+
+        $onair = $content;
 
         ///echo $onairs[1];
 
-        return $this->render('ProgramBundle:Program:show_onair.html.twig', array('onairs' => $onairs));
+        return $this->render('ProgramBundle:Program:show_onair.html.twig', compact('onair'));
 
 
     }

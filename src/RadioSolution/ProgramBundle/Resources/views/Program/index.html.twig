@@ -1,73 +1,164 @@
-<div class="inner-wrap">
-	<div class="page-content">
-		<section class="entry group">
-			<div class="entry-content programme">
-				<h3 style="text-align: center;"><a href="{{ path('programs') }}?week={{ weekNumber - 1}}" id="prev_week">&lt; </a>Programmes de la semaine {{ weekNumber }}<a href="{{ path('programs') }}?week={{ weekNumber + 1}}" id="next_week"> &gt;</a></h3>
+<section class="actu-list grille">
+  <div class="breadcrumb"><a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span></div>
 
-				<ul class="tabs" style="margin-left:30px;">
-					<li><a href="#tab1">Lundi</a></li>
-					<li><a href="#tab2">Mardi</a></li>
-					<li><a href="#tab3">Mercredi</a></li>
-					<li><a href="#tab4">Jeudi</a></li>
-					<li><a href="#tab5">Vendredi</a></li>
-					<li><a href="#tab6">Samedi</a></li>
-					<li><a href="#tab7">Dimanche</a></li>
-				</ul>
+  <h1>Les programmes de la semaine {{ weekNumber }} {{ stop|date('Y') }}</h1>
 
-				{% for i, day in entities %}
-				<div id="tab{{ i + 1 }}">
-					<h2>{{ day.date|localizeddate('full', 'none', 'fr-FR')|capitalize }}</h2>
+  <div class="grille-pagination">
+  	<a href="{{ path('programs') }}?date={{ start|date_modify('-1 week')|date('Y-m-d')}}" id="prev_week" title="afficher la semaine précédente" class="grille-pagination-prev">‹ Semaine précédente</a>
+    <form action="{{ path('programs') }}" class="grille-pagination-choose">
+      <label class="grille-pagination-choose-label">Accéder directement à une semaine</label>
+      <div class="grille-pagination-choose-field">
+        <input type="number" name="week" placeholder="Ex. 15" class="grille-pagination-choose-input">
+        <input type="submit" value="Voir" class="grille-pagination-choose-submit">
+      </div>
+    </form>
+    <a href="{{ path('programs') }}?date={{ start|date_modify('+1 week')|date('Y-m-d')}}" id="next_week" title="afficher la semaine suivante" class="grille-pagination-next">Semaine suivante ›</a>
+  </div>
 
-					<ol class="full-day">
-					{% for key, value in day if key != 'date' -%}
-						{% if value.entities|length > 0 %}
-						<li id="{{ key }}" class="group">
-							<div class="header">
-								<h4>{{ value.label }}</h4>
-								{% if value.desc is defined %}
-								<b>{{ value.desc }}</b>
-							{% endif %}
-							</div>
-							<ol class="">
-						    	{% for entity in value.entities %}
-								<li class="item">
-									<div class="time">
-										{{ entity.timeStart|date('H:i') }} -
-										{{ entity.timeStop|date('H:i') }}
-									</div>
-									<div class="image-emission_programme">
-										<a href="{{ path('emission', {'name': entity.slug}) }}">
-											{% if entity.imageEmission %}{% thumbnail entity.imageEmission, 'small' %}{% endif %}
-										</a>
-										{# if app.security.isGranted(['ROLE_RADIOSOLUTION_PROGRAM_PROGRAM_EDITOR']) or app.security.isGranted('ROLE_SONATA_ADMIN') or app.security.isGranted('ROLE_SONATA_ADMIN') %}
-											<div class="podcast_add">
-												<a href="/admin/radiosolution/program/program/{{entity.id}}/edit" target="_blank">Ajouter un postcast</a>
-											</div>
-										{% endif #}
-									</div>
-									<div class="details title-emission_programme">
-										<a href="{{ path('emission', {'name': entity.slug}) }}">
-											{{ entity.emission.name }}
-										</a>
-									</div>
-								</li>
-					  			{% endfor %}
-							</ol>
-						</li><!-- fin de tôt -->
-						{% endif %}
-					{% endfor %}
-					</ol>
-				</div><!-- fin du jour -->
-				{% endfor %}
-			</div>
-		</section>
-	</div>
-</div>
+  <div class="grille-week-wrap">
+    <h2 id="grille-day" class="grille-week">Semaine du {{ start|localizeddate('full', 'none', 'fr-FR') }} au {{ stop|date_modify('-1 day')|localizeddate('full', 'none', 'fr-FR') }}</h2>
+    <ul class="actu-list-filters">
+      <li class="actu-list-filter actu-list-filter-selected"><a href="#tab1">Lundi</a></li>
+      <li class="actu-list-filter"><a href="#tab2">Mardi</a></li>
+      <li class="actu-list-filter"><a href="#tab3">Mercredi</a></li>
+      <li class="actu-list-filter"><a href="#tab4">Jeudi</a></li>
+      <li class="actu-list-filter"><a href="#tab5">Vendredi</a></li>
+      <li class="actu-list-filter"><a href="#tab6">Samedi</a></li>
+      <li class="actu-list-filter"><a href="#tab7">Dimanche</a></li>
+    </ul>
+  </div>
+
+  {% for i, day in entities -%}
+		<div id="tab{{ i + 1 }}" data-date="{{ day.date|localizeddate('full', 'none', 'fr-FR')|capitalize }}" class="program-tab">
+			{% for key, value in day if key != 'date' -%}
+				{% if value.entities|length > 0 -%}
+					<div id="{{ key ~ (i + 1) }}" class="grille-list">
+						<h2 class="grille-list-title">{{ value.label }}</h2>
+						{% if value.desc is defined -%}
+							<span class="grille-list-schedule">{{ value.desc }}</span>
+						{%- endif %}
+
+						{%- set parent = false -%}
+
+					  {%- for entity in value.entities -%}
+
+					  	{%- set isChild = parent and parent.timeStart <= entity.timeStart and parent.timeStop >= entity.timeStop -%}
+
+					  	<article class="grille-list-item{% if isChild %} grille-list-item-child{% endif %}">
+					  		<span class="grille-list-hour">{{ entity.timeStart|date('H:i') }} -	{{ entity.timeStop|date('H:i') }}</span>
+					  		{% if entity.imageEmission -%}
+					  			<img src="{% path entity.imageEmission, 'list_program' %}" alt="" class="grille-list-img">
+					  		{%- endif %}
+					      <div class="grille-list-text">
+					      	{% if entity.emission.collection %}
+								  <span class="grille-list-text-suptitle">{{ entity.emission.collection.name }}</span>
+								  {% elseif entity.emission.theme %}
+								  <span class="grille-list-text-suptitle">{{ entity.emission.theme.name }}</span>
+								  {% endif %}
+					        <h3 class="grille-list-text-title">
+					        	<a href="{{ path('emission', {'name': entity.emission.slug}) }}">{{ entity.emission.name }}</a>
+					        </h3>
+					      </div>
+					    </article>
+
+					    {%- if not isChild -%}
+					    {%- set parent = entity -%}
+					    {%- endif -%}
+
+				  	{%- endfor %}
+					</div>
+				{%- endif %}
+			{%- endfor %}
+		</div>
+	{%- endfor %}
+
+  <div class="grille-pagination">
+  	<a href="{{ path('programs') }}?date={{ start|date_modify('-1 week')|date('Y-m-d')}}" id="prev_week" title="afficher la semaine précédente" class="grille-pagination-prev">‹ Semaine précédente</a>
+    <form action="{{ path('programs') }}" class="grille-pagination-choose">
+      <label class="grille-pagination-choose-label">Accéder directement à une semaine</label>
+      <div class="grille-pagination-choose-field">
+        <input type="number" name="week" placeholder="Ex. 15" class="grille-pagination-choose-input">
+        <input type="submit" value="Voir" class="grille-pagination-choose-submit">
+      </div>
+    </form>
+    <a href="{{ path('programs') }}?date={{ start|date_modify('+1 week')|date('Y-m-d')}}" id="next_week" title="afficher la semaine suivante" class="grille-pagination-next">Semaine suivante ›</a>
+  </div>
+</section>
+
+<aside class="content-aside">
+  <div class="content-aside-inner">
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"><a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+    <article data-clickable="true" class="bloc-mini bloc-podcast">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
+          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
+        </div>
+      </div>
+    </article>
+
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
+  </div>
+</aside>
 <script>
 // Wait until the DOM has loaded before querying the document
-jQuery(function($){
+/*jQuery(function($){
 $(document).ready(function(){
-	$('ul.tabs').each(function(){
+	$('.program-tab').each(function(){
 		// For each set of tabs, we want to keep track of
 		// which tab is active and it's associated content
 		var $active, $content, $links = $(this).find('a');
@@ -103,5 +194,11 @@ $(document).ready(function(){
 		});
 	});
 });
+});*/
+
+var elements = document.querySelectorAll('.actu-list-filters');
+Array.prototype.forEach.call(elements, function(el, i){
+	var active, content, links = el.querySelectorAll('a');
+	//active = $(links.filter('[href="'+location.hash+'"]')[0] || $links[{{  weekNumber == "now"|date('W') ? "now"|date('N') - 1 : 0 }}]);
 });
 </script>
