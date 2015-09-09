@@ -112,6 +112,7 @@ class ProgramController extends Controller
 
         return  $this->render(sprintf('ProgramBundle:Program:index.%s.twig', $format), array(
             'entities' => $entities,
+            'count' => count($results),
             'weekNumber' => $weekNumber,
             'start' => $start,
             'stop' => $stop

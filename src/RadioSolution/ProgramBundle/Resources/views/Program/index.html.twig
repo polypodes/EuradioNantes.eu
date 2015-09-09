@@ -28,49 +28,60 @@
     </ul>
   </div>
 
-  {% for i, day in entities -%}
-		<div id="tab{{ i + 1 }}" data-date="{{ day.date|localizeddate('full', 'none', 'fr-FR')|capitalize }}" class="program-tab">
-			{% for key, value in day if key != 'date' -%}
-				{% if value.entities|length > 0 -%}
-					<div id="{{ key ~ (i + 1) }}" class="grille-list">
-						<h2 class="grille-list-title">{{ value.label }}</h2>
-						{% if value.desc is defined -%}
-							<span class="grille-list-schedule">{{ value.desc }}</span>
-						{%- endif %}
+  {% if count > 0 -%}
+    {%- for i, day in entities -%}
+  		<div id="tab{{ i + 1 }}" data-date="{{ day.date|localizeddate('full', 'none', 'fr-FR')|capitalize }}" class="program-tab">
+        {% set hasEvents = false %}
 
-						{%- set parent = false -%}
+        {% for key, value in day if key != 'date' -%}
+  				{% if value.entities|length > 0 -%}
+            {% set hasEvents = true %}
+  					<div id="{{ key ~ (i + 1) }}" class="grille-list">
+  						<h2 class="grille-list-title">{{ value.label }}</h2>
+  						{% if value.desc is defined -%}
+  							<span class="grille-list-schedule">{{ value.desc }}</span>
+  						{%- endif %}
 
-					  {%- for entity in value.entities -%}
+  						{%- set parent = false -%}
 
-					  	{%- set isChild = parent and parent.timeStart <= entity.timeStart and parent.timeStop >= entity.timeStop -%}
+  					  {%- for entity in value.entities -%}
 
-					  	<article class="grille-list-item{% if isChild %} grille-list-item-child{% endif %}">
-					  		<span class="grille-list-hour">{{ entity.timeStart|date('H:i') }} -	{{ entity.timeStop|date('H:i') }}</span>
-					  		{% if entity.imageEmission -%}
-					  			<img src="{% path entity.imageEmission, 'list_program' %}" alt="" class="grille-list-img">
-					  		{%- endif %}
-					      <div class="grille-list-text">
-					      	{% if entity.emission.collection %}
-								  <span class="grille-list-text-suptitle">{{ entity.emission.collection.name }}</span>
-								  {% elseif entity.emission.theme %}
-								  <span class="grille-list-text-suptitle">{{ entity.emission.theme.name }}</span>
-								  {% endif %}
-					        <h3 class="grille-list-text-title">
-					        	<a href="{{ path('emission', {'name': entity.emission.slug}) }}">{{ entity.emission.name }}</a>
-					        </h3>
-					      </div>
-					    </article>
+  					  	{%- set isChild = parent and parent.timeStart <= entity.timeStart and parent.timeStop >= entity.timeStop -%}
 
-					    {%- if not isChild -%}
-					    {%- set parent = entity -%}
-					    {%- endif -%}
+  					  	<article class="grille-list-item{% if isChild %} grille-list-item-child{% endif %}">
+  					  		<span class="grille-list-hour">{{ entity.timeStart|date('H:i') }} -	{{ entity.timeStop|date('H:i') }}</span>
+  					  		{% if entity.imageEmission -%}
+  					  			<img src="{% path entity.imageEmission, 'list_program' %}" alt="" class="grille-list-img">
+  					  		{%- endif %}
+  					      <div class="grille-list-text">
+  					      	{% if entity.emission.collection %}
+  								  <span class="grille-list-text-suptitle">{{ entity.emission.collection.name }}</span>
+  								  {% elseif entity.emission.theme %}
+  								  <span class="grille-list-text-suptitle">{{ entity.emission.theme.name }}</span>
+  								  {% endif %}
+  					        <h3 class="grille-list-text-title">
+  					        	<a href="{{ path('emission', {'name': entity.emission.slug}) }}">{{ entity.emission.name }}</a>
+  					        </h3>
+  					      </div>
+  					    </article>
 
-				  	{%- endfor %}
-					</div>
-				{%- endif %}
-			{%- endfor %}
-		</div>
-	{%- endfor %}
+  					    {%- if not isChild -%}
+  					    {%- set parent = entity -%}
+  					    {%- endif -%}
+
+  				  	{%- endfor %}
+  					</div>
+  				{%- endif %}
+  			{%- endfor %}
+
+        {% if not hasEvents -%}
+          <p><em>Aucune programmation disponible pour la journée du {{ day.date|localizeddate('full', 'none', 'fr-FR')|capitalize }}</em></p>
+        {%- endif %}
+  		</div>
+  	{%- endfor -%}
+  {%- else -%}
+  <p><em>Aucune programmation disponible pour la semaine {{ weekNumber }}</em></p>
+  {%- endif %}
 
   <div class="grille-pagination">
   	<a href="{{ path('programs') }}?date={{ start|date_modify('-1 week')|date('Y-m-d')}}" id="prev_week" title="afficher la semaine précédente" class="grille-pagination-prev">‹ Semaine précédente</a>
@@ -180,25 +191,90 @@ $(document).ready(function(){
 		});
 		// Bind the click event handler
 		$(this).on('click', 'a', function(e){
-		// Make the old tab inactive.
-		$active.removeClass('active');
-		$content.hide();
-		// Update the variables with the new link and content
-		$active = $(this);
-		$content = $($(this).attr('href'));
-		// Make the tab active.
-		$active.addClass('active');
-		$content.show();
-		// Prevent the anchor's default click action
-		e.preventDefault();
+  		// Make the old tab inactive.
+  		$active.removeClass('active');
+  		$content.hide();
+  		// Update the variables with the new link and content
+  		$active = $(this);
+  		$content = $($(this).attr('href'));
+  		// Make the tab active.
+  		$active.addClass('active');
+  		$content.show();
+  		// Prevent the anchor's default click action
+  		e.preventDefault();
 		});
 	});
 });
 });*/
 
-var elements = document.querySelectorAll('.actu-list-filters');
+var elements = document.querySelectorAll('.actu-list-filter'),
+    active = document.querySelectorAll('.actu-list-filter-selected')[0],
+    className = 'actu-list-filter-selected';
+
+function updatePanels(panelId) {
+  var panels = document.querySelectorAll('.program-tab');
+
+  Array.prototype.forEach.call(panels, function(el, i){
+    if (el.id == panelId) {
+      el.style.display = '';
+      document.getElementById('grille-day').innerHTML = el.getAttribute('data-date');
+    } else {
+      el.style.display = 'none';
+    }
+  });
+}
+
+function removeClass(elem, cn) {
+  if (elem.classList) { elem.classList.remove(cn); }
+    else { elem.className = elem.className.replace(new RegExp('(^|\\b)' + cn.split(' ').join('|') + '(\\b|$)', 'gi'), ' '); }
+}
+
+
 Array.prototype.forEach.call(elements, function(el, i){
-	var active, content, links = el.querySelectorAll('a');
+	var links = el.querySelectorAll('a');
 	//active = $(links.filter('[href="'+location.hash+'"]')[0] || $links[{{  weekNumber == "now"|date('W') ? "now"|date('N') - 1 : 0 }}]);
+  var contentId = links[0].getAttribute('href').substr(1);
+  // if elem has className, show panel, else hide it
+
+  if (document.getElementById(contentId)) {
+    if (( el.classList && el.classList.contains(className)) || new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className)) {
+      document.getElementById(contentId).style.display = '';
+    } else {
+      document.getElementById(contentId).style.display = 'none';
+    }
+  }
+
+  links[0].addEventListener('click', function(e) {
+    var contentId = e.target.getAttribute('href').substr(1);
+
+    // remove className
+    //if (active.classList) { active.classList.remove(className); }
+    //else { active.className = active.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' '); }
+    removeClass(active, className);
+
+    // addActive
+    active = e.target.parentNode;
+    active.className += ' ' + className;
+
+    updatePanels(contentId);
+    window.location.hash = '#' + contentId;
+    e.preventDefault();
+  })
 });
+
+
+// check if tab is selected in url hash
+if (location.hash.match(/^#tab[0-9]/)) {
+  //removeClass(active, className);
+  var link = document.querySelectorAll('a[href="'+location.hash+'"]')[0];
+  link.click();
+  //active = elem.parentNode;
+} else  {
+  var num = {{  weekNumber == "now"|date('W') ? "now"|date('N') - 1 : 0 }};
+  var link = document.querySelectorAll('.actu-list-filter')[num].querySelectorAll('a')[0];
+  link.click();
+}
+
+//$active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[{{  weekNumber == "now"|date('W') ? "now"|date('N') - 1 : 0 }}]);
+
 </script>
