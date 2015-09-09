@@ -24,6 +24,9 @@ class EmissionController extends Controller
 
 	public function indexAction()
 	{
+        if (!empty($_GET['emission'])) {
+            $this->redirect($_GET['emission']);
+        }
         $em = $this->getDoctrine()->getManager();
 
         $query = $this
@@ -71,13 +74,23 @@ class EmissionController extends Controller
             ->findAll()
         ;
 
+        $emissions = $this
+            ->getDoctrine()
+            ->getRepository('ProgramBundle:Emission')
+            ->createQueryBuilder('e')
+            ->where('e.archive = 0')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+
         $frequencies = $this
             ->getDoctrine()
             ->getRepository('ProgramBundle:EmissionFrequency')
             ->findAll()
         ;
 
-		return $this->render('ProgramBundle:Emission:index.html.twig', compact('entities','frequencies','themes'));
+		return $this->render('ProgramBundle:Emission:index.html.twig', compact('entities', 'emissions', 'frequencies', 'themes'));
 	}
 
 
