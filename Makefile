@@ -98,6 +98,14 @@ fixtures: vendor/autoload.php
 #	@echo "Install fixtures in db..."
 #	@php app/console dbal:fixtures:load --purge
 
+track:
+	@echo "Trying to process and save the current broadcasted track on air:"
+	@php app/console euradionantes:track
+
+tracks:
+	@echo "Each 10 seconds, try to process and save any new broadcasted track on air:"
+	@echo "CTRL+C to stop this."
+	@while true; do php app/console euradionantes:track; sleep 10; done;
 
 ############################################################################
 # v1 to v2 MySQL upgrade

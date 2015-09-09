@@ -84,6 +84,21 @@ From the root folder of your instance:
 $ make mysqlUpgrade
 ```
 
+## Try the "on air" track process bot
+
+Just test once:
+
+
+```bash
+$ make track
+```
+
+In a 10-seconds infinite loop: (CTRL+C to stop it)
+
+```bash
+$ make tracks
+```
+
 ## License
 
 MIT Licensed.
