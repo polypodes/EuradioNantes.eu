@@ -39,9 +39,11 @@
 
   <div class="filter-quick">
     <label class="filter-label">Accès rapide aux émissions</label>
-    <select class="filter-select filter-quick-select">
-      <option>Sélectionnez une émission</option>
-      <option>ou pas</option>
+    <select name="emission" class="filter-select filter-quick-select">
+      <option value="">Sélectionnez une émission</option>
+      {% for emission in emissions -%}
+        <option value="{{ path('emission', {'name': emission.slug}) }}">{{ emission.name }}</option>
+      {%- endfor %}
     </select>
   </div>
 
@@ -52,13 +54,18 @@
         {% if entity.media -%}
         <figure class="bloc-content-figure"><img src="{% path entity.media, 'large' %}" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
         {%- endif %}
+
         <div class="bloc-content-text">
-          {% if entity.theme %}
+          {% if entity.collection %}
+          <span class="bloc-content-cat">{{ entity.collection.name }}</span>
+          {% elseif entity.theme %}
           <span class="bloc-content-cat">{{ entity.theme.name }}</span>
           {% endif %}
+
           {% if entity.frequency %}
           <span class="bloc-content-date">{{ entity.frequency.titre }}</span>
           {% endif %}
+
           <h2 class="bloc-content-title">
             <a href="{{ path('emission', {'name': entity.slug}) }}" data-clickable-target="true" title="Lien vers l'article">{{ entity.name }}</a>
           </h2>
