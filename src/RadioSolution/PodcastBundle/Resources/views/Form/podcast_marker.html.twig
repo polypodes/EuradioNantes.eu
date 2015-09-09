@@ -2,15 +2,25 @@
 {% block podcast_marker_widget %}
     {% spaceless %}
         <div class="row">
-            <div class="col-xs-3">
+            <div class="col-xs-2">
                 {# form_label(form.time) #}
-                {{ form_widget(form.children.time, {'attr': {'placeholder': 'mm:ss'}}) }}
-                {{ form_errors(form.children.time) }}
+                {{ form_widget(form.children.start, {'attr': {'placeholder': 'Début (mm:ss)'}}) }}
+                {{ form_errors(form.children.start) }}
             </div>
-            <div class="col-xs-9">
+            <div class="col-xs-2">
                 {# form_label(form.time) #}
-                {{ form_widget(form.children.label, {'attr': {'placeholder': form.children.label.vars.label}}) }}
-                {{ form_errors(form.children.label) }}
+                {{ form_widget(form.children.end, {'attr': {'placeholder': 'Fin (mm:ss)'}}) }}
+                {{ form_errors(form.children.end) }}
+            </div>
+            <div class="col-xs-4">
+                {# form_label(form.time) #}
+                {{ form_widget(form.children.title, {'attr': {'placeholder': form.children.title.vars.label}}) }}
+                {{ form_errors(form.children.title) }}
+            </div>
+            <div class="col-xs-4">
+                {# form_label(form.time) #}
+                {{ form_widget(form.children.text, {'attr': {'placeholder': form.children.text.vars.label}}) }}
+                {{ form_errors(form.children.text) }}
             </div>
         </div>
     {% endspaceless %}

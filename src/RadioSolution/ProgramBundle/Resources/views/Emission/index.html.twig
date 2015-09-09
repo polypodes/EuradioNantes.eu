@@ -85,69 +85,7 @@
 
 <aside class="content-aside">
   <div class="content-aside-inner">
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"><a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
+    {{ render(controller('SonataNewsBundle:Post:getAsidePosts')) }}
 
     {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
   </div>

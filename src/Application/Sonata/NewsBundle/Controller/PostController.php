@@ -8,7 +8,8 @@ use Sonata\NewsBundle\Controller\PostController as BaseController;
 
 class PostController extends BaseController
 {
-    public function indexAction(){
+    public function indexAction()
+    {
         $repo = $query = $this
             ->getDoctrine()
             ->getRepository('ApplicationSonataNewsBundle:Post')
@@ -32,21 +33,28 @@ class PostController extends BaseController
             ->findAllByContext('actualite')
         ;
 
-        return $this->render('ApplicationSonataNewsBundle:Post:index.html.twig', compact('news', 'collection'));
+        return $this->render('SonataNewsBundle:Post:index.html.twig', compact('news', 'collection'));
     }
 
-    // public function showAction($id){
-    //     $actu = $this->getDoctrine()
-    //                 ->getRepository('ApplicationSonataNewsBundle:Post')
-    //                 ->find($id)
-    //             ;
-    //     if (!$actu) {
-    //         throw $this->createNotFoundException(
-    //             'Aucun produit trouvé pour cet id : '.$id
-    //         );
-    //     }
-    //     return $this->render('ApplicationSonataNewsBundle:Post:show.html.twig', compact('actu'));
-    // }
+    public function getLastPosts($limit = 9)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $em
+            ->createQuery("SELECT p FROM ApplicationSonataNewsBundle:Post p WHERE p.enabled = 1 ORDER BY p.publicationDateStart DESC")
+            ->setMaxResults($limit)
+        ;
+
+        $entities = $query->getResult();
+
+        return $entities;
+    }
+
+    public function getAsidePostsAction()
+    {
+        $posts = $this->getLastPosts(9);
+
+        return $this->render('SonataNewsBundle:Post:aside.html.twig', compact('posts'));
+    }
 
 }
 

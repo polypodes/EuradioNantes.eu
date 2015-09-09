@@ -12,45 +12,50 @@
   </ul>
 
   {% set top = news|first %}
-  <article data-clickable="true" class="bloc-content">
-    <div class="bloc-content-inner">
-      {% if top.image -%}
-        <figure class="bloc-content-figure"><img src="{% path top.image, 'list_tablet' %}" srcset="{% path top.image, 'list_mobile' %} 480w, {% path top.image, 'list_tablet' %} 1900w" alt="Illustration de l'article « {{ top.title }} »" class="bloc-content-img img-responsive"></figure>
-      {%- endif %}
-      <div class="bloc-content-text">
-        {% if top.collection -%}
-          <span class="bloc-content-cat">{{ top.collection.name }}</span>
-        {%- endif %}
-        <time datetime="{{ top.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ top.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
-        <h2 class="bloc-content-title">
-          <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(top) }) }}" data-clickable-target="true" title="Lire l'article « {{ top.title }} »">{{ top.title }}</a>
-        </h2>
-        {{ top.abstract|raw }}
-      </div>
-    </div>
-  </article>
-
-  <div class="list">
-    {% for post in news[1:] %}
+  {% if top -%}
     <article data-clickable="true" class="bloc-content">
       <div class="bloc-content-inner">
-        {% if post.image -%}
-          <figure class="bloc-content-figure"><img src="{% path post.image, 'list_tablet' %}" srcset="{% path post.image, 'list_mobile' %} 480w, {% path post.image, 'list_tablet' %} 992w, {% path post.image, 'list_desktop' %} 1900w" alt="Illustration de l'article « {{ post.title }} »" class="bloc-content-img img-responsive"></figure>
+        {% if top.image -%}
+          <figure class="bloc-content-figure"><img src="{% path top.image, 'list_tablet' %}" srcset="{% path top.image, 'list_mobile' %} 480w, {% path top.image, 'list_tablet' %} 1900w" alt="Illustration de l'article « {{ top.title }} »" class="bloc-content-img img-responsive"></figure>
         {%- endif %}
         <div class="bloc-content-text">
-          {% if post.collection -%}
-            <span class="bloc-content-cat">{{ post.collection.name }}</span>
+          {% if top.collection -%}
+            <span class="bloc-content-cat">{{ top.collection.name }}</span>
           {%- endif %}
-          <time datetime="{{ post.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ post.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+          <time datetime="{{ top.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ top.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
           <h2 class="bloc-content-title">
-            <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}" data-clickable-target="true" title="Lire l'article « {{ post.title }} »">{{ post.title }}</a>
+            <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(top) }) }}" data-clickable-target="true" title="Lire l'article « {{ top.title }} »">{{ top.title }}</a>
           </h2>
-          {{ post.abstract|raw }}
+          {{ top.abstract|raw }}
         </div>
       </div>
     </article>
-    {% endfor %}
-  </div>
+
+    <div class="list">
+      {% for post in news[1:] %}
+      <article data-clickable="true" class="bloc-content">
+        <div class="bloc-content-inner">
+          {% if post.image -%}
+            <figure class="bloc-content-figure"><img src="{% path post.image, 'list_tablet' %}" srcset="{% path post.image, 'list_mobile' %} 480w, {% path post.image, 'list_tablet' %} 992w, {% path post.image, 'list_desktop' %} 1900w" alt="Illustration de l'article « {{ post.title }} »" class="bloc-content-img img-responsive"></figure>
+          {%- endif %}
+          <div class="bloc-content-text">
+            {% if post.collection -%}
+              <span class="bloc-content-cat">{{ post.collection.name }}</span>
+            {%- endif %}
+            <time datetime="{{ post.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ post.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+            <h2 class="bloc-content-title">
+              <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}" data-clickable-target="true" title="Lire l'article « {{ post.title }} »">{{ post.title }}</a>
+            </h2>
+            {{ post.abstract|raw }}
+          </div>
+        </div>
+      </article>
+
+      {% endfor %}
+    </div>
+  {%- else -%}
+    <p><em>Aucun résultat</em></p>
+  {%- endif %}
 
   {{ knp_pagination_render(news) }}
 
@@ -58,71 +63,7 @@
 
 <aside class="content-aside">
   <div class="content-aside-inner">
-
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"><a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-
-    <article data-clickable="true" class="bloc-mini">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
-    <article data-clickable="true" class="bloc-mini bloc-podcast">
-      <div class="bloc-mini-inner">
-        <div class="bloc-mini-text"><span class="bloc-mini-cat">Culture</span><span class="bloc-mini-date">12/08</span>
-          <h2 class="bloc-mini-title"> <a href="#" data-clickable-target="true" title="Lien vers l'article">The Feather, Jaune Orange</a></h2>
-        </div>
-      </div>
-    </article>
+    {{ render(controller('SonataNewsBundle:Post:getAsidePosts')) }}
 
     {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
 

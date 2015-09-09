@@ -17,7 +17,8 @@ class PostRepository extends BasePostRepository
 
   public function getPostsByType($type = 'actualite'){
     $query = $this->createQueryBuilder('p')
-        ->where('p.type = :category')
+        ->where('p.enabled = 1')
+        ->andwhere('p.type = :category')
         ->setParameter('category', $type)
         ->addOrderBy('p.publicationDateStart', 'DESC')
         //->setMaxResults($limit)
@@ -33,6 +34,7 @@ class PostRepository extends BasePostRepository
 
   public function listAll($order = 'DESC', $limit = 10){
     $q = $this->createQueryBuilder('p')
+        ->where('p.enabled = 1')
         ->addOrderBy('p.publicationDateStart', $order)
         ->setMaxResults($limit)
     ;
@@ -43,7 +45,8 @@ class PostRepository extends BasePostRepository
   public function getPostsByCollection($collection = null, $order = 'DESC')
   {
     $q = $this->createQueryBuilder('p')
-        ->where('p.collection = :collection')
+        ->where('p.enabled = 1')
+        ->andWhere('p.collection = :collection')
         ->setParameter('collection', $collection)
         ->addOrderBy('p.publicationDateStart', $order)
     ;

@@ -1,0 +1,15 @@
+{% for post in posts %}
+    <article data-clickable="true" class="bloc-mini{% if post.type == 'podcast' %} bloc-podcast{% endif %}">
+      <div class="bloc-mini-inner">
+        <div class="bloc-mini-text">
+          {% if post.collection -%}
+            <span class="bloc-mini-cat">{{ post.collection.name }}</span>
+          {%- endif %}
+          <time datetime="{{ post.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-mini-date">{{ post.publicationDateStart | localizeddate('short', 'none', 'fr-FR') }}</time>
+          <h2 class="bloc-mini-title">
+            <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}" data-clickable-target="true" title="Lire l'article « {{ post.title }} »">{{ post.title }}</a>
+          </h2>
+        </div>
+      </div>
+    </article>
+{% endfor %}
