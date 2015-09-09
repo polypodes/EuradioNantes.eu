@@ -236,6 +236,36 @@ class Podcast
         return $this->markers;
     }
 
+    public function getMarkersJSON()
+    {
+        $data = array(
+            'regions' => array()
+        );
+        if (!empty($this->markers)) {
+            foreach ($this->markers as $marker) {
+                if (empty($marker['start']) || empty($marker['title'])) {
+                    continue;
+                }
+                $start = $marker['start'];
+                $end = !empty($marker['end']) ? $marker['end'] : $start;
+                $title = $marker['title'];
+                $text = $marker['text'];
+
+                $data['regions'][] = array(
+                    'start' => $start,
+                    'end' => $end,
+                    'color' => 'rgba(0, 0, 0, 0.03)',
+                    'data' => array(
+                        'title' => $title,
+                        'text' => $text,
+                    ),
+                );
+            }
+        }
+        //{&quot;regions&quot;: [{&quot;start&quot;: 1, &quot;end&quot;: 13, &quot;color&quot;: &quot;rgba(0, 0, 0, 0.03)&quot;, &quot;data&quot;: {&quot;title&quot;: &quot;Interview de Patrick Boulote&quot;, &quot;text&quot;: &quot;Brooklyn Neutra asymmetrical cred Carles raw denim. Cronut squid aesthetic, shabby chic iPhone organic chia messenger bag distillery McSweeney's literally bicycle rights Shoreditch put a bird on it. Cliche authentic..&quot;}},{&quot;start&quot;: 18, &quot;end&quot;: 33, &quot;color&quot;: &quot;rgba(0, 0, 0, 0.03)&quot;, &quot;data&quot;: {&quot;title&quot;: &quot;Interview de Patou gros&quot;, &quot;text&quot;: &quot;Brooklyn Neutra asymmetrical cred Carles raw denim. Cronut squid aesthetic, shabby chic iPhone organic chia messenger bag distillery McSweeney's literally bicycle rights Shoreditch put a bird on it. Cliche authentic..&quot;}},{&quot;start&quot;: 100, &quot;end&quot;: 113, &quot;color&quot;: &quot;rgba(0, 0, 0, 0.03)&quot;, &quot;data&quot;: {&quot;title&quot;: &quot;Interview de Seb Castagne&quot;, &quot;text&quot;: &quot;Brooklyn Neutra asymmetrical cred Carles raw denim. Cronut squid aesthetic, shabby chic iPhone organic chia messenger bag distillery McSweeney's literally bicycle rights Shoreditch put a bird on it. Cliche authentic..&quot;}},{&quot;start&quot;: 150, &quot;end&quot;: 183, &quot;color&quot;: &quot;rgba(0, 0, 0, 0.03)&quot;, &quot;data&quot;: {&quot;title&quot;: &quot;Témoignage d'Eric Gras&quot;, &quot;text&quot;: &quot;Brooklyn Neutra asymmetrical cred Carles raw denim. Cronut squid aesthetic, shabby chic iPhone organic chia messenger bag distillery McSweeney's literally bicycle rights Shoreditch put a bird on it. Cliche authentic..&quot;}},{&quot;start&quot;: 190, &quot;end&quot;: 213, &quot;color&quot;: &quot;rgba(0, 0, 0, 0.03)&quot;, &quot;data&quot;: {&quot;title&quot;: &quot;Interview de Francis Bold&quot;, &quot;text&quot;: &quot;Brooklyn Neutra asymmetrical cred Carles raw denim. Cronut squid aesthetic, shabby chic iPhone organic chia messenger bag distillery McSweeney's literally bicycle rights Shoreditch put a bird on it. Cliche authentic..&quot;}},{&quot;start&quot;: 23, &quot;end&quot;: 43, &quot;color&quot;: &quot;rgba(0, 0, 0, 0.03)&quot;, &quot;data&quot;: {&quot;title&quot;: &quot;text2&quot;, &quot;text&quot;: &quot;lorem ipsum bla&quot;}}]}
+        return json_encode($data);
+    }
+
     public function setMarkers($markers)
     {
         $this->markers = $markers;

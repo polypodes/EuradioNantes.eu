@@ -1,19 +1,22 @@
 <article class="podcast podcast-list">
-    <div class="podcast-title">Les derniers podcasts de l'émission</div>
-    {% for entity in podcasts %}
-    	<div class="podcast-item">
-          <button class="podcast-item-control podcast-item-play"></button>
-          <h3 class="podcast-item-title"><a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}">{{ entity.post.title }}</a></h3>
-          <p class="podcast-item-text">{{ entity.post.abstract | truncate(80, true, "…") }}</p>
-          <audio controls class="podcast-item-player" preload="none">
-          	<source src="{% path entity.filePodcast, 'reference' %}.ogg" type="audio/ogg" />
-			<source src="{% path entity.filePodcast, 'reference' %}" type="audio/mpeg" />
-			Your browser does not support the audio tag.
-          </audio>
-          <a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}" title="Lien pour obtenir plus d'information sur ce podcast" class="podcast-item-more">Plus d'infos et commentaires</a>
-          <span class="podcast-item-date">{{ entity.realtimestart|format_datetime("dd MMM Y H'h'mm", 'fr', 'Europe/Paris') }}</span>
-        </div>
-    {% endfor %}
+  <div class="podcast-title">Les derniers podcasts de l'émission</div>
+
+  {% for entity in podcasts -%}
+  	<div class="podcast-item">
+      <button class="podcast-item-control podcast-item-play"></button>
+      <h3 class="podcast-item-title"><a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}">{{ entity.post.title }}</a></h3>
+      <p class="podcast-item-text">{{ entity.post.abstract | truncate(80, true, "…") }}</p>
+      <audio controls class="podcast-item-player" preload="none">
+      	<source src="{% path entity.filePodcast, 'reference' %}.ogg" type="audio/ogg" />
+  			<source src="{% path entity.filePodcast, 'reference' %}" type="audio/mpeg" />
+  			Your browser does not support the audio tag.
+      </audio>
+      <a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}" title="Lien pour obtenir plus d'information sur ce podcast" class="podcast-item-more">Plus d'infos et commentaires</a>
+      <span class="podcast-item-date">{{ entity.realtimestart|format_datetime("dd MMM Y H'h'mm", 'fr', 'Europe/Paris') }}</span>
+    </div>
+
+  {%- endfor %}
+
 </article>
 
 {{ knp_pagination_render(podcasts) }}
