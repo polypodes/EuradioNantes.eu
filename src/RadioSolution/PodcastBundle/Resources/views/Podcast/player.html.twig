@@ -4,11 +4,16 @@
         {# dump(media) #}
         <div id="podcast-player">
             <h2>{{ podcast.name }}</h2>
-            <audio controls="controls">
+            {#<audio controls="controls">
                 <source src="{% path podcast.filePodcast, 'reference' %}.ogg" type="audio/ogg" />
                 <source src="{% path podcast.filePodcast, 'reference' %}" type="audio/mp3" />
                 <a href="{% path podcast.filePodcast, 'reference' %}" target="_blank"><img src="{% path podcast.filePodcast, 'small' %}" /></a>
-            </audio>
+            </audio>#}
+            <div class="podcast-item">
+              <div data-player-src="{% path podcast.filePodcast, 'reference' %}"{% if podcast.markers %} data-player-regions="{{ podcast.markersJSON|e }}"{% endif %} class="podcast-player">
+                <button class="podcast-item-control podcast-item-play"></button>
+              </div>
+            </div>
 
             {% if podcast.dlAuth %}
             <div id="podcast_export">
@@ -29,5 +34,7 @@
             {% endspaceless %}</pre>
         </div>
 
+        <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.42/wavesurfer.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.41/plugin/wavesurfer.regions.min.js"></script>
     {% endif %}
 {% endblock %}
