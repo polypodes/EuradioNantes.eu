@@ -9,3 +9,9 @@ RadioSolution\MenuBundle\Entity\Menu:
     name:
       type: string
       length: 100
+
+  oneToMany:
+    items:
+      targetEntity: Item
+      mappedBy: menu
+      cascade: [all]

@@ -3,6 +3,7 @@
 namespace RadioSolution\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * RadioSolution\MenuBundle\Entity\Menu
@@ -20,6 +21,16 @@ class Menu
     private $name;
 
     /**
+     * @var ArrayCollection
+     */
+    private $items;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
+
+    /**
      * to string
      *
      * @return string
@@ -32,7 +43,7 @@ class Menu
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -52,10 +63,28 @@ class Menu
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
+
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    public function addItem(Item $item)
+    {
+        $this->items[] = $item;
+    }
+
+    public function removeItem(Item $item)
+    {
+        $this->items->removeElement($item);
+
+        return $this;
+    }
+
 }

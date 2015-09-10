@@ -32,6 +32,10 @@ SiteBundle:
     resource: "@SiteBundle/Resources/config/routing.yml"
     prefix:   /
 
+MenuBundle:
+    resource: "@MenuBundle/Resources/config/routing.yml"
+    prefix:   /
+
 # Sonata
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'

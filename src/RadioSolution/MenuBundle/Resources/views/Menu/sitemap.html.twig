@@ -1,0 +1,79 @@
+<section class="content-main">
+  <div class="breadcrumb"><a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span></div>
+
+  <h1 class="content-title">Plan du site</h1>
+
+  <article class="podcast podcast-list">
+    {% set mainMenu = knp_menu_get('MenuBundle:Builder:mainMenu', {}, {'idmenu': 1 }) %}
+    <div class="podcast-item">
+      <h3 class="podcast-item-title">{{ mainMenu.name }}</h3>
+
+      <ul>
+        {% for item in mainMenu.children %}
+          <li>
+            {% if item.uri != '#' %}
+              <a href="{{ item.uri }}">{{ item.name }}</a>
+            {% else %}
+              <span>{{ item.name }}</span>
+            {% endif %}
+            {% if item.children|length > 0 %}
+              <ul>
+                {% for child in item.children %}
+                  <li>
+                    {% if child.uri != '#' %}
+                      <a href="{{ child.uri }}">{{ child.name }}</a>
+                    {% else %}
+                      <span>{{ child.name }}</span>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% set footerMenu = knp_menu_get('MenuBundle:Builder:footerMenu', {}, {'idmenu': 4 }) %}
+    <div class="podcast-item">
+      {#<h3 class="podcast-item-title">{{ footerMenu.name }}</h3>#}
+
+      <ul>
+        {% for item in footerMenu.children %}
+          <li>
+            {% if item.uri != '#' %}
+              <a href="{{ item.uri }}">{{ item.name }}</a>
+            {% else %}
+              <span>{{ item.name }}</span>
+            {% endif %}
+            {#% if item.children|length > 0 %}
+              <ul>
+                {% for child in item.children %}
+                  <li>
+                    {% if child.uri != '#' %}
+                      <a href="{{ child.uri }}">{{ child.name }}</a>
+                    {% else %}
+                      <span>{{ child.name }}</span>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %#}
+          </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+
+  </article>
+
+  {{ include(':Social:share.html.twig') }}
+
+</section>
+<aside class="content-aside">
+  <div class="content-aside-inner">
+    {{ render(controller('SonataNewsBundle:Post:getAsidePosts')) }}
+
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
+  </div>
+</aside>
