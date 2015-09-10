@@ -1,23 +1,41 @@
-<h1>{{ entity.name }}</h1>
-<p>{{ entity.body }}</p>
-		<div class="navigation">
-	    	{{ knp_pagination_render(entities) }}
-		</div>
-{% for entity in entities %}
-	<div class="static-page_list">
-	{% if entity.getImage() %}
-		<a href="/article/{{ entity.getSlug() }}">
-			{%media entity.getImage() ,'medium' %}
-		</a>
-	{% endif %}
+<section class="content-main">
+  <div class="breadcrumb"><a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span></div>
 
-	<a href="/article/{{ entity.getSlug() }}">
-		<h3>{{ entity.name }}</h3>
-	</a>
-	<p>{{ entity.introduction| truncate(270, true, "...") }}</p>
-	<a href="/article/{{ entity.getSlug() }}" id="plus">lire la suite</a>
-	</div>
-{% endfor %}
-		<div class="navigation">
-	    	{{ knp_pagination_render(entities) }}
-		</div>
+  {# if entity.collection %}
+  <span class="bloc-content-cat">{{ entity.collection.name }}</span>
+  {% elseif entity.theme %}
+  <span class="bloc-content-cat">{{ entity.theme.name }}</span>
+  {% endif #}
+
+  <h1 class="content-title">{{ entity.name }}</h1>
+
+  {# if entity.media %}
+  <figure class="content-img"><img src="{% path entity.media, 'large' %}" srcset="{% path entity.media, 'large_mobile' %} 480w, {% path entity.media, 'large' %} 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
+  {% endif #}
+
+  {{ entity.body|raw }}
+
+	<article class="podcast podcast-list">
+
+	  {% for entity in entities -%}
+	  	<div class="podcast-item">
+	      <h3 class="podcast-item-title"><a href="{{ path('static_content', {'slug': entity.slug}) }}">{{ entity.name }}</a></h3>
+	      <p class="podcast-item-text">{{ entity.introduction | truncate(270, true, "…") }}</p>
+	      {#<span class="podcast-item-date">{{ entity.realtimestart|format_datetime("dd MMM Y H'h'mm", 'fr', 'Europe/Paris') }}</span>#}
+	    </div>
+
+	  {%- endfor %}
+	</article>
+
+	{{ knp_pagination_render(entities) }}
+
+  {{ include(':Social:share.html.twig') }}
+</section>
+
+<aside class="content-aside">
+  <div class="content-aside-inner">
+    {{ render(controller('SonataNewsBundle:Post:getAsidePosts')) }}
+
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
+  </div>
+</aside>

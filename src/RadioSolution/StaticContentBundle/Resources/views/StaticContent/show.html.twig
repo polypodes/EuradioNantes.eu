@@ -1,74 +1,45 @@
-<div class="article">
-<h1>{{ entity.name }}</h1>
+<section class="content-main">
+  <div class="breadcrumb">
+  	<a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span>
+  	{{ sonata_block_render_event('breadcrumb', { 'context': sonata_seo_context is defined ? sonata_seo_context : 'homepage' , 'current_uri': app.request.requestUri }) }}
+  </div>
 
-<!-- 
-<div class="" style="float:left; margin-right:15px;">
-	{% if entity.getImage() %}
-			{%media entity.getImage() ,'medium' %}
-	{% endif %}
-</div><p style="font-weight:bold;">{{ entity.introduction }}</p>
-<br clear="all" />
- -->
-<p class="article-body">{{ entity.body|raw }}</p>
-</div>
+  {# if entity.categoryStaticContent -%}
+    <span class="bloc-content-cat">{{ entity.categoryStaticContent.name }}</span>
+  {%- endif #}
+	{#}
+  <time datetime="{{ entity.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ entity.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+	#}
 
+  <h1 class="content-title">{{ entity.name }}</h1>
 
-<script type='text/javascript'>
-jQuery.noConflict();
+  {% if entity.image -%}
+    <figure class="content-img">
+      <img src="{% path entity.image, 'large' %}" srcset="{% path entity.image, 'large_mobile' %} 480w, {% path entity.image, 'large' %} 1900w" alt="Illustration de la page" class="bloc-content-img img-responsive">
+    </figure>
+  {%- endif %}
 
-jQuery(function($){
+  {{ entity.body|raw }}
 
-	console.log('jquery');
+  {# if entity.author %}
+  <div data-clickable="true" class="author">
+    {% if entity.author.image %}
+    <img src="//unsplash.it/50x50" alt="" class="author-img">
+    {% endif %}
+    <div class="author-text">
+      {% set authorname = entity.author.fullname != '' ? entity.author.fullname : entity.author.username %}
+      <div class="author-sup">Rédigé par</div><a href="#" data-clickable-target="true" title="Lien vers les articles de {{ authorname }}" class="author-title">{{ authorname }}</a>
+    </div>
+  </div>
+  {% endif #}
 
-		console.log('ready');
+  {{ include(':Social:share.html.twig') }}
 
-		$('audio').each(function(index) {
+</section>
+<aside class="content-aside">
+  <div class="content-aside-inner">
+    {{ render(controller('SonataNewsBundle:Post:getAsidePosts')) }}
 
-			console.log('audio');
-			
-			var src = $(this).attr('src');
-	
-			if(src != ""){
-			
-				$(this).html('');
-				
-	
-				if(src.substr((src.length-3), 3) == 'ogg'){
-		
-					var oggsource = '<source src="'+src+'" type="audio/ogg">';
-					var mp3source = '<source src="'+src.substr(0, (src.length-4))+'" type="audio/mpeg">';
-					var qtfallback = 'QT_WriteOBJECT("'+src.substr(0, (src.length-4))+'", "300", "30", "")';
-					
-				}else{
-					
-					var oggsource = '<source src="'+src+'.ogg" type="audio/ogg">';
-					var mp3source = '<source src="'+src+'" type="audio/mpeg">';
-					var qtfallbackContent = 'QT_WriteOBJECT("'+src+'", "300", "30", "");';
-			
-				}
-		
-				var qtfallbackContent = '<a href="'+src+'" target="_blank"><img src="http://www.euradionantes.eu/images/timeline/play.png" /></a>';
-				
-				var script = document.createElement('script');
-				script.type = 'text/javascript';
-				script.innerHTML = qtfallbackContent;
-			
-				$(this).append(oggsource);
-				$(this).append(mp3source);
-				$(this).append(qtfallbackContent);
-		
-				
-				$(this).removeAttr('src');
-				$(this).removeAttr('type');
-				$(this).removeAttr('width');
-				$(this).removeAttr('height');
-				$(this).attr('tabindex', 0);
-				$(this).attr('controls', 'controls');
-	
-			}
-			
-		});
-
-});
-
-</script>
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
+  </div>
+</aside>
