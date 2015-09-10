@@ -25,6 +25,7 @@ parameters:
     amazon_ws_api_secret_key: 0s3Pp...
     amazon_ws_api_associate_tag: euradionantes...
     nowPlayingUrl: http://www.euradionantes.eu/uploads/onair/now_playing.txt
+    liveStreamUrl: http://80.82.229.202:80/euradio.mp3
     mailchimp_api_key: xxxxxxxxx
     mailchimp_default_list: xxxxxxxx
 
