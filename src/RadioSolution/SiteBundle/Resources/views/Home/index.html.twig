@@ -1,0 +1,76 @@
+{% if posts|length > 0 %}
+<div class="home-main">
+
+  {% set top = posts|first %}
+  <article data-clickable="true" class="bloc-content bloc-content-first">
+    <div class="bloc-content-inner">
+      {% if top.image -%}
+        <figure class="bloc-content-figure"><img src="{% path top.image, 'list_tablet' %}" srcset="{% path top.image, 'list_mobile' %} 480w, {% path top.image, 'list_medium' %} 1200w, {% path top.image, 'list_tablet' %} 1900w" alt="Illustration de l'article « {{ top.title }} »" class="bloc-content-img img-responsive"></figure>
+      {%- endif %}
+      <div class="bloc-content-text">
+        {% if top.collection -%}
+          <span class="bloc-content-cat">{{ top.collection.name }}</span>
+        {%- endif %}
+        <time datetime="{{ top.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ top.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+        <h1 class="bloc-content-title">
+          <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(top) }) }}" data-clickable-target="true" title="Lire l'article « {{ top.title }} »">{{ top.title }}</a>
+        </h1>
+        <div class="bloc-content-intro">{{ top.abstract|raw }}</div>
+      </div>
+    </div>
+  </article>
+
+  <div class="home-col01">
+    <a href="{{ path('listeactus') }}" title="Voir toutes les actualités" class="home-btn-more">Toutes les actualités</a>
+
+    {% for post in posts|slice(1, 3) %}
+    <article data-clickable="true" class="bloc-content{% if post.type == 'podcast' %} bloc-podcast{% endif %}">
+      <div class="bloc-content-inner">
+        {% if post.image -%}
+          <figure class="bloc-content-figure"><img src="{% path post.image, 'list_tablet' %}" srcset="{% path post.image, 'list_mobile' %} 480w, {% path post.image, 'list_tablet' %} 992w, {% path post.image, 'list_desktop' %} 1900w" alt="Illustration de l'article « {{ post.title }} »" class="bloc-content-img img-responsive"></figure>
+        {%- endif %}
+        <div class="bloc-content-text">
+          {% if post.collection -%}
+            <span class="bloc-content-cat">{{ post.collection.name }}</span>
+          {%- endif %}
+          <time datetime="{{ post.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ post.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+          <h2 class="bloc-content-title">
+            <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}" data-clickable-target="true" title="Lire l'article « {{ post.title }} »">{{ post.title }}</a>
+          </h2>
+          {% if loop.first -%}
+            <div class="bloc-content-intro">{{ post.abstract|raw }}</div>
+          {%- endif %}
+        </div>
+      </div>
+    </article>
+
+    {% endfor %}
+  </div>
+</div>
+<div class="home-side">
+  <div class="home-col02">
+    {% for post in posts|slice(4, 4) %}
+    <article data-clickable="true" class="bloc-content{% if post.type == 'podcast' %} bloc-podcast{% endif %}">
+      <div class="bloc-content-inner">
+        {% if post.image -%}
+          <figure class="bloc-content-figure"><img src="{% path post.image, 'list_tablet' %}" srcset="{% path post.image, 'list_mobile' %} 480w, {% path post.image, 'list_tablet' %} 992w, {% path post.image, 'list_desktop' %} 1900w" alt="Illustration de l'article « {{ post.title }} »" class="bloc-content-img img-responsive"></figure>
+        {%- endif %}
+        <div class="bloc-content-text">
+          {% if post.collection -%}
+            <span class="bloc-content-cat">{{ post.collection.name }}</span>
+          {%- endif %}
+          <time datetime="{{ post.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ post.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+          <h2 class="bloc-content-title">
+            <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(post) }) }}" data-clickable-target="true" title="Lire l'article « {{ post.title }} »">{{ post.title }}</a>
+          </h2>
+        </div>
+      </div>
+    </article>
+
+    {% endfor %}
+  </div>
+  <div class="home-col03">
+    {{ include('ApplicationSonataNewsBundle:Post:aside.html.twig', { 'posts': posts[9:] }) }}
+  </div>
+</div>
+{% endif %}

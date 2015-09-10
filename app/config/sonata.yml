@@ -65,6 +65,7 @@ sonata_media:
                 list_desktop: { width: 300, height: 165, quality: 80}
                 list_mobile: { width: 450, height: 246, quality: 80}
                 list_tablet: { width: 570, height: 312, quality: 80}
+                list_medium: { width: 470, height: 215, quality: 80}
                 list_program: { width: 100, height: 50, quality: 80}
 
                 #big: { width: 850, height: 510,  quality: 80}
@@ -118,9 +119,9 @@ sonata_page:
         homepage: {decorate: false} # disable decoration for homepage, key - is a page route
 
     default_template: default # template key from templates section, used as default for pages
-    templates:
-        default: {path: 'ApplicationSonataPageBundle::layout.html.twig', name: default }
-        empty: {path: 'RadioSolution:ProgramBundle:empty_layout.html.twig', name: empty }
+    #templates:
+        #default: {path: 'ApplicationSonataPageBundle::layout.html.twig', name: default }
+
         # @todo check against actual params in production
         #ecoute: {path: 'SonataPageBundle::ecoute2.html.twig', name: ecoute }
 
@@ -134,8 +135,34 @@ sonata_page:
     multisite:        host
     default_template: default # template key from templates section, used as default for
     templates:
-        default:  { path: 'SonataPageBundle::layout.html.twig',          name: 'default' }
-        2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
+        default:
+            path: 'ApplicationSonataPageBundle::layout.html.twig'
+            name: 'default'
+            containers:
+                #header:
+                #    name: Header
+                #content_top:
+                #    name: Top content
+                content:
+                    name: Main content
+                #content_bottom:
+                #    name: Bottom content
+                #footer:
+                #    name: Footer
+            matrix:
+                layout: |
+                    CCCCCCCC
+                    CCCCCCCC
+                mapping:
+                    #H: header
+                    #T: content_top
+                    C: content
+                    #B: content_bottom
+                    #F: footer
+        empty:
+            path: 'RadioSolution:ProgramBundle:empty_layout.html.twig'
+            name: empty
+        #2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
 
     # Generates a snapshot when a page is saved (from the admin)
     direct_publication: true # or %kernel.debug% if you want to publish in dev mode (but not in prod)
