@@ -151,18 +151,23 @@ class NowPlaying implements ContainerAwareInterface
             $this->fetchTerms();
         }
 
-        /** @var Broadcast */
+        /** @var Broadcast $broadcast */
         $broadcast = null;
-        /** @var Track */
+        /** @var Track $currentTrack */
         $currentTrack = null;
-        /** @var AlbumModel */
+        /** @var AlbumModel $albumModel */
         $albumModel = null;
-
+        /** @var array $trackList */
+        $trackList = null;
         $code = false;
 
         if(isset($this->terms)) {
             list($currentTrackTitle, $terms, $album, $images, $tracks) = $this->retriever->search($this->terms);
-            list($code, $albumModel) = $this->saveAlbum($album, $images, $terms);
+            try {
+                list($code, $albumModel) = $this->saveAlbum($album, $images, $terms);
+            } catch (\Exception $e) {
+                $this->saveBroadCastBeforeThrowingException($terms, $e);
+            }
             switch($code) {
                 case self::NEWLY_SAVED:
                     if ($tracks) {
@@ -175,32 +180,46 @@ class NowPlaying implements ContainerAwareInterface
                     $trackList = $albumModel->getTracks();
                     break;
                 default:
-                    throw new InvalidTermsInputException(sprintf("album couldn't be saved in %s", __METHOD__));
+                    $this->saveBroadCastBeforeThrowingException($terms,
+                        new InvalidTermsInputException(sprintf("album couldn't be saved in %s", __METHOD__)));
             }
 
             if(empty($trackList)) {
-                throw new InvalidTrackInputException(sprintf('trackList not found in %s', __METHOD__));
+                $this->saveBroadCastBeforeThrowingException($terms,
+                new InvalidTrackInputException(sprintf('trackList not found in %s', __METHOD__)));
             }
             elseif(empty($currentTrackTitle)) {
-                throw new InvalidTrackInputException(sprintf('currentTrackTitle is empty in %s', __METHOD__));
+                $this->saveBroadCastBeforeThrowingException($terms,
+                new InvalidTrackInputException(sprintf('currentTrackTitle is empty in %s', __METHOD__)));
             }
 
             $currentTrack = $this->getTrackByTitle($trackList, $currentTrackTitle);
 
             if (empty($currentTrack)) {
-                throw new InvalidTrackInputException(sprintf("No '%s' track found in '%s' found album, using given '%s' terms in %s", $currentTrackTitle, $albumModel->getTitle(), $terms, __METHOD__));
+                $this->saveBroadCastBeforeThrowingException($terms,
+                    new InvalidTrackInputException(sprintf(
+                        "No '%s' track found in '%s' found album, using given '%s' terms in %s",
+                        $currentTrackTitle, $albumModel->getTitle(), $terms, __METHOD__)));
             }
 
-            list($code, $broadcast) = $this->saveBroadcast($currentTrack);
+            list($code, $broadcast) = $this->saveBroadcast($terms, $currentTrack);
 
             if(empty($broadcast) || $code == self::SOMETHING_TERRIBLE_HAPPENED) {
-                throw new InvalidTrackInputException(sprintf("broadcast couldn't be saved using given track in %s", __METHOD__));
+                $this->saveBroadCastBeforeThrowingException($terms,
+                 new InvalidTrackInputException(sprintf(
+                    "broadcast couldn't be saved using given '%s' terms and track ID #%d in %s",
+                    $terms, $currentTrack->getId(), __METHOD__)));
             }
 
             return array($currentTrack, $broadcast, $this->terms, $albumModel, $trackList);
         }
 
         return array();
+    }
+
+    protected function saveBroadCastBeforeThrowingException($terms, $e) {
+        list($code, $broadcast) = $this->saveBroadcast($terms, null);
+        throw $e;
     }
 
 
@@ -218,10 +237,10 @@ class NowPlaying implements ContainerAwareInterface
             throw new InvalidAlbumInputException(sprintf("terms are null in %s", __METHOD__));
         }
         elseif(empty($album)) {
-            throw new InvalidAlbumInputException(sprintf("album is null in %s", __METHOD__));
+            throw new InvalidAlbumInputException(sprintf("album is null for '%s' terms in %s", $terms, __METHOD__));
         }
         elseif(empty($images)) {
-            throw new InvalidAlbumInputException(sprintf("images list is null in %s", __METHOD__));
+            throw new InvalidAlbumInputException(sprintf("images list is null for '%s' terms in %s", $terms, __METHOD__));
         }
         $albumModel = new AlbumModel();
         try {
@@ -233,7 +252,7 @@ class NowPlaying implements ContainerAwareInterface
             $exists = $this->albumExistsYet($albumModel);
             if('RadioSolution\ProgramBundle\Entity\Album' === get_class($exists)) {
                 $this->logger->info(sprintf(
-                    'Album #%d "%s" already existing found for terms "%s"',
+                    'Album #%d "%s" already existing found for given "%s" terms',
                     $exists->getId(), $exists->getTitle(), $terms
                 ));
 
@@ -296,8 +315,11 @@ class NowPlaying implements ContainerAwareInterface
      * @return array
      * @throws InvalidTrackInputException
      */
-    protected function saveBroadCast($track)
+    protected function saveBroadCast($terms, $track = null)
     {
+        if (empty($terms)) {
+            throw new InvalidTrackInputException(sprintf("terms cannot be null in %s", __METHOD__));
+        }
         /** @var Broadcast */
         $lastBroadcast = $this
             ->container->get('doctrine')->getManager()
@@ -312,24 +334,30 @@ class NowPlaying implements ContainerAwareInterface
         /** @var Track */
         $lastBroadcastedTrack = $lastBroadcast->getTrack();
 
+        // Broadcast track already processed in last db entry
         if (!empty($lastBroadcastedTrack && !empty($track))) {
-            //die(dump([$track->getId(), $lastBroadcastedTrack->getId()]));
             if($track->getId() === $lastBroadcastedTrack->getId()) {
                 return array(self::ALREADY_EXISTS, $lastBroadcast);
             }
         }
-
+        // Broadcast terms already processed (in case track is not found) in last db entry
+        if (!empty($lastBroadcast && !empty($terms))) {
+            if($lastBroadcast->getTerms() === $terms) {
+                return array(self::ALREADY_EXISTS, $lastBroadcast);
+            }
+        }
         $broadcast = new Broadcast();
 
-        if(empty($track)) {
-            throw new InvalidTrackInputException(sprintf("track entity cannot be null in %s", __METHOD__));
-        }
         try {
-            $this->logger->info(sprintf('Trying to SAVE broadcast using Track %d "%s"',
-                $track->getId(), $track->getTitle()));
-
             $broadcast->setBroadcasted(new \DateTime('now'));
-            $broadcast->setTrack($track);
+            if (!empty($track)) {
+                $this->logger->info(sprintf('Trying to SAVE broadcast using Track %d "%s"',
+                    $track->getId(), $track->getTitle()));
+                $broadcast->setTrack($track);
+            } else {
+                $this->logger->info(sprintf('Trying to SAVE broadcast using no Track but terms "%s"', $terms));
+            }
+            $broadcast->setTerms($terms);
             $this->entityManager->persist($broadcast);
             $this->entityManager->flush();
 

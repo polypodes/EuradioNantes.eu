@@ -26,6 +26,11 @@ class Broadcast
     private $track;
 
     /**
+     * @var string
+     */
+    private $terms;
+
+    /**
      * @var \DateTime
      */
     private $broadcasted;
@@ -67,6 +72,30 @@ class Broadcast
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set terms
+     *
+     * @param string $terms
+     *
+     * @return Broadcast
+     */
+    public function setTerms($terms)
+    {
+        $this->terms = $terms;
+
+        return $this;
+    }
+
+    /**
+     * Get terms
+     *
+     * @return string
+     */
+    public function getTerms()
+    {
+        return $this->terms;
     }
 
     /**

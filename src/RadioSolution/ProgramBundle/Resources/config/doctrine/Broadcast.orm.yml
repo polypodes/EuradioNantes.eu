@@ -4,11 +4,19 @@ RadioSolution\ProgramBundle\Entity\Broadcast:
   lifecycleCallbacks:
     prePersist: [ updatedTimestamps ]
     preUpdate: [ updatedTimestamps ]
+  indexes:
+      created_index:
+        columns: [ created_at ]
   id:
     id:
       type: integer
       generator: { strategy: AUTO }
   fields:
+    terms:
+          type: string
+          length: 255
+          nullable: true
+          default: NULL
     broadcasted:
       type: datetime
       nullable: true
