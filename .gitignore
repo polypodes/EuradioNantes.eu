@@ -54,3 +54,6 @@ doc/upgrade/sql/v2_classification__tag.sql
 
 # Mac
 .DS_Store
+
+# Local composer
+composer.phar
