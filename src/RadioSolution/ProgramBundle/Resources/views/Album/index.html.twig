@@ -4,54 +4,64 @@
     {{ sonata_block_render_event('breadcrumb', { 'context': sonata_seo_context is defined ? sonata_seo_context : 'homepage' , 'current_uri': app.request.requestUri }) }}
   </div>
 
-  <h1 class="actu-list-title">Album de la semaine</h1>
+  <h1 class="actu-list-title">Albums de la semaine</h1>
 
   {% set top = albums|first %}
   {% if top -%}
-    <article data-clickable="true" class="bloc-content">
-      <div class="bloc-content-inner">
-        {% if top.image -%}
-            <figure class="bloc-content-figure"><img src="{% path top.image, 'list_tablet' %}" srcset="{% path top.image, 'list_mobile' %} 480w, {% path top.image, 'list_tablet' %} 992w, {% path top.image, 'list_desktop' %} 1900w" alt="Illustration de l’album « {{ top.title }} »" class="bloc-content-img img-responsive"></figure>
-        {% elseif top.thumbnailUrl -%}
-          <figure class="bloc-content-figure"><img src="{{ top.thumbnailUrl }}" srcset="{{ top.thumbnailUrl }} 480w, {{ top.thumbnailUrl }} 1900w" alt="Illustration de l'album « {{ top.title }} »" class="bloc-content-img img-responsive"></figure>
-        {%- endif %}
-        <div class="bloc-content-text">
+    <article data-clickable="true" class="media bloc-content">
+        <div class="media-left">
+          {% if top.image -%}
+            <figure>
+              <img class="media-object" src="{% path top.image, 'list_tablet' %}" srcset="{% path top.image, 'list_mobile' %} 480w, {% path top.image, 'list_tablet' %} 992w, {% path top.image, 'list_desktop' %} 1900w" alt="Illustration de l’album « {{ top.title }} »" class="bloc-content-img img-responsive">
+            </figure>
+          {% elseif top.thumbnailUrl -%}
+            <figure>
+              <img class="media-object" src="{{ top.thumbnailUrl }}" srcset="{{ top.thumbnailUrl }} 480w, {{ top.thumbnailUrl }} 1900w" alt="Illustration de l'album « {{ top.title }} »" class="bloc-content-img img-responsive">
+            </figure>
+          {%- endif %}
+        </div>
+
+        <div class="media-body">
           {# if top.collection -%}
             <span class="bloc-content-cat">{{ top.collection.name }}</span>
           {%- endif #}
           <time datetime="{{ top.featuredFrom | date('Y-m-d H:i') }}" class="bloc-content-date">{{ top.featuredFrom | localizeddate('long', 'none', 'fr-FR') }}</time>
           <h2 class="bloc-content-title">
-            <a href="{{ path('album', {'slug': top.slug}) }}" data-clickable-target="true" title="Voir « {{ top.title }} »">{{ top.title }}</a>
+            <a href="{{ path('album', {'slug': top.slug}) }}" data-clickable-target="true" title="Voir « {{ top.title }} »">
+              {{ top.title }} <small>{{ top.artist }}</small>
+            </a>
           </h2>
           {{ top.resume|raw }}
         </div>
-      </div>
     </article>
 
-    <div class="list">
-      {% for album in albums[1:] %}
-      <article data-clickable="true" class="bloc-content">
-        <div class="bloc-content-inner">
-          {% if album.image -%}
-            <figure class="bloc-content-figure"><img src="{% path album.image, 'list_tablet' %}" srcset="{% path album.image, 'list_mobile' %} 480w, {% path album.image, 'list_tablet' %} 992w, {% path album.image, 'list_desktop' %} 1900w" alt="Illustration de l’album « {{ album.title }} »" class="bloc-content-img img-responsive"></figure>
-          {% elseif album.thumbnailUrl -%}
-            <figure class="bloc-content-figure"><img src="{{ album.thumbnailUrl }}" srcset="{{ album.thumbnailUrl }} 480w, {{ album.thumbnailUrl }} 1900w" alt="Illustration de l'album « {{ album.title }} »" class="bloc-content-img img-responsive"></figure>
-          {%- endif %}
-          <div class="bloc-content-text">
-            {# if album.collection -%}
-              <span class="bloc-content-cat">{{ album.collection.name }}</span>
-            {%- endif #}
-            <time datetime="{{ album.featuredFrom | date('Y-m-d H:i') }}" class="bloc-content-date">{{ album.featuredFrom | localizeddate('long', 'none', 'fr-FR') }}</time>
-            <h2 class="bloc-content-title">
-              <a href="{{ path('album', {'slug': album.slug}) }}" data-clickable-target="true" title="Voir « {{ album.title }} »">{{ album.title }}</a>
-            </h2>
-            {{ album.resume|raw }}
-          </div>
-        </div>
-      </article>
 
-      {% endfor %}
-    </div>
+  {% for album in albums[1:] %}
+    <article  data-clickable="true" class="media bloc-content">
+      <div class="media-left">
+        {% if album.image -%}
+          <figure>
+            <img class="media-object" src="{% path album.image, 'list_tablet' %}" srcset="{% path album.image, 'list_mobile' %} 480w, {% path album.image, 'list_tablet' %} 992w, {% path album.image, 'list_desktop' %} 1900w" alt="Illustration de l’album « {{ album.title }} »" class="bloc-content-img img-responsive">
+          </figure>
+        {% elseif album.thumbnailUrl -%}
+          <figure>
+            <img class="media-object" src="{{ album.thumbnailUrl }}" srcset="{{ album.thumbnailUrl }} 480w, {{ album.thumbnailUrl }} 1900w" alt="Illustration de l'album « {{ album.title }} »" class="bloc-content-img img-responsive">
+          </figure>
+        {%- endif %}
+      </div>
+      <div class="media-body">
+        <time datetime="{{ album.featuredFrom | date('Y-m-d H:i') }}" class="bloc-content-date">{{ album.featuredFrom | localizeddate('long', 'none', 'fr-FR') }}</time>
+        <h2 class="bloc-content-title">
+          <a href="{{ path('album', {'slug': album.slug}) }}" data-clickable-target="true" title="Voir « {{ album.title }} »">
+            {{ album.title }} <small>{{ album.artist }}</small>
+          </a>
+        </h2>
+        {{ album.resume|raw }}
+      </div>
+    </article>
+  {% endfor %}
+
+
   {%- else -%}
     <p><em>Aucun résultat</em></p>
   {%- endif %}
