@@ -148,8 +148,11 @@ class ProgramController extends Controller
             ;
             //var_dump($result);
             if ($broadcast) {
-                $track = $broadcast->getTrack();
-                $content = $track->getArtist() . ' - ' . $track->getTitle() . ' - ' . $track->getAlbum()->getTitle();
+                if ($track = $broadcast->getTrack()) {
+                    $content = $track->getArtist() . ' - ' . $track->getTitle() . ' - ' . $track->getAlbum()->getTitle();
+                } else {
+                    $content = $broadcast->getTerms();
+                }
             }
         }
 

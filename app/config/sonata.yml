@@ -119,11 +119,6 @@ sonata_page:
         homepage: {decorate: false} # disable decoration for homepage, key - is a page route
 
     default_template: default # template key from templates section, used as default for pages
-    #templates:
-        #default: {path: 'ApplicationSonataPageBundle::layout.html.twig', name: default }
-
-        # @todo check against actual params in production
-        #ecoute: {path: 'SonataPageBundle::ecoute2.html.twig', name: ecoute }
 
     # manage the http errors
     catch_exceptions:
@@ -160,8 +155,12 @@ sonata_page:
                     #B: content_bottom
                     #F: footer
         empty:
-            path: 'RadioSolution:ProgramBundle:empty_layout.html.twig'
+            path: 'ProgramBundle:empty_layout.html.twig'
             name: empty
+        ecoute:
+            path: 'ProgramBundle::layout_ecoute.html.twig'
+            name: ecoute
+
         #2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
 
     # Generates a snapshot when a page is saved (from the admin)

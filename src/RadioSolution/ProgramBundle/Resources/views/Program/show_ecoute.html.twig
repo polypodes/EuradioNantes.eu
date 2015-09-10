@@ -1,152 +1,243 @@
+  <div class="walkman-container walkman-now">
+    {% if program %}
+      <section class="walkman-show">
+        <h2 class="sr-only">Émission à l’écoute</h2>
+        <div class="show">
+          {% if program.emission.media %}
+            <img src="//lorempixel.com/85/43" alt="" class="show-image">
+          {% endif %}
+          <ul class="show-info">
+            <li class="show-time">
+              <time>{{ program.timeStart|date('h\\hi') }} - {{ program.timeStop|date('h\\hi') }}</time>
+            </li>
+            <li class="show-name"><a href="{{ path('emission', {'name': program.emission.slug}) }}" target="_parent">{{ program.emission.name }}</a></li>
+          </ul>
+        </div>
+      </section>
+    {% endif %}
 
+    {% if onair %}
+      <section class="walkman-track">
+        <h2 class="walkman-track-title">En ce moment</h2>
+        <div class="track">
+          {% if onair.track and onair.track.album %}
+            {% if onair.track.album.image %}
+              <img src="//lorempixel.com/86/86" alt="" class="track-image">
+            {% elseif onair.track.album.thumbnailUrl %}
+              <img src="{{ onair.track.album.thumbnailUrl }}" alt="" class="track-image">
+            {% endif %}
+          {% endif %}
+          <ul class="track-info">
+            {% if onair.track %}
+              <li class="track-title"><strong>{{ onair.track.title }}&nbsp;</strong></li>
+              <li class="track-artist">{{ onair.track.artist }}&nbsp;</li>
+              <li class="track-album">{{ onair.track.title }}</li>
+            {% else %}
+              {% set terms = onair.terms|split(' - ') %}
+              <li class="track-title"><strong>{{ terms[terms|length > 1 ? 1 : 0] }}</strong></li>
+              {% if terms|length > 1 %}<li class="track-artist">{{ terms[0] }}&nbsp;</li>{% endif %}
+              {% if terms|length > 2 %}<li class="track-album">{{ terms[2] }}</li>{% endif %}
+            {% endif -%}
+          </ul>
+        </div>
+      </section>
+    {% endif %}
+  </div>
+  <section class="walkman-container walkman-playlist">
+    <h2 class="playlist-title">Vous avez entendu</h2>
+    <ol class="playlist-list">
+      {% for broadcast in broadcasts -%}
+        <li class="playlist-item">
+          <time class="playlist-item-time" datetime="{{ broadcast.broadcasted|date('Y-m-d H:i') }}">{{ broadcast.broadcasted|date('H:i') }}&nbsp;</time>
+          {% if broadcast.track %}
+            <strong>{{ broadcast.track.title }}&nbsp;</strong>
+            <span class="playlist-track-title">{{ broadcast.track.artist }}&nbsp;</span>
+            <span class="playlist-album">{{ broadcast.track.title }}</span>
+          {% else %}
+            {% set terms = broadcast.terms|split(' - ') %}
+            <strong>{{ terms[terms|length > 1 ? 1 : 0] }}</strong>
+            {% if terms|length > 1 %}<span class="playlist-track-title">{{ terms[0] }}&nbsp;</span>{% endif %}
+            {% if terms|length > 2 %}<span class="playlist-album">{{ terms[2] }}</span>{% endif %}
+          {% endif -%}
+        </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <script>
+      setInterval(function() {
+        //openLinksInOpener();
+        var request = new XMLHttpRequest();
+        request.open('GET', this.location.href, true);
+
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            // Success!
+            var content = request.responseText;
+            document.getElementById('main-content').innerHTML = content;
+            openLinksInOpener();
+          } else {
+            // We reached our target server, but it returned an error
+            if (console) console.log('Impossible de mettre à jour la page ', request);
+          }
+        };
+
+        request.onerror = function() {
+          // There was a connection error of some sort
+        };
+
+        request.send();
+      }, 10000);
+  </script>
+{#
 <script src="{{ asset('bundles/sonatajquery/jquery-1.7.1.js') }}" type="text/javascript"></script>
 
-          <script type="text/javascript">
-            //<![CDATA[
-                
-                var myListener = new Object();
-                /**
-                 * Initialisation
-                 */
-                myListener.onInit = function()
-                {
-                    this.position = 0;
-                    play();
-                };
-                /**
-                 * Update
-                 */
-                myListener.onUpdate = function()
-                {
-                    
-                    var isPlaying = (this.isPlaying == "true");
-                    
-                };
-                
-                function setPosition()
-                {
-                    var position = document.getElementById("inputPosition").value;
-                    getFlashObject().SetVariable("method:setPosition", position);
-                }
-                
-                function setVolume()
-                {
-                    var volume = document.getElementById("inputVolume").value;
-                    getFlashObject().SetVariable("method:setVolume", volume);
-                }
+<script type="text/javascript">
+//<![CDATA[
 
-                function switchSound()
-                {
-                	if (myListener.position == 0) {
-                		play()
-                	}else{
-						stop();
-						myListener.position == 0
-                	}
-                }
-                
-                function play()
-                {
-                                 
-                    getFlashObject().SetVariable("method:setUrl", "http://80.82.229.202:80/euradio.mp3");
-                    getFlashObject().SetVariable("method:play", "");
-                    getFlashObject().SetVariable("enabled", "true");
-                }
-                
-                function pause()
-                {
-                    getFlashObject().SetVariable("method:pause", "");
-                }
-                
-                function stop()
-                {
-                    getFlashObject().SetVariable("method:stop", "");
-                }
-                
-                
-                function getFlashObject()
-                {
-                    return document.getElementById("myFlash");
-                }
+    var myListener = new Object();
+    /**
+     * Initialisation
+     */
+    myListener.onInit = function()
+    {
+        this.position = 0;
+        play();
+    };
+    /**
+     * Update
+     */
+    myListener.onUpdate = function()
+    {
 
-                
-                $(document).ready(function(){
+        var isPlaying = (this.isPlaying == "true");
 
-                	var hasFlash = false;
-                	try {
-                	  var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
-                	  if(fo) hasFlash = true;
-                	}catch(e){
-                	  if(navigator.mimeTypes ["application/x-shockwave-flash"] != undefined) hasFlash = true;
-                	}
-                	                    
-                	if(hasFlash){
-                		
-                		$('#streamingHTML5').hide();
-               		
-	                	$('#play_btn').click(function(){
-	                	
-	                		switchSound();
-	                		
-	                		if(myListener.position == 0){
-	                    		
-	                			$(this).removeClass("paused");
-	                		}else{
-	                    		
-	                			$(this).addClass("paused");
-	                		}
-	
-	                	});
-	                	
-	                	updateOnair();
-	                	setInterval('updateOnair()', 10000	);
-	
-                	}else{
-                    	
-                		$('#play_btn').hide();
-                		$('#streamingHTML5').show();
-                		$('#streamingHTML5 audio').play();
-                    }
-             	   
-				});
+    };
 
-                function updateOnair()
-                {
-                	jQuery.get('http://www.euradionantes.eu/uploads/onair/now_playing.txt', function(data) {
+    function setPosition()
+    {
+        var position = document.getElementById("inputPosition").value;
+        getFlashObject().SetVariable("method:setPosition", position);
+    }
 
-                		tab = data.split(';');
+    function setVolume()
+    {
+        var volume = document.getElementById("inputVolume").value;
+        getFlashObject().SetVariable("method:setVolume", volume);
+    }
 
-                		if(tab.length == 3){
-							data = tab[0]+' - '+tab[1];
-                		}
-                    	
-             		   $("#nowplaying").html(data);
-             		   
-             		});                    
-                }
+    function switchSound()
+    {
+    	if (myListener.position == 0) {
+    		play()
+    	}else{
+			stop();
+			myListener.position == 0
+    	}
+    }
+
+    function play()
+    {
+
+        getFlashObject().SetVariable("method:setUrl", "http://80.82.229.202:80/euradio.mp3");
+        getFlashObject().SetVariable("method:play", "");
+        getFlashObject().SetVariable("enabled", "true");
+    }
+
+    function pause()
+    {
+        getFlashObject().SetVariable("method:pause", "");
+    }
+
+    function stop()
+    {
+        getFlashObject().SetVariable("method:stop", "");
+    }
 
 
-				
-            //]]>
-            </script>
-            <!--[if IE]>
-            <script type="text/javascript" event="FSCommand(command,args)" for="myFlash">
-            eval(args);
-            </script>
-            <![endif]-->
+    function getFlashObject()
+    {
+        return document.getElementById("myFlash");
+    }
+
+
+    $(document).ready(function(){
+
+    	var hasFlash = false;
+    	try {
+    	  var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+    	  if(fo) hasFlash = true;
+    	}catch(e){
+    	  if(navigator.mimeTypes ["application/x-shockwave-flash"] != undefined) hasFlash = true;
+    	}
+
+    	if(hasFlash){
+
+    		$('#streamingHTML5').hide();
+
+        	$('#play_btn').click(function(){
+
+        		switchSound();
+
+        		if(myListener.position == 0){
+
+        			$(this).removeClass("paused");
+        		}else{
+
+        			$(this).addClass("paused");
+        		}
+
+        	});
+
+        	updateOnair();
+        	setInterval('updateOnair()', 10000	);
+
+    	}else{
+
+    		$('#play_btn').hide();
+    		$('#streamingHTML5').show();
+    		$('#streamingHTML5 audio').play();
+        }
+
+	});
+
+    function updateOnair()
+    {
+    	jQuery.get('http://www.euradionantes.eu/uploads/onair/now_playing.txt', function(data) {
+
+    		tab = data.split(';');
+
+    		if(tab.length == 3){
+				data = tab[0]+' - '+tab[1];
+    		}
+
+ 		   $("#nowplaying").html(data);
+
+ 		});
+    }
+
+
+
+//]]>
+</script>
+<!--[if IE]>
+<script type="text/javascript" event="FSCommand(command,args)" for="myFlash">
+eval(args);
+</script>
+<![endif]-->
     <h1>Le direct</h1>
 	<div id="player-top">
-		
+
 		<div id="streaming">
 			<a id="play_btn" href="#"></a>
 		</div>
-		
+
 		<div id="streamingHTML5">
 			<audio controls="controls">
 				<source src="http://80.82.229.202:80/euradio.mp3" type="audio/mpeg" />
 			</audio>
 		</div>
-		
+
 		<div id="nowplaying"></div>
 
 <!--
@@ -157,7 +248,7 @@
 			</a>
 		</div>
 		<div class="on-air">{% if somethingNow %}ON AIR{% else %}NEXT{% endif %}</div>
-		
+
 		<div class="program-title">{{ entity.getNameEmission()|raw}}</div>
 		<div class="program-infos">
 			<p><strong>De {{ entity.timeStart|date("G:i") }} &agrave; {{ entity.timeStop|date("G:i") }}</strong><br/>
@@ -166,17 +257,17 @@
 		{% endif %}
 		{% endfor %}
 		-->
-	</div>        
-   
+	</div>
+
 	</div>
 
 <div id="content" style="width:100%; height:100%;">
 
   <div id="timeline-embed" style="width: 960px;"></div>
-  
+
 </div >
- 
- 
+
+
   <script type="text/javascript">
   var test=getEmission();
    var timeline_config = {
@@ -190,7 +281,7 @@
            debug:              true,                           //OPTIONAL DEBUG TO CONSOLE
            lang:               'fr',                           //OPTIONAL LANGUAGE
            start_zoom_adjust:	'-1',
-           
+
    }
 
 	function getEmission(){
@@ -200,7 +291,7 @@
 		        "headline":"Programme du {{ "now"|date("m/d/Y") }}",
 		        "type":"default",
 		        "text":"",
-				"startDate":"{{ "now"|date("Y,m,d,G,i")  }}", 
+				"startDate":"{{ "now"|date("Y,m,d,G,i")  }}",
 		        "date": [
 	            	{% for entity in json %}
 					{
@@ -221,7 +312,7 @@
 							{% set imgMedium %}{%path entity.getImageEmission(), 'medium' %}{% endset %}
 							{% set imgSmall %}{% endset %}
 						{% endif %}
-						
+
 		                "startDate":"{{ entity.timeStart|date("Y,m,d,G,i") }}",
 		                "endDate":"{{ entity.timeStop|date("Y,m,d,G,i") }}",
 		                "headline":"<a href=\"/emission/{{entity.slug}}\" target=\"_parent\">{{ entity.getNameEmission()|raw }}</a>",
@@ -236,12 +327,12 @@
 		                }
 		            },
 		            {% endfor %}
-			        
+
 
 		        ],
 		    }
 		};
-	return test;	
+	return test;
 };
 
 
@@ -252,8 +343,8 @@
                 <param name="AllowScriptAccess" value="always" />
                 <param name="FlashVars" value="listener=myListener&amp;interval=500" />
             </object>
-            
-<!-- 
+
+<!--
 
 		        "era": [
 	            	{% for entity in program %}
@@ -275,3 +366,4 @@
 		        ]
 
 -->
+#}

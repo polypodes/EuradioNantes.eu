@@ -167,6 +167,13 @@ function removeClass(elem, cn) {
     else { elem.className = elem.className.replace(new RegExp('(^|\\b)' + cn.split(' ').join('|') + '(\\b|$)', 'gi'), ' '); }
 }
 
+function addClass(elem, cn) {
+  if (elem.classList)
+    elem.classList.add(cn);
+  else
+    elem.className += ' ' + cn;
+}
+
 
 Array.prototype.forEach.call(elements, function(el, i){
 	var links = el.querySelectorAll('a');
@@ -192,7 +199,7 @@ Array.prototype.forEach.call(elements, function(el, i){
 
     // addActive
     active = e.target.parentNode;
-    active.className += ' ' + className;
+    addClass(active, className);
 
     updatePanels(contentId);
     window.location.hash = '#' + contentId;
