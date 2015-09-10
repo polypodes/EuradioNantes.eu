@@ -22,15 +22,23 @@
           {% endfor %}
       </ul>#}
       {% for entity in playlist.albums %}
-        <div class="podcast-item">
+      <div class="media">
+        <div class="media-left">
           {% if entity.image -%}
-            <figure class="bloc-content-figure"><img src="{% path entity.image, 'list_tablet' %}" srcset="{% path entity.image, 'list_mobile' %} 480w, {% path entity.image, 'list_tablet' %} 992w, {% path entity.image, 'list_desktop' %} 1900w" alt="Illustration du label « {{ entity.title }} »" class="bloc-content-img img-responsive"></figure>
+            <figure class="bloc-content-figure">
+              <img class="media-object" src="{% path entity.image, 'list_tablet' %}" srcset="{% path entity.image, 'list_mobile' %} 480w, {% path entity.image, 'list_tablet' %} 992w, {% path entity.image, 'list_desktop' %} 1900w" alt="Illustration du label « {{ entity.title }} »" class="bloc-content-img img-responsive">
+            </figure>
           {% elseif entity.thumbnailUrl %}
-            <figure class="bloc-content-figure"><img src="{{ entity.thumbnailUrl }}" alt="Illustration du label « {{ entity.title }} »" class="bloc-content-img img-responsive"></figure>
+            <figure class="bloc-content-figure">
+              <img class="media-object" src="{{ entity.thumbnailUrl }}" alt="Illustration du label « {{ entity.title }} »" class="bloc-content-img img-responsive">
+            </figure>
           {%- endif %}
+        </div>
+        <div class="media-body">
           <h3 class="podcast-item-title"><a href="{{ path('album', {'slug': entity.slug}) }}">{{ entity.artist ~ ' ' ~ entity.title }}</a></h3>
           <p class="podcast-item-text">{{ entity.resume| truncate(80, true, "…") }}</p>
         </div>
+      </div>
 
       {% endfor %}
     {% endif %}
