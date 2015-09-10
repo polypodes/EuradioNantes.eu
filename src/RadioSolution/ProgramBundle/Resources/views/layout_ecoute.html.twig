@@ -1,0 +1,101 @@
+{% extends 'ApplicationSonataPageBundle::base_layout.html.twig' %}
+
+{% block sonata_page_body_tag -%}
+  <body class="walkman">
+{%- endblock %}
+
+{% block sonata_page_container %}
+    <header class="walkman-header">
+      <img src="{{ asset('/assets/images/logo-header-inverted.svg') }}" alt="Logo d'EuradioNantes" class="walkman-logo">
+      <h1 class="sr-only">Écouter Euradionantes</h1>
+      <svg id="player-control" class="player-svg walkman-player-svg">
+        <circle cx="52" cy="52" r="52" class="player-circle-03"></circle>
+        <circle cx="52" cy="52" r="42" class="player-circle-02"></circle>
+        <circle cx="52" cy="52" r="32" class="player-circle-01"></circle>
+        <g transform="translate(20, 33) scale(1.25)" class="player-play player-hide">
+          <path d="M21.3871246,27.178247 C20.0687521,28.1843734 19,27.6594313 19,26.0057181 L19,2.99428189 C19,1.34058566 20.0622351,0.810653091 21.3871246,1.82175298 L35.6128754,12.678247 C36.9312479,13.6843734 36.9377649,15.3106531 35.6128754,16.321753 L21.3871246,27.178247 Z" class="player-play-path"></path>
+        </g>
+        <g transform="translate(-12, 33) scale(1.25)" class="player-pause">
+          <path d="M57.8,25.45 C56.25,25.45 55,24.25 55,22.775 L55,5.675 C55,4.2 56.25,3 57.8,3 C59.35,3 60.6,4.2 60.6,5.675 L60.6,22.775 C60.6,24.25 59.35,25.45 57.8,25.45"></path>
+          <path d="M44.8,25.45 C43.25,25.45 42,24.25 42,22.775 L42,5.675 C42,4.2 43.25,3 44.8,3 C46.35,3 47.6,4.2 47.6,5.675 L47.6,22.775 C47.6,24.25 46.35,25.45 44.8,25.45"></path>
+        </g>
+      </svg>
+      <audio id="player" src="{{ liveStreamUrl }}" autoplay>
+        Votre navigateur ne supporte pas le HTML5
+      </audio>
+
+    </header>
+    <main id="main-content" class="walkman-main">
+      {% block page_content %}
+        {% if content is defined %}
+          {{ content|raw }}
+        {% else %}
+          {% set content = block('content') %}
+          {% if content|length > 0 %}
+            {{ content|raw }}
+          {% elseif page is defined %}
+            {{ sonata_page_render_container('content', page) }}
+          {% endif %}
+        {% endif %}
+      {% endblock %}
+    </main>
+    <footer class="walkman-container walkman-footer">
+      <a href="{{ path('broadcast') }}" target="_parent">« Les morceaux précédents</a>
+    </footer>
+    <script>
+
+      function openLinksInOpener() {
+        var links = document.querySelectorAll('a');
+        Array.prototype.forEach.call(links, function(el, i){
+          el.addEventListener('click', function(e) {
+            if (window.opener) {
+              e.preventDefault();
+              window.opener.location.href = e.target.getAttribute('href');
+            }
+          })
+        });
+      }
+
+      function removeClass(elem, cn) {
+        if (elem.classList) { elem.classList.remove(cn); }
+        else { elem.className = elem.className.replace(new RegExp('(^|\\b)' + cn.split(' ').join('|') + '(\\b|$)', 'gi'), ''); }
+
+        console.log(elem);
+      }
+
+      function addClass(elem, cn) {
+        if (elem.classList)
+          elem.classList.add(cn);
+        else
+          elem.className += ' ' + cn;
+      }
+
+      openLinksInOpener();
+
+      var player = document.getElementById('player'),
+          playerControl = document.getElementById('player-control'),
+          playButton = document.querySelectorAll('.player-play')[0],
+          pauseButton = document.querySelectorAll('.player-pause')[0]
+      ;
+      playerControl.addEventListener('click', function(e) {
+        if (player.paused){
+          player.play();
+
+        } else {
+          player.pause();
+        }
+      });
+
+      player.addEventListener('playing', function(e) {
+        console.log('playing');
+        removeClass(pauseButton, 'player-hide');
+        addClass(playButton, 'player-hide');
+      });
+      player.addEventListener('pause', function(e) {
+        console.log('paused');
+        removeClass(playButton, 'player-hide');
+        addClass(pauseButton, 'player-hide');
+      });
+    </script>
+
+{% endblock %}
