@@ -35,6 +35,21 @@ class StaticContent
     private $order_content;
 
     /**
+     * @var date $date_add
+     */
+    private $date_add;
+
+    /**
+     * @var Application\Sonata\MediaBundle\Entity\Media
+     */
+    private $image;
+
+    /**
+     * @var string $slug
+     */
+    private $slug;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct()
@@ -147,11 +162,6 @@ class StaticContent
     {
         return $this->categoryStaticContent;
     }
-    /**
-     * @var date $date_add
-     */
-    private $date_add;
-
 
     /**
      * Set date_add
@@ -172,11 +182,6 @@ class StaticContent
     {
         return $this->date_add;
     }
-    /**
-     * @var Application\Sonata\MediaBundle\Entity\Media
-     */
-    private $image;
-
 
     /**
      * Set image
@@ -197,11 +202,6 @@ class StaticContent
     {
         return $this->image;
     }
-    /**
-     * @var string $slug
-     */
-    private $slug;
-
 
     /**
      * Set slug

@@ -3,6 +3,7 @@
 namespace RadioSolution\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * RadioSolution\MenuBundle\Entity\Item
@@ -30,11 +31,23 @@ class Item
     private $parent;
 
     /**
+     * @var ArrayCollection
+     */
+    private $children;
+
+    /**
      * @var RadioSolution\MenuBundle\Entity\Menu
      */
     private $menu;
 
     private $order_item;
+
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
+
     /**
      * to string
      *
@@ -48,7 +61,7 @@ class Item
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -68,7 +81,7 @@ class Item
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -88,7 +101,7 @@ class Item
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -108,7 +121,7 @@ class Item
     /**
      * Get parent
      *
-     * @return RadioSolution\MenuBundle\Entity\Item 
+     * @return RadioSolution\MenuBundle\Entity\Item
      */
     public function getParent()
     {
@@ -128,18 +141,35 @@ class Item
     /**
      * Get menu
      *
-     * @return RadioSolution\MenuBundle\Entity\Menu 
+     * @return RadioSolution\MenuBundle\Entity\Menu
      */
     public function getMenu()
     {
         return $this->menu;
     }
-    
+
     public function getOrderItem(){
     	return $this->order_item;
     }
-    
+
     public function setOrderItem($order){
     	$this->order_item=$order;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    public function addChild(Item $item)
+    {
+        $this->children[] = $item;
+    }
+
+    public function removeChild(Item $item)
+    {
+        $this->children->removeElement($item);
+
+        return $this;
     }
 }

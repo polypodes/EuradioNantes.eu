@@ -1,3 +1,7 @@
 #MenuBundle_homepage:
 #    pattern:  /hello/{name}
 #    defaults: { _controller: MenuBundle:Default:index }
+
+sitemap:
+    pattern:  plan-du-site
+    defaults: { _controller: MenuBundle:Menu:sitemap }
