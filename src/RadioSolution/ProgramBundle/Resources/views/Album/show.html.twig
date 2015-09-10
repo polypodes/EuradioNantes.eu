@@ -1,47 +1,58 @@
 <section class="content-main">
   <div class="breadcrumb"><a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span></div>
 
-  <h1 class="content-title">{{ album.artist }} - {{ album.title }}</h1>
-
-  {% if album.image -%}
-    <figure class="content-img">
-      <img src="{% path album.image, 'large' %}" srcset="{% path album.image, 'large_mobile' %} 480w, {% path album.image, 'large' %} 1900w" alt="Illustration de l'album" class="bloc-content-img img-responsive">
-    </figure>
-  {% elseif album.thumbnailUrl %}
-    <figure class="content-img">
-      <img src="{{ album.thumbnailUrl }}{# path album.image, 'large' #}" srcset="{{ album.thumbnailUrl }}{# path album.image, 'large_mobile' #} 480w, {{ album.thumbnailUrl }}{# path album.image, 'large' #} 1900w" alt="Illustration de l'album" class="bloc-content-img img-responsive">
-    </figure>
-  {%- endif %}
-
-  {{ album.content|raw }}
-
-  <dl>
-    <dt>Artiste</dt>
-    <dd>{{ album.artist }}</dd>
-
-    <dt>Label</dt>
-    <dd>{% if album.labelId -%}
-        <a href="{{ path('label', {'slug': album.labelId.slug}) }}">{{ album.labelId.title }}</a>
-    {%- else -%}
-        {{ album.label }}
-    {%- endif %}</dd>
-
-    <dt>Date de sortie</dt>
-    <dd>{{ album.releaseDate|localizeddate('long', 'none', 'fr-FR') }}</dd>
-
-    <dt>Titres</dt>
-    <dd>
-      {% if album.tracks|length > 0 %}
-      <ul id="track-list">
-        {% for track in album.tracks %}
-        <li class="track">
-          {{ track.trackSequence }} - {{ track.title }}
+  <h1 class="content-title">{{ album.artist }} <small>{{ album.title }}</small></h1>
+  <div class="media">
+    <div class="media-left">
+      {% if album.image -%}
+        <figure>
+          <img class="media-object" src="{% path album.image, 'large' %}" srcset="{% path album.image, 'large_mobile' %} 480w, {% path album.image, 'large' %} 1900w" alt="Illustration de l'album" class="bloc-content-img img-responsive">
+        </figure>
+      {% elseif album.thumbnailUrl %}
+        <figure>
+          <img class="media-object" src="{{ album.thumbnailUrl }}{# path album.image, 'large' #}" srcset="{{ album.thumbnailUrl }}{# path album.image, 'large_mobile' #} 480w, {{ album.thumbnailUrl }}{# path album.image, 'large' #} 1900w" alt="Illustration de l'album" class="bloc-content-img img-responsive">
+        </figure>
+      {%- endif %}
+    </div>
+    <div class="media-body">
+      <div class="album-content">
+        {{ album.content|raw }}
+      </div>
+      <ul class="list-unstyled">
+        <li>
+          <strong>Artiste</strong> :
+          {{ album.artist }}
         </li>
-        {% endfor %}
+        <li>
+          <strong>Label</strong> :
+          {% if album.labelId -%}
+              <a href="{{ path('label', {'slug': album.labelId.slug}) }}">{{ album.labelId.title }}</a>
+          {%- else -%}
+              {{ album.label }}
+          {%- endif %}
+        </li>
+        <li>
+          <strong>Date de sortie</strong>:
+          {{ album.releaseDate|localizeddate('long', 'none', 'fr-FR') }}
+        </li>
+        <li>
+          <strong>Titres</strong>
+          {% if album.tracks|length > 0 %}
+          <ol class="list-unstyled track-list">
+            {% for track in album.tracks %}
+            <li class="track">
+              {{ track.title }}
+            </li>
+            {% endfor %}
+          </ol>
+          {% endif %}
+        </li>
       </ul>
-      {% endif %}
-    </dd>
-  </dl>
+    </div>
+  </div>
+
+
+
 
   {{ include(':Social:share.html.twig') }}
 
