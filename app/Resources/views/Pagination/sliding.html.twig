@@ -18,9 +18,9 @@
             {% endif %}
 
         {% endfor %}
-        {% if last is defined and last not in pagesInRange %}
-            <li class="pagination-link"> … <a href="{{ path(route, query|merge({(pageParameterName): last})) }}" title="lien vers la page numéro {{ last }}">{{ last }}</a></li>
-        {% endif %}
+        {# if last is defined and last not in pagesInRange %}
+            <li class="pagination-link"> … {#<a href="{{ path(route, query|merge({(pageParameterName): last})) }}" title="lien vers la page numéro {{ last }}">{{ last }}</a># }</li>
+        {% endif #}
         </ul>
 
     {% if next is defined %}
