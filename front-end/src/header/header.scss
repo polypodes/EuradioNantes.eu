@@ -292,12 +292,11 @@
       }
 
       // scss-lint:disable MergeableSelector
-      li {
+      & > li {
         margin-right: ($bs * 1.5);
       }
 
       li:first-of-type {
-        margin-right: 15px;
       }
     }
 
@@ -323,9 +322,10 @@
     &-menu-level2 {
       position: absolute;
       top: 30px;
+      left: -12px;
       z-index: 2;
-      width: 190px;
-      padding: 15px 20px;
+      width: 240px;
+      padding: 10px;
       background-color: $col01;
       // border: 1px solid lighten($col04, 15%);
       border-radius: 3px;
@@ -335,20 +335,27 @@
       transition: all $duration $besier;
 
       li + li {
-        margin-left: 0;
+
       }
 
       // scss-lint:disable MergeableSelector
       li {
         display: block;
-        line-height: 30px;
+        line-height: 20px;
+        margin-bottom: 5px;
+      }
+      .header-link {
+        font-size: 1em;
+        display: block;
       }
     }
-
     &-level2-show {
       opacity: 1;
       visibility: visible;
       transition: all $duration $besier;
+      & ~ a {
+        border: 1px red solid;
+      }
     }
 
     ////////////////////////////////////////

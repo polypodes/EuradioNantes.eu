@@ -1,1 +1,654 @@
-!function(e){function t(n){if(a[n])return a[n].exports;var s=a[n]={exports:{},id:n,loaded:!1};return e[n].call(s.exports,s,s.exports,t),s.loaded=!0,s.exports}var a={};return t.m=e,t.c=a,t.p="",t(0)}([function(e,t,a){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}var s=a(2),o=n(s),r=a(4),l=n(r),c=a(3),i=n(c),d=a(5),u=n(d);[o["default"],l["default"],i["default"],u["default"]].map(function(e){return e()})},function(e,t){"use strict";function a(e){return document.querySelector(e)}function n(e){return document.querySelectorAll(e)}function s(e){console.log(e)}function o(e,t){for(var a=0;a<e.length;a++)t(e[a])}function r(e,t){for(var a=e.length-1;a>=0;a--)if(e[a].classList.contains(t))return e[a];return!1}function l(e){"loading"!==document.readyState?e():document.addEventListener("DOMContentLoaded",e)}function c(e,t){for(var a=this,n=arguments.length,s=Array(n>2?n-2:0),o=2;n>o;o++)s[o-2]=arguments[o];s.map(function(n){return e.addEventListener(n,t.bind(a,e))})}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]={cl:s,documentReady:l,each:o,on:c,select:a,selectAll:n,findNode:r},e.exports=t["default"]},function(e,t){"use strict";function a(){}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=a,e.exports=t["default"]},function(e,t,a){"use strict";function n(e,t){var a=t.querySelector('[data-clickable-target="true"]'),n=a.getAttribute("href");location.pathname=n}function s(){var e=o.selectAll('[data-clickable="true"]');o.each(e,function(e){e.addEventListener("click",n.bind(null,event,e),"true")})}Object.defineProperty(t,"__esModule",{value:!0});var o=a(1);t["default"]=s,e.exports=t["default"]},function(e,t,a){"use strict";function n(){c.on(i,s,"click"),c.on(f,r,"click"),c.each(p,function(e){c.on(e,o,"click"),e.addEventListener("click",o)})}function s(){null!==c.select(".header-menu-show")?(d.classList.add("header-menu-hide"),d.classList.remove("header-menu-show"),c.select("body").classList.remove("header-menu-opened")):(d.classList.remove("header-menu-hide"),d.classList.add("header-menu-show"),c.select("body").classList.add("header-menu-opened")),r()}function o(e){e.preventDefault();var t=e.target.parentNode,a=t.querySelector("ul");a.classList.toggle("header-level2-show"),u.classList.toggle("header-level2"),f.classList.toggle("header-menu-back-show");var n=function s(){a.classList.remove("header-level2-show"),f.classList.remove("header-menu-back-show"),document.removeEventListener("click",s)};null!==c.select(".header-level2-show")&&setTimeout(function(){document.addEventListener("click",n)},100)}function r(){c.each(v,function(e){e.classList.remove("header-level2-show")}),u.classList.remove("header-level2"),f.classList.remove("header-menu-back-show")}function l(){c.documentReady(n)}Object.defineProperty(t,"__esModule",{value:!0});var c=a(1),i=c.select(".header-menu-button"),d=c.select(".header-menu"),u=c.select(".header-items"),p=c.selectAll(".header-link-has-children"),f=c.select(".header-menu-back"),v=c.selectAll(".header-menu ul > li > ul");t["default"]=l,e.exports=t["default"]},function(e,t,a){"use strict";function n(e,t){t.paused?(e.classList.remove("podcast-item-play"),e.classList.add("podcast-item-pause"),t.play()):(e.classList.remove("podcast-item-pause"),e.classList.add("podcast-item-play"),t.pause())}function s(e){var t=e.querySelector(".podcast-item-control"),a=e.querySelector(".podcast-item-player");t.addEventListener("click",function(e){n(e.target,a)}),a.addEventListener("ended",function(e){t.classList.remove("podcast-item-pause"),t.classList.add("podcast-item-play")})}function o(e){var t=Math.floor(e/60),a=("0"+(e-60*t)).slice(-2);return t+":"+a+"s"}function r(e,t,a,n){var s=o(n);e.querySelector(".podcast-player-list").innerHTML+='\n    <div data-annotation-start="'+n+'"\n      data-annotation-title="'+t+'"\n      data-annotation-text="'+a+'"\n      class="podcast-player-list-item">\n      <span class="podcast-player-list-start">\n        à '+s+'\n      </span>\n      <button class="\n        podcast-item-control\n        podcast-item-play\n        podcast-player-list-play">\n      </button>\n      <span class="podcast-player-list-title">'+t+"</span>\n    </div>\n  "}function s(e){function t(t){for(var a=t.data.title,n=t.data.text,s=e.querySelector(".podcast-player-title"),o=e.querySelector(".podcast-player-text"),r=e.querySelector('[data-annotation-title="'+t.data.title+'"]'),l=e.querySelectorAll("[data-annotation-title]"),c=0;c<l.length;c++)l[c].classList.remove("podcast-player-item-active");r.classList.add("podcast-player-item-active"),e.querySelector(".podcast-player-list").scrollTop=r.offsetTop-90,s.innerHTML=a,o.innerHTML=n}var a=Object.create(WaveSurfer),n=e.getAttribute("data-player-src"),s=e.getAttribute("data-player-regions");s=JSON.parse(s),a.init({container:e,waveColor:"#EB1D5D",progressColor:"#C42456",cursorColor:"#282245",backend:"MediaElement",height:90,minimap:!0}),a.on("ready",function(){var t=document.createElement("div");t.classList.add("podcast-player-bloc"),t.innerHTML='\n      <div class="podcast-player-list">\n      </div>\n      <div class="podcast-player-info">\n        <h3 class="podcast-player-title"></h3>\n        <p class="podcast-player-text"></p>\n      </div>\n    ',e.appendChild(t),s.regions.map(function(t){a.addRegion(t);var n=t.data.title,s=t.data.text,o=t.start;r(e,n,s,o)});var n=e.querySelector(".podcast-item-control");n.addEventListener("click",function(){a.isPlaying()?a.pause():a.play()});for(var o=e.querySelectorAll(".podcast-player-list-item"),l=0;l<o.length;l++)o[l].addEventListener("click",function(e){var t=e.target,n=0;n="object"==typeof t.getAttribute("data-annotation-start")?parseInt(t.parentElement.getAttribute("data-annotation-start")):parseInt(t.getAttribute("data-annotation-start")),a.play(n)});a.on("play",function(){n.classList.remove("podcast-item-play"),n.classList.add("podcast-item-pause")}),a.on("pause",function(){n.classList.add("podcast-item-play"),n.classList.remove("podcast-item-pause")})}),a.on("region-click",function(e,t){t.stopPropagation(),e.play()}),a.on("region-in",t),a.load(n)}function l(){var e=c.selectAll(".podcast-item");c.each(e,s);for(var t=document.querySelectorAll(".podcast-player"),a=0;a<t.length;a++)s(t[a])}Object.defineProperty(t,"__esModule",{value:!0});var c=a(1);t["default"]=l,e.exports=t["default"]}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// modules
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _basesCommonJs = __webpack_require__(1);
+
+	var _basesCommonJs2 = _interopRequireDefault(_basesCommonJs);
+
+	var _headerHeaderJs = __webpack_require__(2);
+
+	var _headerHeaderJs2 = _interopRequireDefault(_headerHeaderJs);
+
+	var _blocBlocJs = __webpack_require__(4);
+
+	var _blocBlocJs2 = _interopRequireDefault(_blocBlocJs);
+
+	var _podcastPodcastJs = __webpack_require__(5);
+
+	var _podcastPodcastJs2 = _interopRequireDefault(_podcastPodcastJs);
+
+	////////////////////////////////////////
+	// Dependencies init                  //
+	////////////////////////////////////////
+
+	[_basesCommonJs2['default'], _headerHeaderJs2['default'], _blocBlocJs2['default'], _podcastPodcastJs2['default']
+	// append here your dependencies
+
+	].map(function (dependency) {
+	  return dependency();
+	});
+
+	////////////////////////////////////////
+	// below - shit to remove in prod     //
+	////////////////////////////////////////
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	////////////////////////////////////////
+	// Common stuffs                      //
+	////////////////////////////////////////
+
+	////////////////////////////////////////
+	// Requirements                       //
+	////////////////////////////////////////
+	// import $ from 'jquery';
+
+	////////////////////////////////////////
+	// Helpers & private methods          //
+	////////////////////////////////////////
+
+	/**
+	 * common helper function example
+	 * this is a trivial example
+	 */
+	// function genUuid() {
+	//   // ...
+	// }
+
+	////////////////////////////////////////
+	// Public API                         //
+	////////////////////////////////////////
+
+	/**
+	 * common function example
+	 * this is a trivial example of function
+	 */
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	function common() {
+	  // ...
+	}
+
+	exports["default"] = common;
+	module.exports = exports["default"];
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	////////////////////////////////////////
+	// Header                             //
+	////////////////////////////////////////
+
+	////////////////////////////////////////
+	// Requirements                       //
+	////////////////////////////////////////
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _utilUtil = __webpack_require__(3);
+
+	////////////////////////////////////////
+	// Helpers                            //
+	////////////////////////////////////////
+
+	////////////////////////////////////////
+	// private properties                 //
+	////////////////////////////////////////
+	var $menuBtn = (0, _utilUtil.select)('.header-menu-button');
+	var $menu = (0, _utilUtil.select)('.header-menu');
+	var $menuItems = (0, _utilUtil.select)('.header-items');
+	var $linkWithChildren = (0, _utilUtil.selectAll)('.header-link-has-children');
+	var $goBackBtn = (0, _utilUtil.select)('.header-menu-back');
+	var $level2 = (0, _utilUtil.selectAll)('.header-menu ul > li > ul');
+
+	////////////////////////////////////////
+	// private methods                    //
+	////////////////////////////////////////
+
+	/**
+	 * triggered when document is ready
+	 * @return {void}
+	 */
+	function documentLoaded() {
+
+	  (0, _utilUtil.on)($menuBtn, toggleMenu, 'click');
+	  (0, _utilUtil.on)($goBackBtn, hideLevel2, 'click');
+
+	  (0, _utilUtil.each)($linkWithChildren, function ($elt) {
+	    (0, _utilUtil.on)($elt, toggleLevel2, 'click');
+	    $elt.addEventListener('click', toggleLevel2);
+	  });
+	}
+
+	/**
+	 * show/hide menu mobile
+	 * @return {void}
+	 */
+	function toggleMenu() {
+	  if ((0, _utilUtil.select)('.header-menu-show') !== null) {
+	    $menu.classList.add('header-menu-hide');
+	    $menu.classList.remove('header-menu-show');
+	    (0, _utilUtil.select)('body').classList.remove('header-menu-opened');
+	  } else {
+	    $menu.classList.remove('header-menu-hide');
+	    $menu.classList.add('header-menu-show');
+	    (0, _utilUtil.select)('body').classList.add('header-menu-opened');
+	  }
+
+	  hideLevel2();
+	}
+
+	/**
+	 * show second level of menu mobile
+	 * @param  {event} event from addEventListener
+	 * @return {void}
+	 */
+	function toggleLevel2(event) {
+	  event.preventDefault();
+
+	  var $li = event.target.parentNode;
+	  var $ul = $li.querySelector('ul');
+
+	  $ul.classList.toggle('header-level2-show');
+	  $menuItems.classList.toggle('header-level2');
+
+	  // show go back button
+	  $goBackBtn.classList.toggle('header-menu-back-show');
+
+	  var hideUL = function hideUL() {
+	    $ul.classList.remove('header-level2-show');
+	    $goBackBtn.classList.remove('header-menu-back-show');
+
+	    document.removeEventListener('click', hideUL);
+	  };
+
+	  // close panel on click (desktop)
+	  if ((0, _utilUtil.select)('.header-level2-show') !== null) {
+	    setTimeout(function () {
+	      document.addEventListener('click', hideUL);
+	    }, 100);
+	  }
+	}
+
+	/**
+	 * hide second level of menu mobile
+	 * @return {void}
+	 */
+	function hideLevel2() {
+	  (0, _utilUtil.each)($level2, function ($elt) {
+	    $elt.classList.remove('header-level2-show');
+	  });
+	  $menuItems.classList.remove('header-level2');
+
+	  // hide go back button
+	  $goBackBtn.classList.remove('header-menu-back-show');
+	}
+
+	////////////////////////////////////////
+	// Public API                         //
+	////////////////////////////////////////
+
+	/**
+	 * init function
+	 * this is a trivial init function
+	 */
+	function init() {
+	  (0, _utilUtil.documentReady)(documentLoaded);
+	}
+
+	exports['default'] = init;
+	module.exports = exports['default'];
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	////////////////////////////////////////
+	// Util : set of usefull function     //
+	////////////////////////////////////////
+
+	////////////////////////////////////////
+	// Requirements                       //
+	////////////////////////////////////////
+	// import $ from 'jquery';
+
+	////////////////////////////////////////
+	// Helpers                            //
+	////////////////////////////////////////
+
+	////////////////////////////////////////
+	// private properties                 //
+	////////////////////////////////////////
+
+	////////////////////////////////////////
+	// private methods                    //
+	////////////////////////////////////////
+
+	////////////////////////////////////////
+	// Public API                         //
+	////////////////////////////////////////
+
+	/**
+	 * select the first matched element
+	 * @param  {string} selector: css selector
+	 * @return {elementHTML} html node
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	function select(selector) {
+	  return document.querySelector(selector);
+	}
+
+	/**
+	 * select all matched element
+	 * @param  {string} selector: css selector
+	 * @return {array[elementHTML]} an array of html node
+	 */
+	function selectAll(selector) {
+	  return document.querySelectorAll(selector);
+	}
+
+	function cl(msg) {
+	  console.log(msg);
+	}
+
+	function each(array, callback) {
+	  for (var i = 0; i < array.length; i++) {
+	    callback(array[i]);
+	  }
+	}
+
+	/**
+	 * find a node in HTMLCollection of node
+	 * @param  {HTMLCollection} HTMLCollection
+	 * @param  {string} className: ex: Lorem-ipsum (without dot)
+	 * @return {HTMLnode || false} If node found it return
+	 * the node else it return false
+	 */
+	function findNode(HTMLCollection, className) {
+	  for (var i = HTMLCollection.length - 1; i >= 0; i--) {
+	    if (HTMLCollection[i].classList.contains(className)) {
+	      return HTMLCollection[i];
+	    }
+	  }
+
+	  return false;
+	};
+
+	/**
+	 * equivalent of jquery 'ready'
+	 * @param  {Function} callback
+	 * @return {void}
+	 */
+	function documentReady(callback) {
+	  if (document.readyState !== 'loading') {
+	    callback();
+	  } else {
+	    document.addEventListener('DOMContentLoaded', callback);
+	  }
+	}
+
+	/**
+	 * on: jquery equivalent of .on({event}, {fn})
+	 * @param  {elementHTML}    elt: an HTML node
+	 * @param  {Function}  callback
+	 * @param  {...[string]} events: an event or
+	 * a list of event (ex: click, touchstart)
+	 * @return {void}
+	 */
+	function on(elt, callback) {
+	  var _this = this;
+
+	  for (var _len = arguments.length, events = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+	    events[_key - 2] = arguments[_key];
+	  }
+
+	  /*eslint-disable */
+	  events.map(function (event) {
+	    return elt.addEventListener(event, callback.bind(_this, elt));
+	  });
+	  /*eslint-enable */
+	}
+
+	exports['default'] = {
+	  cl: cl,
+	  documentReady: documentReady,
+	  each: each,
+	  on: on,
+	  select: select,
+	  selectAll: selectAll,
+	  findNode: findNode
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	////////////////////////////////////////
+	// Bloc js                            //
+	////////////////////////////////////////
+
+	////////////////////////////////////////
+	// Requirements                       //
+	////////////////////////////////////////
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _utilUtil = __webpack_require__(3);
+
+	////////////////////////////////////////
+	// Helpers & private methods          //
+	////////////////////////////////////////
+
+	/**
+	 * common helper function example
+	 * this is a trivial example
+	 */
+	function changeLocation(event, $elt) {
+	  var $url = $elt.querySelector('[data-clickable-target="true"]');
+	  var path = $url.getAttribute('href');
+	  location.pathname = path;
+	}
+
+	////////////////////////////////////////
+	// Public API                         //
+	////////////////////////////////////////
+
+	/**
+	 * common function example
+	 * this is a trivial example of function
+	 */
+	function init() {
+	  var $clickableElts = (0, _utilUtil.selectAll)('[data-clickable="true"]');
+
+	  (0, _utilUtil.each)($clickableElts, function ($elt) {
+	    $elt.addEventListener('click', changeLocation.bind(null, event, $elt), 'true');
+	  });
+	}
+
+	exports['default'] = init;
+	module.exports = exports['default'];
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	////////////////////////////////////////
+	// Podcast js                         //
+	////////////////////////////////////////
+
+	////////////////////////////////////////
+	// Requirements                       //
+	////////////////////////////////////////
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _utilUtil = __webpack_require__(3);
+
+	////////////////////////////////////////
+	// Helpers & private methods          //
+	////////////////////////////////////////
+
+	/**
+	 * common helper function example
+	 * this is a trivial example
+	 */
+	function togglePodcastState($elt, $player) {
+	  if (!$player.paused) {
+	    $elt.classList.remove('podcast-item-pause');
+	    $elt.classList.add('podcast-item-play');
+	    $player.pause();
+	  } else {
+	    $elt.classList.remove('podcast-item-play');
+	    $elt.classList.add('podcast-item-pause');
+	    $player.play();
+	  }
+	}
+
+	/**
+	 * triggered at end of playing
+	 * @param  {event} event]
+	 * @return {void}
+	 */
+	function handleEndOfPlaying(event) {
+	  var className = 'podcast-item-control';
+	  var node = event.target.parentElement.children;
+	  var $buttonPlayerControl = (0, _utilUtil.findNode)(node, className);
+
+	  togglePodcastState($buttonPlayerControl);
+	}
+
+	function initPlayer($player) {
+	  var $button = $player.querySelector('.podcast-item-control');
+	  var $audioElement = $player.querySelector('.podcast-item-player');
+
+	  // click
+	  $button.addEventListener('click', function (event) {
+	    togglePodcastState(event.target, $audioElement);
+	  });
+
+	  // ended event
+	  $audioElement.addEventListener('ended', function (event) {
+	    $button.classList.remove('podcast-item-pause');
+	    $button.classList.add('podcast-item-play');
+	  });
+	};
+
+	function secondsToMinutes(_seconds) {
+	  var minutes = Math.floor(_seconds / 60);
+	  // force two digits format 00 to 09
+	  var seconds = ('0' + (_seconds - minutes * 60)).slice(-2);
+	  return minutes + ':' + seconds + 's';
+	};
+
+	function addAnnotation($parent, title, text, startAt) {
+	  var timeFormated = secondsToMinutes(startAt);
+
+	  $parent.querySelector('.podcast-player-list').innerHTML += '\n    <div data-annotation-start="' + startAt + '"\n      data-annotation-title="' + title + '"\n      data-annotation-text="' + text + '"\n      class="podcast-player-list-item">\n      <span class="podcast-player-list-start">\n        à ' + timeFormated + '\n      </span>\n      <button class="\n        podcast-item-control\n        podcast-item-play\n        podcast-player-list-play">\n      </button>\n      <span class="podcast-player-list-title">' + title + '</span>\n    </div>\n  ';
+	}
+
+	function initPlayer($player) {
+	  var wavesurfer = Object.create(WaveSurfer);
+	  var source = $player.getAttribute('data-player-src');
+	  var data = $player.getAttribute('data-player-regions');
+	  data = JSON.parse(data);
+
+	  wavesurfer.init({
+	    container: $player,
+	    waveColor: '#EB1D5D',
+	    progressColor: '#C42456',
+	    // progressColor: '#C42456',
+	    cursorColor: '#282245',
+	    backend: 'MediaElement',
+	    height: 90,
+	    minimap: true
+	  });
+
+	  wavesurfer.on('ready', function () {
+
+	    // construct annotation list
+	    var $annotation = document.createElement('div');
+	    $annotation.classList.add('podcast-player-bloc');
+	    $annotation.innerHTML = '\n      <div class="podcast-player-list">\n      </div>\n      <div class="podcast-player-info">\n        <h3 class="podcast-player-title"></h3>\n        <p class="podcast-player-text"></p>\n      </div>\n    ';
+
+	    $player.appendChild($annotation);
+
+	    // display each region
+	    data.regions.map(function (region) {
+	      wavesurfer.addRegion(region);
+	      // add related annotation
+	      var title = region.data.title;
+	      var text = region.data.text;
+	      var startAt = region.start;
+	      addAnnotation($player, title, text, startAt);
+	    });
+
+	    // button
+	    var $button = $player.querySelector('.podcast-item-control');
+	    $button.addEventListener('click', function () {
+	      if (!wavesurfer.isPlaying()) {
+	        wavesurfer.play();
+	      } else {
+	        wavesurfer.pause();
+	      }
+	    });
+
+	    // list comment
+	    var $items = $player.querySelectorAll('.podcast-player-list-item');
+
+	    for (var i = 0; i < $items.length; i++) {
+	      $items[i].addEventListener('click', function (event) {
+	        var $elt = event.target;
+	        var startAt = 0;
+	        if (typeof $elt.getAttribute('data-annotation-start') === 'object') {
+	          startAt = parseInt($elt.parentElement.getAttribute('data-annotation-start'));
+	        } else {
+	          startAt = parseInt($elt.getAttribute('data-annotation-start'));
+	        }
+	        wavesurfer.play(startAt);
+	      });
+	    }
+
+	    wavesurfer.on('play', function () {
+	      $button.classList.remove('podcast-item-play');
+	      $button.classList.add('podcast-item-pause');
+	    });
+	    wavesurfer.on('pause', function () {
+	      $button.classList.add('podcast-item-play');
+	      $button.classList.remove('podcast-item-pause');
+	    });
+	  });
+
+	  // display info when ok
+	  wavesurfer.on('region-click', function (region, e) {
+	    e.stopPropagation();
+	    region.play();
+	  });
+
+	  wavesurfer.on('region-in', showNote);
+
+	  function showNote(region) {
+	    var title = region.data.title;
+	    var text = region.data.text;
+	    var $title = $player.querySelector('.podcast-player-title');
+	    var $text = $player.querySelector('.podcast-player-text');
+	    var $item = $player.querySelector('[data-annotation-title="' + region.data.title + '"]');
+	    var $items = $player.querySelectorAll('[data-annotation-title]');
+
+	    // reset class
+	    for (var i = 0; i < $items.length; i++) {
+	      $items[i].classList.remove('podcast-player-item-active');
+	    }
+
+	    $item.classList.add('podcast-player-item-active');
+
+	    // scroll to active item
+	    $player.querySelector('.podcast-player-list').scrollTop = $item.offsetTop - 90;
+	    $title.innerHTML = title;
+	    $text.innerHTML = text;
+
+	    // if (!showNote.el) {
+	    //   showNote.el = document.querySelector('#subtitle');
+	    // }
+	    // showNote.el.textContent = region.data.text;
+	  }
+
+	  wavesurfer.load(source);
+	}
+
+	////////////////////////////////////////
+	// Public API                         //
+	////////////////////////////////////////
+
+	/**
+	 * common function example
+	 * this is a trivial example of function
+	 */
+	function init() {
+	  var $players = (0, _utilUtil.selectAll)('.podcast-item');
+
+	  (0, _utilUtil.each)($players, initPlayer);
+
+	  ////////////////////////////////////////
+	  // Wavesurfer                         //
+	  ////////////////////////////////////////
+
+	  var players = document.querySelectorAll('.podcast-player');
+
+	  for (var i = 0; i < players.length; i++) {
+	    initPlayer(players[i]);
+	  }
+	}
+
+	exports['default'] = init;
+	module.exports = exports['default'];
+
+/***/ }
+/******/ ]);
