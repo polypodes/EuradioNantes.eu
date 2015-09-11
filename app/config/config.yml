@@ -44,6 +44,7 @@ twig:
             - 'PodcastBundle:Form:podcast_marker.html.twig'
     globals:
         liveStreamUrl: %liveStreamUrl%
+        google_search_cx: %google_search_cx%
 
 # Assetic Configuration
 assetic:

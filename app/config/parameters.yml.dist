@@ -29,3 +29,4 @@ parameters:
     mailchimp_api_key: xxxxxxxxx
     mailchimp_default_list: xxxxxxxx
 
+    google_search_cx: 009530823814786353114:4rwpfku8hou

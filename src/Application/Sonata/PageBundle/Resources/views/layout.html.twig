@@ -28,8 +28,8 @@ file that was distributed with this source code.
           {% set menuItem = knp_menu_get('MenuBundle:Builder:mainMenu', {}, {'idmenu': 1 }) %}
           {{ knp_menu_render(menuItem) }}
         </nav>
-        <form class="header-search">
-          <input type="search" placeholder="Recherche" class="header-search-input">
+        <form action="{{ path('search') }}" class="header-search">
+          <input name="search" type="search" placeholder="Recherche" class="header-search-input">
           <input type="submit" value="" class="header-search-submit">
         </form>
       </div>
