@@ -1,4 +1,4 @@
-Contact:
+contact:
     path:  /contact
     defaults: { _controller: "ContactBundle:Page:contact" }
     requirements:

@@ -1,68 +1,119 @@
-{% if app.session.hasFlash('blogger-notice') %}
-    <div class="blogger-notice">
-        {{ app.session.flash('blogger-notice') }}
-    </div>
-    <a href="/">Retourner � l'accueil</a>
-{% endif %}
-{% if notification != "" %}
-    <div class="blogger-notice">
-        {{ notification }}
-    </div>
-    <a href="/">Retourner � l'accueil</a>
-{% endif %}
-<div class="article">
+<section class="content-main">
+  <div class="breadcrumb">
+    <a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span>
+    {{ sonata_block_render_event('breadcrumb', { 'context': sonata_seo_context is defined ? sonata_seo_context : 'homepage' , 'current_uri': app.request.requestUri }) }}
+  </div>
 
-<h1>{{ entity.name }}</h1>
+  {# if entity.categoryStaticContent -%}
+    <span class="bloc-content-cat">{{ entity.categoryStaticContent.name }}</span>
+  {%- endif #}
+    {#}
+  <time datetime="{{ entity.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ entity.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
+    #}
 
+  <h1 class="content-title">{{ entity.name }}</h1>
 
-<div class="" style="float:left; margin-right:15px;">
-	{% if entity.getImage() %}
-			{%media entity.getImage() ,'medium' %}
-	{% endif %}
-</div><p style="font-weight:bold;">{{ entity.introduction }}</p>
-<br clear="all" />
+  {% if entity.image -%}
+    <figure class="content-img">
+      <img src="{% path entity.image, 'large' %}" srcset="{% path entity.image, 'large_mobile' %} 480w, {% path entity.image, 'large' %} 1900w" alt="Illustration de la page" class="bloc-content-img img-responsive">
+    </figure>
+  {%- endif %}
 
-<p>{{ entity.body|raw }}</p>
-</div>
+  {{ entity.body|raw }}
 
-	<div class="googlemap">
-		<iframe width="620" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=19+rue+jeanne+d'arc,+nantes&amp;aq=&amp;sll=47.220282,-1.55735&amp;sspn=0.002547,0.006539&amp;ie=UTF8&amp;hq=&amp;hnear=19+Rue+Jeanne+d'Arc,+44000+Nantes,+Loire-Atlantique,+Pays+de+la+Loire&amp;t=m&amp;ll=47.220676,-1.557055&amp;spn=0.020403,0.053215&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
-	</div>
+  <div class="googlemap">
+    <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=19+rue+jeanne+d'arc,+nantes&amp;aq=&amp;sll=47.220282,-1.55735&amp;sspn=0.002547,0.006539&amp;ie=UTF8&amp;hq=&amp;hnear=19+Rue+Jeanne+d'Arc,+44000+Nantes,+Loire-Atlantique,+Pays+de+la+Loire&amp;t=m&amp;ll=47.220676,-1.557055&amp;spn=0.020403,0.053215&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
+  </div>
 
-<br clear="all" />
-	<a id="form"></a>
-    <form action="{{ path('Contact') }}" method="post" {{ form_enctype(form) }} id="contact-form">
-        {{ form_errors(form) }}
-		<fieldset>	
-        {{ form_row(form.name) }}
-        </fieldset>
-		<fieldset>
-        {{ form_row(form.email) }}
-        </fieldset>
-		<fieldset>
-        {{ form_row(form.subject) }}
-        </fieldset>
-		<fieldset>
-        {{ form_row(form.body) }}
-		</fieldset>
-		<fieldset>
-        {{ form_rest(form) }}
-        </fieldset>
-        {% form_theme form 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig' %}
+  {{ include(':Social:share.html.twig') }}
 
-			{{ form_widget(form.recaptcha, { 'attr': {
-			    'options' : {
-			        'theme' : 'clean',
-			    },
-			} }) }}
-		<button type="submit" class="button">ENVOYER</button>
-    </form>
-    </div></section>
-    <script type="text/javascript">
-		<!--
-		$("label[for='contact_name']").html("Nom");
-		$("label[for='contact_email']").html("Email");
-		$("label[for='contact_subject']").html("Sujet");
-		$("label[for='contact_body']").html("Message");
-		//-->
-		</script>
+  <section id="contact-form" class="comment">
+    <h3 class="comment-title2">Envoyer une demande de contact</h3>{#'title_leave_comment'|trans({}, 'SonataNewsBundle') #}
+
+    {% if form.vars.errors|length > 0 -%}
+      {% for i, error in form.vars.errors -%}
+          <div class="comment-message"><i class="ico-info"></i><span>{{ error.message }}</span></div>
+      {%- endfor %}
+    {% endif -%}
+
+    {% if app.session.flashbag.has('contact') %}
+      {%- for flashMessage in app.session.flashbag.get('contact') -%}
+        <div class="comment-message">
+          <i class="ico-info"></i><span>{{ flashMessage }}</span>
+        </div>
+      {%- endfor -%}
+
+    {% endif %}
+
+    <div class="comment-message"><i class="ico-info"></i><span>Tous les champs sont obligatoires.</span></div>
+
+    <form action="{{ path('contact') }}#contact-form" method="post" {{ form_enctype(form) }}>
+      <div class="comment-textarea">
+        {{ form_label(form.body, 'Votre message', {'label_attr': {'class': 'comment-label'}}) }}
+        {{ form_widget(form.body, {'attr': {'placeholder': 'Votre message ou commentaire'}}) }}
+        {% if form.body.vars.errors|length > 0 %}
+          <small class="comment-errors">
+            {% for i, error in form.body.vars.errors -%}
+              {% if i > 0 %}<br>{% endif %}
+              <strong>{{ error.message }}</strong>
+            {% endfor %}
+          </small>
+        {% endif %}
+      </div>
+      <div class="comment-inputs">
+        <div class="comment-input">
+          {{ form_label(form.name, 'Votre nom', {'label_attr': {'class': 'comment-label'}}) }}
+          {{ form_widget(form.name, {'attr': {'placeholder': 'Nom prénom'}}) }}
+          {% if form.name.vars.errors|length > 0 %}
+            <small class="comment-errors">
+              {% for i, error in form.name.vars.errors -%}
+                {% if i > 0 %}<br>{% endif %}
+                <strong>{{ error.message }}</strong>
+              {% endfor %}
+            </small>
+          {% endif %}
+        </div>
+        <div class="comment-input">
+          {{ form_label(form.email, 'Votre adresse e-mail', {'label_attr': {'class': 'comment-label'}}) }}
+          {{ form_widget(form.email, {'attr': {'placeholder': 'adresse@email.com'}}) }}
+          {% if form.email.vars.errors|length > 0 %}
+            <small class="comment-errors">
+              {% for i, error in form.email.vars.errors -%}
+                {% if i > 0 %}<br>{% endif %}
+                <strong>{{ error.message }}</strong>
+              {% endfor %}
+            </small>
+          {% endif %}
+        </div>
+        <div class="comment-input">
+          {{ form_label(form.subject, 'Sujet de l’e-mail', {'label_attr': {'class': 'comment-label'}}) }}
+          {{ form_widget(form.subject, {'attr': {'placeholder': 'Demande de renseignements'}}) }}
+          {% if form.subject.vars.errors|length > 0 %}
+            <small class="comment-errors">
+              {% for i, error in form.subject.vars.errors -%}
+                {% if i > 0 %}<br>{% endif %}
+                <strong>{{ error.message }}</strong>
+              {% endfor %}
+            </small>
+          {% endif %}
+        </div>
+      </div>
+
+      {% form_theme form 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig' %}
+      {{ form_widget(form.recaptcha, { 'attr': {'options': {'theme' : 'clean'}}}) }}
+
+      <input type="submit" value="Envoyer votre demande" class="comment-submit">
+
+    {{ form_end(form) }}
+  </section>
+
+</section>
+
+<aside class="content-aside">
+  <div class="content-aside-inner">
+    {{ render(controller('SonataNewsBundle:Post:getAsidePosts')) }}
+
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
+  </div>
+</aside>
+

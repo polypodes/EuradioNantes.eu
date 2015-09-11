@@ -5,50 +5,56 @@ namespace RadioSolution\ContactBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use RadioSolution\ContactBundle\Form\EnquiryType;
 use RadioSolution\ContactBundle\Entity\Enquiry;
+use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
-public function contactAction()
-{
-    $enquiry = new Enquiry();
-    $form = $this->createForm(new EnquiryType(), $enquiry);
-    $seoPage = $this->container->get('sonata.seo.page');
-    $seoPage->setTitle("Contacts - Eur@dioNantes");
-    $request = $this->getRequest();
-    if ($request->getMethod() == 'POST') {
-        $form->bindRequest($request);
+    public function contactAction(Request $request)
+    {
+        $enquiry = new Enquiry();
+
+        $form = $this->createForm(new EnquiryType(), $enquiry);
+
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage->setTitle("Contact - Euradionantes");
+
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
-			$message = \Swift_Message::newInstance()
-            	->setSubject('Contact enquiry from symblog')
-            	->setFrom('enquiries@symblog.co.uk')
-            	->setTo('test.dill.44@gmail.com')
-            	->setBody($this->renderView('ContactBundle:Page:contactEmail.txt.twig', array('enquiry' => $enquiry)));
-       		$this->get('mailer')->send($message);
+            $data = $form->getData();
 
-
-
-        	$this->get('session')->setFlash('notification', 'Votre message à bien été envoyé. Merci!');
-
-        	// Redirect - This is important to prevent users re-posting
-        	// the form if they refresh the page
-        	return $this->redirect($this->generateUrl('Contact'));
+            $fromAddress = $data->getEmail();
+            $toAddress = $this->container->getParameter('contact_address');
+            $message = \Swift_Message::newInstance()
+                ->setSubject('[Euradionantes] Demande de contact')
+                ->setFrom($fromAddress)
+                ->setTo($toAddress)
+                ->setCc($fromAddress)
+                ->setBody($this->renderView('ContactBundle:Page:contactEmail.txt.twig', array('enquiry' => $enquiry)))
+            ;
+            if ($this->get('mailer')->send($message)) {
+                $this->get('session')->getFlashBag()->add('contact', 'Votre message a bien été envoyé.');
+                // Redirect - This is important to prevent users re-posting
+                // the form if they refresh the page
+                return $this->redirect($this->generateUrl('contact'));
+            } else {
+                $this->get('session')->getFlashBag()->add('contact', 'Une erreur s’est produite lors de l’envoi de votre message.');
+            }
         }
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        // @todo Change static ID by a more clever solution
+        $entity = $em->getRepository('StaticContentBundle:StaticContent')->findOneById(30);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find StaticContent entity.');
+        }
+
+
+        return $this->render('ContactBundle:Page:contact.html.twig', array(
+            'form' => $form->createView(),
+            'entity' => $entity
+        ));
     }
-
-    $em = $this->getDoctrine()->getEntityManager();
-
-    // @todo Change static ID by a more clever solution
-    $entity = $em->getRepository('StaticContentBundle:StaticContent')->findOneById(30);
-
-    if (!$entity) {
-    	throw $this->createNotFoundException('Unable to find StaticContent entity.');
-    }
-
-
-    return $this->render('ContactBundle:Page:contact.html.twig', array(
-        'form' => $form->createView(),
-    	'entity'      => $entity
-    ));
-}
 }

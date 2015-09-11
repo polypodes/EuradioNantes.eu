@@ -18,6 +18,8 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    contact_address: mail@localhost
+
     recaptcha_public_key:  your_recaptcha_public_key
     recaptcha_private_key:  your_recaptcha_private_key
 
