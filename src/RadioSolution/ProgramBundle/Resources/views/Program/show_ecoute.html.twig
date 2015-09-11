@@ -1,3 +1,6 @@
+{% extends app.request.isxmlhttprequest ? 'ProgramBundle::empty_layout.html.twig' : 'ProgramBundle::layout_ecoute.html.twig' %}
+
+{% block content %}
   <div class="walkman-container walkman-now">
     {% if program %}
       <section class="walkman-show">
@@ -69,6 +72,7 @@
         //openLinksInOpener();
         var request = new XMLHttpRequest();
         request.open('GET', this.location.href, true);
+        request.setRequestHeader('X-Requested-With','XMLHttpRequest');
 
         request.onload = function() {
           if (request.status >= 200 && request.status < 400) {
@@ -367,3 +371,4 @@ eval(args);
 
 -->
 #}
+{% endblock %}

@@ -111,6 +111,7 @@ sonata_page:
         - sonata_cache_js_async
         - sonata_cache_js_sync
         - sonata_cache_apc
+        - ecoute # ignore ecoute page for ajax loading
 
     ignore_uri_patterns:
         - ^/admin\/   # ignore admin route, ie route containing 'admin'
