@@ -25,16 +25,18 @@ class StaticContentAdmin extends Admin
 
    	$liste = $q->getQuery()->execute();
    	$maxValue = 0;
+
    	foreach ($liste as $result){
-   		if  (is_int($result->getOrderContent())){
-   			if($result->getOrderContent()>$maxValue){
-   				$maxValue=$result->getOrderContent();
+   		if (is_int($result->getOrderContent())) {
+   			if ($result->getOrderContent()>$maxValue) {
+   				$maxValue = $result->getOrderContent();
    			}
    		}
   	}
   	$label = 'Ordre du contenu (le plus grand '.$maxValue.')';
     $formMapper
       ->add('name', null, array('label' => 'Nom'))
+      ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
       ->add('order_content', 'integer', array('label' => $label))
       ->add('image', 'sonata_type_model_list', array('label' => 'Image'), array('link_parameters' => array('provider' => 'sonata.media.provider.image')))
       ->add('introduction', 'textarea', array('label' => 'Introduction', 'required' => false))

@@ -19,6 +19,10 @@ RadioSolution\StaticContentBundle\Entity\StaticContent:
       type: datetime
     slug:
       type: string
+      gedmo:
+        slug:
+          fields:
+            - name
     order_content:
       type: integer
       default: 10
