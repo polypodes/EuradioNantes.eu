@@ -1,51 +1,75 @@
-<div class="inner-wrap">
-	<div class="page-content">
-		<section class="entry group">
-			<div class="entry-content programme">
-				<h3 style="text-align: center;">C’est quoi ce titre&nbsp;?</h3>
+<section class="actu-list grille">
+  <div class="breadcrumb"><a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span></div>
 
-				<div class="broadcast-nav">
-					{% if start == now %}
-					<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day">hier</a>
-					<span>Aujourd'hui</span>
-					{% else %}
-					<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day">Jour précédent</a>
-					<span>{{ start|localizeddate('full', 'none', 'fr-FR') }}</span>
-					<a href="{{ path('broadcast') }}?day={{ start|date_modify('+1 day')|date('Y-m-d') }}" id="next_day">Jour suivant</a>
-					{% endif %}
-				</div>
+  <h1>C’est quoi ce titre&nbsp;?</h1>
 
-				{% if entities|length > 0 %}
-				<table>
-					<thead>
-						<tr>
-							<th>Heure de diffusion</th>
-							<th>Titre de la chanson</th>
-							<th>Artiste</th>
-							<th>Album</th>
-						</tr>
-					</thead>
-					<tbody>
-					{% for elem in entities %}
-						<tr class="broadcast-elem">
-							<td class="broadcast-track-time"><time datetime="{{ elem.broadcasted|date('Y-m-d H:i:s' )}}">{{ elem.broadcasted|date('H:i')}}</time></td>
-							<td class="broadcast-track-title">{{ elem.track.title }}</td>
-							<td class="broadcast-track-artist">{{ elem.track.artist }}</td>
-							<td class="broadcast-track-album">
-								{%- if elem.track.album.featuredFrom is not null and elem.track.album.featuredTo is not null -%}
-									<a href="{{ path('album', {'slug': elem.track.album.slug}) }}">{{ elem.track.album.title }}</a>
-								{%- else -%}
-									{{ elem.track.album.title }}
-								{%- endif -%}
-							</td>
-						</tr>
-					{% endfor %}
-					</tbody>
-				</table>
-				{% else %}
-				<p><em>Aucune information disponible</em></p>
-				{% endif %}
-			</div>
-		</section>
+  <div class="grille-pagination">
+  	{% if start == now %}
+		<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ hier</a>
+		{% else %}
+		<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d')}}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ Jour précédent</a>
+		{% endif %}
+
+		<span class="grille-pagination-choose"></span>
+
+    {% if start == now|date_modify('-1 day') %}
+    	<a href="{{ path('broadcast') }}?day={{ start|date_modify('+1 day')|date('Y-m-d') }}" id="next_day" title="afficher la journée suivante" class="grille-pagination-next">Aujourd’hui ›</a>
+    {% elseif start < now %}
+    	<a href="{{ path('broadcast') }}?day={{ start|date_modify('+1 day')|date('Y-m-d') }}" id="next_day" title="afficher la journée suivante" class="grille-pagination-next">Jour suivant ›</a>
+    {% endif %}
+  </div>
+
+	<div class="grille-list">
+		<h2 class="grille-list-title">{{ start == now ? 'Aujourd’hui' : start|localizeddate('full', 'none', 'fr-FR') }}</h2>
+
+		{% if entities|length > 0 -%}
+			<section class="walkman-container walkman-playlist">
+
+		    <ol class="playlist-list">
+		      {% for broadcast in entities -%}
+		        <li class="playlist-item">
+		          <time class="playlist-item-time" datetime="{{ broadcast.broadcasted|date('Y-m-d H:i') }}">{{ broadcast.broadcasted|date('H:i') }}&nbsp;</time>
+		          {% if broadcast.track %}
+		            <strong>{{ broadcast.track.title }}&nbsp;</strong>
+		            <span class="playlist-track-title">{{ broadcast.track.artist }}&nbsp;</span>
+		            <span class="playlist-album">{{ broadcast.track.title }}</span>
+		          {% else %}
+		            {% set terms = broadcast.terms|split(' - ') %}
+		            <strong>{{ terms[terms|length > 1 ? 1 : 0] }}</strong>
+		            {% if terms|length > 1 %}<span class="playlist-track-title">{{ terms[0] }}&nbsp;</span>{% endif %}
+		            {% if terms|length > 2 %}<span class="playlist-album">{{ terms[2] }}</span>{% endif %}
+		          {% endif -%}
+		        </li>
+		      {% endfor %}
+		    </ol>
+	  	</section>
+	  {%- else -%}
+			<p><em>Aucune information disponible</em></p>
+		{%- endif %}
+
 	</div>
-</div>
+
+  <div class="grille-pagination">
+  	{% if start == now %}
+		<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ hier</a>
+		{% else %}
+		<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 week')|date('Y-m-d')}}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ Jour précédent</a>
+		{% endif %}
+
+		<span class="grille-pagination-choose"></span>
+
+    {% if start == now|date_modify('-1 day') %}
+    	<a href="{{ path('broadcast') }}?day={{ start|date_modify('+1 day')|date('Y-m-d') }}" id="next_day" title="afficher la journée suivante" class="grille-pagination-next">Aujourd’hui ›</a>
+    {% elseif start < now %}
+    	<a href="{{ path('broadcast') }}?day={{ start|date_modify('+1 day')|date('Y-m-d') }}" id="next_day" title="afficher la journée suivante" class="grille-pagination-next">Jour suivant ›</a>
+    {% endif %}
+  </div>
+</section>
+
+<aside class="content-aside">
+  <div class="content-aside-inner">
+    {{ render(controller('SonataNewsBundle:Post:getAsidePosts')) }}
+
+    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
+  </div>
+</aside>
