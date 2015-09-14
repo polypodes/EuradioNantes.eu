@@ -24,6 +24,10 @@ class EmissionController extends Controller
 
 	public function indexAction()
 	{
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Les émissions');
+        $breadcrumbs->addItem('Les émissions de A à Z');
+
         if (!empty($_GET['emission'])) {
             $this->redirect($_GET['emission']);
         }
@@ -108,6 +112,10 @@ class EmissionController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Emission entity.');
         }
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addRouteItem('Les émissions de A à Z', 'emissions');
+        $breadcrumbs->addItem($entity->getName());
 
         return $this->render('ProgramBundle:Emission:show.html.twig', array(
         	'entity'	=> $entity

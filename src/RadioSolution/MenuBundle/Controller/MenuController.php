@@ -16,6 +16,9 @@ class MenuController extends Controller
 
     public function sitemapAction()
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Plan du site');
+
         $em = $this->getDoctrine()->getEntityManager();
 
         $menus = $em

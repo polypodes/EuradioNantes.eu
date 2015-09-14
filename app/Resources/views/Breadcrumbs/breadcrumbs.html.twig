@@ -1,0 +1,20 @@
+{% if wo_breadcrumbs()|length %}
+    {%- spaceless -%}
+        <div class="{{ listClass }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+            <a href="{{ path('home') }}" title="Lien vers la page d'accueil d'Euradionantes" class="{{ itemClass }}">Accueil</a>
+            {% for b in breadcrumbs %}
+                {% if b.url and not loop.last %}
+                    <a href="{{ b.url }}"{% if itemClass is defined and itemClass|length %} class="{{ itemClass }}"{% endif %} itemprop="url"{% if linkRel is defined and linkRel|length %} rel="{{ linkRel }}"{% endif %}>
+                        <span itemprop="title">{{- b.text | trans(b.translationParameters, translation_domain, locale) -}}</span>
+                    </a>
+                {% else %}
+                    <span{% if itemClass is defined and itemClass|length %} class="{{ itemClass }}"{% endif %} itemprop="title">{{- b.text | trans(b.translationParameters, translation_domain, locale) -}}</span>
+                {% endif %}
+
+                {# if separator is not null and not loop.last %}
+                    <span class='{{ separatorClass }}'>{{ separator }}</span>
+                {% endif #}
+            {% endfor %}
+        </div>
+    {%- endspaceless -%}
+{% endif %}

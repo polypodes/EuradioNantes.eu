@@ -20,6 +20,10 @@ class PlaylistController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Musique');
+        $breadcrumbs->addItem('La playlist');
+
         //$playlists = $this->getDoctrine()->getRepository('ProgramBundle:Playlist')->findAllFeatured(20);
 
         $query = $this->getDoctrine()->getRepository('ProgramBundle:Playlist')->queryPublishedOrderedByFeaturedFrom()->getQuery();
@@ -42,6 +46,11 @@ class PlaylistController extends Controller
         if (!$playlist || !$playlist->getPublished()) {
             throw $this->createNotFoundException('La playlist est introuvable.');
         }
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Musique');
+        $breadcrumbs->addRouteItem('La playlist', 'playlists');
+        $breadcrumbs->addItem($playlist->getTitle());
+
         return $this->render('ProgramBundle:Playlist:show.html.twig', compact('playlist'));
     }
 

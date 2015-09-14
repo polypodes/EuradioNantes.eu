@@ -264,6 +264,17 @@ hype_mailchimp:
     api_key: %mailchimp_api_key%
     default_list: %mailchimp_default_list%
 
+white_october_breadcrumbs:
+    #separator:          ''
+    #separatorClass:     ''
+    #listId:             'wo-breadcrumbs'
+    listClass:          'breadcrumb'
+    itemClass:          'breadcrumb-item'
+    linkRel:            ''
+    locale:             ~ # defaults to null, so the default locale is used
+    translation_domain: ~ # defaults to null, so the default domain is used
+    viewTemplate:       ':Breadcrumbs:breadcrumbs.html.twig'
+
 #nomaya_social:
 #    buttons:
 #        facebook:
@@ -298,3 +309,4 @@ hype_mailchimp:
 #        googleplus:         "https://plus.google.com/104061818216863002695"
 #
 #    theme:                  'default' # optional
+#

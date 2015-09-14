@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ac8ef71ac15cda641cf99e15edca7cef",
+    "hash": "a400b6d644f5fd40a1de70089c9b4fad",
     "packages": [
         {
             "name": "ahmedsamy/hype-mailchimp-bundle",
@@ -2673,69 +2673,6 @@
             "time": "2015-05-16 17:16:14"
         },
         {
-            "name": "nomaya/social-bundle",
-            "version": "dev-master",
-            "target-dir": "Nomaya/SocialBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nomayann/NomayaSocialButtonsBundle.git",
-                "reference": "4a3d28aceebed00bed8ab3f4c680d0372b499273"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nomayann/NomayaSocialButtonsBundle/zipball/4a3d28aceebed00bed8ab3f4c680d0372b499273",
-                "reference": "4a3d28aceebed00bed8ab3f4c680d0372b499273",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "twig/twig": "*"
-            },
-            "require-dev": {
-                "matthiasnoback/symfony-config-test": "0.*",
-                "symfony/framework-bundle": ">=2.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Nomaya\\SocialBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Yann Chauvel",
-                    "email": "yann@nomaya.net",
-                    "homepage": "http://www.nomaya.net/"
-                }
-            ],
-            "description": "A bundle to easily add facebook, twitter, G+, Linkedin buttons to your templates",
-            "homepage": "http://github.com/nomayann/NomayaSocialButtonsBundle",
-            "keywords": [
-                "Symfony2",
-                "bundle",
-                "buttons",
-                "facebook",
-                "google plus",
-                "like",
-                "linkedin",
-                "share",
-                "social",
-                "symfony",
-                "symfony2bundle",
-                "twitter"
-            ],
-            "time": "2014-09-18 15:13:20"
-        },
-        {
             "name": "phpcollection/phpcollection",
             "version": "0.4.0",
             "source": {
@@ -3041,7 +2978,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/fbd7300558790e1cb40893e9d1606ed8fccc70bf",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/1e0750a2333aa8ce6581adbde121958b05eb1a84",
                 "reference": "6a3b6c01c78406ef18359c7ac57891e5de145dd1",
                 "shasum": ""
             },
@@ -3933,7 +3870,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/8069da22ac716fac76f3bc868aa3edcda4c8d268",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/337fe4ceca35ec0370df14d810fad2dff586632d",
                 "reference": "d7a0c9a98485c114dd0770735647d41499409d97",
                 "shasum": ""
             },
@@ -4174,7 +4111,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/cb56e38a1e3f645faab7dccfdebc6f0b34f1feaa",
+                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/21aa1132c2c1c6c7f2a8307e50ae3ef2499cd040",
                 "reference": "07880d1f980af1b6fe17fdf381f6a20f6d4cabb1",
                 "shasum": ""
             },
@@ -5082,6 +5019,49 @@
             "time": "2015-08-12 15:56:39"
         },
         {
+            "name": "whiteoctober/breadcrumbs-bundle",
+            "version": "1.2.0",
+            "target-dir": "WhiteOctober/BreadcrumbsBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whiteoctober/BreadcrumbsBundle.git",
+                "reference": "68465cb75ea6ad5a04742ff10ec2f69ef09ff5b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whiteoctober/BreadcrumbsBundle/zipball/68465cb75ea6ad5a04742ff10ec2f69ef09ff5b8",
+                "reference": "68465cb75ea6ad5a04742ff10ec2f69ef09ff5b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "2.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "WhiteOctober\\BreadcrumbsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rich Sage",
+                    "email": "rich.sage@gmail.com"
+                }
+            ],
+            "description": "A small breadcrumbs bundle for Symfony2",
+            "homepage": "https://github.com/whiteoctober/BreadcrumbsBundle",
+            "keywords": [
+                "breadcrumbs",
+                "symfony"
+            ],
+            "time": "2015-07-21 09:21:37"
+        },
+        {
             "name": "willdurand/jsonp-callback-validator",
             "version": "v1.1.0",
             "source": {
@@ -5292,8 +5272,7 @@
         "sonata-project/doctrine-orm-admin-bundle": 20,
         "sonata-project/media-bundle": 20,
         "sonata-project/page-bundle": 20,
-        "ahmedsamy/hype-mailchimp-bundle": 20,
-        "nomaya/social-bundle": 20
+        "ahmedsamy/hype-mailchimp-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

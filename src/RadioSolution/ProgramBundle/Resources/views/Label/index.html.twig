@@ -1,8 +1,5 @@
 <section class="actu-list">
-  <div class="breadcrumb">
-    <a href="#" title="Lien vers la page d'accueil d'euradionantes" class="breadcrumb-item">Accueil</a><a href="#" title="Lien vers la page des actualitées" class="breadcrumb-item">Actualités</a><span class="breadcrumb-item">Les Lorem Ipsum en concert</span>
-    {{ sonata_block_render_event('breadcrumb', { 'context': sonata_seo_context is defined ? sonata_seo_context : 'homepage' , 'current_uri': app.request.requestUri }) }}
-  </div>
+  {{ wo_render_breadcrumbs() }}
 
   <h1 class="actu-list-title">Label européen du mois</h1>
 

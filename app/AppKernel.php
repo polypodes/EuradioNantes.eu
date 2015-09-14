@@ -60,7 +60,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Hype\MailchimpBundle\HypeMailchimpBundle(),
-            //new Nomaya\SocialBundle\NomayaSocialBundle(),
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
 
             // RadioSolution
             new RadioSolution\ProgramBundle\ProgramBundle(),

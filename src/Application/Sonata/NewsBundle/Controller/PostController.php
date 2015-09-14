@@ -10,6 +10,9 @@ class PostController extends BaseController
 {
     public function indexAction()
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Actualités');
+
         $repo = $query = $this
             ->getDoctrine()
             ->getRepository('ApplicationSonataNewsBundle:Post')
@@ -34,6 +37,38 @@ class PostController extends BaseController
         ;
 
         return $this->render('SonataNewsBundle:Post:index.html.twig', compact('news', 'collection'));
+    }
+
+    public function viewAction($permalink)
+    {
+        $post = $this->getPostManager()->findOneByPermalink($permalink, $this->container->get('sonata.news.blog'));
+
+        if (!$post || !$post->isPublic()) {
+            throw new NotFoundHttpException('Unable to find the post');
+        }
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Actualités', $this->get('router')->generate('listeactus'));
+        $breadcrumbs->addItem($post->getTitle());
+
+        if ($seoPage = $this->getSeoPage()) {
+            $seoPage
+                ->setTitle($post->getTitle())
+                ->addMeta('name', 'description', $post->getAbstract())
+                ->addMeta('property', 'og:title', $post->getTitle())
+                ->addMeta('property', 'og:type', 'blog')
+                ->addMeta('property', 'og:url', $this->generateUrl('sonata_news_view', array(
+                    'permalink'  => $this->getBlog()->getPermalinkGenerator()->generate($post, true)
+                ), true))
+                ->addMeta('property', 'og:description', $post->getAbstract())
+            ;
+        }
+
+        return $this->render('SonataNewsBundle:Post:view.html.twig', array(
+            'post' => $post,
+            'form' => false,
+            'blog' => $this->get('sonata.news.blog')
+        ));
     }
 
     public function getLastPosts($limit = 9)

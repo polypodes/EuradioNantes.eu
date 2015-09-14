@@ -21,6 +21,10 @@ class ProgramController extends Controller
      */
     public function indexAction()
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Les émissions');
+        $breadcrumbs->addItem('Grille des programmes');
+
         $format = $this->get('request')->get('_format');
 
         $timestampDay = 60*60*24;

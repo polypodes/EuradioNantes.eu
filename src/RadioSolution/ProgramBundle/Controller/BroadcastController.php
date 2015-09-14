@@ -20,6 +20,10 @@ class BroadcastController extends Controller
 
     public function indexAction()
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Musique');
+        $breadcrumbs->addItem('C’était quoi ce titre ?');
+
         $now = new \DateTime('now');
         $now->setTime(0, 0);
 

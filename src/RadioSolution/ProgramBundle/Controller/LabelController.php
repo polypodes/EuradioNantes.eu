@@ -21,6 +21,10 @@ class LabelController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Musique');
+        $breadcrumbs->addItem('Le label européen du mois');
+
         //$labels = $this->getDoctrine()->getRepository('ProgramBundle:Label')->findAllFeatured(20);
 
         $query = $this->getDoctrine()->getRepository('ProgramBundle:Label')->queryPublishedOrderedByFeaturedFrom()->getQuery();
@@ -44,6 +48,12 @@ class LabelController extends Controller
         if (!$label || !$label->getPublished()) {
             throw $this->createNotFoundException('Le label est introuvable.');
         }
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Musique');
+        $breadcrumbs->addRouteItem('Le label européen du mois', 'labels');
+        $breadcrumbs->addItem($label->getTitle());
+
         return $this->render('ProgramBundle:Label:show.html.twig', compact('label'));
     }
 

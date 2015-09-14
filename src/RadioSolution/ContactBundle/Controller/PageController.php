@@ -11,6 +11,9 @@ class PageController extends Controller
 {
     public function contactAction(Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Contact');
+
         $enquiry = new Enquiry();
 
         $form = $this->createForm(new EnquiryType(), $enquiry);

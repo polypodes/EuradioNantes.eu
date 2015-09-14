@@ -19,6 +19,10 @@ class AlbumController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Musique');
+        $breadcrumbs->addItem('Album de la semaine');
+
         //$albums = $this->getDoctrine()->getRepository('ProgramBundle:Album')->findAllFeatured(20);
 
         $query = $this->getDoctrine()->getRepository('ProgramBundle:Album')->queryPublishedOrderedByFeaturedFrom()->getQuery();
@@ -42,6 +46,12 @@ class AlbumController extends Controller
         if (!$album || !$album->getPublished()) {
             throw $this->createNotFoundException('L’album est introuvable.');
         }
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem('Musique');
+        $breadcrumbs->addRouteItem('Album de la semaine', 'albums');
+        $breadcrumbs->addItem($album->getArtist() . ' - ' . $album->getTitle());
+
         return $this->render('ProgramBundle:Album:show.html.twig', compact('album'));
     }
 
