@@ -275,38 +275,21 @@ white_october_breadcrumbs:
     translation_domain: ~ # defaults to null, so the default domain is used
     viewTemplate:       ':Breadcrumbs:breadcrumbs.html.twig'
 
-#nomaya_social:
-#    buttons:
-#        facebook:
-#            url:            null
-#            locale:         "fr_FR"
-#            send:           false
-#            width:          300
-#            showFaces:      false
-#            layout:         "button_count"
-#        twitter:
-#            url:            null
-#            locale:         "fr"
-#            message:        "Je veux partager ça avec vous"
-#            text:           "Tweet"
-#            via:            "L'Equipe Euradionantes"
-#            tag:            "ttot"
-#        googleplus:
-#            url:            null
-#            locale :        "fr"
-#            size :          "medium"
-#            annotation :    "bubble"
-#            width :         300
-#        linkedin:
-#            url:            null
-#            locale:         "fr_FR"
-#            counter:        "right"
-#        pinterest:
-#            url:            null
-#    links:
-#        twitter:            "https://twitter.com/euradionantes"
-#        facebook:           "https://www.facebook.com/pages/EuradioNantes/119060581473600"
-#        googleplus:         "https://plus.google.com/104061818216863002695"
-#
-#    theme:                  'default' # optional
-#
+mremi_url_shortener:
+    link_class: Mremi\UrlShortener\Model\Link
+
+    providers:
+        bitly:
+            enabled:             true
+            username:            %bitly_username%
+            password:            %bitly_password%
+            options:
+                connect_timeout: 1
+                timeout:         1
+
+        #google:
+        #    enabled:             true
+        #    api_key:             your_api_key
+        #    options:
+        #        connect_timeout: 1
+        #        timeout:         1

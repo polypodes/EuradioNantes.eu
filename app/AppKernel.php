@@ -61,6 +61,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Hype\MailchimpBundle\HypeMailchimpBundle(),
             new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
+            new Mremi\UrlShortenerBundle\MremiUrlShortenerBundle(),
 
             // RadioSolution
             new RadioSolution\ProgramBundle\ProgramBundle(),

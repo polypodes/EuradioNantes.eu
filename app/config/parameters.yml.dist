@@ -32,3 +32,6 @@ parameters:
     mailchimp_default_list: xxxxxxxx
 
     google_search_cx: 009530823814786353114:4rwpfku8hou
+
+    bitly_username: your_bitly_username
+    bitly_api_key: your_bitly_api_key

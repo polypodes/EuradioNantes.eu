@@ -54,7 +54,8 @@
         "gedmo/doctrine-extensions": "2.3.*",
         "stof/doctrine-extensions-bundle": "^1.1",
         "ahmedsamy/hype-mailchimp-bundle": "dev-master",
-        "whiteoctober/breadcrumbs-bundle": "^1.2"
+        "whiteoctober/breadcrumbs-bundle": "^1.2",
+        "mremi/url-shortener-bundle": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

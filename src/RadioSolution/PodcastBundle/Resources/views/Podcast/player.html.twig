@@ -10,30 +10,12 @@
                 <a href="{% path podcast.filePodcast, 'reference' %}" target="_blank"><img src="{% path podcast.filePodcast, 'small' %}" /></a>
             </audio>#}
             <div class="podcast-item">
-              <div data-player-src="{% path podcast.filePodcast, 'reference' %}"{% if podcast.markers %} data-player-regions="{{ podcast.markersJSON|e }}"{% endif %} class="podcast-player">
+              <div data-player-src="{% path podcast.filePodcast, 'reference' %}"{% if podcast.markers|length > 0 %} data-player-regions="{{ podcast.markersJSON|e }}"{% endif %} class="podcast-player">
                 <button class="podcast-item-control podcast-item-play"></button>
               </div>
             </div>
 
-            {% if podcast.dlAuth %}
-            <div id="podcast_export">
-                <a href="/download.php?file={% path podcast.filePodcast, 'reference' %}&amp;name={{ podcast.slug }}" id="download" target="_blank" alt="Télécharger le podcast" title="Télécharger le podcast">Télécharger le podcast</a>
-                <a id="show_pre" alt="Exporter le podcast"  title="Exporter le podcast">Exporter le podcast</a>
-            </div>
-            {% endif %}
         </div>
-
-        <div id="export_code">
-            <p id="pre_info">Pour exporter le lecteur, copier-coller l'intégralité du code ci-dessous sur la plateforme de votre choix.</p>
-            <pre>{% spaceless %}
-                &lt;audio controls="controls"&gt;
-                    &lt;source src="{% path podcast.filePodcast, 'reference' %}.ogg" type="audio/ogg" /&gt;
-                    &lt;source src="{% path podcast.filePodcast, 'reference' %}" type="audio/mp3" /&gt;
-                    &lt;a href="{% path podcast.filePodcast, 'reference' %}" target="_blank"&gt;&lt;img src="http://www.euradionantes.eu/images/timeline/play.png" /&gt;&lt;/a&gt;
-                &lt;/audio&gt;
-            {% endspaceless %}</pre>
-        </div>
-
         <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.42/wavesurfer.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.41/plugin/wavesurfer.regions.min.js"></script>
     {% endif %}

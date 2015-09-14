@@ -3,9 +3,20 @@
     <a href="#" title="partager sur twitter" class="share-twitter"><img src="{{ asset('/assets/images/twitter.svg') }}" alt="Icone twitter"></a>
     <a href="#" title="partager sur facebook" class="share-facebook"><img src="{{ asset('/assets/images/facebook.svg') }}" alt="Icone facebook"></a>
     <a href="#" title="partager sur google" class="share-google"><img src="{{ asset('/assets/images/google.svg') }}" alt="Icone google+"></a>
+    {% if podcast is defined %}
+        <a href="#" title="Intégrer le lecteur" class="share-embeded"><img src="{{ asset('/assets/images/embed.svg') }}" alt="Icone intégration lecteur"></a>
+        {% if podcast.dlAuth %}
+            <a href="{% path podcast.filePodcast, 'reference' %}" title="Télécharger le podcast" class="share-download"><img src="{{ asset('/assets/images/download.svg') }}" alt="Icone téléchargement"></a>
+        {% endif %}
+    {% endif %}
   </div>
   <div class="share-aside">
     <div>Envoyer cet article</div>
-    <span class="share-aside-link">euradionantes.eu/art123</span>
+    <span class="share-aside-link">{{ mremi_url_shorten('bitly', app.request.getUri()) }}</span>
   </div>
+  {% if podcast is defined %}
+    <div class="share-embed-inner"><span class="share-embed-title">Copiez collez ce code</span>
+      <input type="text" value="&lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;https://www.euradionantes.com/embed/p" class="share-embed-input">
+    </div>
+  {% endif %}
 </div>

@@ -28,7 +28,8 @@
     {% endif %}
     <div class="author-text">
       {% set authorname = post.author.fullname != '' ? post.author.fullname : post.author.username %}
-      <div class="author-sup">Rédigé par</div><a href="#" data-clickable-target="true" title="Lien vers les articles de {{ authorname }}" class="author-title">{{ authorname }}</a>
+      <div class="author-sup">Rédigé par</div>
+      <a href="#" data-clickable-target="true" title="Lien vers les articles de {{ authorname }}" class="author-title">{{ authorname }}</a>
     </div>
   </div>
   {% endif %}
@@ -37,7 +38,7 @@
     {{ include('PodcastBundle:Podcast:player.html.twig', {'podcast': post.podcast}) }}
   {% endif %}
 
-  {{ include(':Social:share.html.twig') }}
+  {{ include(':Social:share.html.twig', {'podcast': post.podcast}) }}
 
   <section class="comment">
     {% render(controller('SonataNewsBundle:Post:comments', {'postId': post.id})) %}
