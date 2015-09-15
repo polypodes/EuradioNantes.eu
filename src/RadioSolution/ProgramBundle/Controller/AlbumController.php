@@ -47,6 +47,19 @@ class AlbumController extends Controller
             throw $this->createNotFoundException('L’album est introuvable.');
         }
 
+        if ($seoPage = $this->get('sonata.seo.page')) {
+            $seoPage
+                ->setTitle($album->getTitle())
+                ->addMeta('name', 'description', $album->getResume())
+                ->addMeta('property', 'og:title', $album->getTitle())
+                ->addMeta('property', 'og:type', 'article')
+                ->addMeta('property', 'og:url', $this->generateUrl('album', array(
+                    'slug'  => $album->getSlug()
+                ), true))
+                ->addMeta('property', 'og:description', $album->getResume())
+            ;
+        }
+
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('Musique');
         $breadcrumbs->addRouteItem('Album de la semaine', 'albums');

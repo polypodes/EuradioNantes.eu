@@ -113,6 +113,19 @@ class EmissionController extends Controller
             throw $this->createNotFoundException('Unable to find Emission entity.');
         }
 
+        if ($seoPage = $this->get('sonata.seo.page')) {
+            $seoPage
+                ->setTitle($entity->getName())
+                ->addMeta('name', 'description', $entity->getDescription())
+                ->addMeta('property', 'og:title', $entity->getName())
+                ->addMeta('property', 'og:type', 'article')
+                ->addMeta('property', 'og:url', $this->generateUrl('emission', array(
+                    'name'  => $entity->getSlug()
+                ), true))
+                ->addMeta('property', 'og:description', $entity->getDescription())
+            ;
+        }
+
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addRouteItem('Les émissions de A à Z', 'emissions');
         $breadcrumbs->addItem($entity->getName());

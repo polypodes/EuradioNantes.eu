@@ -46,6 +46,20 @@ class PlaylistController extends Controller
         if (!$playlist || !$playlist->getPublished()) {
             throw $this->createNotFoundException('La playlist est introuvable.');
         }
+
+        if ($seoPage = $this->get('sonata.seo.page')) {
+            $seoPage
+                ->setTitle($playlist->getTitle())
+                ->addMeta('name', 'description', $playlist->getResume())
+                ->addMeta('property', 'og:title', $playlist->getTitle())
+                ->addMeta('property', 'og:type', 'article')
+                ->addMeta('property', 'og:url', $this->generateUrl('playlist', array(
+                    'slug'  => $playlist->getSlug()
+                ), true))
+                ->addMeta('property', 'og:description', $playlist->getResume())
+            ;
+        }
+
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('Musique');
         $breadcrumbs->addRouteItem('La playlist', 'playlists');

@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-//use RadioSolution\ProgramBundle\Entity\Album;
+//use RadioSolution\ProgramBundle\Entity\label;
 use RadioSolution\ProgramBundle\Entity\Label;
 
 
@@ -47,6 +47,19 @@ class LabelController extends Controller
         //$label = $this->getDoctrine()->getRepository('ProgramBundle:Label')->findPublishedBySlug($slug);
         if (!$label || !$label->getPublished()) {
             throw $this->createNotFoundException('Le label est introuvable.');
+        }
+
+        if ($seoPage = $this->get('sonata.seo.page')) {
+            $seoPage
+                ->setTitle($label->getTitle())
+                ->addMeta('name', 'description', $label->getResume())
+                ->addMeta('property', 'og:title', $label->getTitle())
+                ->addMeta('property', 'og:type', 'article')
+                ->addMeta('property', 'og:url', $this->generateUrl('label', array(
+                    'slug'  => $label->getSlug()
+                ), true))
+                ->addMeta('property', 'og:description', $label->getResume())
+            ;
         }
 
         $breadcrumbs = $this->get("white_october_breadcrumbs");

@@ -40,72 +40,12 @@ class EcouteController extends Controller
             ->getOneOrNullResult()
         ;
 
-        // broadcast
-        //$now = new \DateTime('now');
-        //$now->setTime(0, 0);
-        //
-        //if (!empty($_GET['day'])) {
-        //    $start = new \DateTime($_GET['day']);
-        //} else {
-        //    $start = new \DateTime('now');
-        //    $start->setTime(0, 0);
-        //}
-        //
-        //$stop = clone $start;
-        //$stop->modify('+1 day');
-
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $query = $em
+        $broadcasts = $em
             ->createQuery("SELECT b FROM ProgramBundle:Broadcast b ORDER BY b.broadcasted DESC")
             ->setMaxResults(20)
             //->setParameters(array('start' => $start, 'stop' => $stop))
+            >getResult()
         ;
-
-        $broadcasts = $query->getResult();
-
-        /*
-    	$day = new \DateTime('now');
-    	$start=new \DateTime('now');
-    	date_sub($start, date_interval_create_from_date_string('1 days'));
-    	$start->setTime('00', '00');
-    	$stop=new \DateTime('now');
-    	date_add($stop, date_interval_create_from_date_string('1 days'));
-    	$stop->setTime('23', '59', '59');
-
-
-    	$em = $this->getDoctrine()->getEntityManager();
-
-    	$query = $em->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop<:stop AND p.time_start>:start ORDER BY p.time_start ASC")
-    	->setParameters(array('start'=>$start,'stop'=>$stop));
-    	$entities=$query->getResult();
-
-    	$query = $em->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop>:now AND p.time_start<:now ORDER BY p.time_start ASC")
-    	->setParameters(array('now'=>$day))
-    	->setMaxResults(1);
-    	$currentProgram=$query->getResult();
-
-    	//echo "".$currentProgram[0]->getName()."<br/>";
-
-    	$nowSlide = 0;
-
-    	if(is_array($currentProgram) && count($currentProgram) > 0){
-
-    		$somethingNow = true;
-
-    	} else {
-
-    		$somethingNow = false;
-
-    		$query = $em->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_start>:now ORDER BY p.time_start ASC")
-    		->setParameters(array('now'=>$day))
-    		->setMaxResults(1);
-    		$currentProgram=$query->getResult();
-
-    	}
-
-    	$nowSlide = array_search($currentProgram[0], $entities);
-        */
 
 		return $this->render('ProgramBundle:Program:show_ecoute.html.twig', compact('program', 'onair', 'broadcasts'));
     }

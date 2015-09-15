@@ -51,11 +51,19 @@ class StaticContentController extends Controller
         }
         $breadcrumbs->addItem($entity->getName());
 
-        $seoPage = $this->container->get('sonata.seo.page');
-        $seoPage
-            ->setTitle($entity->getName().' - Eur@dioNantes')
-            ->addMeta('name', 'description', html_entity_decode($entity->getIntroduction()))
-        ;
+        //$seoPage = $this->container->get('sonata.seo.page');
+        if ($seoPage = $this->get('sonata.seo.page')) {
+            $seoPage
+                ->setTitle($entity->getName())
+                ->addMeta('name', 'description', $entity->getIntroduction())
+                ->addMeta('property', 'og:title', $entity->getName())
+                ->addMeta('property', 'og:type', 'article')
+                ->addMeta('property', 'og:url', $this->generateUrl('static_content', array(
+                    'slug'  => $entity->getSlug()
+                ), true))
+                ->addMeta('property', 'og:description', $entity->getIntroduction())
+            ;
+        }
 
         return $this->render('StaticContentBundle:StaticContent:show.html.twig', array(
             'entity'      => $entity,
@@ -180,8 +188,21 @@ class StaticContentController extends Controller
                 6
         );
 
-        $seoPage = $this->container->get('sonata.seo.page');
-        $seoPage->setTitle($entity->getName() . ' - Eur@dioNantes');
+        //$seoPage = $this->container->get('sonata.seo.page');
+        //$seoPage->setTitle($entity->getName() . ' - Eur@dioNantes');
+
+        if ($seoPage = $this->get('sonata.seo.page')) {
+            $seoPage
+                ->setTitle($entity->getName())
+                ->addMeta('name', 'description', $entity->getBody())
+                ->addMeta('property', 'og:title', $entity->getName())
+                ->addMeta('property', 'og:type', 'article')
+                ->addMeta('property', 'og:url', $this->generateUrl('static_content_categorie', array(
+                    'slug'  => $entity->getSlug()
+                ), true))
+                ->addMeta('property', 'og:description', $entity->getBody())
+            ;
+        }
 
         return $this->render('StaticContentBundle:CategoryStaticContent:showCategorie.html.twig', array(
             'entity' => $entity,
