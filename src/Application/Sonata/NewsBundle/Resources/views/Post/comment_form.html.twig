@@ -60,7 +60,17 @@
       </div>
 
       <div class="comment-input">
-        <div data-sitekey="6LeHx_4SAAAAAGmoCxyy9ZP6UOKWjwMk7BFssfuW" class="g-recaptcha"></div>
+        {#<div data-sitekey="6LeHx_4SAAAAAGmoCxyy9ZP6UOKWjwMk7BFssfuW" class="g-recaptcha"></div>#}
+        {% form_theme form 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig' %}
+        {{ form_widget(form.recaptcha) }}
+        {% if form.recaptcha.vars.errors|length > 0 %}
+          <small class="comment-errors">
+            {% for i, error in form.recaptcha.vars.errors -%}
+              {% if i > 0 %}<br>{% endif %}
+              <strong>{{ error.message }}</strong>
+            {% endfor %}
+          </small>
+        {% endif %}
       </div>
     </div>
 

@@ -48,4 +48,4 @@ assetic:
 #    delivery_address: me@example.com
 
 ewz_recaptcha:
-    enabled: false
+    #enabled: false

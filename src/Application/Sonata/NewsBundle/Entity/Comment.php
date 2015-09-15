@@ -28,6 +28,8 @@ class Comment extends BaseComment
      */
     protected $id;
 
+    protected $recaptcha;
+
     /**
      * Get id
      *
@@ -36,5 +38,16 @@ class Comment extends BaseComment
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getRecaptcha()
+    {
+        return $this->recaptcha;
+    }
+
+    public function setRecaptcha($recaptcha)
+    {
+        $this->recaptcha = $recaptcha;
+        return $this;
     }
 }

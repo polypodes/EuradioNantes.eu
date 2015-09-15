@@ -33,3 +33,8 @@ services:
         class: RadioSolution\PodcastBundle\Form\Type\PodcastPlayerType
         tags:
             - { name: form.type, alias: podcast_player }
+
+    sonata.news.form.type.comment:
+        class: Application\Sonata\NewsBundle\Form\Type\CommentType
+        tags:
+            - { name: form.type, alias: sonata_post_comment }
