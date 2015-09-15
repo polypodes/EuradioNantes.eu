@@ -44,7 +44,7 @@ class EcouteController extends Controller
             ->createQuery("SELECT b FROM ProgramBundle:Broadcast b ORDER BY b.broadcasted DESC")
             ->setMaxResults(20)
             //->setParameters(array('start' => $start, 'stop' => $stop))
-            >getResult()
+            ->getResult()
         ;
 
 		return $this->render('ProgramBundle:Program:show_ecoute.html.twig', compact('program', 'onair', 'broadcasts'));
