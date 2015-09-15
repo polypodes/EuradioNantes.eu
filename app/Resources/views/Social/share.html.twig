@@ -1,26 +1,59 @@
-<div class="share"><span class="share-title">Partager cet article</span>
+{% set url = mremi_url_shorten('bitly', app.request.getUri()) %}
+{% if text is not defined %}{% set text = '' %}{% endif %}
+<div class="share">
+  <span class="share-title">Partager cet article</span>
   <div class="share-buttons">
-    <a href="#" title="partager sur twitter" class="share-twitter"><img src="{{ asset('/assets/images/twitter.svg') }}" alt="Icone twitter"></a>
-    <a href="#" title="partager sur facebook" class="share-facebook"><img src="{{ asset('/assets/images/facebook.svg') }}" alt="Icone facebook"></a>
-    <a href="#" title="partager sur google" class="share-google"><img src="{{ asset('/assets/images/google.svg') }}" alt="Icone google+"></a>
+
+    <a href="https://twitter.com/intent/tweet?text={{ text }}&amp;url={{ url }}&amp;via={{ social_twitter_username }}" title="partager sur twitter" class="share-link share-twitter"><img src="{{ asset('/assets/images/twitter.svg') }}" alt="Icone twitter"></a>
+    <a href="https://www.facebook.com/dialog/share?app_id={{ social_facebook_app_id }}&amp;display=popup&amp;href={{ url }}" title="partager sur facebook" class="share-link share-facebook"><img src="{{ asset('/assets/images/facebook.svg') }}" alt="Icone facebook"></a>
+    <a href="https://plus.google.com/share?url={{ url }}" title="partager sur google" class="share-link share-google"><img src="{{ asset('/assets/images/google.svg') }}" alt="Icone google+"></a>
     {% if podcast is defined %}
-        <a href="#" title="Intégrer le lecteur" class="share-embeded"><img src="{{ asset('/assets/images/embed.svg') }}" alt="Icone intégration lecteur"></a>
+        <a href="#" id="share-embeded" title="Intégrer le lecteur" class="share-embeded"><img src="{{ asset('/assets/images/embed.svg') }}" alt="Icone intégration lecteur"></a>
         {% if podcast.dlAuth %}
-            <a href="{% path podcast.filePodcast, 'reference' %}" title="Télécharger le podcast" class="share-download"><img src="{{ asset('/assets/images/download.svg') }}" alt="Icone téléchargement"></a>
+            <a href="{{ path('sonata_media_download', {id: podcast.filePodcast.id}) }}" title="Télécharger le podcast" class="share-download"><img src="{{ asset('/assets/images/download.svg') }}" alt="Icone téléchargement"></a>
         {% endif %}
     {% endif %}
   </div>
   <div class="share-aside">
     <div>Envoyer cet article</div>
-    <span class="share-aside-link">{{ mremi_url_shorten('bitly', app.request.getUri()) }}</span>
+    <span class="share-aside-link">{{ url }}</span>
   </div>
-  {% if podcast is defined %}
-    <div class="share-embed-inner"><span class="share-embed-title">Copiez collez ce code</span>
+  {% if podcast is defined -%}
+    <div id="embed-code" class="share-embed-inner">
+      <span class="share-embed-title">Copiez-collez ce code</span>
       {% set iframeUrl = url('podcast_embed', {'id': podcast.getId()}) %}
       {% set html = '<iframe width="100%" height="315" src="' ~ iframeUrl ~ '" frameborder="0"></iframe>' %}
       <input type="text" value="{{
         html|e
       }}" class="share-embed-input">
     </div>
-  {% endif %}
+  {%- endif %}
+  <script>
+    var shareLinks = document.querySelectorAll('.share-link'),
+        embed = document.getElementById('embed-code')
+    ;
+
+    Array.prototype.forEach.call(shareLinks, function(el, i){
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.open(
+          this.getAttribute('href'),
+          this.getAttribute('title'),
+          'width=1010,height=495,left=320,top=445'
+        );
+      });
+    });
+
+    // show / hide embed code
+    embed.style.display = 'none';
+    document.getElementById('share-embeded').addEventListener('click', function(e) {
+      e.preventDefault();
+
+      if (embed.style.display == 'none') {
+        embed.style.display = '';
+      } else {
+        embed.style.display = 'none';
+      }
+    })
+  </script>
 </div>
