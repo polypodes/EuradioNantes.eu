@@ -144,4 +144,18 @@ class PodcastController extends Controller
         return $this->render('PodcastBundle:Podcast:emission.html.twig', compact('podcasts'));
 
     }
+
+    public function embedAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $podcast = $em->getRepository('PodcastBundle:Podcast')->find($id);
+
+        if (!$podcast) {
+            throw $this->createNotFoundException('Unable to find Podcast entity.');
+        }
+
+        return $this->render('PodcastBundle:Podcast:embed.html.twig', compact('podcast'));
+
+    }
 }

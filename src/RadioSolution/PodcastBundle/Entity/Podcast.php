@@ -246,8 +246,20 @@ class Podcast
                 if (empty($marker['start']) || empty($marker['title'])) {
                     continue;
                 }
+                // convert start time hh:mm to seconds
                 $start = $marker['start'];
-                $end = !empty($marker['end']) ? $marker['end'] : $start;
+                sscanf($start, "%d:%d", $minutes, $seconds);
+                $start = $minutes * 60 + $seconds;
+
+                // convert end time hh:mm to seconds
+                if (!empty($marker['end'])) {
+                    $end = $marker['end'];
+                    sscanf($end, "%d:%d", $minutes, $seconds);
+                    $end = $minutes * 60 + $seconds;
+                } else {
+                    $end = $start;
+                }
+
                 $title = $marker['title'];
                 $text = $marker['text'];
 

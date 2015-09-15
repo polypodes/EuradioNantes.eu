@@ -44,7 +44,7 @@ class PostController extends BaseController
         $post = $this->getPostManager()->findOneByPermalink($permalink, $this->container->get('sonata.news.blog'));
 
         if (!$post || !$post->isPublic()) {
-            throw new NotFoundHttpException('Unable to find the post');
+            throw $this->createNotFoundException('L’actualité est introuvable.');
         }
 
         $breadcrumbs = $this->get("white_october_breadcrumbs");

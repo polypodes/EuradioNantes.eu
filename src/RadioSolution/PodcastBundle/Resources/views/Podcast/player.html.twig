@@ -10,7 +10,7 @@
                 <a href="{% path podcast.filePodcast, 'reference' %}" target="_blank"><img src="{% path podcast.filePodcast, 'small' %}" /></a>
             </audio>#}
             <div class="podcast-item">
-              <div data-player-src="{% path podcast.filePodcast, 'reference' %}"{% if podcast.markers|length > 0 %} data-player-regions="{{ podcast.markersJSON|e }}"{% endif %} class="podcast-player">
+              <div data-player-src="{% path podcast.filePodcast, 'reference' %}" data-player-regions="{{ podcast.markersJSON|e }}" class="podcast-player">
                 <button class="podcast-item-control podcast-item-play"></button>
               </div>
             </div>

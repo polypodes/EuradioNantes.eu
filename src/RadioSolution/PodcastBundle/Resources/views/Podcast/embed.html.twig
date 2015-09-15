@@ -1,0 +1,5 @@
+{% extends 'ApplicationSonataPageBundle::base_layout.html.twig' %}
+
+{% block sonata_page_container %}
+    {{ include('PodcastBundle:Podcast:player.html.twig', {'podcast': podcast}) }}
+{% endblock %}

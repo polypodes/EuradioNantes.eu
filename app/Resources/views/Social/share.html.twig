@@ -16,7 +16,11 @@
   </div>
   {% if podcast is defined %}
     <div class="share-embed-inner"><span class="share-embed-title">Copiez collez ce code</span>
-      <input type="text" value="&lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;https://www.euradionantes.com/embed/p" class="share-embed-input">
+      {% set iframeUrl = url('podcast_embed', {'id': podcast.getId()}) %}
+      {% set html = '<iframe width="100%" height="315" src="' ~ iframeUrl ~ '" frameborder="0"></iframe>' %}
+      <input type="text" value="{{
+        html|e
+      }}" class="share-embed-input">
     </div>
   {% endif %}
 </div>
