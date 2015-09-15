@@ -68,12 +68,12 @@ class AppKernel extends Kernel
             new RadioSolution\PodcastBundle\PodcastBundle(),
             new RadioSolution\MenuBundle\MenuBundle(),
             new RadioSolution\StaticContentBundle\StaticContentBundle(),
-            new RadioSolution\CarrouselBundle\CarrouselBundle(),
+            //new RadioSolution\CarrouselBundle\CarrouselBundle(),
             new RadioSolution\ContactBundle\ContactBundle(),
-            new RadioSolution\PubBundle\PubBundle(),
+            //new RadioSolution\PubBundle\PubBundle(),
             new RadioSolution\SearchBundle\SearchBundle(),
-            new RadioSolution\SurveyBundle\SurveyBundle(),
-            new RadioSolution\RSSAgregatorBundle\RSSAgregatorBundle(),
+            //new RadioSolution\SurveyBundle\SurveyBundle(),
+            //new RadioSolution\RSSAgregatorBundle\RSSAgregatorBundle(),
             new RadioSolution\SiteBundle\SiteBundle(),
         );
 

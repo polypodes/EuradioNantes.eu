@@ -45,6 +45,13 @@ twig:
     globals:
         liveStreamUrl: %liveStreamUrl%
         google_search_cx: %google_search_cx%
+        social_facebook_url: %social_facebook_url%
+        social_facebook_app_id: %social_facebook_app_id%
+        social_twitter_url: %social_twitter_url%
+        social_twitter_username: %social_twitter_username%
+        social_googleplus_url: %social_googleplus_url%
+        social_flickr_url: %social_flickr_url%
+        social_youtube_url: %social_youtube_url%
 
 # Assetic Configuration
 assetic:
@@ -97,11 +104,13 @@ doctrine:
                     ProgramBundle: ~
                     PodcastBundle: ~
                     MenuBundle: ~
-                    CarrouselBundle: ~
+                    SiteBundle: ~
                     StaticContentBundle: ~
-                    PubBundle: ~
-                    SurveyBundle: ~
-                    RSSAgregatorBundle: ~
+                    #CarrouselBundle: ~
+                    #PubBundle: ~
+                    #SurveyBundle: ~
+                    #RSSAgregatorBundle: ~
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -276,7 +285,7 @@ white_october_breadcrumbs:
     viewTemplate:       ':Breadcrumbs:breadcrumbs.html.twig'
 
 mremi_url_shortener:
-    link_class: Mremi\UrlShortener\Model\Link
+    link_class: RadioSolution\SiteBundle\Entity\Link
 
     providers:
         bitly:

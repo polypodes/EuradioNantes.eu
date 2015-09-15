@@ -1,0 +1,27 @@
+RadioSolution\SiteBundle\Entity\Link:
+  type: entity
+  #table: music__playlist
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    #title:
+    #  type: string
+    #  length: 255
+
+    providerName:
+      column: provider_name
+      type: string
+      length: 255
+    shortUrl:
+      column: short_url
+      type: string
+      length: 255
+    longUrl:
+      column: long_url
+      type: string
+      length: 255
+    createdAt:
+      column: created_at
+      type: datetime
