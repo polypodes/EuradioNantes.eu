@@ -271,6 +271,7 @@ class Podcast
                         'title' => $title,
                         'text' => $text,
                     ),
+                    'drag' => false
                 );
             }
         }
