@@ -3,8 +3,10 @@
 
   <h1 class="content-title">Recherche</h1>
 
-  <h2>Résultats de la recherche « {{ app.request.query.get('search') }} »</h2>
+  {% if app.request.query.get('search') is not empty %}
+    <h2>Résultats de la recherche « {{ app.request.query.get('search') }} »</h2>
 
+  {% endif %}
   <gcse:searchresults-only></gcse:searchresults-only>
 
 </section>

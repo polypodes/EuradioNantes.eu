@@ -64,7 +64,7 @@ class MenuBlockService extends BaseBlockService
 
     /**
      * @return mixed
-     
+
     public function getMediaPool()
     {
         return $this->getMediaAdmin()->getPool();
@@ -72,7 +72,7 @@ class MenuBlockService extends BaseBlockService
 	*/
     /**
      * @return mixed
-     
+
     public function getMediaAdmin()
     {
         if (!$this->mediaAdmin) {
@@ -118,7 +118,7 @@ class MenuBlockService extends BaseBlockService
 
     /**
      * @return array
-     
+
     protected function getContextChoices()
     {
         $contextChoices = array();
@@ -134,7 +134,7 @@ class MenuBlockService extends BaseBlockService
      * @param null|\Sonata\MediaBundle\Model\MediaInterface $media
      *
      * @return array
-     
+
     protected function getFormatChoices(MediaInterface $media = null)
     {
         $formatChoices = array();
@@ -154,7 +154,7 @@ class MenuBlockService extends BaseBlockService
      * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
      *
      * @return \Symfony\Component\Form\FormBuilder
-     
+
     protected function getMediaBuilder(FormMapper $formMapper)
     {
         // simulate an association ...
@@ -212,7 +212,7 @@ class MenuBlockService extends BaseBlockService
      */
     public function load(BlockInterface $block)
     {
-        menu = $block->getSetting('menuId', null);
+        $menu = $block->getSetting('menuId', null);
 		/*
         if ($media) {
             $media = $this->mediaManager->findOneBy(array('id' => $media));

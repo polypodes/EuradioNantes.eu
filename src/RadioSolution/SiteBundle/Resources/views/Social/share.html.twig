@@ -10,7 +10,7 @@
     {% if podcast is defined %}
         <a href="#" id="share-embeded" title="Intégrer le lecteur" class="share-embeded"><img src="{{ asset('/assets/images/embed.svg') }}" alt="Icone intégration lecteur"></a>
         {% if podcast.dlAuth %}
-            <a href="{{ path('sonata_media_download', {id: podcast.filePodcast.id}) }}" title="Télécharger le podcast" class="share-download"><img src="{{ asset('/assets/images/download.svg') }}" alt="Icone téléchargement"></a>
+            <a href="{{ path('sonata_media_download', {id: podcast.filePodcast|sonata_urlsafeid}) }}" title="Télécharger le podcast" class="share-download"><img src="{{ asset('/assets/images/download.svg') }}" alt="Icone téléchargement"></a>
         {% endif %}
     {% endif %}
   </div>
