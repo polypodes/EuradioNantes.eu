@@ -45,6 +45,7 @@ twig:
     globals:
         liveStreamUrl: %liveStreamUrl%
         google_search_cx: %google_search_cx%
+        ga_tracking_code: %ga_tracking_code%
         social_facebook_url: %social_facebook_url%
         social_facebook_app_id: %social_facebook_app_id%
         social_twitter_url: %social_twitter_url%
@@ -260,7 +261,7 @@ knp_paginator:
         sort_direction_name: direction # sort direction query parameter name
         distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
-        pagination: :Pagination:sliding.html.twig     # sliding pagination controls template
+        pagination: SiteBundle:Pagination:sliding.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
 stof_doctrine_extensions:
@@ -282,7 +283,7 @@ white_october_breadcrumbs:
     linkRel:            ''
     locale:             ~ # defaults to null, so the default locale is used
     translation_domain: ~ # defaults to null, so the default domain is used
-    viewTemplate:       ':Breadcrumbs:breadcrumbs.html.twig'
+    viewTemplate:       SiteBundle:Breadcrumbs:breadcrumbs.html.twig
 
 mremi_url_shortener:
     link_class: RadioSolution\SiteBundle\Entity\Link

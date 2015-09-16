@@ -83,6 +83,8 @@ file that was distributed with this source code.
         {{ sonata_block_include_javascripts('screen', app.request.basePath) #}
         <script src="//www.google.com/recaptcha/api.js"></script>
         <script src="{{ asset('assets/bundle.js') }}"></script>
+        {% include('SiteBundle::google_analytics.html.twig') %}
+
     {% endblock %}
 {% endblock %}
 </body>

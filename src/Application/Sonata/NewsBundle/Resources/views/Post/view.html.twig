@@ -38,7 +38,7 @@
     {{ include('PodcastBundle:Podcast:player.html.twig', {'podcast': post.podcast}) }}
   {% endif %}
 
-  {{ include(':Social:share.html.twig', {'podcast': post.podcast}) }}
+  {{ include('SiteBundle:Social:share.html.twig', {'podcast': post.podcast}) }}
 
   <section class="comment">
     {% render(controller('SonataNewsBundle:Post:comments', {'postId': post.id})) %}

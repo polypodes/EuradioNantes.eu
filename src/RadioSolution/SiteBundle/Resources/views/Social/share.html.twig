@@ -44,16 +44,18 @@
       });
     });
 
-    // show / hide embed code
-    embed.style.display = 'none';
-    document.getElementById('share-embeded').addEventListener('click', function(e) {
-      e.preventDefault();
+    if (embed) {
+      // show / hide embed code
+      embed.style.display = 'none';
+      document.getElementById('share-embeded').addEventListener('click', function(e) {
+        e.preventDefault();
 
-      if (embed.style.display == 'none') {
-        embed.style.display = '';
-      } else {
-        embed.style.display = 'none';
-      }
-    })
+        if (embed.style.display == 'none') {
+          embed.style.display = '';
+        } else {
+          embed.style.display = 'none';
+        }
+      });
+    }
   </script>
 </div>

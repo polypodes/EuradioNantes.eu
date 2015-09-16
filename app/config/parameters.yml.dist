@@ -32,6 +32,7 @@ parameters:
     mailchimp_default_list: xxxxxxxx
 
     google_search_cx: 009530823814786353114:4rwpfku8hou
+    ga_tracking_code: UA-XXXXXXXX-1
 
     bitly_username: your_bitly_username
     bitly_password: your_bitly_password

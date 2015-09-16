@@ -1,6 +1,6 @@
-PodcastBundle_homepage:
-    path:  /podcasts
-    defaults: { _controller: "PodcastBundle:Podcast:index" }
+#PodcastBundle_homepage:
+#    path:  /podcasts
+#    defaults: { _controller: "PodcastBundle:Podcast:index" }
 
 podcast_embed:
     path: /embed/podcast/{id}
