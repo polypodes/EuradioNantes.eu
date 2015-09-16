@@ -19,7 +19,7 @@ class MenuController extends Controller
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('Plan du site');
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $menus = $em
             ->getRepository('MenuBundle:Menu')

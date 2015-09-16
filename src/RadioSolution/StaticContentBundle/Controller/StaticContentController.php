@@ -19,7 +19,7 @@ class StaticContentController extends Controller
     public function showAction(Request $request, $slug)
     {
         //\$page->setTitle('test');
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('StaticContentBundle:StaticContent')->findOneBySlug($slug);
 
@@ -72,7 +72,7 @@ class StaticContentController extends Controller
 
     public function showListAction(Request $request, $slug)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em
             ->getRepository('StaticContentBundle:CategoryStaticContent')
@@ -141,7 +141,7 @@ class StaticContentController extends Controller
 
     public function showCategorieAction(Request $request, $slug)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em
             ->getRepository('StaticContentBundle:CategoryStaticContent')

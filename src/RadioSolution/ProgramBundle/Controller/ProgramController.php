@@ -57,7 +57,7 @@ class ProgramController extends Controller
         $stop = clone $start;
         $stop->modify('+7 days');
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $query = $em
             ->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop < :stop AND p.time_start >= :start AND p.time_start < p.time_stop  ORDER BY p.time_start ASC, p.time_stop DESC")
             ->setParameters(array('start' => $start, 'stop' => $stop))
@@ -125,7 +125,7 @@ class ProgramController extends Controller
 
     public function onairAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $url = $this->container->getParameter('nowPlayingUrl');
         $file = fopen($url, 'r');

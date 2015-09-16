@@ -37,7 +37,7 @@ class BroadcastController extends Controller
         $stop = clone $start;
         $stop->modify('+1 day');
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $query = $em
             ->createQuery("SELECT b FROM ProgramBundle:Broadcast b WHERE b.broadcasted >= :start AND b.broadcasted < :stop ORDER BY b.broadcasted DESC")

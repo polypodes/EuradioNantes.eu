@@ -23,7 +23,7 @@ class PodcastController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $dateNow =new \DateTime();
 
         if (!empty($_GET['emission'])) {
@@ -77,7 +77,7 @@ class PodcastController extends Controller
         $dateStop=new \DateTime($date);
         $dateStop->setTime(23, 59);
         $dateNow =new \DateTime();
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery("SELECT p FROM PodcastBundle:Podcast p $join WHERE p.real_time_start<:dateNow AND p.real_time_start>:dateStart AND p.real_time_start<:dateStop $condition ORDER BY p.real_time_start DESC")
         ->setParameters(array('dateStart'=> $dateStart,'dateStop'=> $dateStop))
         ->setParameter('dateNow', $dateNow);
@@ -107,7 +107,7 @@ class PodcastController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('PodcastBundle:Podcast')->find($id);
 
@@ -123,7 +123,7 @@ class PodcastController extends Controller
     public function emissionAction($id, $page = 1, $title = "Émission - Eur@dioNantes")
     {
         $dateNow = new \DateTime();
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $query = $em
             ->createQuery("SELECT p FROM PodcastBundle:Podcast p JOIN p.program pr WHERE p.real_time_start < :dateNow AND pr.emission = :idEmission ORDER BY p.real_time_start DESC")
@@ -147,7 +147,7 @@ class PodcastController extends Controller
 
     public function embedAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $podcast = $em->getRepository('PodcastBundle:Podcast')->find($id);
 

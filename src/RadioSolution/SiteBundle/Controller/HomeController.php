@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $query = $em
             ->createQuery("SELECT p FROM ApplicationSonataNewsBundle:Post p WHERE p.enabled = 1 ORDER BY p.publicationDateStart DESC")
             ->setMaxResults(18)

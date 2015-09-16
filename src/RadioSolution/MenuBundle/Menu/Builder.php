@@ -12,7 +12,7 @@ class Builder extends Controller
     public function mainMenu(FactoryInterface $factory, array $options)
     {
     	$options['idmenu'] = 1;
-    	$em = $this->getDoctrine()->getEntityManager();
+    	$em = $this->getDoctrine()->getManager();
 
     	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
     	$menu = $factory->createItem($menu);
@@ -88,7 +88,7 @@ class Builder extends Controller
     {
     	//$domain = $this->get('request')->server->get('HTTP_HOST');
     	$options['idmenu'] = 4;
-    	$em = $this->getDoctrine()->getEntityManager();
+    	$em = $this->getDoctrine()->getManager();
 
     	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
     	$menu = $factory->createItem($menu);
@@ -114,7 +114,7 @@ class Builder extends Controller
     {
     	//$domain = $this->get('request')->server->get('HTTP_HOST');
     	$options['idmenu'] = 6;
-    	$em = $this->getDoctrine()->getEntityManager();
+    	$em = $this->getDoctrine()->getManager();
 
     	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
     	$menu = $factory->createItem($menu);
@@ -142,7 +142,7 @@ class Builder extends Controller
     {
     	$domain = $this->get('request')->server->get('HTTP_HOST');
     	$options['idmenu'] = 5;
-    	$em = $this->getDoctrine()->getEntityManager();
+    	$em = $this->getDoctrine()->getManager();
 
     	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
     	$menu = $factory->createItem($menu);

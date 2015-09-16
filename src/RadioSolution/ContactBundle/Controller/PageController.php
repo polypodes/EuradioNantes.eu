@@ -45,7 +45,7 @@ class PageController extends Controller
             }
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         // @todo Change static ID by a more clever solution
         $entity = $em->getRepository('StaticContentBundle:StaticContent')->findOneById(30);

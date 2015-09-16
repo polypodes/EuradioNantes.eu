@@ -24,7 +24,7 @@ class EcouteController extends Controller
         $program = null;
         $onair = null;
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $program = $em
             ->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop > :now AND p.time_start >= :now AND p.time_start < p.time_stop  ORDER BY p.time_start ASC, p.time_stop DESC")

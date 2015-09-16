@@ -7,7 +7,7 @@ class DefaultController extends Controller {
 
 	public function indexAction($id = 0, $limit = 7) {
 		if($id!=0){$condition=" AND p.menu=$id";}else{$condition='AND p.menu IS NULL';}
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$query = $em
 				->createQuery(
 						"SELECT p FROM RSSAgregatorBundle:RSSfile p WHERE p.enable=true $condition");
@@ -16,11 +16,11 @@ class DefaultController extends Controller {
 
 		//$allFeeds = array('title' => 'Titre', 'desc' => 'Desc', 'link' => 'Lien','date' => 'Date',);
 		$allFeeds = array();
-		
+
 		$bloc_title = "";
-		
+
 		$bloc_title = $entities[0]->getMenu();
-		
+
 		foreach ($entities as $entity) {
 
 			if ($entity->getUrl()) {

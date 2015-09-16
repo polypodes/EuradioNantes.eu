@@ -36,7 +36,7 @@ class PostAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
 
-        $em = $this->modelManager->getEntityManager('Application\Sonata\NewsBundle\Entity\Post');
+        $em = $this->modelManager->getManager('Application\Sonata\NewsBundle\Entity\Post');
         $repo = $em->getRepository('Application\Sonata\NewsBundle\Entity\Post');
 
         //get related lists

@@ -18,7 +18,7 @@ class BlockController extends Controller
 	 */
 	public function InfoAction()
 	{
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 
 		$entities = $em->getRepository('StaticContentBundle:CategoryStaticContent')->findByParent(6);
 
@@ -34,10 +34,10 @@ class BlockController extends Controller
 	 */
 	public function MusiqueAction()
 	{
-		$em = $this->getDoctrine()->getEntityManager();
-	
+		$em = $this->getDoctrine()->getManager();
+
 		$entities = $em->getRepository('StaticContentBundle:CategoryStaticContent')->findByParent(7);
-	
+
 		return $this->render('StaticContentBundle:CategoryStaticContent:accueil.html.twig', array(
 				'entities'      => $entities,
 				'id_name'		=>'services-example-2',
@@ -52,5 +52,5 @@ class BlockController extends Controller
 	{
 		return $this->render('StaticContentBundle:CategoryStaticContent:JsAccueil.html.twig', array());
 	}
-	
+
 }
