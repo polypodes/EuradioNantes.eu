@@ -38,10 +38,34 @@
 
     {% endif %}
 
-    <div class="comment-message"><i class="ico-info"></i><span>Tous les champs sont obligatoires.</span></div>
+    <div class="comment-message"><i class="ico-info"></i><span>Les champs marqués d’un astérisque (*) sont obligatoires.</span></div>
     <form action="{{ path('contact') }}#contact-form" method="post" {{ form_enctype(form) }}>
       <div class="comment-textarea">
-        {{ form_label(form.body, 'Votre message', {'label_attr': {'class': 'comment-label'}}) }}
+        {{ form_label(form.recipient, 'Destinataire *', {'label_attr': {'class': 'comment-label required'}}) }}
+        {{ form_widget(form.recipient) }}
+        {% if form.recipient.vars.errors|length > 0 %}
+          <small class="comment-errors">
+            {% for i, error in form.recipient.vars.errors -%}
+              {% if i > 0 %}<br>{% endif %}
+              <strong>{{ error.message }}</strong>
+            {% endfor %}
+          </small>
+        {% endif %}
+      </div>
+      <div class="comment-textarea">
+        {{ form_label(form.subject, 'Sujet de l’e-mail *', {'label_attr': {'class': 'comment-label required'}}) }}
+        {{ form_widget(form.subject, {'attr': {'placeholder': 'Demande de renseignements'}}) }}
+        {% if form.subject.vars.errors|length > 0 %}
+          <small class="comment-errors">
+            {% for i, error in form.subject.vars.errors -%}
+              {% if i > 0 %}<br>{% endif %}
+              <strong>{{ error.message }}</strong>
+            {% endfor %}
+          </small>
+        {% endif %}
+      </div>
+      <div class="comment-textarea">
+        {{ form_label(form.body, 'Votre message *', {'label_attr': {'class': 'comment-label required'}}) }}
         {{ form_widget(form.body, {'attr': {'placeholder': 'Votre message ou commentaire'}}) }}
         {% if form.body.vars.errors|length > 0 %}
           <small class="comment-errors">
@@ -54,7 +78,7 @@
       </div>
       <div class="comment-inputs">
         <div class="comment-input">
-          {{ form_label(form.name, 'Votre nom', {'label_attr': {'class': 'comment-label'}}) }}
+          {{ form_label(form.name, 'Votre nom *', {'label_attr': {'class': 'comment-label required'}}) }}
           {{ form_widget(form.name, {'attr': {'placeholder': 'Nom prénom'}}) }}
           {% if form.name.vars.errors|length > 0 %}
             <small class="comment-errors">
@@ -66,11 +90,11 @@
           {% endif %}
         </div>
         <div class="comment-input">
-          {{ form_label(form.email, 'Votre adresse e-mail', {'label_attr': {'class': 'comment-label'}}) }}
-          {{ form_widget(form.email, {'attr': {'placeholder': 'adresse@email.com'}}) }}
-          {% if form.email.vars.errors|length > 0 %}
+          {{ form_label(form.company, 'Votre société', {'label_attr': {'class': 'comment-label'}}) }}
+          {{ form_widget(form.company, {'attr': {'placeholder': 'Entreprise'}}) }}
+          {% if form.company.vars.errors|length > 0 %}
             <small class="comment-errors">
-              {% for i, error in form.email.vars.errors -%}
+              {% for i, error in form.company.vars.errors -%}
                 {% if i > 0 %}<br>{% endif %}
                 <strong>{{ error.message }}</strong>
               {% endfor %}
@@ -78,11 +102,11 @@
           {% endif %}
         </div>
         <div class="comment-input">
-          {{ form_label(form.subject, 'Sujet de l’e-mail', {'label_attr': {'class': 'comment-label'}}) }}
-          {{ form_widget(form.subject, {'attr': {'placeholder': 'Demande de renseignements'}}) }}
-          {% if form.subject.vars.errors|length > 0 %}
+          {{ form_label(form.email, 'Votre adresse e-mail *', {'label_attr': {'class': 'comment-label required'}}) }}
+          {{ form_widget(form.email, {'attr': {'placeholder': 'adresse@email.com'}}) }}
+          {% if form.email.vars.errors|length > 0 %}
             <small class="comment-errors">
-              {% for i, error in form.subject.vars.errors -%}
+              {% for i, error in form.email.vars.errors -%}
                 {% if i > 0 %}<br>{% endif %}
                 <strong>{{ error.message }}</strong>
               {% endfor %}

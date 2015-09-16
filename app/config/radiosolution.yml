@@ -29,11 +29,11 @@ services:
             - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Émissions hebdo', show_in_dashboard: false }
         arguments: [null, RadioSolution\ProgramBundle\Entity\WeeklyBroadcast, "SonataAdminBundle:CRUD"]
 
-    radioSolution.program.themeColor:
-        class: RadioSolution\ProgramBundle\Admin\ThemeColorAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Couleurs du thème' }
-        arguments: [null, RadioSolution\ProgramBundle\Entity\ThemeColor, "SonataAdminBundle:CRUD"]
+    #radioSolution.program.themeColor:
+    #    class: RadioSolution\ProgramBundle\Admin\ThemeColorAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Couleurs du thème' }
+    #    arguments: [null, RadioSolution\ProgramBundle\Entity\ThemeColor, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.program:
         class: RadioSolution\ProgramBundle\Admin\ProgramAdmin
@@ -83,23 +83,23 @@ services:
             - { name: sonata.admin, manager_type: orm, group: 'Menus', label: 'Entrées' }
         arguments: [null, RadioSolution\MenuBundle\Entity\Item, "SonataAdminBundle:CRUD"]
 
-    radioSolution.carrousel.slider:
-        class: RadioSolution\CarrouselBundle\Admin\SliderAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Carousels' }
-        arguments: [null, RadioSolution\CarrouselBundle\Entity\Slider, "SonataAdminBundle:CRUD"]
+    #radioSolution.carrousel.slider:
+    #    class: RadioSolution\CarrouselBundle\Admin\SliderAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Carousels' }
+    #    arguments: [null, RadioSolution\CarrouselBundle\Entity\Slider, "SonataAdminBundle:CRUD"]
 
-    radioSolution.carrousel.item:
-        class: RadioSolution\CarrouselBundle\Admin\ItemAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Éléments de carousel'}
-        arguments: [null, RadioSolution\CarrouselBundle\Entity\Item, "SonataAdminBundle:CRUD"]
+    #radioSolution.carrousel.item:
+    #    class: RadioSolution\CarrouselBundle\Admin\ItemAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Éléments de carousel'}
+    #    arguments: [null, RadioSolution\CarrouselBundle\Entity\Item, "SonataAdminBundle:CRUD"]
 
-    radioSolution.carrousel.customItem:
-        class: RadioSolution\CarrouselBundle\Admin\CustomItemAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Éléments de carousel personnalisés'}
-        arguments: [null, RadioSolution\CarrouselBundle\Entity\CustomItem, "SonataAdminBundle:CRUD"]
+    #radioSolution.carrousel.customItem:
+    #    class: RadioSolution\CarrouselBundle\Admin\CustomItemAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Éléments de carousel personnalisés'}
+    #    arguments: [null, RadioSolution\CarrouselBundle\Entity\CustomItem, "SonataAdminBundle:CRUD"]
 
     radioSolution.staticContent.staticContent:
         class: RadioSolution\StaticContentBundle\Admin\StaticContentAdmin
@@ -113,33 +113,39 @@ services:
             - { name: sonata.admin, manager_type: orm, group: sonata_page, label_catalogue: "%sonata.page.admin.site.translation_domain%", label: "Catégories contenus statiques", label_translator_strategy: "sonata.admin.label.strategy.underscore"}
         arguments: [null, RadioSolution\StaticContentBundle\Entity\CategoryStaticContent, "SonataAdminBundle:CRUD"]
 
-    radioSolution.staticContent.DailymediastaticContent:
-        class: RadioSolution\StaticContentBundle\Admin\DailymediaStaticContentAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label_catalogue: "%sonata.page.admin.site.translation_domain%", label: "Dailymedia contenus statiques", label_translator_strategy: "sonata.admin.label.strategy.underscore"}
-        arguments: [null, RadioSolution\StaticContentBundle\Entity\DailymediaStaticContent, "SonataAdminBundle:CRUD"]
+    #radioSolution.staticContent.DailymediastaticContent:
+    #    class: RadioSolution\StaticContentBundle\Admin\DailymediaStaticContentAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label_catalogue: "%sonata.page.admin.site.translation_domain%", label: "Dailymedia contenus statiques", label_translator_strategy: "sonata.admin.label.strategy.underscore"}
+    #    arguments: [null, RadioSolution\StaticContentBundle\Entity\DailymediaStaticContent, "SonataAdminBundle:CRUD"]
 
-    radioSolution.pub.pub:
-        class: RadioSolution\PubBundle\Admin\PubAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Pub' }
-        arguments: [null, RadioSolution\PubBundle\Entity\Pub, "SonataAdminBundle:CRUD"]
+    #radioSolution.pub.pub:
+    #    class: RadioSolution\PubBundle\Admin\PubAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Pub' }
+    #    arguments: [null, RadioSolution\PubBundle\Entity\Pub, "SonataAdminBundle:CRUD"]
 
-    radioSolution.Survey.Survey:
-        class: RadioSolution\SurveyBundle\Admin\SurveyAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Sondages' }
-        arguments: [null, RadioSolution\SurveyBundle\Entity\Survey, "SonataAdminBundle:CRUD"]
+    #radioSolution.Survey.Survey:
+    #    class: RadioSolution\SurveyBundle\Admin\SurveyAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Sondages' }
+    #    arguments: [null, RadioSolution\SurveyBundle\Entity\Survey, "SonataAdminBundle:CRUD"]
 
-    radioSolution.RSSAgregator.RSSfile:
-        class: RadioSolution\RSSAgregatorBundle\Admin\RSSAgregatorAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Agrégateur RSS' }
-        arguments: [null, RadioSolution\RSSAgregatorBundle\Entity\RSSfile, "SonataAdminBundle:CRUD"]
+    #radioSolution.RSSAgregator.RSSfile:
+    #    class: RadioSolution\RSSAgregatorBundle\Admin\RSSAgregatorAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Agrégateur RSS' }
+    #    arguments: [null, RadioSolution\RSSAgregatorBundle\Entity\RSSfile, "SonataAdminBundle:CRUD"]
 
-    radioSolution.RSSAgregator.RSSagregator:
-        class: RadioSolution\RSSAgregatorBundle\Admin\RSSAgregatorContenerAdmin
+    #radioSolution.RSSAgregator.RSSagregator:
+    #    class: RadioSolution\RSSAgregatorBundle\Admin\RSSAgregatorContenerAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Conteneur d’agrégateurs RSS' }
+    #    arguments: [null, RadioSolution\RSSAgregatorBundle\Entity\RSSagregator, "SonataAdminBundle:CRUD"]
+
+    radioSolution.contact.contact:
+        class: RadioSolution\ContactBundle\Admin\ContactAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Blocs personnalisés', label: 'Conteneur d’agrégateurs RSS' }
-        arguments: [null, RadioSolution\RSSAgregatorBundle\Entity\RSSagregator, "SonataAdminBundle:CRUD"]
+            - { name: sonata.admin, manager_type: orm, group: %sonata.user.admin.groupname%, label: 'Contacts', label_catalogue: 'SonataUserBundle', label_translator_strategy: 'sonata.admin.label.strategy.underscore' }
+        arguments: [null, RadioSolution\ContactBundle\Entity\Contact, "SonataAdminBundle:CRUD"]
 

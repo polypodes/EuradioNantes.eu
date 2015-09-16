@@ -21,6 +21,10 @@ class Enquiry
 
     public $recaptcha;
 
+    protected $company;
+
+    protected $recipient;
+
     public function getName()
     {
         return $this->name;
@@ -74,4 +78,25 @@ class Enquiry
     	$metadata->addPropertyConstraint('recaptcha', new Recaptcha());
     }
 
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    public function setCompany($company)
+    {
+        $this->company = $company;
+        return $this;
+    }
+
+    public function getRecipient()
+    {
+        return $this->recipient;
+    }
+
+    public function setRecipient($recipient)
+    {
+        $this->recipient = $recipient;
+        return $this;
+    }
 }

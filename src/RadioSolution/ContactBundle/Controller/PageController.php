@@ -11,12 +11,19 @@ class PageController extends Controller
 {
     public function contactAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('Contact');
 
         $enquiry = new Enquiry();
 
-        $form = $this->createForm(new EnquiryType(), $enquiry);
+        $contacts = $em
+            ->createQuery('SELECT c FROM ContactBundle:Contact c ORDER BY c.position ASC')
+            ->getResult()
+        ;
+
+        $form = $this->createForm(new EnquiryType($contacts), $enquiry);
 
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage->setTitle("Contact - Euradionantes");
@@ -27,7 +34,7 @@ class PageController extends Controller
             $data = $form->getData();
 
             $fromAddress = $data->getEmail();
-            $toAddress = $this->container->getParameter('contact_address');
+            $toAddress = !empty($data->getRecipient()) ? $data->getRecipient() : $this->container->getParameter('contact_address');
             $message = \Swift_Message::newInstance()
                 ->setSubject('[Euradionantes] Demande de contact')
                 ->setFrom($fromAddress)
@@ -45,7 +52,7 @@ class PageController extends Controller
             }
         }
 
-        $em = $this->getDoctrine()->getManager();
+
 
         // @todo Change static ID by a more clever solution
         $entity = $em->getRepository('StaticContentBundle:StaticContent')->findOneById(30);
@@ -54,10 +61,10 @@ class PageController extends Controller
             throw $this->createNotFoundException('Unable to find StaticContent entity.');
         }
 
-
         return $this->render('ContactBundle:Page:contact.html.twig', array(
             'form' => $form->createView(),
-            'entity' => $entity
+            'entity' => $entity,
+            'contacts' => $contacts
         ));
     }
 }

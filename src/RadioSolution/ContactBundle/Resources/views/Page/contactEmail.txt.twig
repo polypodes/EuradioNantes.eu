@@ -1,8 +1,11 @@
 {{ enquiry.name }} a envoyé un message, sur le formulaire de contact de euradionantes.eu :
 
-Date : {{ "now" | date("Y-m-d H:i") }}
+Date : {{ "now" | date("d/m/Y H:i") }}
 
 Nom : {{ enquiry.name }}
+{% if enquiry.company -%}
+Société : {{ enquiry.company }}
+{% endif -%}
 Adresse e-mail : {{ enquiry.email }}
 
 Sujet : {{ enquiry.subject }}
