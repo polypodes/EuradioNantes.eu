@@ -246,8 +246,10 @@ class NowPlaying implements ContainerAwareInterface
         try {
             $this->logger->info(sprintf('Trying to SAVE %s ALBUM INFOS using the TrackRetriever', $terms));
             $albumModel->fromXml($album);
-            $albumModel->setImagesfromXml($images);
+            //$albumModel->setImagesfromXml($images);
             $albumModel->setPublished(true);
+
+            $this->saveAlbumImages($albumModel, $images);
 
             $exists = $this->albumExistsYet($albumModel);
             if('RadioSolution\ProgramBundle\Entity\Album' === get_class($exists)) {
@@ -266,6 +268,48 @@ class NowPlaying implements ContainerAwareInterface
         }
 
         return array(self::NEWLY_SAVED, $albumModel);
+    }
+
+    protected function saveAlbumImages(&$albumModel, $xml)
+    {
+        $values = (array) json_decode(json_encode($xml));
+        if (!empty($values)
+            && !empty($values["ImageSet"])
+            && !empty($values["ImageSet"]->LargeImage)
+            && !empty($values["ImageSet"]->LargeImage->URL)
+        ) {
+            $albumModel->setThumbnailUrl(strval($values["ImageSet"]->LargeImage->URL));
+            $filename = explode('/', $albumModel->getThumbnailUrl());
+            $filename = $filename[sizeof($filename) - 1];
+
+
+            $fileDir = $this->container->getParameter('kernel.root_dir') . '/../web/uploads/images/albums/';
+            if (!file_exists($fileDir)) {
+                if (!mkdir($fileDir, 0770, true)) return;
+            }
+            $filePath = $fileDir . $filename;
+
+            try {
+                $ch = curl_init($albumModel->getThumbnailUrl());
+                $fp = fopen($filePath, "w");
+
+                curl_setopt($ch, CURLOPT_FILE, $fp);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+
+                curl_exec($ch);
+                curl_close($ch);
+                fclose($fp);
+
+                $media = new \Application\Sonata\MediaBundle\Entity\Media();
+                $media->setBinaryContent($filePath);
+                $media->setContext('default');
+                $media->setProviderName('sonata.media.provider.image');
+
+                $albumModel->setImage($media);
+            } catch (\Exception $e) {
+
+            }
+        }
     }
 
     /**

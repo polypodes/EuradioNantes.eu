@@ -103,6 +103,7 @@ RadioSolution\ProgramBundle\Entity\Album:
     image:
       targetEntity: Application\Sonata\MediaBundle\Entity\Media
       nullable: true
+      cascade: [persist]
       joinColumn:
         name: image
         referencedColumnName: id

@@ -185,14 +185,6 @@ class Album
             && !empty($values["ImageSet"]->LargeImage->URL)
         ) {
             $this->thumbnailUrl = strval($values["ImageSet"]->LargeImage->URL);
-            // enregistrer l'image principale en tant que Media
-            //$media = new \Application\Sonata\MediaBundle\Entity\Media();
-            //$basePath = $this->getRequest()->server->get('DOCUMENT_ROOT');
-            //$media->setBinaryContent($this->thumbnailUrl);
-            //$media->setContext('default');
-            //$media->setProviderName('sonata.media.provider.image');
-
-            //$this->image = $media;
         }
 
         return $this;
