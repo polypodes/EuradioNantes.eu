@@ -7,7 +7,7 @@
     <a href="https://twitter.com/intent/tweet?text={{ text }}&amp;url={{ url }}&amp;via={{ social_twitter_username }}" title="partager sur twitter" class="share-link share-twitter"><img src="{{ asset('/assets/images/twitter.svg') }}" alt="Icone twitter"></a>
     <a href="https://www.facebook.com/dialog/share?app_id={{ social_facebook_app_id }}&amp;display=popup&amp;href={{ url }}" title="partager sur facebook" class="share-link share-facebook"><img src="{{ asset('/assets/images/facebook.svg') }}" alt="Icone facebook"></a>
     <a href="https://plus.google.com/share?url={{ url }}" title="partager sur google" class="share-link share-google"><img src="{{ asset('/assets/images/google.svg') }}" alt="Icone google+"></a>
-    {% if podcast is defined %}
+    {% if podcast is defined and podcast %}
         <a href="#" id="share-embeded" title="Intégrer le lecteur" class="share-embeded"><img src="{{ asset('/assets/images/embed.svg') }}" alt="Icone intégration lecteur"></a>
         {% if podcast.dlAuth %}
             <a href="{{ path('sonata_media_download', {id: podcast.filePodcast|sonata_urlsafeid}) }}" title="Télécharger le podcast" class="share-download"><img src="{{ asset('/assets/images/download.svg') }}" alt="Icone téléchargement"></a>
@@ -18,7 +18,7 @@
     <div>Envoyer cet article</div>
     <span class="share-aside-link">{{ url }}</span>
   </div>
-  {% if podcast is defined -%}
+  {% if podcast is defined and podcast -%}
     <div id="embed-code" class="share-embed-inner">
       <span class="share-embed-title">Copiez-collez ce code</span>
       {% set iframeUrl = url('podcast_embed', {'id': podcast.getId()}) %}
