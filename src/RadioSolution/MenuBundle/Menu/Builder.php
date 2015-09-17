@@ -9,8 +9,12 @@ use Knp\Menu\FactoryInterface;
 
 class Builder extends Controller
 {
+    private $baseUrl = '';
+
     public function mainMenu(FactoryInterface $factory, array $options)
     {
+        $this->baseUrl = $this->container->get('router')->getContext()->getBaseUrl();
+
     	$options['idmenu'] = 1;
     	$em = $this->getDoctrine()->getManager();
 
@@ -24,7 +28,7 @@ class Builder extends Controller
         $menu->setChildrenAttribute('class', 'header-items');
 
     	$items = $em
-            ->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
+            ->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu = :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
         	->setParameters(array(
          		'id_menu' => $options['idmenu'],
     		))
@@ -34,7 +38,7 @@ class Builder extends Controller
     	foreach ($items as $key => $values) {
     	    $url = (preg_match('@^(http://|[/#])@', $values->getUrl()) ? '' : '/') . $values->getUrl();
 
-    		$item = $menu->addChild($values->getName(), array('uri' => $url));
+    		$item = $menu->addChild($values->getName(), array('uri' => $this->baseUrl . $url));
             $item->setLinkAttribute('class', 'header-link');
 
             if (in_array($url, array('/', '/accueil'))) {
@@ -71,7 +75,7 @@ class Builder extends Controller
 
     	foreach ($items as $key => $values) {
             $url = (preg_match('@^(http://|[/#])@', $values->getUrl()) ? '' : '/') . $values->getUrl();
-    		$subitem = $item->addChild($values->getName(), array('uri' => $url));
+    		$subitem = $item->addChild($values->getName(), array('uri' => $this->baseUrl . $url));
             if (!empty($class)) $subitem->setLinkAttribute('class', $class);
 
             if (strpos($this->container->get('request')->getRequestUri(), $url) !== false) {
@@ -86,8 +90,9 @@ class Builder extends Controller
 
     public function footerMenu(FactoryInterface $factory, array $options)
     {
-    	//$domain = $this->get('request')->server->get('HTTP_HOST');
-    	$options['idmenu'] = 4;
+        $this->baseUrl = $this->container->get('router')->getContext()->getBaseUrl();
+
+        $options['idmenu'] = 4;
     	$em = $this->getDoctrine()->getManager();
 
     	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
@@ -103,65 +108,11 @@ class Builder extends Controller
 
     	foreach ($items as $key=>$values){
     		$url = (preg_match('@^(http://|[/#])@', $values->getUrl()) ? '' : '/') . $values->getUrl();
-    		$item = $menu->addChild($values->getName(), array('uri' => $url));
+    		$item = $menu->addChild($values->getName(), array('uri' => $this->baseUrl . $url));
             $item->setLinkAttribute('class', 'footer-link');
     		//$this->addChild($em, $values, $item, $options['idmenu'], 'footer-link');
     	}
     	return $menu;
     }
-
-    public function surfooterMenu(FactoryInterface $factory, array $options)
-    {
-    	//$domain = $this->get('request')->server->get('HTTP_HOST');
-    	$options['idmenu'] = 6;
-    	$em = $this->getDoctrine()->getManager();
-
-    	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
-    	$menu = $factory->createItem($menu);
-
-    	$items = $em
-            ->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
-        	->setParameters(array(
-         		'id_menu' => $options['idmenu'],
-    		))
-            ->getResult()
-        ;
-
-    	foreach ($items as $key=>$values){
-    		$ext = strpos($values->getUrl(),'http://') === false ? '/' : '';
-    		$item = $menu->addChild($values->getName(), array('uri' => $ext . $values->getUrl()));
-    		$this->addChild($em, $values, $item, $options['idmenu']);
-    	}
-    	return $menu;
-    }
-
-
-
-
-    public function footerLinks(FactoryInterface $factory, array $options )
-    {
-    	$domain = $this->get('request')->server->get('HTTP_HOST');
-    	$options['idmenu'] = 5;
-    	$em = $this->getDoctrine()->getManager();
-
-    	$menu = $em->getRepository('MenuBundle:Menu')->find($options['idmenu']);
-    	$menu = $factory->createItem($menu);
-
-    	$items = $em
-            ->createQuery('SELECT i FROM MenuBundle:Item i WHERE i.menu= :id_menu AND i.parent IS NULL ORDER BY i.order_item ASC')
-        	->setParameters(array(
-         		'id_menu' => $options['idmenu'],
-    		))
-            ->getResult()
-        ;
-
-    	foreach ($items as $key=>$values){
-    		$ext = strpos($values->getUrl(),'http://') === false ? '/' : '';
-    		$item = $menu->addChild($values->getName(), array('uri' => $ext . $values->getUrl()));
-    		$this->addChild($em, $values, $item, $options['idmenu']);
-    	}
-    	return $menu;
-    }
-
 
 }
