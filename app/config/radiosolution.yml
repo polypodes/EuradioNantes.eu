@@ -5,11 +5,11 @@ services:
             - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Émissions' }
         arguments: [null, RadioSolution\ProgramBundle\Entity\Emission, "ProgramBundle:CRUD"]
 
-    radioSolution.program.emissionTheme:
-        class: RadioSolution\ProgramBundle\Admin\EmissionThemeAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Thèmes' }
-        arguments: [null, RadioSolution\ProgramBundle\Entity\EmissionTheme, "SonataAdminBundle:CRUD"]
+    #radioSolution.program.emissionTheme:
+    #    class: RadioSolution\ProgramBundle\Admin\EmissionThemeAdmin
+    #    tags:
+    #        - { name: sonata.admin, manager_type: orm, group: 'Programmation', label: 'Thèmes' }
+    #    arguments: [null, RadioSolution\ProgramBundle\Entity\EmissionTheme, "SonataAdminBundle:CRUD"]
 
     radioSolution.program.emissionFrequency:
         class: RadioSolution\ProgramBundle\Admin\EmissionFrequencyAdmin
