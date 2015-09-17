@@ -36,12 +36,12 @@
 
   <div class="filter-quick">
     <label class="filter-label">Accès rapide aux émissions</label>
-    <select name="emission" class="filter-select filter-quick-select">
-      <option value="">Sélectionnez une émission</option>
+    <ul class="filter-select filter-quick-select">
+      <li>Sélectionnez une émission</li>
       {% for emission in emissions -%}
-        <option value="{{ path('emission', {'name': emission.slug}) }}">{{ emission.name }}</option>
+        <li><a href="{{ path('emission', {'name': emission.slug}) }}">{{ emission.name }}</a></li>
       {%- endfor %}
-    </select>
+    </ul>
   </div>
 
   <section class="list">
@@ -49,7 +49,7 @@
     <article data-clickable="true" class="bloc-content">
       <div class="bloc-content-inner">
         {% if entity.media -%}
-        <figure class="bloc-content-figure"><img src="{% path entity.media, 'large' %}" srcset="//lorempixel.com/450/246 480w, //lorempixel.com/570/312 992w, //lorempixel.com/300/165 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
+          <figure class="bloc-content-figure"><img src="{% path entity.media, 'large' %}" srcset="{% path entity.media, 'list_mobile' %} 480w, {% path entity.media, 'list_tablet' %} 992w, {% path entity.media, 'list_desktop' %} 1900w" alt="Image de l'émission « {{ entity.name }} »" class="bloc-content-img img-responsive"></figure>
         {%- endif %}
 
         <div class="bloc-content-text">
