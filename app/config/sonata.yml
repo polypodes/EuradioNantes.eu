@@ -208,11 +208,11 @@ sonata_seo:
     encoding:         UTF-8
     page:
         default:          sonata.seo.page.default
-        title:            Sonata Project
+        title:            "Euradionantes"
         metas:
             name:
-                #keywords:             foo bar
-                #description:          The description
+                keywords:             "Nantes, radio, Europe, européen, européenne, école"
+                escription:           "Toute l'information locale européenne, la musique indé d'Europe et d'ailleurs, les magazines, la radio-école... Sur le 101.3 FM, la RNT et euradionantes.eu"
                 robots:               index, follow
 
             property:
@@ -222,8 +222,8 @@ sonata_seo:
 
                 # Open Graph information
                 # see http://developers.facebook.com/docs/opengraphprotocol/#types or http://ogp.me/
-                'og:site_name':       Euradionantes
-                #ga 'og:description':
+                'og:site_name':       Euradionantes.eu
+                'og:description':     "EuradioNantes - L'Europe vue d'une autre oreille"
 
             #http-equiv:
                 #'Content-Type':         text/html; charset=utf-8
@@ -232,16 +232,16 @@ sonata_seo:
             #charset:
                 #UTF-8:    ''
 
-        #head:
+        head:
             #'xmlns':              http://www.w3.org/1999/xhtml
-            #'xmlns:og':           http://opengraphprotocol.org/schema/
+            'xmlns:og':           http://opengraphprotocol.org/schema/
             #'xmlns:fb':           "http://www.facebook.com/2008/fbml"
 
 sonata_news:
     admin:
         post:
             class:      Application\Sonata\NewsBundle\Admin\PostAdmin
-    title:        "Les actualités d'Euradio"
+    title:        "Les actualités"
     link:         http://euradionantes.eu
     description:  "L’Europe vue d'une autre oreille"
     salt:         'yoiuplaboumsitck'
@@ -249,8 +249,7 @@ sonata_news:
 
     comment:
         notification:
-            # @todo: move this to parameters.yml
-            emails:   [webmaster@euradionantes.eu]
+            emails:   [%contact_address%]
             from:     no-reply@euradionantes.eu
             template: 'SonataNewsBundle:Mail:comment_notification.txt.twig'
 

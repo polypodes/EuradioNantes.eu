@@ -51,7 +51,7 @@ class LabelController extends Controller
 
         if ($seoPage = $this->get('sonata.seo.page')) {
             $seoPage
-                ->setTitle($label->getTitle())
+                ->addTitle($label->getTitle())
                 ->addMeta('name', 'description', $label->getResume())
                 ->addMeta('property', 'og:title', $label->getTitle())
                 ->addMeta('property', 'og:type', 'article')

@@ -21,7 +21,7 @@ class AlbumController extends Controller
     {
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('Musique');
-        $breadcrumbs->addItem('Album de la semaine');
+        $breadcrumbs->addItem('L’album de la semaine');
 
         //$albums = $this->getDoctrine()->getRepository('ProgramBundle:Album')->findAllFeatured(20);
 
@@ -49,9 +49,9 @@ class AlbumController extends Controller
 
         if ($seoPage = $this->get('sonata.seo.page')) {
             $seoPage
-                ->setTitle($album->getTitle())
+                ->addTitle(sprintf('%s - %s', $album->getArtist(), $album->getTitle()))
                 ->addMeta('name', 'description', $album->getResume())
-                ->addMeta('property', 'og:title', $album->getTitle())
+                ->addMeta('property', 'og:title', sprintf('%s - %s', $album->getArtist(), $album->getTitle()))
                 ->addMeta('property', 'og:type', 'article')
                 ->addMeta('property', 'og:url', $this->generateUrl('album', array(
                     'slug'  => $album->getSlug()
@@ -62,7 +62,7 @@ class AlbumController extends Controller
 
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('Musique');
-        $breadcrumbs->addRouteItem('Album de la semaine', 'albums');
+        $breadcrumbs->addRouteItem('L’album de la semaine', 'albums');
         $breadcrumbs->addItem($album->getArtist() . ' - ' . $album->getTitle());
 
         return $this->render('ProgramBundle:Album:show.html.twig', compact('album'));

@@ -115,7 +115,7 @@ class EmissionController extends Controller
 
         if ($seoPage = $this->get('sonata.seo.page')) {
             $seoPage
-                ->setTitle($entity->getName())
+                ->addTitle($entity->getName())
                 ->addMeta('name', 'description', $entity->getDescription())
                 ->addMeta('property', 'og:title', $entity->getName())
                 ->addMeta('property', 'og:type', 'article')

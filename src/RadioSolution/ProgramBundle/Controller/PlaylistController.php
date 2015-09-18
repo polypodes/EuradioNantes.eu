@@ -49,7 +49,7 @@ class PlaylistController extends Controller
 
         if ($seoPage = $this->get('sonata.seo.page')) {
             $seoPage
-                ->setTitle($playlist->getTitle())
+                ->addTitle($playlist->getTitle())
                 ->addMeta('name', 'description', $playlist->getResume())
                 ->addMeta('property', 'og:title', $playlist->getTitle())
                 ->addMeta('property', 'og:type', 'article')

@@ -7,6 +7,7 @@
 	{#}
   <time datetime="{{ entity.publicationDateStart | date('Y-m-d H:i') }}" class="bloc-content-date">{{ entity.publicationDateStart | localizeddate('long', 'none', 'fr-FR') }}</time>
 	#}
+{{ dump(seo_page) }}
 
   <h1 class="content-title">{{ entity.name }}</h1>
 

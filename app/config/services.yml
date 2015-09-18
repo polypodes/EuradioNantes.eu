@@ -38,3 +38,10 @@ services:
         class: Application\Sonata\NewsBundle\Form\Type\CommentType
         tags:
             - { name: form.type, alias: sonata_post_comment }
+
+
+    sonata.classification.form.type.collection_selector:
+        class: Application\Sonata\ClassificationBundle\Form\Type\CollectionSelectorType
+        tags:
+            - { name: form.type, alias: sonata_collection_selector }
+        arguments: [ @sonata.classification.manager.collection ]

@@ -51,10 +51,10 @@ class StaticContentController extends Controller
         }
         $breadcrumbs->addItem($entity->getName());
 
-        //$seoPage = $this->container->get('sonata.seo.page');
-        if ($seoPage = $this->get('sonata.seo.page')) {
+        //var_dump($this->container);
+        if ($seoPage = $this->container->get('sonata.seo.page')) {
             $seoPage
-                ->setTitle($entity->getName())
+                ->addTitle($entity->getName())
                 ->addMeta('name', 'description', $entity->getIntroduction())
                 ->addMeta('property', 'og:title', $entity->getName())
                 ->addMeta('property', 'og:type', 'article')
