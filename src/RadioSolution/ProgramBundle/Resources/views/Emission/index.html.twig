@@ -36,12 +36,12 @@
 
   <div class="filter-quick">
     <label class="filter-label">Accès rapide aux émissions</label>
-    <ul class="filter-select filter-quick-select">
-      <li>Sélectionnez une émission</li>
+    <select class="filter-select filter-quick-select" id="emission-quickmenu">
+      <option>Sélectionnez une émission</option>
       {% for emission in emissions -%}
-        <li><a href="{{ path('emission', {'name': emission.slug}) }}">{{ emission.name }}</a></li>
+        <option data-href="{{ path('emission', {'name': emission.slug}) }}">{{ emission.name }}</option>
       {%- endfor %}
-    </ul>
+    </select>
   </div>
 
   <section class="list">
