@@ -66,7 +66,7 @@
           <h2 class="bloc-content-title">
             <a href="{{ path('emission', {'name': entity.slug}) }}" data-clickable-target="true" title="Lien vers l'article">{{ entity.name }}</a>
           </h2>
-          <p>{{ entity.description| striptags | truncate(200, true, "...") | raw }}</p>
+          <p>{{ entity.description| striptags | truncate(140, true, "…") | raw }}</p>
         </div>
       </div>
     </article>
