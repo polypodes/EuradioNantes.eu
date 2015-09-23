@@ -4,6 +4,9 @@ import header from './header/header.js';
 import bloc from './bloc/bloc.js';
 import podcast from './podcast/podcast.js';
 import emission from './emission/emission.js';
+import program from './program/program.js';
+import ecoute from './program/ecoute.js';
+import share from './share/share.js';
 
 ////////////////////////////////////////
 // Dependencies init                  //
@@ -14,7 +17,10 @@ import emission from './emission/emission.js';
   header,
   bloc,
   podcast,
-  emission
+  emission,
+  program,
+  ecoute,
+  share
   // append here your dependencies
 
 ].map(dependency => dependency());

@@ -28,34 +28,4 @@
       }}" class="share-embed-input">
     </div>
   {%- endif %}
-  <script>
-    var shareLinks = document.querySelectorAll('.share-link'),
-        embed = document.getElementById('embed-code')
-    ;
-
-    Array.prototype.forEach.call(shareLinks, function(el, i){
-      el.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.open(
-          this.getAttribute('href'),
-          this.getAttribute('title'),
-          'width=1010,height=495,left=320,top=445'
-        );
-      });
-    });
-
-    if (embed) {
-      // show / hide embed code
-      embed.style.display = 'none';
-      document.getElementById('share-embeded').addEventListener('click', function(e) {
-        e.preventDefault();
-
-        if (embed.style.display == 'none') {
-          embed.style.display = '';
-        } else {
-          embed.style.display = 'none';
-        }
-      });
-    }
-  </script>
 </div>

@@ -33,6 +33,8 @@ function changeLocation(event, $elt) {
 function init() {
   const $clickableElts = selectAll('[data-clickable="true"]');
 
+  if ($clickableElts.lenght === 0) return;
+
   each($clickableElts, ($elt) => {
     $elt.addEventListener('click',
       changeLocation.bind(null, event, $elt),

@@ -91,8 +91,37 @@ function documentReady(callback) {
  */
 function on(elt, callback, ...events) {
   /*eslint-disable */
+  if (!elt) return;
   events.map((event) => elt.addEventListener(event, callback.bind(this, elt)));
   /*eslint-enable */
+}
+
+/**
+ * remove a given css class from an element
+ * @param  {elementHTML} elem element
+ * @param  {string} cn   class name
+ * @return {void}
+ */
+function removeClass(elem, cn) {
+  if (elem.classList) { elem.classList.remove(cn); }
+  else { elem.className = elem.className.replace(new RegExp('(^|\\b)' + cn.split(' ').join('|') + '(\\b|$)', 'gi'), ' '); }
+}
+
+/**
+ * add a given css class on an element
+ * @param  {elementHTML} elem element
+ * @param  {string} cn   class name
+ * @return {void}
+ */
+function addClass(elem, cn) {
+  if (elem.classList)
+    elem.classList.add(cn);
+  else
+    elem.className += ' ' + cn;
+}
+
+function hasClass(elem, cn) {
+  return ( elem.classList && elem.classList.contains(cn) ) || new RegExp('(^| )' + cn + '( |$)', 'gi').test(elem.className);
 }
 
 export default {
@@ -102,5 +131,8 @@ export default {
   on,
   select,
   selectAll,
-  findNode
+  findNode,
+  addClass,
+  removeClass,
+  hasClass
 };

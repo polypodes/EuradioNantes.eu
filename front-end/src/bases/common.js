@@ -6,6 +6,7 @@
 // Requirements                       //
 ////////////////////////////////////////
 // import $ from 'jquery';
+import {selectAll, each} from '../util/util';
 
 ////////////////////////////////////////
 // Helpers & private methods          //
@@ -28,7 +29,19 @@
  * this is a trivial example of function
  */
 function common() {
-  // ...
+  // on air (in header)
+  const elements = selectAll('.player-svg, .player-what');
+
+  if (elements.length > 0) {
+    each(elements, function(el, i){
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (ecoutePath) {
+          window.open(ecoutePath, 'Le direct - Euradionantes','width=1010,height=495,left=320,top=445');
+        }
+      });
+    });
+  }
 }
 
 export default common;

@@ -25,14 +25,7 @@
     {{ include('SiteBundle:Social:links_player.html.twig') }}
   </div>
   <script>
-    var elements = document.querySelectorAll('.player-svg, .player-what');
-    Array.prototype.forEach.call(elements, function(el, i){
-      el.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.open('{{ path('ecoute') }}', 'Le direct - Euradionantes','width=1010,height=495,left=320,top=445');
-
-      });
-    });
-</script>
+    var ecoutePath = '{{ path('ecoute') }}';
+  </script>
 </section>
 
