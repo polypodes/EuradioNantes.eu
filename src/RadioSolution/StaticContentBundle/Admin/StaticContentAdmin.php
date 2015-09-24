@@ -39,7 +39,7 @@ class StaticContentAdmin extends Admin
       ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
       ->add('order_content', 'integer', array('label' => $label))
       ->add('image', 'sonata_type_model_list', array('label' => 'Image'), array('link_parameters' => array('provider' => 'sonata.media.provider.image')))
-      ->add('introduction', 'textarea', array('label' => 'Introduction', 'required' => false))
+      ->add('introduction', 'ckeditor', array('label' => 'Introduction', 'required' => false, 'config_name' => 'mini'))
       ->add('body', 'ckeditor', array('label' => 'Contenu', 'config_name' => 'plus'))
       ->add('categoryStaticContent', 'sonata_type_model', array('label' => 'Catégorie', 'required' => false))
     ;
