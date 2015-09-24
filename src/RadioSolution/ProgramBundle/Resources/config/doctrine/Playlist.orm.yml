@@ -48,7 +48,7 @@ RadioSolution\ProgramBundle\Entity\Playlist:
       targetEntity: Album
       inversedBy: playlists
       joinTable:
-        name: albums_playlists
+        name: music__albums_playlists
         joinColumns:
           playlist_id:
             referencedColumnName: id
