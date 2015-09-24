@@ -38,9 +38,9 @@ parameters:
     bitly_username: your_bitly_username
     bitly_password: your_bitly_password
 
-    social_facebook_url: https://twitter.com/euradionantes
+    social_facebook_url: https://www.facebook.com/pages/EuradioNantes/119060581473600
     social_facebook_app_id: 0123456789
-    social_twitter_url: https://www.facebook.com/pages/EuradioNantes/119060581473600
+    social_twitter_url: https://twitter.com/euradionantes
     social_twitter_username: euradionantes
     social_googleplus_url: https://plus.google.com/104061818216863002695
     social_flickr_url: https://www.flickr.com/photos/euradionantes
