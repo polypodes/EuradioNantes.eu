@@ -39,6 +39,7 @@ DB_USER	    := $(shell if [ -f app/config/parameters.yml ] ; then cat app/config
 DB_PASSWORD := $(shell if [ -f app/config/parameters.yml ] ; then cat app/config/parameters.yml | grep 'database_password' | sed 's/database_password: //' | sed 's/null//' | sed 's/^ *//;s/ *$$//' ; fi)
 DB_NAME     := $(shell if [ -f app/config/parameters.yml ] ; then cat app/config/parameters.yml | grep 'database_name' | sed 's/database_name: //' | sed 's/^ *//;s/ *$$//' ; fi)
 DB_v1DUMPSQL := doc/backups/prod/euradionantes_prod.v1.sql
+DB_v1PARTIALDUMPSQL := doc/backups/prod/euradionantes_prod_partial.v1.sql
 DB_SQLDIR   := doc/upgrade/sql
 DB_SQLQUIET :=  2>/dev/null
 VENDOR_PATH := $(PWD)/vendor
@@ -188,6 +189,29 @@ rePublish:
 	php app/console sonata:page:update-core-routes --site=all
 	php app/console sonata:page:create-snapshots --site=all
 
+mysqlRefresh:
+	$(MAKE) mysqldump
+
+	@echo
+	@echo "Importing remote v1 sql partial backup into a filled db..."
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_v1PARTIALDUMPSQL} ${DB_SQLQUIET}
+
+	@echo
+	@echo "Removing table constraints on v2 tables"
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v1tov2-d.sql #${DB_SQLQUIET}
+
+	@echo
+	@php app/console doctrine:schema:update --force
+
+	@echo
+	@echo "Adapting imported content to v2 database"
+	mysql --user=${DB_USER} --password=${DB_PASSWORD} ${DB_NAME} < ${DB_SQLDIR}/v1tov2-e.sql #${DB_SQLQUIET}
+
+	@echo
+	@php app/console doctrine:schema:update --force
+
+	@echo
+	@echo "Done."
 
 ############################################################################
 # Generic sf2 tasks:
