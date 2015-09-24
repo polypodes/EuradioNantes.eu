@@ -33,16 +33,16 @@ class Program
      * @var RadioSolution\ProgramBundle\Entity\Emission
      */
     private $emission;
-    
+
     private $collision;
 
     public function __construct()
     {
     	$this->time_start = new \DateTime('now');
     	$this->time_stop = new \DateTime('now');
-    
-    }    
-    
+
+    }
+
     /**
      * to string
      *
@@ -50,13 +50,19 @@ class Program
      */
     public function __toString()
     {
-    	return (String)$this->getId();
+        $str = (String) $this->getId();
+        $emission = $this->getEmission();
+        if ($emission && !empty($emission->getName())) {
+            $str = $emission->getName();
+        }
+        $str .= ' - ' . $this->getTimeStart()->format('d/m/Y H:i') . ' - ' . $this->getTimeStop()->format('d/m/Y H:i');
+    	return $str;
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -76,7 +82,7 @@ class Program
     /**
      * Get time_start
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getTimeStart()
     {
@@ -96,7 +102,7 @@ class Program
     /**
      * Get time_stop
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getTimeStop()
     {
@@ -116,7 +122,7 @@ class Program
     /**
      * Get podcast
      *
-     * @return RadioSolution\PodcastBundle\Entity\Podcast 
+     * @return RadioSolution\PodcastBundle\Entity\Podcast
      */
     public function getPodcast()
     {
@@ -136,40 +142,40 @@ class Program
     /**
      * Get emission
      *
-     * @return RadioSolution\ProgramBundle\Entity\Emission 
+     * @return RadioSolution\ProgramBundle\Entity\Emission
      */
     public function getEmission()
     {
         return $this->emission;
     }
-    
+
     public function getNameEmission()
     {
     	return  $this->emission->getName();
     }
-    
+
     public function getDescriptionEmission()
     {
     	return  $this->emission->getDescription();
     }
-    
+
     public function getSlug()
     {
     	return $this->emission->getSlug();
     }
-    
+
     public function getImageEmission()
     {
     	return $this->emission->getMedia();
     }
-    
+
     public function getCollision()
     {
     	return $this->collision;
-    }   
-    
+    }
+
     public function setCollision($collision)
     {
     	$this->collision=$collision;
-    }    
+    }
 }
