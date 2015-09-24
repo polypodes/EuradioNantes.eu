@@ -48,6 +48,11 @@ class Post extends BasePost
 
     protected $relatedPosts;
 
+    public function __toString() {
+        $str = !empty($this->getTitle()) ? $this->getTitle() : 'Titre inconnu';
+        if ($this->getPublicationDateStart()) $str .= ' - ' . $this->getPublicationDateStart()->format('d/m/Y H:i');
+        return $str;
+    }
     /**
      * Get id
      *
