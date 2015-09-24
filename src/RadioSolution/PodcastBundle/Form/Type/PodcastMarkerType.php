@@ -17,7 +17,7 @@ class PodcastMarkerType extends AbstractType
             ->add('start', 'text', array('label' => 'Début'))
             ->add('end', 'text', array('label' => 'Fin'))
             ->add('title', 'text', array('label' => 'Titre'))
-            ->add('text', 'textarea', array('label' => 'Description'))
+            ->add('text', 'textarea', array('label' => 'Description', 'required' => false))
         ;
     }
 
