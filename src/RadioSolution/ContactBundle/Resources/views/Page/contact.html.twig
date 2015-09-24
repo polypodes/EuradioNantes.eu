@@ -18,8 +18,6 @@
 
   {{ entity.body|raw }}
 
-  {{ include('SiteBundle:Social:share.html.twig') }}
-
   <section id="contact-form" class="comment">
     <h3 class="comment-title2">Envoyer une demande de contact</h3>{#'title_leave_comment'|trans({}, 'SonataNewsBundle') #}
 
@@ -133,6 +131,8 @@
 
     {{ form_end(form) }}
   </section>
+
+  {{ include('SiteBundle:Social:share.html.twig') }}
 
 </section>
 
