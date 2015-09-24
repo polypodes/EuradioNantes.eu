@@ -3,7 +3,7 @@
     {% if podcast is defined %}
         {# dump(media) #}
         <div id="podcast-player">
-            <h2>{{ podcast.name }}</h2>
+            {#<h2>{{ podcast.name }}</h2>#}
             {#<audio controls="controls">
                 <source src="{% path podcast.filePodcast, 'reference' %}.ogg" type="audio/ogg" />
                 <source src="{% path podcast.filePodcast, 'reference' %}" type="audio/mp3" />
