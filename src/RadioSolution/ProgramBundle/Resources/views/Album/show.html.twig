@@ -19,10 +19,13 @@
         {{ album.content|raw }}
       </div>
       <ul class="list-unstyled">
+        {% if album.artist -%}
         <li>
           <strong>Artiste</strong> :
           {{ album.artist }}
         </li>
+        {%- endif %}
+        {% if album.label or album.labelId -%}
         <li>
           <strong>Label</strong> :
           {% if album.labelId -%}
@@ -31,13 +34,16 @@
               {{ album.label }}
           {%- endif %}
         </li>
+        {%- endif %}
+        {% if album.releaseDate -%}
         <li>
           <strong>Date de sortie</strong>:
           {{ album.releaseDate|localizeddate('long', 'none', 'fr-FR') }}
         </li>
+        {%- endif %}
+        {% if album.tracks|length > 0 -%}
         <li>
           <strong>Titres</strong>
-          {% if album.tracks|length > 0 %}
           <ol class="list-unstyled track-list">
             {% for track in album.tracks %}
             <li class="track">
@@ -45,8 +51,8 @@
             </li>
             {% endfor %}
           </ol>
-          {% endif %}
         </li>
+        {%- endif %}
       </ul>
     </div>
   </div>
