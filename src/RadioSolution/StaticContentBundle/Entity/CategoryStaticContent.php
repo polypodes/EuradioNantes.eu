@@ -152,7 +152,7 @@ class CategoryStaticContent
      *
      * @param RadioSolution\StaticContentBundle\Entity\CategoryStaticContent $parent
      */
-    public function setParent(\RadioSolution\StaticContentBundle\Entity\CategoryStaticContent $parent)
+    public function setParent(CategoryStaticContent $parent)
     {
         $this->parent = $parent;
     }

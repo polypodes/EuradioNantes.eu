@@ -18,6 +18,7 @@ RadioSolution\StaticContentBundle\Entity\CategoryStaticContent:
     contents:
       targetEntity: StaticContent
       mappedBy: categoryStaticContent
+      cascade: [persist, detach, refresh]
   oneToOne:
     image:
       nullable: true
@@ -30,6 +31,7 @@ RadioSolution\StaticContentBundle\Entity\CategoryStaticContent:
       nullable: true
       default: NULL
       targetEntity: CategoryStaticContent
+      cascade: [persist, detach, refresh, merge]
       joinColumn:
         name: id_parent
         referencedColumnName: id
