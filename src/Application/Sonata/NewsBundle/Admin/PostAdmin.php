@@ -79,7 +79,7 @@ class PostAdmin extends BaseAdmin
                     'required' => false
                 ))
                 ->add('slug',"text", array('required' => false, 'label' => "Slug"))
-                ->add('collection', 'sonata_type_model_list', array('required' => true))
+                ->add('collection', 'sonata_type_model_list', array('required' => true, 'btn_add' => false))
             ->end()
             ->with('Articles associés', array(
                 'class' => 'col-md-4'

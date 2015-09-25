@@ -21,7 +21,8 @@ class EmissionAdmin extends Admin
         ->add('name', null, array('label' => 'Nom'))
         ->add('description', 'ckeditor', array('config_name' => 'plus'))
         //->add('theme', 'sonata_type_model', array('label' => 'Thème', 'required' => false))
-        ->add('collection', 'sonata_type_model', array('label' => 'Catégorie', 'required' => true), array('context' => 'emission')) // sonata_category_selector
+        ->add('collection', 'sonata_type_model_list', array('required' => true, 'btn_add' => false))
+        //->add('collection', 'sonata_type_model', array('label' => 'Catégorie', 'required' => true), array('context' => 'emission')) // sonata_category_selector
         ->add('group', 'sonata_type_model', array('label' => 'Groupe', 'required' => false))
         ->add('media', 'sonata_type_model_list', array('label' => 'Média', 'required' => false), array('link_parameters' => array('provider'=>'sonata.media.provider.image')))
         ->add('archive', null, array('required' => false))
