@@ -93,7 +93,7 @@ RadioSolution\ProgramBundle\Entity\Album:
     playlists:
       targetEntity: Playlist
       mappedBy: albums
-      cascade: [persist, detach, merge, refresh]
+      cascade: [persist, detach, refresh]
   manyToOne:
     labelId:
       targetEntity: Label

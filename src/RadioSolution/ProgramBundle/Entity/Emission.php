@@ -56,18 +56,18 @@ class Emission
      */
     private $diffusion_stop;
 
-        /**
-     * @var RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast
+    /**
+     * @var ArrayCollection
      */
     private $ExceptionalBroadcast;
 
     /**
-     * @var RadioSolution\ProgramBundle\Entity\WeeklyBroadcast
+     * @var ArrayCollection
      */
     private $WeeklyBroadcast;
 
     /**
-     * @var RadioSolution\ProgramBundle\Entity\Program
+     * @var ArrayCollection
      */
     private $programs;
 
@@ -233,6 +233,14 @@ class Emission
     public function addExceptionalBroadcast(\RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast $exceptionalBroadcast)
     {
         $this->ExceptionalBroadcast[] = $exceptionalBroadcast;
+        return $this;
+    }
+
+    public function  removeExceptionalBroadcast(\RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast $exceptionalBroadcast)
+    {
+        $exceptionalBroadcast->setEmission(null);
+        $this->ExceptionalBroadcast->removeElement($exceptionalBroadcast);
+        return $this;
     }
 
     /**
@@ -264,6 +272,14 @@ class Emission
     public function addWeeklyBroadcast(\RadioSolution\ProgramBundle\Entity\WeeklyBroadcast $weeklyBroadcast)
     {
         $this->WeeklyBroadcast[] = $weeklyBroadcast;
+        return $this;
+    }
+
+    public function removeWeeklyBroadcast(\RadioSolution\ProgramBundle\Entity\WeeklyBroadcast $weeklyBroadcast)
+    {
+        $weeklyBroadcast->setEmission(null);
+        $this->WeeklyBroadcast->removeElement($weeklyBroadcast);
+        return $this;
     }
 
     /**

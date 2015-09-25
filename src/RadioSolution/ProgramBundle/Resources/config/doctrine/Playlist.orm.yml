@@ -47,6 +47,7 @@ RadioSolution\ProgramBundle\Entity\Playlist:
     albums:
       targetEntity: Album
       inversedBy: playlists
+      cascade: [persist, detach, refresh]
       joinTable:
         name: music__albums_playlists
         joinColumns:

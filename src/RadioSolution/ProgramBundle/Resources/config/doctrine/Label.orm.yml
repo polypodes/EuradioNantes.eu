@@ -43,7 +43,7 @@ RadioSolution\ProgramBundle\Entity\Label:
   oneToMany:
     albums:
       targetEntity: Album
-      cascade: [all]
+      cascade: [persist, detach]
       mappedBy: labelId
 
   manyToOne:

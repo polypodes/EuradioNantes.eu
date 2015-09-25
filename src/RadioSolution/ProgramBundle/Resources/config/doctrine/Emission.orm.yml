@@ -51,10 +51,12 @@ RadioSolution\ProgramBundle\Entity\Emission:
       targetEntity: ExceptionalBroadcast
       cascade: [all]
       mappedBy: Emission
+      orphanRemoval: true
     WeeklyBroadcast:
       targetEntity: WeeklyBroadcast
       cascade: [all]
       mappedBy: Emission
+      orphanRemoval: true
     programs:
       targetEntity: Program
       #cascade: [persist]
