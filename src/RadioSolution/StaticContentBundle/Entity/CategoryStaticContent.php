@@ -4,6 +4,7 @@ namespace RadioSolution\StaticContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\ClassificationBundle\Model\Tag as Tag;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * RadioSolution\StaticContentBundle\Entity\CategoryStaticContent
@@ -24,6 +25,32 @@ class CategoryStaticContent
      * @var string $body
      */
     private $body;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $contents;
+
+     /**
+     * @var RadioSolution\StaticContentBundle\Entity\CategoryStaticContent
+     */
+    private $parent;
+
+    /**
+     * @var string $slug
+     */
+    private $slug;
+
+    /**
+     * @var Application\Sonata\MediaBundle\Entity\Media
+     */
+    private $image;
+
+
+    public function __construct()
+    {
+        $this->contents = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -79,11 +106,6 @@ class CategoryStaticContent
     {
         return $this->body;
     }
-    /**
-     * @var Application\Sonata\MediaBundle\Entity\Media
-     */
-    private $image;
-
 
     /**
      * Set image
@@ -104,11 +126,6 @@ class CategoryStaticContent
     {
         return $this->image;
     }
-    /**
-     * @var string $slug
-     */
-    private $slug;
-
 
     /**
      * Set slug
@@ -129,11 +146,6 @@ class CategoryStaticContent
     {
         return $this->slug;
     }
-    /**
-     * @var RadioSolution\StaticContentBundle\Entity\CategoryStaticContent
-     */
-    private $parent;
-
 
     /**
      * Set parent
@@ -154,4 +166,22 @@ class CategoryStaticContent
     {
         return $this->parent;
     }
+
+    public function getContents()
+    {
+        return $this->contents;
+    }
+
+    public function addContent($content)
+    {
+        $this->contents[] = $content;
+        return $this;
+    }
+
+    public function removeContent($content)
+    {
+        $this->contents->removeElement($content);
+        return $this;
+    }
+
 }

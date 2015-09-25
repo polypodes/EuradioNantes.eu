@@ -15,7 +15,7 @@ RadioSolution\StaticContentBundle\Entity\CategoryStaticContent:
     slug:
       type: string
   OneToMany:
-    staticContent:
+    contents:
       targetEntity: StaticContent
       mappedBy: categoryStaticContent
   oneToOne:

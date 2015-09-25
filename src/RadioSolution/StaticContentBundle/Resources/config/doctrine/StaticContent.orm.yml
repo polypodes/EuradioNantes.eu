@@ -35,7 +35,7 @@ RadioSolution\StaticContentBundle\Entity\StaticContent:
   manyToOne:
     categoryStaticContent:
       targetEntity: CategoryStaticContent
-      inversedBy: staticContent
+      #inversedBy: contents
       joinColumn:
         name: id_category
         referencedColumnName: id
