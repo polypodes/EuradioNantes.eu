@@ -78,7 +78,7 @@ class PostAdmin extends BaseAdmin
                     'multiple' => 'true',
                     'required' => false
                 ))
-                ->add('slug',"text", array('required' => false, 'label' => "Slug"))
+                ->add('slug', null, array('required' => false, 'label' => 'Titre URL'))
                 ->add('collection', 'sonata_type_model_list', array('required' => true, 'btn_add' => false))
             ->end()
             ->with('Articles associés', array(
@@ -102,7 +102,7 @@ class PostAdmin extends BaseAdmin
         $listMapper
             ->add('custom', 'string', array('template' => 'SonataNewsBundle:Admin:list_post_custom.html.twig', 'label' => 'Post'))
             ->add('type', null, array('label' => 'Type', 'values' => $this->choices))
-            ->add('commentsEnabled', null, array('editable' => true))
+            ->add('enabled', null, array('editable' => true))
             ->add('publicationDateStart')
         ;
     }

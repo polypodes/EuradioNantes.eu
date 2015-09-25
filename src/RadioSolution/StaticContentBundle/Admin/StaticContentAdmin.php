@@ -37,11 +37,11 @@ class StaticContentAdmin extends Admin
     $formMapper
       ->add('name', null, array('label' => 'Nom'))
       ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
+      ->add('categoryStaticContent', 'sonata_type_model', array('label' => 'Catégorie', 'required' => false))
       ->add('order_content', 'integer', array('label' => $label))
-      ->add('image', 'sonata_type_model_list', array('label' => 'Image'), array('link_parameters' => array('provider' => 'sonata.media.provider.image')))
       ->add('introduction', 'ckeditor', array('label' => 'Introduction', 'required' => false, 'config_name' => 'mini'))
       ->add('body', 'ckeditor', array('label' => 'Contenu', 'config_name' => 'plus'))
-      ->add('categoryStaticContent', 'sonata_type_model', array('label' => 'Catégorie', 'required' => false))
+      ->add('image', 'sonata_type_model_list', array('label' => 'Image'), array('link_parameters' => array('provider' => 'sonata.media.provider.image')))
     ;
     //$formMapper->setDefaults(array('order_content'=>$maxValue));
   }
@@ -58,10 +58,10 @@ class StaticContentAdmin extends Admin
   {
     $listMapper
       ->addIdentifier('name', null, array('label' => 'Nom'))
-      ->add('order_content', null, array('label' => 'Ordre'))
+      //->add('order_content', null, array('label' => 'Ordre'))
       ->add('categoryStaticContent', null, array('label' => 'Catégorie'))
       ->add('URL', 'string', array('label' => 'URL', 'template' => 'StaticContentBundle:StaticContentAdmin:list_URL.html.twig'))
-    ;																//RadioSolution\StaticContentBundle\Entity\StaticContent
+    ;
   }
 
   public function validate(ErrorElement $errorElement, $object)
