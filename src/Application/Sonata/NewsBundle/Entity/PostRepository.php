@@ -15,18 +15,16 @@ use Sonata\NewsBundle\Entity\BasePostRepository;
 class PostRepository extends BasePostRepository
 {
 
-  public function getPostsByType($type = 'actualite'){
+  public function getPostsByType($type = null){
     $query = $this->createQueryBuilder('p')
         ->where('p.enabled = 1')
-        ->andwhere('p.type = :category')
-        ->setParameter('category', $type)
         ->addOrderBy('p.publicationDateStart', 'DESC')
         //->setMaxResults($limit)
     ;
-    if ($type == 'actualite') { //for old records with no type
+    if ($type) {
         $query
             ->orWhere('p.type = :type')
-            ->setParameter('type', "")
+            ->setParameter('type', $type)
         ;
     }
     return $query;

@@ -13,14 +13,25 @@ class PostController extends BaseController
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem('Actualités');
 
-        $repo = $query = $this
+        $query = $this
             ->getDoctrine()
             ->getRepository('ApplicationSonataNewsBundle:Post')
+            ->createQueryBuilder('p')
+            ->where('p.enabled = 1')
+            ->addOrderBy('p.publicationDateStart', 'DESC')
         ;
+
         if (!empty($_GET['collection'])) {
-            $query = $repo->getPostsByCollection($_GET['collection']);
-        } else {
-            $query = $repo->getPostsByType('actualite');
+            $query = $query
+                ->andWhere('p.collection = :collection')
+                ->setParameter('collection', $_GET['collection'])
+            ;
+        }
+        if (!empty($_GET['type'])) {
+            $query = $query
+                ->andWhere('p.type = :type')
+                ->setParameter('type', $_GET['type'])
+            ;
         }
 
         $paginator = $this->get('knp_paginator');
