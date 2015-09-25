@@ -128,36 +128,41 @@ class ProgramController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $url = $this->container->getParameter('nowPlayingUrl');
-        $file = fopen($url, 'r');
-        $content = fgets($file);
 
-        if ($content == "EuradioNantes - La diversite europeenne au creux de l'oreille") {
-            $program = $em
-                ->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop > :now AND p.time_start >= :now AND p.time_start < p.time_stop  ORDER BY p.time_start ASC, p.time_stop DESC")
-                ->setParameters(array('now' => new \Datetime()))
-                ->setMaxResults(1)
-                ->getOneOrNullResult()
-            ;
-            //var_dump($result);
-            if ($program) {
-                $content = $program->getEmission()->getName();
-            }
+        try {
+            $file = fopen($url, 'r');
+            $content = fgets($file);
 
-        } else {
-            $broadcast = $em
-                ->createQuery("SELECT b FROM ProgramBundle:Broadcast b WHERE b.broadcasted > :mindate ORDER BY b.broadcasted DESC")
-                ->setParameters(array('mindate' => new \Datetime('-1 hour')))
-                ->setMaxResults(1)
-                ->getOneOrNullResult()
-            ;
-            //var_dump($result);
-            if ($broadcast) {
-                if ($track = $broadcast->getTrack()) {
-                    $content = $track->getArtist() . ' - ' . $track->getTitle() . ' - ' . $track->getAlbum()->getTitle();
-                } else {
-                    $content = $broadcast->getTerms();
+            if ($content == "EuradioNantes - La diversite europeenne au creux de l'oreille") {
+                $program = $em
+                    ->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop > :now AND p.time_start >= :now AND p.time_start < p.time_stop  ORDER BY p.time_start ASC, p.time_stop DESC")
+                    ->setParameters(array('now' => new \Datetime()))
+                    ->setMaxResults(1)
+                    ->getOneOrNullResult()
+                ;
+                //var_dump($result);
+                if ($program) {
+                    $content = $program->getEmission()->getName();
+                }
+
+            } else {
+                $broadcast = $em
+                    ->createQuery("SELECT b FROM ProgramBundle:Broadcast b WHERE b.broadcasted > :mindate ORDER BY b.broadcasted DESC")
+                    ->setParameters(array('mindate' => new \Datetime('-1 hour')))
+                    ->setMaxResults(1)
+                    ->getOneOrNullResult()
+                ;
+                //var_dump($result);
+                if ($broadcast) {
+                    if ($track = $broadcast->getTrack()) {
+                        $content = $track->getArtist() . ' - ' . $track->getTitle() . ' - ' . $track->getAlbum()->getTitle();
+                    } else {
+                        $content = $broadcast->getTerms();
+                    }
                 }
             }
+        } catch (\Exception $e) {
+            $content = 'Information indisponible';
         }
 
         $onair = $content;
