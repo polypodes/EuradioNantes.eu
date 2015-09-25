@@ -49,7 +49,7 @@ class AlbumAdmin extends Admin
             ->with($this->trans('Album'))->end()
             ->with($this->trans('Description'))->end()
             ->with($this->trans('Tracks'))->end()
-            ->with($this->trans('Playlists'))->end()
+            //->with($this->trans('Playlists'))->end()
         ;
 
         $formMapper
@@ -59,6 +59,7 @@ class AlbumAdmin extends Admin
                 ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
                 ->add('artist', null, array('label' => 'Artiste', 'required' => false))
                 ->add('label', null, array('label' => 'Label', 'required' => false))
+                ->add('labelId', null, array('label' => 'Association à un label du mois', 'required' => false))
                 ->add('manufacturer', null, array('label' => 'Production', 'required' => false))
                 ->add('publisher', null, array('label' => 'Édition', 'required' => false))
                 ->add('releaseDate', 'sonata_type_date_picker', array('label' => 'Date de sortie', 'required' => false))
@@ -104,11 +105,11 @@ class AlbumAdmin extends Admin
                     )
                 )
                 */
-                ->add('tracks', 'sonata_type_model_autocomplete', array('property'=>'title','multiple'=>true,'required'=>false))
+                ->add('tracks', 'sonata_type_collection', array('label' => 'Pistes', 'required'=>false, 'btn_add' => 'Ajouter une piste'), array('edit' => 'inline', 'inline' => 'table', 'sortable' => 'trackSequence'))
             ->end()
-            ->with($this->trans('Playlists'))
-                ->add('playlists', 'sonata_type_model_autocomplete', array('property'=>'title','multiple'=>true,'required'=>false))
-            ->end()
+            //->with($this->trans('Playlists'))
+            //    ->add('playlists', 'sonata_type_model_autocomplete', array('property'=>'title','multiple'=>true,'required'=>false))
+            //->end()
         ;
     }
 

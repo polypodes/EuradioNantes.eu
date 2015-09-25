@@ -454,6 +454,16 @@ class Album
      */
     public function addTrack(Track $track)
     {
+        $track
+            ->setAlbum($this)
+            ->setArtist($this->getArtist())
+            ->setLabel($this->getLabel())
+            ->setManufacturer($this->getManufacturer())
+            ->setPublisher($this->getPublisher())
+            ->setReleaseDate($this->getReleaseDate())
+            ->setStudio($this->getStudio())
+        ;
+
         $this->tracks[] = $track;
 
         return $this;

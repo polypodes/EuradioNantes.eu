@@ -83,6 +83,7 @@ RadioSolution\ProgramBundle\Entity\Album:
       nullable: true
       targetEntity: Track
       mappedBy: album
+      cascade: [all]
       options:
         orderBy:
           trackSequence: ASC
@@ -92,6 +93,7 @@ RadioSolution\ProgramBundle\Entity\Album:
     playlists:
       targetEntity: Playlist
       mappedBy: albums
+      cascade: [persist, detach, merge, refresh]
   manyToOne:
     labelId:
       targetEntity: Label
