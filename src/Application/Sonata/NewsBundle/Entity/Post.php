@@ -48,6 +48,8 @@ class Post extends BasePost
 
     protected $relatedPosts;
 
+    protected $position;
+
     public function __toString() {
         $str = !empty($this->getTitle()) ? $this->getTitle() : 'Titre inconnu';
         if ($this->getPublicationDateStart()) $str .= ' - ' . $this->getPublicationDateStart()->format('d/m/Y H:i');
@@ -194,6 +196,17 @@ class Post extends BasePost
     {
         $this->type = $type;
 
+        return $this;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
         return $this;
     }
 }

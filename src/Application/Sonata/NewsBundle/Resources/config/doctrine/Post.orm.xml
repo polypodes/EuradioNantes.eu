@@ -17,16 +17,17 @@
             <generator strategy="AUTO"/>
         </id>
         <field name="short_title" type="text" column="short_title" nullable="true"/>
-        <field name="type"   type="string"  column="type"    default="actualite" nullable="false"/>
-        <one-to-one field="podcast" target-entity="RadioSolution\PodcastBundle\Entity\Podcast" mapped-by='post' />
-        <many-to-one field="image" target-entity="Application\Sonata\MediaBundle\Entity\Media" >
+        <field name="type"   type="string"  column="type" default="actualite" nullable="false"/>
+        <field name="position" type="integer" column="position"/>
+        <one-to-one field="podcast" target-entity="RadioSolution\PodcastBundle\Entity\Podcast" mapped-by='post'/>
+        <many-to-one field="image" target-entity="Application\Sonata\MediaBundle\Entity\Media">
             <join-column name="image_id" referenced-column-name="id" nullable="true"/>
         </many-to-one>
 
         <many-to-many field="relatedPosts" target-entity="Application\Sonata\NewsBundle\Entity\Post">
             <join-table name="news_related_posts">
                 <join-columns>
-                    <join-column name="post_id" referenced-column-name="id" nullable="false" unique="false" />
+                    <join-column name="post_id" referenced-column-name="id" nullable="false" unique="false"/>
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="related_post_id" referenced-column-name="id" nullable="false"/>

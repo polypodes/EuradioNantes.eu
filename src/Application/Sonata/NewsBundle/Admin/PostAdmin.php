@@ -21,8 +21,8 @@ class PostAdmin extends BaseAdmin
 {
 
     protected $choices = array(
-        "actualite" => "actualité",
-        "podcast" => "podcast"
+        'actualite' => 'actualité',
+        'podcast' => 'podcast'
     );
 
     protected $datagridValues = array(
@@ -58,6 +58,7 @@ class PostAdmin extends BaseAdmin
                     'class' => 'col-md-4'
                 ))
                 ->add('enabled', null, array('required' => false))
+                ->add('position', null, array('label' => 'Ordre d’importance sur la page d’accueil'))
                 ->add('image', 'sonata_type_model_list', array('required' => false), array(
                     'link_parameters' => array(
                         'context' => 'news'
@@ -73,13 +74,13 @@ class PostAdmin extends BaseAdmin
             ->with('Classification', array(
                 'class' => 'col-md-4'
                 ))
+                ->add('slug', null, array('required' => false, 'label' => 'Titre URL'))
+                ->add('collection', 'sonata_type_model_list', array('required' => true, 'btn_add' => false))
                 ->add('tags', 'sonata_type_model_autocomplete', array(
                     'property' => 'name',
                     'multiple' => 'true',
                     'required' => false
                 ))
-                ->add('slug', null, array('required' => false, 'label' => 'Titre URL'))
-                ->add('collection', 'sonata_type_model_list', array('required' => true, 'btn_add' => false))
             ->end()
             ->with('Articles associés', array(
                 'class' => 'col-md-4'
@@ -103,6 +104,7 @@ class PostAdmin extends BaseAdmin
             ->add('custom', 'string', array('template' => 'SonataNewsBundle:Admin:list_post_custom.html.twig', 'label' => 'Post'))
             ->add('type', null, array('label' => 'Type', 'values' => $this->choices))
             ->add('enabled', null, array('editable' => true))
+            ->add('position', null, array('editable' => true))
             ->add('publicationDateStart')
         ;
     }
