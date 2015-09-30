@@ -99,6 +99,16 @@ In a 10-seconds infinite loop: (CTRL+C to stop it)
 $ make tracks
 ```
 
+## Run cron tasks
+
+```bash
+# Euradionantes broadcast
+* * * * * php /path/to/euradionantes/app/console euradionantes:track > /dev/null
+
+# Euradionantes purge old broadcast entries
+0 1 * * * php /path/to/euradionantes/app/console euradionantes:broadcast:purge > /dev/null
+```
+
 ## License
 
 MIT Licensed.
