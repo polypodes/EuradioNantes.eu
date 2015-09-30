@@ -5,10 +5,12 @@
 
   <div class="grille-pagination">
   	{% if start == now %}
-		<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ hier</a>
+		  <a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ hier</a>
+		{% elseif start > now|date_modify('-7 days') %}
+		  <a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d')}}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ Jour précédent</a>
 		{% else %}
-		<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d')}}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ Jour précédent</a>
-		{% endif %}
+      <span class="grille-pagination-prev"></span>
+    {% endif %}
 
 		<span class="grille-pagination-choose"></span>
 
@@ -57,10 +59,12 @@
 
   <div class="grille-pagination">
   	{% if start == now %}
-		<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ hier</a>
+		  <a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d') }}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ hier</a>
+		{% elseif start > now|date_modify('-7 days') %}
+		  <a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d')}}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ Jour précédent</a>
 		{% else %}
-		<a href="{{ path('broadcast') }}?day={{ start|date_modify('-1 day')|date('Y-m-d')}}" id="prev_day" title="afficher la journée précédente" class="grille-pagination-prev">‹ Jour précédent</a>
-		{% endif %}
+      <span class="grille-pagination-prev"></span>
+    {% endif %}
 
 		<span class="grille-pagination-choose"></span>
 
