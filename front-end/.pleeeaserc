@@ -1,8 +1,7 @@
 {
   "sass": true,
-  "autoprefixer": true,
   "in": ["./src/index.scss"],
   "out": "./dist/assets/main.css",
   "sourcemaps": false,
-  "browsers": ["ie 9", "Safari 6", "Chrome 30", "Firefox 25"]
+  "browsers": ["ie 9", "safari 6", "chrome 30", "firefox > 25"]
 }
