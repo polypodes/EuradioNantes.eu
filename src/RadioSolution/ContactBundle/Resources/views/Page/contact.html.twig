@@ -40,7 +40,7 @@
     <form action="{{ path('contact') }}#contact-form" method="post" {{ form_enctype(form) }}>
       <div class="comment-textarea">
         {{ form_label(form.recipient, 'Destinataire *', {'label_attr': {'class': 'comment-label required'}}) }}
-        {{ form_widget(form.recipient) }}
+        {{ form_widget(form.recipient, {'attr': {'class': 'filter-select'}}) }}
         {% if form.recipient.vars.errors|length > 0 %}
           <small class="comment-errors">
             {% for i, error in form.recipient.vars.errors -%}
