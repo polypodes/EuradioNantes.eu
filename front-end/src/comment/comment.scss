@@ -149,6 +149,10 @@
       padding-top: 22px;
       padding-left: 22px;
     }
+
+    &-inputs-contact {
+      margin-top: -174px;
+    }
   }
 }
 
@@ -163,10 +167,6 @@
       @include make-md-column(4, 0);
       padding-top: 22px;
       padding-left: 22px;
-    }
-
-    &-inputs-contact {
-      margin-top: -174px;
     }
   }
 }

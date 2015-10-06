@@ -2796,6 +2796,10 @@ textarea {
       float: left;
       width: 41.66667%; } }
 
+@media (min-width: 992px) {
+  .comment-inputs-contact {
+    margin-top: -174px; } }
+
 @media (min-width: 1200px) {
   .comment-textarea {
     position: relative;
@@ -2819,10 +2823,6 @@ textarea {
     .comment-inputs {
       float: left;
       width: 33.33333%; } }
-
-@media (min-width: 1200px) {
-  .comment-inputs-contact {
-    margin-top: -174px; } }
 
 .bloc-newsletter {
   font-family: 'Open Sans', arial, sans-serif;
