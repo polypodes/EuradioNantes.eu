@@ -99,9 +99,8 @@
 <aside class="content-aside">
   <div class="content-aside-inner">
     {{ render(controller('SonataNewsBundle:Post:getAsidePosts')) }}
-
-    {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
   </div>
+  {{ render(controller('SiteBundle:Newsletter:subscribe')) }}
 </aside>
 <script>
   var dayNumber = {{  weekNumber == "now"|date('W') ? "now"|date('N') - 1 : 0 }};
