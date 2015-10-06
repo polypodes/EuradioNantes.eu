@@ -2820,6 +2820,10 @@ textarea {
       float: left;
       width: 33.33333%; } }
 
+@media (min-width: 1200px) {
+  .comment-inputs-contact {
+    margin-top: -174px; } }
+
 .bloc-newsletter {
   font-family: 'Open Sans', arial, sans-serif;
   font-weight: 700;
