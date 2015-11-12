@@ -14,15 +14,9 @@ var config = {
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({minimize: true})
+  ]
 };
-
-// minfiying if builded in production
-if (process.env.NODE_ENV === 'production') {
-  var options = {minimize: true};
-  var uglify = new webpack.optimize.UglifyJsPlugin(options);
-
-  config.plugins.push(uglify);
-}
 
 module.exports = config;

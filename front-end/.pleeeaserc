@@ -3,5 +3,6 @@
   "in": ["./src/index.scss"],
   "out": "./dist/assets/main.css",
   "sourcemaps": false,
+  "minifier": true,
   "browsers": ["ie 9", "safari 6", "chrome 30", "firefox > 25"]
 }
