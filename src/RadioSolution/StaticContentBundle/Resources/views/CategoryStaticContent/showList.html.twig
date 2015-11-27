@@ -20,7 +20,7 @@
     {% for entity in entities -%}
       <div class="podcast-item">
         <h3 class="podcast-item-title"><a href="{{ path('static_content', {'slug': entity.slug}) }}">{{ entity.name }}</a></h3>
-        <p class="podcast-item-text">{{ entity.introduction | truncate(270, true, "…") }}</p>
+        <p class="podcast-item-text">{{ entity.introduction | striptags | raw }}</p>
         {#<span class="podcast-item-date">{{ entity.realtimestart|format_datetime("dd MMM Y H'h'mm", 'fr', 'Europe/Paris') }}</span>#}
       </div>
 
