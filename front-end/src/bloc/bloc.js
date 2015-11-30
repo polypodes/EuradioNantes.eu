@@ -15,7 +15,7 @@ import {selectAll, each, on} from '../util/util';
  * common helper function example
  * this is a trivial example
  */
-function changeLocation(event, $elt) {
+function changeLocation($elt) {
   const $url = $elt
     .querySelector('[data-clickable-target="true"]');
   const path = $url.getAttribute('href');
@@ -37,7 +37,7 @@ function init() {
 
   each($clickableElts, ($elt) => {
     $elt.addEventListener('click',
-      changeLocation.bind(null, event, $elt),
+      changeLocation.bind(null, $elt),
     'true');
   });
 }
