@@ -70,9 +70,9 @@ class PlaylistAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title')
-            ->add('featuredFrom')
-            ->add('featuredTo')
+            ->add('title', null, array('label' => 'Titre'))
+            ->add('featuredFrom', null, array('label' => 'Album du mois (début)'))
+            ->add('featuredTo', null, array('label' => 'Album du mois (fin)'))
         ;
     }
 

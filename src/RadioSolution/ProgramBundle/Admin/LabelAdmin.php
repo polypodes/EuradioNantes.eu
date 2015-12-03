@@ -40,9 +40,9 @@ class LabelAdmin extends Admin
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
   {
     $datagridMapper
-      ->add('id')
-      ->add('title')
-      ->add('published')
+      ->add('title', null, array('label' => 'Titre'))
+      ->add('featuredFrom', null, array('label' => 'Album du mois (début)'))
+      ->add('published', null, array('label' => 'Publié'))
     ;
   }
 
