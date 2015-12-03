@@ -41,7 +41,19 @@ class MediaAdmin extends BaseMediaAdmin
         //parent::configureDatagridFilters($datagridMapper);
 
         $datagridMapper
-            ->add('providerName')
+            ->add('name', null, array('label' => 'Nom'))
+            ->add('providerName'/*, 'doctrine_orm_choice', array( //'doctrine_orm_choice' //'doctrine_orm_model_autocomplete'
+                'label' => 'Type',
+                //'property' => '',
+                'choices' => array(
+                    'sonata.media.provider.image' => 'image',
+                    'sonata.media.provider.file' => 'document',
+                    'sonata.media.provider.podcast' => 'podcast',
+                    'sonata.media.provider.youtube' => 'Youtube',
+                    'sonata.media.provider.dailymotion' => 'DailyMotion',
+                )
+            )*/)
+            ->add('enabled', null, array('label' => 'Activé'))
         ;
     }
 }
