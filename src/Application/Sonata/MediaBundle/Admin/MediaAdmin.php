@@ -15,26 +15,10 @@ use Sonata\MediaBundle\Admin\BaseMediaAdmin as BaseMediaAdmin;
 
 class MediaAdmin extends BaseMediaAdmin
 {
-
-    /**
-     * {@inheritdoc}
-     */
-    //protected function configureListFields(ListMapper $listMapper)
-    //{
-    //    $listMapper
-    //        ->addIdentifier('name')
-    //        ->add('description')
-    //        ->add('enabled')
-    //        ->add('size')
-    //        ->add('_action', 'actions', array(
-    //            'actions' => array(
-    //                'view' => array(),
-    //                'edit' => array(),
-    //                'delete' => array(),
-    //            )
-    //        ))
-    //    ;
-    //}
+    protected $datagridValues = array(
+        '_sort_order' => 'DESC', // sort direction
+        '_sort_by' => 'createdAt' // field name
+    );
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
