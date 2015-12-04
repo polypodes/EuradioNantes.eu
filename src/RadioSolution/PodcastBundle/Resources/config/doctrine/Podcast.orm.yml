@@ -23,6 +23,7 @@ RadioSolution\PodcastBundle\Entity\Podcast:
   oneToOne:
     filePodcast:
       targetEntity: Application\Sonata\MediaBundle\Entity\Media
+      cascade: [all]
       joinColumn:
         name: id_media_podcast
         referencedColumnName: id

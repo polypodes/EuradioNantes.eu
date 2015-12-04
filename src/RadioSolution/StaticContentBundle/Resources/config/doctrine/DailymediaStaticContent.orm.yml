@@ -21,3 +21,4 @@ RadioSolution\StaticContentBundle\Entity\DailymediaStaticContent:
       joinColumn:
         name: id_image
         referencedColumnName: id
+        onDelete: "SET NULL"

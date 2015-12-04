@@ -29,6 +29,7 @@ RadioSolution\MenuBundle\Entity\Item:
       joinColumn:
         name: id_parent
         referencedColumnName: id
+        onDelete: "SET NULL"
   OneToMany:
     children:
       targetEntity: Item

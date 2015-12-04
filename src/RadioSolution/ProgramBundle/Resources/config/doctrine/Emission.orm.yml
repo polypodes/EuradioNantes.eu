@@ -46,6 +46,7 @@ RadioSolution\ProgramBundle\Entity\Emission:
       joinColumn:
         name: id_media
         referencedColumnName: id
+        onDelete: "SET NULL"
   oneToMany:
     ExceptionalBroadcast:
       targetEntity: ExceptionalBroadcast

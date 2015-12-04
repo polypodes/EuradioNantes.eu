@@ -109,3 +109,4 @@ RadioSolution\ProgramBundle\Entity\Album:
       joinColumn:
         name: image
         referencedColumnName: id
+        onDelete: "SET NULL"

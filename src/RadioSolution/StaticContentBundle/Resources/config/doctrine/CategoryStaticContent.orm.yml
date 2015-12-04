@@ -26,6 +26,7 @@ RadioSolution\StaticContentBundle\Entity\CategoryStaticContent:
       joinColumn:
         name: id_image
         referencedColumnName: id
+        onDelete: "SET NULL"
   manyToOne:
     parent:
       nullable: true
@@ -35,3 +36,4 @@ RadioSolution\StaticContentBundle\Entity\CategoryStaticContent:
       joinColumn:
         name: id_parent
         referencedColumnName: id
+        onDelete: "SET NULL"
