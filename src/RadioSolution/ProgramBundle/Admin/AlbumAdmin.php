@@ -25,7 +25,7 @@ class AlbumAdmin extends Admin
 {
     protected $datagridValues = array(
         '_sort_order' => 'DESC', // sort direction
-        '_sort_by' => 'featuredFrom' // field name
+        '_sort_by' => 'createdAt' // field name
     );
 
     protected function configureFormFields(FormMapper $formMapper)
