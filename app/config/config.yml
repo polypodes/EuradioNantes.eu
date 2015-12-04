@@ -297,8 +297,8 @@ mremi_url_shortener:
             username:            %bitly_username%
             password:            %bitly_password%
             options:
-                connect_timeout: 1
-                timeout:         1
+                connect_timeout: 3
+                timeout:         10
 
         #google:
         #    enabled:             true
