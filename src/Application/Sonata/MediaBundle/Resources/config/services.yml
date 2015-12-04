@@ -11,4 +11,4 @@ services:
             - @sonata.media.pool
             - @sonata.classification.manager.category
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: Médias}
+            - {name: sonata.admin, manager_type: orm, group: sonata_media, label: media, label_catalogue: "%sonata.media.admin.media.translation_domain%" }
