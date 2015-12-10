@@ -13,6 +13,11 @@ use RadioSolution\ProgramBundle\Entity\WeeklyBroadcast;
 
 class EmissionAdmin extends Admin
 {
+  protected $datagridValues = array(
+    '_sort_order' => 'ASC', // sort direction
+    '_sort_by' => 'name' // field name
+  );
+
   protected function configureFormFields(FormMapper $formMapper)
   {
 
@@ -32,7 +37,7 @@ class EmissionAdmin extends Admin
         ->add('diffusion_stop','sonata_type_date_picker', array('label' => 'Date d’arrêt de diffusion'))
         ->add('ExceptionalBroadcast', 'sonata_type_collection', array('label' => 'Diffusion exceptionnelle', 'required' => false, 'by_reference' =>true), array(
           'edit' => 'inline',
-			    'inline' => 'table',
+          'inline' => 'table',
         ))
         ->add('WeeklyBroadcast', 'sonata_type_collection', array('label' => 'Diffusion hebdomadaire', 'required' => false, 'by_reference' =>true), array(
           'edit' => 'inline',
@@ -79,72 +84,112 @@ class EmissionAdmin extends Admin
 
   public function validate(ErrorElement $errorElement, $object)
   {
-  	$timeStampDay=3600*24;
-  	$timeStampWeek=$timeStampDay*7;
+    $timeStampDay = 3600*24;
+    $timeStampWeek = $timeStampDay*7;
 
-  	$object->setDiffusionStart();
+    $object->setDiffusionStart();
 
-  	$newDate=new \DateTime(null,new \DateTimeZone('GMT'));
-  	$newDate2=new \DateTime(null,new \DateTimeZone('GMT'));
-  	$now=new \DateTime('tomorrow');
-  	$now->setTime('00','00');
-  	$q=$this->createQuery()->delete('ProgramBundle:Program','p')
-  	->where('p.emission = :id_emission AND p.time_start >= :now')
-  	->setParameters(array('id_emission'=>(String)$object->getId(),'now'=>$now));
+    $now = new \DateTime('tomorrow');
+    $now->setTime('00','00');
 
-  	$q->getQuery()->execute();
+    // purge previous future programs
+    $q = $this->createQuery()
+      ->delete('ProgramBundle:Program','p')
+      ->where('p.emission = :id_emission AND p.time_start >= :now')
+      ->setParameters(array(
+        'id_emission' => (String) $object->getId(),
+        'now' => $now)
+      )
+    ;
+    $q->getQuery()->execute();
 
-  	$exceptional=$object->getExceptionalBroadcast();
+    // Exceptionnal broadcasts
+    $exceptional = $object->getExceptionalBroadcast();
+    foreach ($exceptional as $value){
+      if ($value->getTimeStart() > $now) {
+        $value->setEmission($object);
+        $program = new Program();
+        $program->setTimeStart($value->getTimeStart());
+        //$timeValue = $value->getTimeStart()->getTimestamp() + $value->getDuration()->getTimestamp();
+        //$program->setTimeStop($newDate->setTimestamp($timeValue));
+        $duration = $value->getDuration()->format('G\Hi\M');
+        $timeStop = clone $program->getTimeStart();
+        $timeStop->add(new \DateInterval('PT' . $duration));
+        $program->setTimeStop($timeStop);
+        $program->setEmission($object);
 
-  	foreach ($exceptional as $value){
-  		if ($value->getTimeStart()->getTimestamp()>$now->getTimestamp()){
-	  		$value->setEmission($object);
-	  		$program=new Program();
-	  		$program->setTimeStart($value->getTimeStart()->setTimezone(new \DateTimeZone('GMT')));
-	  		$timeValue=$value->getTimeStart()->setTimezone(new \DateTimeZone('GMT'))->getTimestamp()+$value->getDuration()->setTimezone(new \DateTimeZone('GMT'))->getTimestamp();
-	  		$program->setTimeStop($newDate->setTimestamp($timeValue));
-	  		$program->setEmission($object);
+        $this->prePersist($program);
+        $this->getModelManager()->create($program);
+        $this->postPersist($program);
+        $this->createObjectSecurity($program);
+      }
+    }
 
+    // weekly broadcasts
+    $weekly = $object->getWeeklyBroadcast();
+    /*foreach ($weekly as $value) {
+      $timestamp = $object->getDiffusionStart()->getTimestamp() + $timeStampDay;
+      $dateDay = date("N", $timestamp);
 
-	  		$this->prePersist($program);
-	  		$this->getModelManager()->create($program);
-	  		$this->postPersist($program);
-	  		$this->createObjectSecurity($program);
-  		}
-  	}
+      while ($dateDay != $value->getDay()) {
+        $timestamp += $timeStampDay;
+        $dateDay = date("N", $timestamp);
+      }
+      for ($timestamp; $timestamp < $object->getDiffusionStop()->getTimestamp(); $timestamp += $timeStampWeek) {
+        $value->setEmission($object);
 
-  	$weekly=$object->getWeeklyBroadcast();
+        $program = new Program();
+        $program->setTimeStart($newDate->setTimestamp($timestamp + $value->getHour()->getTimestamp()));
+        $timeValue = $program->getTimeStart()->getTimestamp() + $value->getDuration()->getTimestamp();
+        $program->setTimeStop($newDate2->setTimestamp($timeValue));
+        $program->setEmission($object);
 
-  	foreach ($weekly as $value){
-  		$timestamp = $object->getDiffusionStart()->setTimezone(new \DateTimeZone('GMT'))->getTimestamp()+$timeStampDay;
-  		$dateDay=date("N",$timestamp);
-  		while($dateDay!=$value->getDay()){
-  			$timestamp+=$timeStampDay;
-  			$dateDay=date("N",$timestamp);
-  		}
-  		for($timestamp;$timestamp<$object->getDiffusionStop()->getTimestamp();$timestamp+=$timeStampWeek){
-  			$value->setEmission($object);
-  			$program=new Program();
-  			$program->setTimeStart($newDate->setTimestamp($timestamp+$value->getHour()->setTimezone(new \DateTimeZone('GMT'))->getTimestamp()));
-  			$timeValue=$program->getTimeStart()->setTimezone(new \DateTimeZone('GMT'))->getTimestamp()+$value->getDuration()->setTimezone(new \DateTimeZone('GMT'))->getTimestamp();
-  			$program->setTimeStop($newDate2->setTimestamp($timeValue));
-  			$program->setEmission($object);
+        $this->prePersist($program);
+        $this->getModelManager()->create($program);
+        $this->postPersist($program);
+        $this->createObjectSecurity($program);
+      }
 
-  			$this->prePersist($program);
-  			$this->getModelManager()->create($program);
-  			$this->postPersist($program);
-  			$this->createObjectSecurity($program);
-  		}
+      $value->setEmission($object);
+    }*/
 
-  		$value->setEmission($object);
-  	}
+    $currentDate = clone $now;
+    $stopDate = $object->getDiffusionStop();
+
+    while($currentDate < $stopDate) {
+      $dayNum = $currentDate->format('N');
+      foreach ($weekly as $value) {
+        if ($dayNum != $value->getDay()) continue;
+
+        $program = new Program();
+        $program->setEmission($object);
+
+        $hour = $value->getHour()->format('G\Hi\M');
+        $duration = $value->getDuration()->format('G\Hi\M');
+
+        $progStart = clone $currentDate;
+        $progStart->add(new \DateInterval('PT' . $hour));
+
+        $progStop = clone $progStart;
+        $progStop->add(new \DateInterval('PT' . $duration));
+
+        $program->setTimeStart($progStart);
+        $program->setTimeStop($progStop);
+
+        $this->prePersist($program);
+        $this->getModelManager()->create($program);
+        $this->postPersist($program);
+        $this->createObjectSecurity($program);
+      }
+      $currentDate->modify('+1 day');
+    }
 
     $errorElement
       ->with('name')
-      ->assertLength(array('max' => 32))
+        ->assertLength(array('max' => 32))
       ->end()
       ->with('description')
-      ->assertNotNull()
+        ->assertNotNull()
       ->end()
     ;
   }
