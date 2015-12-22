@@ -59,12 +59,12 @@ class Emission
     /**
      * @var ArrayCollection
      */
-    private $ExceptionalBroadcast;
+    private $exceptionalBroadcasts;
 
     /**
      * @var ArrayCollection
      */
-    private $WeeklyBroadcast;
+    private $weeklyBroadcasts;
 
     /**
      * @var ArrayCollection
@@ -86,11 +86,38 @@ class Emission
      */
     private $slug;
 
+   /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
     public function __construct()
     {
-        $this->ExceptionalBroadcast = new ArrayCollection();
-        $this->WeeklyBroadcast = new ArrayCollection();
+        $this->exceptionalBroadcasts = new ArrayCollection();
+        $this->weeklyBroadcasts = new ArrayCollection();
         $this->programs = new ArrayCollection();
+
+        if (empty($this->created_at)) {
+            $this->created_at = new \Datetime();
+        }
+    }
+
+    /**
+     * set datetimes on create/update.
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
+        //die(var_dump($this->WeeklyBroadcast->first()));
+        $this->updateRelated();
     }
 
     /**
@@ -122,6 +149,7 @@ class Emission
     {
         $this->name = $name;
         $this->setSlug(Tag::slugify($name));
+        return $this;
     }
 
     /**
@@ -142,6 +170,7 @@ class Emission
     public function setDescription($description)
     {
         $this->description = $description;
+        return $this;
     }
 
     /**
@@ -162,6 +191,7 @@ class Emission
     public function setTheme(\RadioSolution\ProgramBundle\Entity\EmissionTheme $theme)
     {
         $this->theme = $theme;
+        return $this;
     }
    /**
      * Get theme
@@ -193,6 +223,7 @@ class Emission
     public function setGroup(\Application\Sonata\UserBundle\Entity\Group $group)
     {
         $this->group = $group;
+        return $this;
     }
 
     /**
@@ -213,6 +244,7 @@ class Emission
     public function setMedia(\Application\Sonata\MediaBundle\Entity\Media $media)
     {
         $this->media = $media;
+        return $this;
     }
 
     /**
@@ -232,36 +264,37 @@ class Emission
      */
     public function addExceptionalBroadcast(\RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast $exceptionalBroadcast)
     {
-        $this->ExceptionalBroadcast[] = $exceptionalBroadcast;
+        $exceptionalBroadcast->setEmission($this);
+        $this->exceptionalBroadcasts[] = $exceptionalBroadcast;
         return $this;
     }
 
-    public function  removeExceptionalBroadcast(\RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast $exceptionalBroadcast)
+    public function removeExceptionalBroadcast(\RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast $exceptionalBroadcast)
     {
-        $exceptionalBroadcast->setEmission(null);
-        $this->ExceptionalBroadcast->removeElement($exceptionalBroadcast);
+        //$exceptionalBroadcast->setEmission(null);
+        $this->exceptionalBroadcasts->removeElement($exceptionalBroadcast);
         return $this;
     }
 
     /**
-     * Add ExceptionalBroadcast
+     * set ExceptionalBroadcast
      *
      * @param RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast $exceptionalBroadcast
      */
-    public function setExceptionalBroadcast(\Doctrine\Common\Collections\ArrayCollection $exceptionalBroadcast)
-    {
-    	$this->ExceptionalBroadcast = $exceptionalBroadcast;
-    	return $this->ExceptionalBroadcast;
-    }
+    //public function setExceptionalBroadcast(\Doctrine\Common\Collections\ArrayCollection $exceptionalBroadcast)
+    //{
+    //	$this->ExceptionalBroadcast = $exceptionalBroadcast;
+    //	return $this->ExceptionalBroadcast;
+    //}
 
     /**
      * Get ExceptionalBroadcast
      *
      * @return Doctrine\Common\Collections\Collection
      */
-    public function getExceptionalBroadcast()
+    public function getExceptionalBroadcasts()
     {
-        return $this->ExceptionalBroadcast;
+        return $this->exceptionalBroadcasts;
     }
 
     /**
@@ -271,14 +304,15 @@ class Emission
      */
     public function addWeeklyBroadcast(\RadioSolution\ProgramBundle\Entity\WeeklyBroadcast $weeklyBroadcast)
     {
-        $this->WeeklyBroadcast[] = $weeklyBroadcast;
+        $weeklyBroadcast->setEmission($this);
+        $this->weeklyBroadcasts[] = $weeklyBroadcast;
         return $this;
     }
 
     public function removeWeeklyBroadcast(\RadioSolution\ProgramBundle\Entity\WeeklyBroadcast $weeklyBroadcast)
     {
-        $weeklyBroadcast->setEmission(null);
-        $this->WeeklyBroadcast->removeElement($weeklyBroadcast);
+        //$weeklyBroadcast->setEmission();
+        $this->weeklyBroadcasts->removeElement($weeklyBroadcast);
         return $this;
     }
 
@@ -287,20 +321,20 @@ class Emission
      *
      * @param RadioSolution\ProgramBundle\Entity\WeeklyBroadcast $weeklyBroadcast
      */
-    public function setWeeklyBroadcast(\Doctrine\Common\Collections\ArrayCollection $weeklyBroadcast)
-    {
-    	$this->WeeklyBroadcast = $weeklyBroadcast;
-    	return $this->WeeklyBroadcast;
-    }
+    //public function setWeeklyBroadcast($weeklyBroadcast)
+    //{
+    //	$this->weeklyBroadcasts = $weeklyBroadcast;
+    //	return $this;
+    //}
 
     /**
      * Get WeeklyBroadcast
      *
      * @return Doctrine\Common\Collections\Collection
      */
-    public function getWeeklyBroadcast()
+    public function getWeeklyBroadcasts()
     {
-        return $this->WeeklyBroadcast;
+        return $this->weeklyBroadcasts;
     }
 
     /**
@@ -313,6 +347,7 @@ class Emission
     	$now= new \DateTime('now',new \DateTimeZone('GMT'));
     	$now->setTime('00','00');
         $this->diffusion_start =  $now;
+        return $this;
     }
 
     /**
@@ -333,6 +368,7 @@ class Emission
     public function setDiffusionStop($diffusionStop)
     {
         $this->diffusion_stop = $diffusionStop;
+        return $this;
     }
 
     /**
@@ -353,6 +389,7 @@ class Emission
     public function setArchive($archive)
     {
         $this->archive = $archive;
+        return $this;
     }
 
     /**
@@ -373,6 +410,7 @@ class Emission
     public function setFrequency(\RadioSolution\ProgramBundle\Entity\EmissionFrequency $frequency)
     {
         $this->frequency = $frequency;
+        return $this;
     }
 
     /**
@@ -393,6 +431,7 @@ class Emission
     public function setSlug($slug)
     {
         $this->slug = $slug;
+        return $this;
     }
 
     /**
@@ -414,5 +453,48 @@ class Emission
     {
         $this->programs = $programs;
         return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+        return $this;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+        return $this;
+    }
+
+    public function updateRelated()
+    {
+
+        if (!empty($this->weeklyBroadcasts)) {
+            foreach($this->weeklyBroadcasts as $broadcast) {
+                $broadcast->setEmission($this);
+            }
+        }
+        if (!empty($this->exceptionalBroadcasts)) {
+            foreach($this->exceptionalBroadcasts as $broadcast) {
+                $broadcast->setEmission($this);
+            }
+        }
+        //if (!empty($this->programs)) {
+        //    foreach($this->programs as $program) {
+        //        $program->setEmission($this);
+        //    }
+        //}
+
     }
 }

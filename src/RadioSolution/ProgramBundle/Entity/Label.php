@@ -60,23 +60,34 @@ class Label
      */
     private $published;
 
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
     public function __construct()
     {
         $this->date = new \DateTime('now');
         $this->albums = new ArrayCollection();
-    }
 
-    public function prePersist()
-    {
-        if (empty($this->slug)) {
-            $this->setSlug(null);
+        if (empty($this->created_at)) {
+            $this->created_at = new \Datetime();
         }
     }
 
-    public function preUpdate()
+    /**
+     * set datetimes on create/update.
+     */
+    public function updatedTimestamps()
     {
-        if (empty($this->slug)) {
-            $this->setSlug(null);
+        $this->setUpdatedAt(new \DateTime('now'));
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
         }
     }
     /**
@@ -225,6 +236,28 @@ class Label
     public function setImage($image)
     {
         $this->image = $image;
+        return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+        return $this;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
         return $this;
     }
 }

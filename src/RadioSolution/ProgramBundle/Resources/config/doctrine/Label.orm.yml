@@ -2,6 +2,9 @@ RadioSolution\ProgramBundle\Entity\Label:
   type: entity
   repositoryClass: RadioSolution\ProgramBundle\Entity\MusicRepository
   table: music__label
+  lifecycleCallbacks:
+    prePersist: [ updatedTimestamps ]
+    preUpdate: [ updatedTimestamps ]
   id:
     id:
       type: integer
@@ -35,7 +38,12 @@ RadioSolution\ProgramBundle\Entity\Label:
     published:
       type: boolean
       nullable: true
-
+    created_at:
+      type: datetime
+      default: 'NOW()'
+    updated_at:
+      type: datetime
+      default: 'NOW()'
   lifecycleCallbacks:
     prePersist: [ prePersist ]
     preUpdate: [ preUpdate ]

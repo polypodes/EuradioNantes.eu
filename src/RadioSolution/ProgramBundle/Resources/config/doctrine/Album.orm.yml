@@ -57,8 +57,10 @@ RadioSolution\ProgramBundle\Entity\Album:
       default: NULL
     created_at:
       type: datetime
+      default: 'NOW()'
     updated_at:
       type: datetime
+      default: 'NOW()'
     slug:
       type: string
       gedmo:

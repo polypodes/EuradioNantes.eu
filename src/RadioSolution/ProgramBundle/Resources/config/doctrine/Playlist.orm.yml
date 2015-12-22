@@ -43,6 +43,12 @@ RadioSolution\ProgramBundle\Entity\Playlist:
     content:
       type: text
       nullable: true
+    created_at:
+      type: datetime
+      default: 'NOW()'
+    updated_at:
+      type: datetime
+      default: 'NOW()'
   manyToMany:
     albums:
       targetEntity: Album

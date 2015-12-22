@@ -1,6 +1,9 @@
 RadioSolution\ProgramBundle\Entity\Program:
   type: entity
   table: program__program
+  lifecycleCallbacks:
+    prePersist: [ updatedTimestamps ]
+    preUpdate: [ updatedTimestamps ]
   id:
     id:
       type: integer
@@ -14,7 +17,12 @@ RadioSolution\ProgramBundle\Entity\Program:
       type: boolean
       nullable: true
       default: false
-
+    created_at:
+      type: datetime
+      default: 'NOW()'
+    updated_at:
+      type: datetime
+      default: 'NOW()'
   oneToOne:
     podcast:
       nullable: true

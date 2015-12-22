@@ -2,6 +2,7 @@
 namespace RadioSolution\ProgramBundle\Admin;
 
 use RadioSolution\ProgramBundle\Entity\Program;
+use RadioSolution\ProgramBundle\Entity\Emission;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -35,11 +36,11 @@ class EmissionAdmin extends Admin
       ->end()
       ->with('Diffusions')
         ->add('diffusion_stop','sonata_type_date_picker', array('label' => 'Date d’arrêt de diffusion'))
-        ->add('ExceptionalBroadcast', 'sonata_type_collection', array('label' => 'Diffusion exceptionnelle', 'required' => false, 'by_reference' =>true), array(
+        ->add('exceptionalBroadcasts', 'sonata_type_collection', array('label' => 'Diffusion exceptionnelle', 'required' => false, 'by_reference' => false), array(
           'edit' => 'inline',
           'inline' => 'table',
         ))
-        ->add('WeeklyBroadcast', 'sonata_type_collection', array('label' => 'Diffusion hebdomadaire', 'required' => false, 'by_reference' =>true), array(
+        ->add('weeklyBroadcasts', 'sonata_type_collection', array('label' => 'Diffusion hebdomadaire', 'required' => false, 'by_reference' => false), array(
           'edit' => 'inline',
           'inline' => 'table',
         ))
@@ -82,7 +83,19 @@ class EmissionAdmin extends Admin
       return $actions;
   }
 
-  public function validate(ErrorElement $errorElement, $object)
+  public function validate(ErrorElement $errorElement, $obj)
+  {
+    $errorElement
+      ->with('name')
+        ->assertLength(array('max' => 32))
+      ->end()
+      ->with('description')
+        ->assertNotNull()
+      ->end()
+    ;
+  }
+
+  public function setPrograms($object)
   {
     $timeStampDay = 3600*24;
     $timeStampWeek = $timeStampDay*7;
@@ -104,7 +117,7 @@ class EmissionAdmin extends Admin
     $q->getQuery()->execute();
 
     // Exceptionnal broadcasts
-    $exceptional = $object->getExceptionalBroadcast();
+    $exceptional = $object->getExceptionalBroadcasts();
     foreach ($exceptional as $value){
       if ($value->getTimeStart() > $now) {
         $value->setEmission($object);
@@ -126,7 +139,7 @@ class EmissionAdmin extends Admin
     }
 
     // weekly broadcasts
-    $weekly = $object->getWeeklyBroadcast();
+    $weekly = $object->getWeeklyBroadcasts();
     /*foreach ($weekly as $value) {
       $timestamp = $object->getDiffusionStart()->getTimestamp() + $timeStampDay;
       $dateDay = date("N", $timestamp);
@@ -184,14 +197,45 @@ class EmissionAdmin extends Admin
       $currentDate->modify('+1 day');
     }
 
-    $errorElement
-      ->with('name')
-        ->assertLength(array('max' => 32))
-      ->end()
-      ->with('description')
-        ->assertNotNull()
-      ->end()
-    ;
+  }
+
+  public function prePersist($obj)
+  {
+    //var_dump('prePersist');
+    //var_dump($obj);
+    //if ($obj instanceof Emission) {
+    //  $obj->updatedTimestamps();
+    //}
+    //var_dump($this->getSubject()->getWeeklyBroadcast()->first());
+    //exit;
+  }
+
+  public function preUpdate($obj)
+  {
+    //var_dump('preUpdate');
+    //var_dump($obj);
+//
+    //if ($obj instanceof Emission) {
+    //  $obj->updatedTimestamps();
+    //}
+    //var_dump($this->getSubject()->getWeeklyBroadcast()->first());
+    //exit;
+  }
+
+  public function postPersist($obj)
+  {
+    //var_dump('postPersist');
+    if ($obj instanceof Emission) {
+      $this->setPrograms($obj);
+    }
+  }
+
+  public function postUpdate($obj)
+  {
+    //var_dump('postUpdate');
+    if ($obj instanceof Emission) {
+      $this->setPrograms($obj);
+    }
   }
 
 }

@@ -82,6 +82,21 @@ class Playlist
     {
         $this->playlists = new ArrayCollection();
         $this->albums = new ArrayCollection();
+
+        if (empty($this->created_at)) {
+            $this->created_at = new \Datetime();
+        }
+    }
+
+    /**
+     * set datetimes on create/update.
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 
     /**
@@ -127,30 +142,6 @@ class Playlist
     }
 
     /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
-    }
-
-    /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Playlist
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-
-        return $this;
-    }
-
-    /**
      * Add album.
      *
      * @param Album $album
@@ -182,41 +173,6 @@ class Playlist
     public function getAlbums()
     {
         return $this->albums;
-    }
-
-    /**
-     * set datetimes on create/update.
-     */
-    public function updatedTimestamps()
-    {
-        $this->setUpdatedAt(new \DateTime('now'));
-        if ($this->getCreatedAt() == null) {
-            $this->setCreatedAt(new \DateTime('now'));
-        }
-    }
-
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Playlist
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -324,6 +280,28 @@ class Playlist
     public function setContent($content)
     {
         $this->content = $content;
+        return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+        return $this;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
         return $this;
     }
 }

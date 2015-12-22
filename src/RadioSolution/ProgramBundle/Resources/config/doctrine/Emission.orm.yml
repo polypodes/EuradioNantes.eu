@@ -1,6 +1,9 @@
 RadioSolution\ProgramBundle\Entity\Emission:
   type: entity
   table: program__emission
+  lifecycleCallbacks:
+    prePersist: [ updatedTimestamps ]
+    preUpdate: [ updatedTimestamps ]
   id:
     id:
       type: integer
@@ -20,6 +23,12 @@ RadioSolution\ProgramBundle\Entity\Emission:
       type: boolean
     slug:
       type: string
+    created_at:
+      type: datetime
+      default: 'NOW()'
+    updated_at:
+      type: datetime
+      default: 'NOW()'
   manyToOne:
     theme:
       targetEntity: EmissionTheme
@@ -48,18 +57,18 @@ RadioSolution\ProgramBundle\Entity\Emission:
         referencedColumnName: id
         onDelete: "SET NULL"
   oneToMany:
-    ExceptionalBroadcast:
+    exceptionalBroadcasts:
       targetEntity: ExceptionalBroadcast
       cascade: [all]
       mappedBy: Emission
       orphanRemoval: true
-    WeeklyBroadcast:
+    weeklyBroadcasts:
       targetEntity: WeeklyBroadcast
       cascade: [all]
       mappedBy: Emission
       orphanRemoval: true
     programs:
       targetEntity: Program
-      #cascade: [persist]
+      cascade: [all]
       mappedBy: emission
       orphanRemoval: true

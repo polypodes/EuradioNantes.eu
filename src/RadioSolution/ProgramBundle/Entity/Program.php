@@ -36,11 +36,35 @@ class Program
 
     private $collision;
 
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
     public function __construct()
     {
     	$this->time_start = new \DateTime('now');
     	$this->time_stop = new \DateTime('now');
 
+        if (empty($this->created_at)) {
+            $this->created_at = new \Datetime();
+        }
+    }
+
+    /**
+     * set datetimes on create/update.
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 
     /**
@@ -137,6 +161,7 @@ class Program
     public function setEmission(\RadioSolution\ProgramBundle\Entity\Emission $emission)
     {
         $this->emission = $emission;
+        return $this;
     }
 
     /**
@@ -177,5 +202,27 @@ class Program
     public function setCollision($collision)
     {
     	$this->collision=$collision;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+        return $this;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+        return $this;
     }
 }
