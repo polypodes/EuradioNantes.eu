@@ -30,6 +30,7 @@ RadioSolution\PodcastBundle\Entity\Podcast:
     post:
       targetEntity: Application\Sonata\NewsBundle\Entity\Post
       inversedBy: podcast
+      cascade: [persist]
       joinColumn:
         name: post_id
         referencedColumnName: id

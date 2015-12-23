@@ -43,7 +43,7 @@ class PodcastProvider extends FileProvider
      */
     public function __construct($name, Filesystem $filesystem, CDNInterface $cdn, GeneratorInterface $pathGenerator, ThumbnailInterface $thumbnail, MetadataBuilderInterface $metadata = null)
     {
-        parent::__construct($name, $filesystem, $cdn, $pathGenerator, $thumbnail, array('mp3'), array('audio/mp3', 'audio/mpeg', /*'application/octet-stream'*/), $metadata);
+        parent::__construct($name, $filesystem, $cdn, $pathGenerator, $thumbnail, array('mp3'), array('audio/mp3', 'audio/mpeg', 'application/octet-stream'), $metadata);
     }
 
     /**
