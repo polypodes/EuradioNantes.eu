@@ -342,11 +342,9 @@ class Emission
      *
      * @param date $diffusionStart
      */
-    public function setDiffusionStart()
+    public function setDiffusionStart(\Datetime $diffusionStart)
     {
-    	$now= new \DateTime('now',new \DateTimeZone('GMT'));
-    	$now->setTime('00','00');
-        $this->diffusion_start =  $now;
+        $this->diffusion_start =  $diffusionStart;
         return $this;
     }
 

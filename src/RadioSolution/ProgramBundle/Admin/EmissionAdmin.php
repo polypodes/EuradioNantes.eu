@@ -29,12 +29,13 @@ class EmissionAdmin extends Admin
         //->add('theme', 'sonata_type_model', array('label' => 'Thème', 'required' => false))
         ->add('collection', 'sonata_type_model_list', array('required' => true, 'btn_add' => false))
         //->add('collection', 'sonata_type_model', array('label' => 'Catégorie', 'required' => true), array('context' => 'emission')) // sonata_category_selector
-        ->add('group', 'sonata_type_model', array('label' => 'Groupe', 'required' => false))
+        ->add('group', 'sonata_type_model', array('label' => 'Groupe', 'required' => false, 'btn_add' => false))
         ->add('media', 'sonata_type_model_list', array('label' => 'Média', 'required' => false), array('link_parameters' => array('provider'=>'sonata.media.provider.image')))
         ->add('archive', null, array('required' => false))
-        ->add('frequency', 'sonata_type_model', array('label' => 'Fréquence', 'required' => false))
+        ->add('frequency', 'sonata_type_model', array('label' => 'Fréquence', 'required' => false, 'btn_add' => false))
       ->end()
       ->with('Diffusions')
+        ->add('diffusion_start','sonata_type_date_picker', array('label' => 'Date de début de diffusion'))
         ->add('diffusion_stop','sonata_type_date_picker', array('label' => 'Date d’arrêt de diffusion'))
         ->add('exceptionalBroadcasts', 'sonata_type_collection', array('label' => 'Diffusion exceptionnelle', 'required' => false, 'by_reference' => false), array(
           'edit' => 'inline',
@@ -100,7 +101,7 @@ class EmissionAdmin extends Admin
     $timeStampDay = 3600*24;
     $timeStampWeek = $timeStampDay*7;
 
-    $object->setDiffusionStart();
+    //$object->setDiffusionStart();
 
     $now = new \DateTime('tomorrow');
     $now->setTime('00','00');
