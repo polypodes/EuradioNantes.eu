@@ -24,6 +24,7 @@ class EmissionAdmin extends Admin
 
     $formMapper
       ->with('Général')
+        ->add('published', null, array('label' => 'Publié'))
         ->add('name', null, array('label' => 'Nom'))
         ->add('description', 'ckeditor', array('config_name' => 'plus'))
         //->add('theme', 'sonata_type_model', array('label' => 'Thème', 'required' => false))
@@ -57,6 +58,7 @@ class EmissionAdmin extends Admin
       ->add('collection', null, array('label' => 'Catégorie'))
       ->add('diffusion_stop', null, array('label' => 'Arrêt de la diffusion'))
       ->add('archive', null, array('label' => 'Archivé'))
+      ->add('published', null, array('label' => 'Publié'))
     ;
   }
 
@@ -68,6 +70,7 @@ class EmissionAdmin extends Admin
       ->add('collection', null, array('label' => 'Catégorie'))
       ->add('diffusion_stop', null, array('label' => 'Arrêt de la diffusion'))
       ->add('archive', null, array('label' => 'Archivé'))
+      ->add('published', 'boolean', array('label' => 'Publié', 'editable' => true))
     ;
   }
 

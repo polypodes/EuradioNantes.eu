@@ -26,6 +26,10 @@ RadioSolution\StaticContentBundle\Entity\StaticContent:
     order_content:
       type: integer
       default: 10
+    published:
+      type: boolean
+      nullable: true
+      default: 1
   oneToOne:
     image:
       targetEntity: Application\Sonata\MediaBundle\Entity\Media

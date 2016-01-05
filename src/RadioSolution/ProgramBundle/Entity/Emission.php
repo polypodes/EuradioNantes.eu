@@ -96,6 +96,11 @@ class Emission
      */
     private $updated_at;
 
+    /**
+     * @var boolean
+     */
+    private $published;
+
     public function __construct()
     {
         $this->exceptionalBroadcasts = new ArrayCollection();
@@ -494,5 +499,16 @@ class Emission
         //    }
         //}
 
+    }
+
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    public function setPublished($published)
+    {
+        $this->published = $published;
+        return $this;
     }
 }

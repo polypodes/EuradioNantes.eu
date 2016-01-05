@@ -43,8 +43,12 @@ class PlaylistController extends Controller
      */
     public function showAction(Playlist $playlist) {
         //$playlist = $this->getDoctrine()->getRepository('ProgramBundle:Playlist')->findBySlugPublished($id);
-        if (!$playlist || !$playlist->getPublished()) {
+        if (!$playlist) {
             throw $this->createNotFoundException('La playlist est introuvable.');
+        }
+        // hide content if not published and user not logged
+        if (!$playlist->getPublished() && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw $this->createNotFoundException('La playlist est indisponible.');
         }
 
         if ($seoPage = $this->get('sonata.seo.page')) {

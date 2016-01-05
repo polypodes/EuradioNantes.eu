@@ -24,7 +24,12 @@ class StaticContentController extends Controller
         $entity = $em->getRepository('StaticContentBundle:StaticContent')->findOneBySlug($slug);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find StaticContent entity.');
+            throw $this->createNotFoundException('La page est introuvable.');
+        }
+
+         // hide content if not published and user not logged
+        if (!$entity->getPublished() && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw $this->createNotFoundException('La page est indisponible.');
         }
 
         // breadcrumbs

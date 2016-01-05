@@ -50,6 +50,11 @@ class StaticContent
     private $slug;
 
     /**
+     * @var boolean
+     */
+    private $published;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct()
@@ -229,5 +234,16 @@ class StaticContent
 
     public function setOrderContent($order_content){
     	$this->order_content=$order_content;
+    }
+
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    public function setPublished($published)
+    {
+        $this->published = $published;
+        return $this;
     }
 }

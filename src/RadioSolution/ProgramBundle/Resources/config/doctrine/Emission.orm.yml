@@ -18,7 +18,7 @@ RadioSolution\ProgramBundle\Entity\Emission:
       type: date
     diffusion_stop:
       type: date
-      column: difusion_stop
+      column: diffusion_stop
     archive:
       type: boolean
     slug:
@@ -29,6 +29,10 @@ RadioSolution\ProgramBundle\Entity\Emission:
     updated_at:
       type: datetime
       default: 'NOW()'
+    published:
+      type: boolean
+      nullable: true
+      default: 1
   manyToOne:
     theme:
       targetEntity: EmissionTheme

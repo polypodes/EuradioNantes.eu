@@ -37,7 +37,7 @@ class EmissionController extends Controller
             ->getDoctrine()
             ->getRepository('ProgramBundle:Emission')
             ->createQueryBuilder('e')
-            //->where('e.name <> "" ')
+            ->where('e.published = 1')
             ->orderBy('e.name', 'ASC')
         ;
 
@@ -82,7 +82,8 @@ class EmissionController extends Controller
             ->getDoctrine()
             ->getRepository('ProgramBundle:Emission')
             ->createQueryBuilder('e')
-            ->where('e.archive = 0')
+            ->where('e.published = 1')
+            ->andWhere('e.archive = 0')
             ->orderBy('e.name', 'ASC')
             ->getQuery()
             ->getResult()
@@ -110,7 +111,12 @@ class EmissionController extends Controller
         $entity = $em->getRepository('ProgramBundle:Emission')->findOneBySlug($name);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Emission entity.');
+            throw $this->createNotFoundException('L’émission est introuvable.');
+        }
+
+        // hide content if not published and user not logged
+        if (!$entity->getPublished() && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw $this->createNotFoundException('L’émission est indisponible.');
         }
 
         if ($seoPage = $this->get('sonata.seo.page')) {

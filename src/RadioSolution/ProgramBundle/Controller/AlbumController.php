@@ -43,8 +43,12 @@ class AlbumController extends Controller
     public function showAction(Album $album)
     {
         //$album = $this->getDoctrine()->getRepository('ProgramBundle:Album')->findPublishedBySlug($slug);
-        if (!$album || !$album->getPublished()) {
+        if (!$album) {
             throw $this->createNotFoundException('L’album est introuvable.');
+        }
+        // hide content if not published and user not logged
+        if (!$album->getPublished() && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw $this->createNotFoundException('L’album est indisponible.');
         }
 
         if ($seoPage = $this->get('sonata.seo.page')) {

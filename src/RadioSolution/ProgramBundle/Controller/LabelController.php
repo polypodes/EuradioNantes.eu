@@ -45,8 +45,12 @@ class LabelController extends Controller
      */
     public function showAction(Label $label) {
         //$label = $this->getDoctrine()->getRepository('ProgramBundle:Label')->findPublishedBySlug($slug);
-        if (!$label || !$label->getPublished()) {
+        if (!$label) {
             throw $this->createNotFoundException('Le label est introuvable.');
+        }
+        // hide content if not published and user not logged
+        if (!$label->getPublished() && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw $this->createNotFoundException('Le label est indisponible.');
         }
 
         if ($seoPage = $this->get('sonata.seo.page')) {

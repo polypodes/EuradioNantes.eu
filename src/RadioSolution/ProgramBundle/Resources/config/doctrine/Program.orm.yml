@@ -37,5 +37,5 @@ RadioSolution\ProgramBundle\Entity\Program:
       targetEntity: Emission
       inversedBy: programs
       joinColumn:
-        name: id_emmission
+        name: id_emission
         referencedColumnName: id
