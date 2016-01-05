@@ -54,8 +54,12 @@ class PostController extends BaseController
     {
         $post = $this->getPostManager()->findOneByPermalink($permalink, $this->container->get('sonata.news.blog'));
 
-        if (!$post || !$post->isPublic()) {
+        if (!$post) {
             throw $this->createNotFoundException('L’actualité est introuvable.');
+        }
+        // hide content if not published and user not logged
+        if (!$post->isPublic() && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw $this->createNotFoundException('L’actualité est indisponible.');
         }
 
         $breadcrumbs = $this->get("white_october_breadcrumbs");

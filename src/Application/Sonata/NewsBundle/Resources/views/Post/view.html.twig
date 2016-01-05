@@ -23,9 +23,9 @@
 
   {% if post.author %}
   <div data-clickable="true" class="author">
-    {% if post.author.image %}
+    {#% if post.author.image is defined %}
     <img src="//unsplash.it/50x50" alt="" class="author-img">
-    {% endif %}
+    {% endif %#}
     <div class="author-text">
       {% set authorname = post.author.fullname != '' ? post.author.fullname : post.author.username %}
       <div class="author-sup">Rédigé par</div>

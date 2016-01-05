@@ -16,6 +16,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\NewsBundle\Admin\PostAdmin as BaseAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\CoreBundle\Validator\ErrorElement;
 
 class PostAdmin extends BaseAdmin
 {
@@ -50,9 +51,21 @@ class PostAdmin extends BaseAdmin
                 ))
                 ->add('author', 'sonata_type_model_list')
                 ->add('title')
-                ->add('short_title',"text", array('required' => false, 'label' => "Titre court"))
-                ->add('abstract', "ckeditor", array())
+                ->add('short_title', 'text', array('required' => false, 'label' => "Titre court"))
+                ->add('abstract', 'ckeditor', array('required' => true))
                 ->add('content', 'ckeditor', array())
+                //->add('content', 'sonata_formatter_type', array(
+                //    'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
+                //    'format_field'   => 'contentFormatter',
+                //    'source_field'   => 'rawContent',
+                //    'source_field_options'      => array(
+                //        'horizontal_input_wrapper_class' => $this->getConfigurationPool()->getOption('form_type') == 'horizontal' ? 'col-lg-12': '',
+                //        'attr' => array('class' => $this->getConfigurationPool()->getOption('form_type') == 'horizontal' ? 'span10 col-sm-10 col-md-10': '', 'rows' => 20)
+                //    ),
+                //    //'ckeditor_context'     => 'news',
+                //    'target_field'   => 'content',
+                //    'listener'       => true,
+                //))
             ->end()
             ->with('Status', array(
                     'class' => 'col-md-4'
@@ -64,9 +77,9 @@ class PostAdmin extends BaseAdmin
                         'context' => 'news'
                     )
                 ))
-                ->add('type',"choice", array('required' => false, 'label' => "Type","choices" => $this->choices))
-                ->add('publicationDateStart', 'sonata_type_datetime_picker', array('dp_side_by_side' => true,'required' => false))
-                ->add('commentsCloseAt', 'sonata_type_datetime_picker', array('dp_side_by_side' => true,'required' => false))
+                ->add('type', 'choice', array('required' => true, 'label' => 'Type', 'choices' => $this->choices))
+                ->add('publicationDateStart', 'sonata_type_datetime_picker', array('dp_side_by_side' => true, 'required' => false))
+                ->add('commentsCloseAt', 'sonata_type_datetime_picker', array('dp_side_by_side' => true, 'required' => false))
                 ->add('commentsEnabled', null, array('required' => false))
                 ->add('commentsDefaultStatus', 'sonata_news_comment_status', array('expanded' => true))
             ->end()
@@ -116,6 +129,22 @@ class PostAdmin extends BaseAdmin
         $datagridMapper
             ->add('type')
         ;
+    }
+
+    public function validate(ErrorElement $errorElement, $obj)
+    {
+        //var_dump($errorElement);
+        //var_dump($obj);
+
+        if (empty($obj->getSlug())) {
+            $obj->setSlug($obj->getTitle());
+        }
+
+        //$errorElement
+        //  ->with('slug')
+        //    //->removeConstraint()
+        //  ->end()
+        //;
     }
 
 }
