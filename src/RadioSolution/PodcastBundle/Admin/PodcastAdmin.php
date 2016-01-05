@@ -77,12 +77,16 @@ class PodcastAdmin extends Admin
     ;
   }
 
-  public function validate(ErrorElement $errorElement, $object)
+  public function validate(ErrorElement $errorElement, $obj)
   {
   	$errorElement
-  	->with('name')
-  	->assertLength(array('max' => 32))
-  	->end()
+    	->with('name')
+    	 ->assertLength(array('max' => 32))
+    	->end()
   	;
+
+    if (empty($obj->getPost()->getSlug())) {
+        $obj->getPost()->setSlug($obj->getPost()->getTitle());
+    }
   }
 }

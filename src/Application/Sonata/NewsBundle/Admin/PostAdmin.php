@@ -133,18 +133,9 @@ class PostAdmin extends BaseAdmin
 
     public function validate(ErrorElement $errorElement, $obj)
     {
-        //var_dump($errorElement);
-        //var_dump($obj);
-
         if (empty($obj->getSlug())) {
             $obj->setSlug($obj->getTitle());
         }
-
-        //$errorElement
-        //  ->with('slug')
-        //    //->removeConstraint()
-        //  ->end()
-        //;
     }
 
 }

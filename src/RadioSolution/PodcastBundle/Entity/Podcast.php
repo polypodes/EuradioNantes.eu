@@ -215,7 +215,7 @@ class Podcast
 
     public function getEmission()
     {
-        return $this->program->getEmission()->getName();
+        return $this->program ? $this->program->getEmission()->getName() : null;
     }
 
     public function getImageEmission()
