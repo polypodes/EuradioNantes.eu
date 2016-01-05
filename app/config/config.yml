@@ -40,6 +40,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
+            - 'SonataFormatterBundle:Form:formatter.html.twig'
             - 'SonataCoreBundle:Form:datepicker.html.twig'
             - 'PodcastBundle:Form:podcast_player.html.twig'
             - 'PodcastBundle:Form:podcast_marker.html.twig'

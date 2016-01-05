@@ -185,6 +185,9 @@ sonata_admin:
         #    - bundles/sonataadmin/vendor/AdminLTE/css/font-awesome.min.css
         #    - bundles/sonataadmin/vendor/jqueryui/themes/flick/jquery-ui.min.css
         #    - bundles/sonatapage/sonata-page.back.min.css
+    templates:
+        # default global templates
+        layout:  ApplicationSonataAdminBundle::layout.html.twig
 
 sonata_notification:
     admin:
