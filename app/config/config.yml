@@ -156,6 +156,7 @@ ewz_recaptcha:
     public_key:  %recaptcha_public_key%
     private_key: %recaptcha_private_key%
     locale_key:  %kernel.default_locale%
+    ajax: true
 
 # FOS comment bundle conf (uses FOS rest bundle)
 fos_comment:
@@ -180,7 +181,7 @@ ivory_ck_editor:
             language: '%locale%'
 
         normal:
-            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Subscript','Superscript','-','Blockquote','-','Link','Unlink','Anchor','-','RemoveFormat' ], '/', [ 'Undo','Redo','-','PasteFromWord','-','Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','-','SpecialChar','-','ShowBlocks' ] ]
+            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Subscript','Superscript','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight','-','Link','Unlink','Anchor','-','RemoveFormat' ], '/', [ 'Undo','Redo','-','PasteFromWord','-','Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','-','SpecialChar','-','ShowBlocks' ] ] #'JustifyBlock',
             #contentsCss: /path/to/style.css
             #contentsLanguage: fr
             language: '%locale%'
@@ -206,7 +207,7 @@ ivory_ck_editor:
             #removePlugins: 'iframe'
 
         plus:
-            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Blockquote','-','Link','Unlink','Anchor','-','RemoveFormat' ], '/', [ 'Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','HorizontalRule','-','SpecialChar'], '/', [ 'Undo','Redo','-','PasteFromWord','PasteText', 'Find','Replace','-','SelectAll','-','SpellChecker','-','Maximize','ShowBlocks' ] ]
+            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Link','Unlink','Anchor','-','RemoveFormat' ], '/', [ 'Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','HorizontalRule','-','SpecialChar'], '/', [ 'Undo','Redo','-','PasteFromWord','PasteText', 'Find','Replace','-','SelectAll','-','SpellChecker','-','Maximize','ShowBlocks' ] ]
             language: '%locale%'
             filebrowserBrowseRoute: admin_sonata_media_media_browser
             filebrowserImageBrowseRoute: admin_sonata_media_media_browser
