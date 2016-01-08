@@ -48,5 +48,8 @@
                 </field>
             </attribute-override>
         </attribute-overrides>-->
+        <many-to-one field="collection" target-entity="Application\Sonata\ClassificationBundle\Entity\Collection">
+            <join-column name="collection_id" referenced-column-name="id" nullable="true" onDelete="SET NULL"/>
+        </many-to-one>
     </entity>
 </doctrine-mapping>
