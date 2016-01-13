@@ -63,13 +63,13 @@ sonata_media:
                 - sonata.media.provider.podcast # custom
             # @todo check against actual params in production
             formats:
-                large: { width: 850, height: 510,  quality: 80}
-                large_mobile: { width: 450, height: 270,  quality: 80}
-                list_desktop: { width: 300, height: 165, quality: 80}
-                list_mobile: { width: 450, height: 246, quality: 80}
-                list_tablet: { width: 570, height: 312, quality: 80}
-                list_medium: { width: 470, height: 215, quality: 80}
-                list_program: { width: 100, height: 50, quality: 80}
+                large: { width: 850, quality: 80} #height: 510,
+                large_mobile: { width: 450, quality: 80} #height: 270,
+                list_desktop: { width: 300, quality: 80} #height: 165,
+                list_mobile: { width: 450, quality: 80} #height: 246,
+                list_tablet: { width: 570, quality: 80} #height: 312,
+                list_medium: { width: 470, quality: 80} #height: 215,
+                list_program: { width: 100, quality: 80} #height: 50,
 
                 #big: { width: 850, height: 510,  quality: 80}
                 #medium: { width: 450, height: 270,  quality: 80}
@@ -91,9 +91,9 @@ sonata_media:
         #podcast:
         #    service: sonata.media.provider.podcast
         #    filesystem: sonata.media.filesystem.podcasts
-        #image:
-            #resizer: sonata.media.resizer.square
-            # @todo check against actual params in productionyy
+        image:
+            resizer: sonata.media.resizer.square
+            # @todo check against actual params in production
 
 sonata_page:
     multisite: host
@@ -173,18 +173,77 @@ sonata_page:
 sonata_admin:
     options:
         use_select2: true
-    #assets:
-        #javascripts:
-        #    - bundles/sonataadmin/vendor/jquery/dist/jquery.min.js
-        #    - bundles/sonataadmin/vendor/jquery.scrollTo/jquery.scrollTo.js
-        #    - bundles/sonataadmin/vendor/jqueryui/ui/minified/jquery-ui.min.js
-        #    - bundles/sonataadmin/vendor/jqueryui/ui/minified/i18n/jquery-ui-i18n.min.js
-        #    - bundles/sonatapage/sonata-page.back.min.js
+    assets:
+        stylesheets:
+            # The sandbox includes default pre-optimized version of some css and js
+            # So you can either use them, and add your custom assets here
+            #   ~ or ~
+            # tweak the assetic.yml and the following lines
+            #- assetic/sonata_admin_css.css
+            #- assetic/sonata_formatter_css.css
+            #- assetic/sonata_jqueryui_css.css
+            - bundles/sonataadmin/vendor/admin-lte/dist/css/skins/skin-black.min.css
 
-        #stylesheets:
-        #    - bundles/sonataadmin/vendor/AdminLTE/css/font-awesome.min.css
-        #    - bundles/sonataadmin/vendor/jqueryui/themes/flick/jquery-ui.min.css
-        #    - bundles/sonatapage/sonata-page.back.min.css
+            # Default admin assets
+            - bundles/sonatacore/vendor/bootstrap/dist/css/bootstrap.min.css
+            - bundles/sonatacore/vendor/components-font-awesome/css/font-awesome.min.css
+            - bundles/sonatacore/vendor/ionicons/css/ionicons.min.css
+            - bundles/sonataadmin/vendor/admin-lte/dist/css/AdminLTE.min.css
+            - bundles/sonataadmin/vendor/iCheck/skins/square/blue.css
+            - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css
+            - bundles/sonataadmin/vendor/jqueryui/themes/base/jquery-ui.css
+            - bundles/sonatacore/vendor/select2/select2.css
+            - bundles/sonatacore/vendor/select2-bootstrap-css/select2-bootstrap.min.css
+            - bundles/sonataadmin/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css
+            - bundles/sonataadmin/css/styles.css
+            - bundles/sonataadmin/css/layout.css
+            - bundles/sonataadmin/css/tree.css
+
+           # Formatter assets
+            - bundles/sonataformatter/markitup/skins/sonata/style.css
+            - bundles/sonataformatter/markitup/sets/markdown/style.css
+            - bundles/sonataformatter/markitup/sets/html/style.css
+            - bundles/sonataformatter/markitup/sets/textile/style.css
+
+           # Page assets
+            - bundles/sonatapage/sonata-page.back.min.css
+
+
+        javascripts:
+            #- assetic/sonata_admin_js.js
+            #- bundles/sonataadmin/Admin.js
+            #- bundles/sonataadmin/treeview.js
+            #- assetic/sonata_jqueryui_js.js
+            #- assetic/sonata_formatter_js.js
+            - bundles/sonataformatter/vendor/ckeditor/ckeditor.js
+
+            # Default admin assets
+            - bundles/sonatacore/vendor/jquery/dist/jquery.min.js
+            - bundles/sonataadmin/vendor/jquery.scrollTo/jquery.scrollTo.min.js
+            - bundles/sonatacore/vendor/moment/min/moment.min.js
+            - bundles/sonatacore/vendor/bootstrap/dist/js/bootstrap.min.js
+            - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js
+            - bundles/sonataadmin/vendor/jqueryui/ui/minified/jquery-ui.min.js
+            - bundles/sonataadmin/vendor/jqueryui/ui/minified/i18n/jquery-ui-i18n.min.js
+            - bundles/sonataadmin/vendor/jquery-form/jquery.form.js
+            - bundles/sonataadmin/jquery/jquery.confirmExit.js
+            - bundles/sonataadmin/vendor/waypoints/lib/jquery.waypoints.min.js
+            - bundles/sonataadmin/vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js
+            - bundles/sonatacore/vendor/select2/select2.min.js
+            - bundles/sonataadmin/vendor/admin-lte/dist/js/app.min.js
+            - bundles/sonataadmin/vendor/iCheck/icheck.min.js
+            - bundles/sonataadmin/vendor/slimScroll/jquery.slimscroll.min.js
+            - bundles/sonataadmin/Admin.js
+            - bundles/sonataadmin/treeview.js
+
+            # Formatter assets
+            - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
+            - bundles/sonataformatter/markitup/sets/markdown/set.js
+            - bundles/sonataformatter/markitup/sets/html/set.js
+            - bundles/sonataformatter/markitup/sets/textile/set.js
+
+            # Page assets
+            - bundles/sonatapage/sonata-page.back.js
     templates:
         # default global templates
         layout:  ApplicationSonataAdminBundle::layout.html.twig
