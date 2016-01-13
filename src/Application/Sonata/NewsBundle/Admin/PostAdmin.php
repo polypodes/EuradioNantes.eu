@@ -74,7 +74,7 @@ class PostAdmin extends BaseAdmin
                 ->add('position', null, array('label' => 'Ordre d’importance sur la page d’accueil'))
                 ->add('image', 'sonata_type_model_list', array('required' => false), array(
                     'link_parameters' => array(
-                        'context' => 'news'
+                        'context' => 'default'
                     )
                 ))
                 ->add('type', 'choice', array('required' => true, 'label' => 'Type', 'choices' => $this->choices))
