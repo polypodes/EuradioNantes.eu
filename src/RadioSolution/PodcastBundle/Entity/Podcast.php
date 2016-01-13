@@ -200,6 +200,7 @@ class Podcast
      */
     public function setProgram(\RadioSolution\ProgramBundle\Entity\Program $program)
     {
+        $program->setPodcast($this);
         $this->program = $program;
     }
 
