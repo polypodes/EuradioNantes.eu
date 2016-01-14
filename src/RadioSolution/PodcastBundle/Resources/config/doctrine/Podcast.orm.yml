@@ -27,10 +27,11 @@ RadioSolution\PodcastBundle\Entity\Podcast:
       joinColumn:
         name: id_media_podcast
         referencedColumnName: id
+        onDelete: "SET NULL"
     post:
       targetEntity: Application\Sonata\NewsBundle\Entity\Post
       inversedBy: podcast
-      cascade: [persist]
+      cascade: [all]
       joinColumn:
         name: post_id
         referencedColumnName: id

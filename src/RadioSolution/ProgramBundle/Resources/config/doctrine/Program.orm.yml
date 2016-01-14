@@ -32,6 +32,7 @@ RadioSolution\ProgramBundle\Entity\Program:
       joinColumn:
         name: id_podcast
         referencedColumnName: id
+        onDelete: "SET NULL"
   manyToOne:
     emission:
       targetEntity: Emission
