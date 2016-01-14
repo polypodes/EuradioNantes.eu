@@ -138,7 +138,7 @@ class Podcast
      *
      * @param Application\Sonata\MediaBundle\Entity\Media $filePodcast
      */
-    public function setFilePodcast(\Application\Sonata\MediaBundle\Entity\Media $filePodcast)
+    public function setFilePodcast($filePodcast)
     {
         $this->filePodcast = $filePodcast;
     }
@@ -198,9 +198,14 @@ class Podcast
      *
      * @param RadioSolution\ProgramBundle\Entity\Program $program
      */
-    public function setProgram(\RadioSolution\ProgramBundle\Entity\Program $program)
+    public function setProgram($program)
     {
-        $program->setPodcast($this);
+        if (!empty($this->program)) {
+            $this->program->setPodcast(null);
+        }
+        if ($program) {
+            $program->setPodcast($this);
+        }
         $this->program = $program;
     }
 

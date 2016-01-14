@@ -21,15 +21,23 @@ class PodcastAdmin extends Admin
 
   protected function configureFormFields(FormMapper $formMapper)
   {
-    $formMapper
+    //$em = $this->modelManager->getEntityManager('RadioSolution\ProgramBundle\Entity\Program');
+    //$query = $em->createQuery('SELECT p FROM ProgramBundle:Program p WHERE p.podcast IS NULL');
+    //$results = $query->getResult();
+    //$programs = array();
+    //foreach ($results as $program) {
+    //  $programs[$program->__toString()] = $program;
+    //}
+    //die(var_dump($programs));
 
+    $formMapper
       ->with('Podcast', array(
             'class' => 'col-md-6'
         ))
         ->add('name', null, array('required' => true, 'label' => 'Nom du podcast'))
         ->add('home_page', null, array('required' => false, 'label' => 'Page d’accueil'))
         ->add('real_time_start', 'sonata_type_datetime_picker', array('required' => true, 'label' => 'Date de diffusion du podcast'))
-        ->add('program', 'sonata_type_model_list', array('required' => true, 'label' => 'Programme associé'))
+        ->add('program', 'sonata_type_model_list', array('required' => true, 'label' => 'Programme associé', 'btn_add' => false))
         ->add('filePodcast', 'sonata_type_model_list', array('required' => true, 'label' => 'Media podcast', 'btn_list' => false), array('link_parameters' => array('provider'=>'sonata.media.provider.podcast')))
         ->add('dlAuth', null, array('required' => false, 'data' => true, 'label' => 'Autoriser le téléchargement ?'))
       ->end()

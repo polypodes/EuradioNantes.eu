@@ -122,6 +122,8 @@ class PodcastController extends Controller
 
     public function emissionAction($id, $page = 1, $title = "Émission - Eur@dioNantes")
     {
+        if (!$page) $page = 1;
+
         $dateNow = new \DateTime();
         $em = $this->getDoctrine()->getManager();
 

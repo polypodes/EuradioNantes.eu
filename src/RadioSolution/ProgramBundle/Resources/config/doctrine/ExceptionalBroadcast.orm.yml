@@ -13,7 +13,7 @@ RadioSolution\ProgramBundle\Entity\ExceptionalBroadcast:
   manyToOne:
     Emission:
       targetEntity: RadioSolution\ProgramBundle\Entity\Emission
-      inversedBy: ExceptionalBroadcast
+      inversedBy: exceptionalBroadcasts
       #cascade: [all]
       joinColumn:
         name: emission_id

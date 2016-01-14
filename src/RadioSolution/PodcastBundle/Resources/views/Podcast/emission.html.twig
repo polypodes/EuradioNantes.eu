@@ -6,10 +6,9 @@
     	<div class="podcast-item">
         <button class="podcast-item-control podcast-item-play"></button>
         <h3 class="podcast-item-title"><a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}">{{ entity.post.title }}</a></h3>
-        <p class="podcast-item-text">{{ entity.post.abstract | truncate(80, true, "…") }}</p>
+        <p class="podcast-item-text">{{ entity.post.abstract | truncate(80, true, "…") | raw }}</p>
         <audio controls class="podcast-item-player" preload="none">
-        	<source src="{% path entity.filePodcast, 'reference' %}.ogg" type="audio/ogg" />
-    			<source src="{% path entity.filePodcast, 'reference' %}" type="audio/mpeg" />
+    			<source src="{% path entity.filePodcast, 'reference' %}" type="audio/mp3" />
     			Your browser does not support the audio tag.
         </audio>
         <a href="{{ path('sonata_news_view', {'permalink': sonata_news_permalink(entity.post)}) }}" title="Lien pour obtenir plus d'information sur ce podcast" class="podcast-item-more">Plus d'infos et commentaires</a>

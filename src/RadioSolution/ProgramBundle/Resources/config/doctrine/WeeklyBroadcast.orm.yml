@@ -16,7 +16,7 @@ RadioSolution\ProgramBundle\Entity\WeeklyBroadcast:
     Emission:
       targetEntity: Emission
       #cascade: [persist]
-      inversedBy: WeeklyBroadcast
+      inversedBy: weeklyBroadcasts
       joinColumn:
         name: emission_id
         referencedColumnName: id

@@ -143,6 +143,11 @@ class Program
         $this->podcast = $podcast;
     }
 
+    public function removePodcast()
+    {
+        $this->podcast = null;
+    }
+
     /**
      * Get podcast
      *
