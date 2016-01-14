@@ -103,10 +103,10 @@ $ make tracks
 
 ```bash
 # Euradionantes broadcast
-* * * * * php /path/to/euradionantes/app/console euradionantes:track > /dev/null
+* * * * * php /path/to/euradionantes/app/console euradionantes:track >> /path/to/euradionantes/app/logs/broadcast.cron.log
 
 # Euradionantes purge old broadcast entries
-0 1 * * * php /path/to/euradionantes/app/console euradionantes:broadcast:purge > /dev/null
+0 1 * * * php /path/to/euradionantes/app/console euradionantes:broadcast:purge >> /path/to/euradionantes/app/logs/broadcast.cron.log
 ```
 
 ## License

@@ -52,19 +52,26 @@ class NowPlayingCommand extends ContainerAwareCommand
         $terms = $this->nowPlaying->fetchTerms()->getTerms();
         $now = new \DateTime();
         $now = $now->format('d/m/Y H:i:s');
-        if(isset($terms)) {
+
+        if (isset($terms)) {
             try {
                 list($currentTrack, $broadcast, $terms, $album, $tracks) = $this->nowPlaying->execute();
             } catch (\Exception $e) {
-                $output->writeln(sprintf('%s -- ERROR %s', $now, $e->getMessage()));
+                $output->writeln(sprintf('%s -- ERROR with terms \"%s\" : %s', $now, $terms, $e->getMessage()));
                 return null;
             }
-            $output->writeln(sprintf("%s -- SUCCESS processing terms '%s' => Album #%d '%s' => Broadcast #%d => Track #%s '%s'",
-                $now, $terms, $album->getId(), $album->getTitle(), $broadcast->getId(),
-                $currentTrack->getId(), $currentTrack->getTitle()));
+            //$output->writeln(sprintf("%s -- SUCCESS processing terms '%s' => Album #%d '%s' => Broadcast #%d => Track #%s '%s'",
+            //    $now,
+            //    $terms,
+            //    $album->getId(),
+            //    $album->getTitle(),
+            //    $broadcast->getId(),
+            //    $currentTrack->getId(),
+            //    $currentTrack->getTitle()
+            //));
 
         } else {
-            $output->writeln(sprintf("%s -- SKIPPED terms are invalid => Not processed", $now));
+            $output->writeln(sprintf("%s -- SKIPPED terms \"%s\" are invalid => Not processed", $now, $terms));
         }
 
         return null;
