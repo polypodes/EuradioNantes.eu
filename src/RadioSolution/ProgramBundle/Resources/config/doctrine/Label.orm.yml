@@ -44,9 +44,6 @@ RadioSolution\ProgramBundle\Entity\Label:
     updated_at:
       type: datetime
       default: 'NOW()'
-  lifecycleCallbacks:
-    prePersist: [ prePersist ]
-    preUpdate: [ preUpdate ]
 
   oneToMany:
     albums:

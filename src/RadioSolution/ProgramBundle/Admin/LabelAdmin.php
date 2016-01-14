@@ -19,8 +19,8 @@ class LabelAdmin extends Admin
   {
     $formMapper
       ->add('published', null, array('label' => 'Publié'))
-      ->add('featuredFrom', 'sonata_type_date_picker', array('label' => 'Label du mois du'))
-      ->add('featuredTo', 'sonata_type_date_picker', array('label' => 'Au'))
+      ->add('featuredFrom', 'sonata_type_date_picker', array('label' => 'Label du mois du', 'required' => false))
+      ->add('featuredTo', 'sonata_type_date_picker', array('label' => 'Au', 'required' => false))
       ->add('title', null, array('label' => 'Titre'))
       ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
       ->add('resume', 'ckeditor', array('label' => 'Résumé', 'config_name' => 'mini'))
@@ -86,11 +86,9 @@ class LabelAdmin extends Admin
 
   //public function prePersist($label)
   //{
-  //    $this->preUpdate($label);
   //}
 
-  public function preUpdate($label)
-  {
-    $label->preUpdate();
-  }
+  //public function preUpdate($label)
+  //{
+  //}
 }
