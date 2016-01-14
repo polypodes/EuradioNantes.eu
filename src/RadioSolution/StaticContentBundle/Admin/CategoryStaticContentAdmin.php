@@ -38,10 +38,10 @@ class CategoryStaticContentAdmin extends Admin
 
   public function validate(ErrorElement $errorElement, $object)
   {
-    $errorElement
-      ->with('name')
-      ->assertLength(array('max' => 32))
-      ->end()
-    ;
+    //$errorElement
+    //  ->with('name')
+    //  ->assertLength(array('max' => 32))
+    //  ->end()
+    //;
   }
 }

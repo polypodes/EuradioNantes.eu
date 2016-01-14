@@ -8,7 +8,7 @@ RadioSolution\PodcastBundle\Entity\Podcast:
   fields:
     name:
       type: string
-      length: 100
+      length: 255
     real_time_start:
       type: datetime
     home_page:

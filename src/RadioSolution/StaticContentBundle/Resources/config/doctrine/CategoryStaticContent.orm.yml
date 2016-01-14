@@ -8,7 +8,7 @@ RadioSolution\StaticContentBundle\Entity\CategoryStaticContent:
   fields:
     name:
       type: string
-      length: 100
+      length: 255
     body:
       type: string
       nullable: true

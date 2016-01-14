@@ -90,9 +90,9 @@ class EmissionAdmin extends Admin
   public function validate(ErrorElement $errorElement, $obj)
   {
     $errorElement
-      ->with('name')
-        ->assertLength(array('max' => 32))
-      ->end()
+      //->with('name')
+      //  ->assertLength(array('max' => 32))
+      //->end()
       ->with('description')
         ->assertNotNull()
       ->end()

@@ -8,6 +8,6 @@ RadioSolution\ProgramBundle\Entity\EmissionFrequency:
   fields:
     titre:
       type: string
-      length: 100
+      length: 255
     description:
       type: string

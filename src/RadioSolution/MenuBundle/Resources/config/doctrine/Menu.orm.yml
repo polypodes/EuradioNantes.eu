@@ -8,7 +8,7 @@ RadioSolution\MenuBundle\Entity\Menu:
   fields:
     name:
       type: string
-      length: 100
+      length: 255
 
   oneToMany:
     items:

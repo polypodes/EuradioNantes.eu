@@ -34,7 +34,7 @@ class PodcastAdmin extends Admin
       ->with('Podcast', array(
             'class' => 'col-md-6'
         ))
-        ->add('name', null, array('required' => true, 'label' => 'Nom du podcast'))
+        ->add('name', null, array('label' => 'Nom du podcast'))
         ->add('home_page', null, array('required' => false, 'label' => 'Page d’accueil'))
         ->add('real_time_start', 'sonata_type_datetime_picker', array('required' => true, 'label' => 'Date de diffusion du podcast'))
         ->add('program', 'sonata_type_model_list', array('required' => true, 'label' => 'Programme associé', 'btn_add' => false))
@@ -89,7 +89,7 @@ class PodcastAdmin extends Admin
   {
   	$errorElement
     	->with('name')
-    	 ->assertLength(array('max' => 32))
+    	 ->assertLength(array('max' => 255))
     	->end()
   	;
 

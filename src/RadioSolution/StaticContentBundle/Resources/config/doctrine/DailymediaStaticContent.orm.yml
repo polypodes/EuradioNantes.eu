@@ -8,7 +8,7 @@ RadioSolution\StaticContentBundle\Entity\DailymediaStaticContent:
   fields:
     title:
       type: string
-      length: 100
+      length: 255
     link:
       type: string
     author:

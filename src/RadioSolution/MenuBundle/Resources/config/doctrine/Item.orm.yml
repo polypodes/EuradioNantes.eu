@@ -8,10 +8,10 @@ RadioSolution\MenuBundle\Entity\Item:
   fields:
     name:
       type: string
-      length: 100
+      length: 255
     url:
       type: string
-      length: 100
+      length: 255
     order_item:
       type: integer
       nullable: true

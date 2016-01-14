@@ -34,9 +34,9 @@ class EmissionFrequencyAdmin extends Admin
   public function validate(ErrorElement $errorElement, $object)
   {
     $errorElement
-      ->with('titre')
-      ->assertLength(array('max' => 32))
-      ->end()
+      //->with('titre')
+      //->assertLength(array('max' => 32))
+      //->end()
     ;
   }
 }

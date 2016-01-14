@@ -36,10 +36,10 @@ class DailymediaStaticContentAdmin extends Admin
 
   public function validate(ErrorElement $errorElement, $object)
   {
-    $errorElement
-      ->with('title')
-      ->assertLength(array('max' => 32))
-      ->end()
-    ;
+    //$errorElement
+    //  ->with('title')
+    //  ->assertLength(array('max' => 32))
+    //  ->end()
+    //;
   }
 }

@@ -11,7 +11,7 @@ RadioSolution\ProgramBundle\Entity\Emission:
   fields:
     name:
       type: string
-      length: 100
+      length: 255
     description:
       type: text
     diffusion_start:

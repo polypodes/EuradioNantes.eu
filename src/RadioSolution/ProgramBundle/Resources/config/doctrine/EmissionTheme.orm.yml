@@ -8,7 +8,7 @@ RadioSolution\ProgramBundle\Entity\EmissionTheme:
   fields:
     name:
       type: string
-      length: 100
+      length: 255
     description:
       type: string
   manyToOne:

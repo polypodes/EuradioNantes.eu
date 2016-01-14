@@ -8,7 +8,7 @@ RadioSolution\StaticContentBundle\Entity\StaticContent:
   fields:
     name:
       type: string
-      length: 100
+      length: 255
     introduction:
       type: string
       length: 255
