@@ -123,17 +123,19 @@ function initPlayer($player) {
       </div>
     `;
 
-    $player.appendChild($annotation);
+    if (data.regions.length > 0) {
+      $player.appendChild($annotation);
 
-    // display each region
-    data.regions.map((region) => {
-      wavesurfer.addRegion(region);
-      // add related annotation
-      const title = region.data.title;
-      const text = region.data.text;
-      const startAt = region.start;
-      addAnnotation($player, title, text, startAt);
-    });
+      // display each region
+      data.regions.map((region) => {
+        wavesurfer.addRegion(region);
+        // add related annotation
+        const title = region.data.title;
+        const text = region.data.text;
+        const startAt = region.start;
+        addAnnotation($player, title, text, startAt);
+      });
+    }
 
     // button
     const $button = $player.querySelector('.podcast-item-control');
@@ -225,11 +227,11 @@ function init() {
   // Wavesurfer                         //
   ////////////////////////////////////////
 
-  const players = document.querySelectorAll('.podcast-player');
+  // const players = document.querySelectorAll('.podcast-player');
 
-  for (let i = 0; i < players.length; i++) {
-    initPlayer(players[i]);
-  }
+  // for (let i = 0; i < players.length; i++) {
+  //   initPlayer(players[i]);
+  // }
 }
 
 export default init;
