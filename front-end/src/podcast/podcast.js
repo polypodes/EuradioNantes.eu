@@ -219,19 +219,19 @@ function initPlayer($player) {
  * this is a trivial example of function
  */
 function init() {
-  const $players = selectAll('.podcast-item');
+  // const $players = selectAll('.podcast-item');
 
-  each($players, initPlayer);
+  // each($players, initPlayer);
 
   ////////////////////////////////////////
   // Wavesurfer                         //
   ////////////////////////////////////////
 
-  // const players = document.querySelectorAll('.podcast-player');
+  const players = document.querySelectorAll('.podcast-player');
 
-  // for (let i = 0; i < players.length; i++) {
-  //   initPlayer(players[i]);
-  // }
+  for (let i = 0; i < players.length; i++) {
+    initPlayer(players[i]);
+  }
 }
 
 export default init;
