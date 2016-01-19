@@ -57,7 +57,7 @@ class NowPlayingCommand extends ContainerAwareCommand
             try {
                 list($currentTrack, $broadcast, $terms, $album, $tracks) = $this->nowPlaying->execute();
             } catch (\Exception $e) {
-                $output->writeln(sprintf('%s -- ERROR with terms \"%s\" : %s', $now, $terms, $e->getMessage()));
+                $output->writeln(sprintf('%s -- ERROR with terms "%s" : %s', $now, $terms, $e->getMessage()));
                 return null;
             }
             //$output->writeln(sprintf("%s -- SUCCESS processing terms '%s' => Album #%d '%s' => Broadcast #%d => Track #%s '%s'",
@@ -71,7 +71,7 @@ class NowPlayingCommand extends ContainerAwareCommand
             //));
 
         } else {
-            $output->writeln(sprintf("%s -- SKIPPED terms \"%s\" are invalid => Not processed", $now, $terms));
+            $output->writeln(sprintf("%s -- No valid terms found => Not processed", $now));
         }
 
         return null;

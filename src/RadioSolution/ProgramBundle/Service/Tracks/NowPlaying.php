@@ -126,7 +126,7 @@ class NowPlaying implements ContainerAwareInterface
             "EuradioNantes - La diversite europeenne au creux de l'oreille"
         );
 
-        if(in_array(trim($this->terms), $unProcessable)) {
+        if(in_array($this->terms, $unProcessable)) {
             $this->terms = null;
         }
 
@@ -161,7 +161,7 @@ class NowPlaying implements ContainerAwareInterface
         $trackList = null;
         $code = false;
 
-        if(isset($this->terms)) {
+        if (isset($this->terms)) {
             list($currentTrackTitle, $terms, $album, $images, $tracks) = $this->retriever->search($this->terms);
             try {
                 list($code, $albumModel) = $this->saveAlbum($album, $images, $terms);
