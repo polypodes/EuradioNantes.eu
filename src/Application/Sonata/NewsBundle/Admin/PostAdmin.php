@@ -115,10 +115,10 @@ class PostAdmin extends BaseAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('custom', 'string', array('template' => 'SonataNewsBundle:Admin:list_post_custom.html.twig', 'label' => 'Post'))
+            ->add('custom', 'string', array('template' => 'ApplicationSonataNewsBundle:Admin:list_post_custom.html.twig', 'label' => 'Post'))
             ->add('type', null, array('label' => 'Type', 'values' => $this->choices))
-            ->add('enabled', null, array('editable' => true))
-            ->add('position', null, array('editable' => true))
+            ->add('enabled', null, array('label' => 'Publié', 'editable' => true))
+            ->add('position', null, array('label' => 'Importance sur l’accueil', 'editable' => true))
             ->add('publicationDateStart')
         ;
     }
@@ -128,7 +128,8 @@ class PostAdmin extends BaseAdmin
         parent::configureDatagridFilters($datagridMapper);
 
         $datagridMapper
-            ->add('type')
+            ->add('type', null, array('label' => 'Type'))
+            ->add('position', null, array('label' => 'Importance sur l’accueil'))
         ;
     }
 
