@@ -209,7 +209,7 @@ class TrackRetriever implements ContainerAwareInterface
     public function prepareItems($terms = "")
     {
         if (empty($terms) || !is_string($terms)) {
-            throw new \InvalidArgumentException(sprintf("terms argument passed to %s must be a string and cannot be null", __METHOD__));
+            throw new \InvalidArgumentException(sprintf("Terms argument passed to %s must be a string and cannot be null", __METHOD__));
         }
         $items = explode(" - ", $terms);
         $artist = $title = $albumName = null;
