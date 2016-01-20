@@ -380,12 +380,12 @@ class NowPlaying implements ContainerAwareInterface
             ->getOneOrNullResult();
 
         /** @var Track */
-        if (!empty($lastBroadcasted)) {
+        if (!empty($lastBroadcast)) {
             $lastBroadcastedTrack = $lastBroadcast->getTrack();
         }
 
         // Broadcast track already processed in last db entry
-        if (!empty($lastBroadcastedTrack && !empty($track))) {
+        if (!empty($lastBroadcastedTrack) && !empty($track)) {
             if($track->getId() === $lastBroadcastedTrack->getId()) {
                 return array(self::ALREADY_EXISTS, $lastBroadcast);
             }
