@@ -380,7 +380,7 @@ class NowPlaying implements ContainerAwareInterface
             ->getOneOrNullResult();
 
         /** @var Track */
-        if ($lastBroadcastedTrack) {
+        if (!empty($lastBroadcasted)) {
             $lastBroadcastedTrack = $lastBroadcast->getTrack();
         }
 
