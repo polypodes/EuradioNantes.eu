@@ -27,9 +27,9 @@
     <img src="//unsplash.it/50x50" alt="" class="author-img">
     {% endif %#}
     <div class="author-text">
-      {% set authorname = post.author.fullname != '' ? post.author.fullname : post.author.username %}
       <div class="author-sup">Rédigé par</div>
-      <a href="#" data-clickable-target="true" title="Lien vers les articles de {{ authorname }}" class="author-title">{{ authorname }}</a>
+      {#<a href="#" data-clickable-target="true" title="Lien vers les articles de {{ authorname }}" class="author-title">{{ authorname }}</a>#}
+      <span class="author-title">{{ post.author.fullname }}</span>
     </div>
   </div>
   {% endif %}

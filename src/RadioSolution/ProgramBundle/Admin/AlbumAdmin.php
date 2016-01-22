@@ -119,9 +119,7 @@ class AlbumAdmin extends Admin
             ->add('title')
             ->add('artist')
             ->add('label')
-            ->add('manufacturer')
-            ->add('publisher')
-            ->add('studio')
+            ->add('created_at', null, array('label' => 'Ajouté le'))
             ->add('featuredFrom')
             ->add('featuredTo')
             ->add('published')
@@ -133,10 +131,8 @@ class AlbumAdmin extends Admin
             ->addIdentifier('title')
             ->add('artist')
             ->add('label')
-            ->add('manufacturer')
-            ->add('publisher')
-            ->add('studio')
             ->add('featuredPeriod', 'string', array('label' => 'Album de la semaine'))
+            ->add('created_at', null, array('label' => 'Ajouté le'))
             ->add('published', 'boolean', array('label' => 'Publié', 'editable' => true))
         ;
     }

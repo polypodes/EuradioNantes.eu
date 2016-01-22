@@ -119,14 +119,18 @@ class NowPlaying implements ContainerAwareInterface
     /**
      * @return NowPlaying
      */
-    public function fetchTerms()
+    public function fetchTerms($terms = null)
     {
-        $this->terms = trim(file_get_contents($this->nowPlayingUrl));
+        if ($terms) {
+            $this->terms = $terms;
+        } else {
+            $this->terms = trim(file_get_contents($this->nowPlayingUrl));
+        }
         $unProcessable = array(
             "EuradioNantes - La diversite europeenne au creux de l'oreille"
         );
 
-        if(in_array(trim($this->terms), $unProcessable)) {
+        if (in_array($this->terms, $unProcessable)) {
             $this->terms = null;
         }
 
@@ -161,7 +165,7 @@ class NowPlaying implements ContainerAwareInterface
         $trackList = null;
         $code = false;
 
-        if(isset($this->terms)) {
+        if (isset($this->terms)) {
             list($currentTrackTitle, $terms, $album, $images, $tracks) = $this->retriever->search($this->terms);
             try {
                 list($code, $albumModel) = $this->saveAlbum($album, $images, $terms);
@@ -373,13 +377,15 @@ class NowPlaying implements ContainerAwareInterface
             ->setFirstResult(0)
             ->setMaxResults(1)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
 
         /** @var Track */
-        $lastBroadcastedTrack = $lastBroadcast->getTrack();
+        if (!empty($lastBroadcast)) {
+            $lastBroadcastedTrack = $lastBroadcast->getTrack();
+        }
 
         // Broadcast track already processed in last db entry
-        if (!empty($lastBroadcastedTrack && !empty($track))) {
+        if (!empty($lastBroadcastedTrack) && !empty($track)) {
             if($track->getId() === $lastBroadcastedTrack->getId()) {
                 return array(self::ALREADY_EXISTS, $lastBroadcast);
             }
@@ -451,7 +457,7 @@ class NowPlaying implements ContainerAwareInterface
             foreach ($tracks as $position => $title) {
                 if ("titre inconnu" == trim(strtolower($title))) {
                     $this->logger->info(
-                        sprintf('INGORING %s - %s TRACK INFOS while processsing %s (album #%s) track list',
+                        sprintf('IGNORING %s - %s TRACK INFOS while processsing %s (album #%s) track list',
                             $terms, $title, $albumModel->getId()));
                     continue;
                 }

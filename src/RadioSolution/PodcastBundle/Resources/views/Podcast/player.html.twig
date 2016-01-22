@@ -1,6 +1,6 @@
 {# src/RadioSolution/PodcastBundle/Resources/views/Podcast/player.html.twig #}
 {% block podcast_player %}
-    {% if podcast is defined %}
+    {% if podcast and podcast.filePodcast %}
         {# dump(media) #}
         <div id="podcast-player">
             {#<h2>{{ podcast.name }}</h2>#}

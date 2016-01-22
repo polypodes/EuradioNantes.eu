@@ -37,4 +37,15 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+    public function getFullname()
+    {
+        if (!empty($this->firstname) || !empty($this->lastname)) {
+            if (empty($this->lastname)) return ucfirst($this->firstname);
+            if (empty($this->firstname)) return ucfirst($this->lastname);
+            return ucwords($this->firstname . ' ' . $this->lastname);
+        }
+
+        return ucfirst($this->username);
+    }
 }

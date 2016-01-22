@@ -121,7 +121,9 @@ class TrackRetriever implements ContainerAwareInterface
             ->setKeywords(sprintf("%s %s %s", $artist, $albumName, $title));
         $xmlResponse = $this->apaiIO->runOperation($search);
         $xml         = new \SimpleXMLElement($xmlResponse);
-
+        if ($xml->Error) {
+            throw new \Exception(sprintf('ERROR %s : %s', $xml->Error->Code, $xml->Error->Message));
+        }
         $result = isset($xml->Items->Item->ItemAttributes) ? $xml->Items->Item->ItemAttributes : null;
 
         // In cas this i not the original Artist' album but a compilation instead
@@ -207,7 +209,7 @@ class TrackRetriever implements ContainerAwareInterface
     public function prepareItems($terms = "")
     {
         if (empty($terms) || !is_string($terms)) {
-            throw new \InvalidArgumentException(sprintf("terms argument passed to %s must be a string and cannot be null", __METHOD__));
+            throw new \InvalidArgumentException(sprintf("Terms argument passed to %s must be a string and cannot be null", __METHOD__));
         }
         $items = explode(" - ", $terms);
         $artist = $title = $albumName = null;
@@ -217,24 +219,27 @@ class TrackRetriever implements ContainerAwareInterface
             $excluding[] = $i;
         }
         $excluding = array_merge($excluding,
-            array('Album', 'inconnu', "[COVER]"));
+            array('Album', 'inconnu', "[COVER]", '(COVER)', '[Explicit]'));
 
         if (isset($items[0])) {
-            $artist = explode("(", $items[0]);
-            $artist = trim(array_shift($artist));
+            $artist = trim($items[0]);
             $artist = trim(str_replace($excluding, "", $artist));
+            $artist = explode("(", $artist);
+            $artist = trim(array_shift($artist));
         }
 
         if (isset($items[1])) {
-            $title = explode("(", $items[1]);
-            $title = array_shift($title);
+            $title = trim($items[1]);
             $title = trim(str_replace($excluding, "", $title));
+            $title = explode("(", $title);
+            $title = array_shift($title);
         }
 
         if (isset($items[2])) {
-            $albumName = explode("(", $items[2]);
-            $albumName = array_shift($albumName);
+            $albumName = trim($items[2]);
             $albumName = trim(str_replace($excluding, "", $albumName));
+            $albumName = explode("(", $albumName);
+            $albumName = array_shift($albumName);
         }
 
         return array($artist, $title, $albumName);

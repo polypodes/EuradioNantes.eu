@@ -15,6 +15,7 @@ namespace RadioSolution\ProgramBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 use RadioSolution\ProgramBundle\Service\Tracks\NowPlaying;
 
@@ -37,6 +38,11 @@ class NowPlayingCommand extends ContainerAwareCommand
         $this
             ->setName('euradionantes:track')
             ->setDescription('Get and record the current track and its album details')
+            ->addArgument(
+                'terms',
+                InputArgument::OPTIONAL,
+                'Format: "Artist - Track - Album"'
+            )
         ;
     }
 
@@ -48,8 +54,9 @@ class NowPlayingCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $terms = $input->getArgument('terms');
         $this->nowPlaying = $this->getContainer()->get("radiosolution.program.nowPlaying");
-        $terms = $this->nowPlaying->fetchTerms()->getTerms();
+        $terms = $this->nowPlaying->fetchTerms($terms)->getTerms();
         $now = new \DateTime();
         $now = $now->format('d/m/Y H:i:s');
 
@@ -57,7 +64,7 @@ class NowPlayingCommand extends ContainerAwareCommand
             try {
                 list($currentTrack, $broadcast, $terms, $album, $tracks) = $this->nowPlaying->execute();
             } catch (\Exception $e) {
-                $output->writeln(sprintf('%s -- ERROR with terms \"%s\" : %s', $now, $terms, $e->getMessage()));
+                $output->writeln(sprintf('%s -- ERROR with terms "%s" : %s', $now, $terms, $e->getMessage()));
                 return null;
             }
             //$output->writeln(sprintf("%s -- SUCCESS processing terms '%s' => Album #%d '%s' => Broadcast #%d => Track #%s '%s'",
@@ -71,7 +78,7 @@ class NowPlayingCommand extends ContainerAwareCommand
             //));
 
         } else {
-            $output->writeln(sprintf("%s -- SKIPPED terms \"%s\" are invalid => Not processed", $now, $terms));
+            $output->writeln(sprintf("%s -- No valid terms found => Not processed", $now));
         }
 
         return null;
