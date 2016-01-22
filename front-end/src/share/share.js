@@ -32,7 +32,7 @@ function init() {
       window.open(
         this.getAttribute('href'),
         this.getAttribute('title'),
-        'width=495,height=495,left=320,top=445,scrollbars=yes'
+        'width=495,height=495,left=320,top=445'
       );
     });
   });
