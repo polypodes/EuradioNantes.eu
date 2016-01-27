@@ -18,7 +18,7 @@
           <h2 class="bloc-content-title">
             <a href="{{ path('playlist', {'slug': top.slug}) }}" data-clickable-target="true" title="Voir « {{ top.title }} »">{{ top.title }}</a>
           </h2>
-          {{ top.resume }}
+          {{ top.resume|raw }}
         </div>
       </div>
     </article>
@@ -38,7 +38,7 @@
             <h2 class="bloc-content-title">
               <a href="{{ path('playlist', {'slug': playlist.slug}) }}" data-clickable-target="true" title="Voir « {{ playlist.title }} »">{{ playlist.title }}</a>
             </h2>
-            {{ playlist.resume }}
+            {{ playlist.resume|raw }}
           </div>
         </div>
       </article>
