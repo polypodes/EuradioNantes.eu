@@ -43,7 +43,7 @@ class EmissionController extends Controller
 
         if (!empty($_GET['theme'])) {
             $query = $query
-                ->andWhere('e.theme = :theme')
+                ->andWhere('e.collection = :theme')
                 ->setParameter('theme', $_GET['theme'])
             ;
         }
@@ -74,8 +74,12 @@ class EmissionController extends Controller
 
 		$themes = $this
             ->getDoctrine()
-            ->getRepository('ProgramBundle:EmissionTheme')
-            ->findAll()
+            ->getRepository('ApplicationSonataClassificationBundle:Collection')
+            ->createQueryBuilder('c')
+            ->where('c.context = :context')
+            ->setParameter('context', 'emission')
+            ->getQuery()
+            ->getResult()
         ;
 
         $emissions = $this
