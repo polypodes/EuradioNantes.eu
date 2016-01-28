@@ -70,6 +70,7 @@ sonata_media:
                 list_tablet: { width: 570, quality: 80} #height: 312,
                 list_medium: { width: 470, quality: 80} #height: 215,
                 list_program: { width: 100, quality: 80} #height: 50,
+                list_ecoute: { width: 86, quality: 80}
 
                 #big: { width: 850, height: 510,  quality: 80}
                 #medium: { width: 450, height: 270,  quality: 80}
