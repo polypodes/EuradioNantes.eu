@@ -35,12 +35,14 @@
 
   &-submit {
     display: inline-block;
-    width: 155px;
+    width: auto;
+    padding-left: 9px;
     padding-right: 9px;
     margin-top: 24px;
     color: $col01;
     background-color: $col07;
     border: 0;
+    text-indent: 0;
   }
 
   &-quick {
