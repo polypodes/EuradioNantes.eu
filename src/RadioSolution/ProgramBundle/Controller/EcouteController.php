@@ -41,7 +41,8 @@ class EcouteController extends Controller
         ;
 
         $broadcasts = $em
-            ->createQuery("SELECT b FROM ProgramBundle:Broadcast b ORDER BY b.broadcasted DESC")
+            ->createQuery("SELECT b FROM ProgramBundle:Broadcast b WHERE b.broadcasted > :mindate ORDER BY b.broadcasted DESC")
+            ->setParameters(array('mindate' => (new \DateTime())->setTime(0,0)))
             ->setMaxResults(20)
             //->setParameters(array('start' => $start, 'stop' => $stop))
             ->getResult()
