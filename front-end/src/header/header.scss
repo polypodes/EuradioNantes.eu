@@ -208,6 +208,7 @@
     // scss-lint:disable MergeableSelector QualifyingElement
     ul.header-level2-show {
       opacity: 1;
+      visibility: visible;
     }
 
     // scss-lint:disable SelectorDepth MergeableSelector
@@ -216,6 +217,7 @@
       top: 0;
       width: 100%;
       opacity: 0;
+      visibility: hidden;
       transform: translateX(50%);
       transition: all .3s ease-in-out;
     }
