@@ -27,7 +27,7 @@ class EcouteController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $program = $em
-            ->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop > :now AND p.time_start >= :now AND p.time_start < p.time_stop  ORDER BY p.time_start ASC, p.time_stop DESC")
+            ->createQuery("SELECT p FROM ProgramBundle:Program p WHERE p.time_stop > :now AND p.time_start <= :now AND p.time_start < p.time_stop  ORDER BY p.time_start ASC, p.time_stop DESC")
             ->setParameters(array('now' => new \Datetime()))
             ->setMaxResults(1)
             ->getOneOrNullResult()
