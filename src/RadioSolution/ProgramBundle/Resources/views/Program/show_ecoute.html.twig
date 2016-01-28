@@ -75,6 +75,8 @@
             {% if terms|length > 2 %}<span class="playlist-album">{{ terms[2] }}</span>{% endif %}
           {% endif -%}
         </li>
+      {% else %}
+        <li class="playlist-item"><em>Aucune information pour le moment</em></li>
       {% endfor %}
     </ol>
   </section>
