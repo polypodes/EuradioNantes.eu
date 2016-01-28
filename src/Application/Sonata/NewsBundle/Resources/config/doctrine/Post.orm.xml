@@ -59,5 +59,9 @@
         <many-to-one field="collection" target-entity="Application\Sonata\ClassificationBundle\Entity\Collection">
             <join-column name="collection_id" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
         </many-to-one>
+
+        <many-to-one field="author" target-entity="Application\Sonata\UserBundle\Entity\User">
+            <join-column name="author_id" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
+        </many-to-one>
     </entity>
 </doctrine-mapping>
