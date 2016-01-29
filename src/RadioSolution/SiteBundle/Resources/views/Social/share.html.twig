@@ -1,5 +1,7 @@
-{% set url = mremi_url_shorten('bitly', app.request.getUri()) %}
-{% if text is not defined %}{% set text = '' %}{% endif %}
+{%- set currentPath = app.request.uri -%}
+{%- set url = mremi_url_shorten('bitly', currentPath) -%}
+
+{%- if text is not defined %}{% set text = '' %}{% endif -%}
 <div class="share">
   <span class="share-title">Partager cet article</span>
   <div class="share-buttons">
