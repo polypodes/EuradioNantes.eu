@@ -18,6 +18,8 @@ class PostController extends BaseController
             ->getRepository('ApplicationSonataNewsBundle:Post')
             ->createQueryBuilder('p')
             ->where('p.enabled = 1')
+            ->andwhere('p.publicationDateStart <= :now')
+            ->setParameter('now', new \Datetime())
             ->addOrderBy('p.publicationDateStart', 'DESC')
         ;
 
@@ -90,7 +92,8 @@ class PostController extends BaseController
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em
-            ->createQuery("SELECT p FROM ApplicationSonataNewsBundle:Post p WHERE p.enabled = 1 ORDER BY p.publicationDateStart DESC")
+            ->createQuery("SELECT p FROM ApplicationSonataNewsBundle:Post p WHERE p.enabled = 1 AND p.publicationDateStart <= :now ORDER BY p.publicationDateStart DESC")
+            ->setParameter('now', new \Datetime())
             ->setMaxResults($limit)
         ;
 
