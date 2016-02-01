@@ -81,7 +81,7 @@
         <h2 class="bloc-content-title">
           <a href="{{ path('sonata_news_view', { 'permalink': sonata_news_permalink(rel) }) }}" data-clickable-target="true" title="Lire l'article « {{ rel.title }} »">{{ rel.title }}</a>
         </h2>
-        <p class="bloc-content-intro">{{ post.abstract|truncate(80, true, '…') | raw }}</p>
+        <p class="bloc-content-intro">{{ rel.abstract|truncate(80, true, '…') | raw }}</p>
       </div>
     </div>
   </article>
