@@ -41,14 +41,14 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <!--<attribute-overrides>
+        <attribute-overrides>
             <attribute-override name="slug">
-                <field name="slug" type="string" column="slug">
-                    <gedmo:slug fields="title" />
+                <field type="string" column="slug">
+                    <gedmo:slug unique="true" fields="title" />
                 </field>
             </attribute-override>
         </attribute-overrides>
-        <association-overrides>
+        <!--<association-overrides>
             <association-override name="collection">
                 <join-columns>
                     <join-column name="collection_id" referenced-column-name="id" nullable="true" onDelete="SET NULL"/>

@@ -34,15 +34,15 @@ class AlbumAdmin extends Admin
         $subject = $this->getSubject();
         $isNew = empty($subject->getTitle());
 
-        if ($isNew) {
-            $formMapper
-            ->with($this->trans('Recherche'))
-                ->add('search', 'text', array('label' => 'Recherche', 'required' => false))
-                ->setHelps(array(
-                    'search' => $this->trans('Recherche au format « Artiste - Album » ou « Artiste - Chanson - Album »'),
-                ))
-            ->end();
-        }
+        //if ($isNew) {
+        //    $formMapper
+        //    ->with($this->trans('Recherche'))
+        //        ->add('search', 'text', array('label' => 'Recherche', 'required' => false))
+        //        ->setHelps(array(
+        //            'search' => $this->trans('Recherche au format « Artiste - Album » ou « Artiste - Chanson - Album »'),
+        //        ))
+        //    ->end();
+        //}
 
         $formMapper
             //->with($this->trans('Recherche'))->end()

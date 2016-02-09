@@ -47,13 +47,21 @@ class PostAdmin extends BaseAdmin
         //parent::configureFormFields($formMapper); //can't use parent cause we cant change field order in formmaper after
         $formMapper
             ->with('Post', array(
-                    'class' => 'col-md-8'
-                ))
+                'class' => 'col-md-8'
+            ))
                 ->add('author', 'sonata_type_model_list')
                 ->add('title')
                 ->add('short_title', 'text', array('required' => false, 'label' => "Titre court"))
+                ->add('type', 'choice', array('required' => true, 'label' => 'Type', 'choices' => $this->choices))
+
                 ->add('abstract', 'ckeditor', array('required' => true))
                 ->add('content', 'ckeditor', array())
+                ->add('image', 'sonata_type_model_list', array('required' => false), array(
+                    'link_parameters' => array(
+                        'context' => 'default',
+                        'provider' => 'sonata.media.provider.image',
+                    ),
+                ))
                 //->add('content', 'sonata_formatter_type', array(
                 //    'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
                 //    'format_field'   => 'contentFormatter',
@@ -67,28 +75,20 @@ class PostAdmin extends BaseAdmin
                 //    'listener'       => true,
                 //))
             ->end()
-            ->with('Status', array(
-                    'class' => 'col-md-4'
-                ))
+
+            ->with('Statut', array(
+                'class' => 'col-md-4'
+            ))
                 ->add('enabled', null, array('required' => false))
-                ->add('position', null, array('label' => 'Ordre d’importance sur la page d’accueil'))
-                ->add('image', 'sonata_type_model_list', array('required' => false), array(
-                    'link_parameters' => array(
-                        'context' => 'default',
-                        'provider' => 'sonata.media.provider.image',
-                    ),
-                ))
-                ->add('type', 'choice', array('required' => true, 'label' => 'Type', 'choices' => $this->choices))
                 ->add('publicationDateStart', 'sonata_type_datetime_picker', array('dp_side_by_side' => true, 'required' => false))
-                ->add('commentsCloseAt', 'sonata_type_datetime_picker', array('dp_side_by_side' => true, 'required' => false))
-                ->add('commentsEnabled', null, array('required' => false))
-                ->add('commentsDefaultStatus', 'sonata_news_comment_status', array('expanded' => true))
+                ->add('position', null, array('label' => 'Ordre d’importance sur la page d’accueil'))
+                ->add('slug', null, array('required' => false, 'label' => 'Titre URL'))
             ->end()
 
             ->with('Classification', array(
                 'class' => 'col-md-4'
-                ))
-                ->add('slug', null, array('required' => false, 'label' => 'Titre URL'))
+            ))
+
                 ->add('collection', 'sonata_type_model_list', array('required' => true, 'btn_add' => false))
                 ->add('tags', 'sonata_type_model_autocomplete', array(
                     'property' => 'name',
@@ -96,9 +96,19 @@ class PostAdmin extends BaseAdmin
                     'required' => false
                 ))
             ->end()
+
+            ->with('Commentaires', array(
+                'class' => 'col-md-4'
+            ))
+                ->add('commentsCloseAt', 'sonata_type_datetime_picker', array('dp_side_by_side' => true, 'required' => false))
+                ->add('commentsEnabled', null, array('required' => false))
+                ->add('commentsDefaultStatus', 'sonata_news_comment_status', array('expanded' => true))
+            ->end()
+
+
             ->with('Articles associés', array(
                 'class' => 'col-md-4'
-                ))
+            ))
                 ->add('relatedPosts', 'sonata_type_model_autocomplete', array(
                     'label' => 'Actualités et Podcasts associés',
                     'property' => 'title',

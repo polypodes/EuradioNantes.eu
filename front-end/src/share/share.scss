@@ -23,6 +23,7 @@
   &-twitter,
   &-facebook,
   &-google,
+  &-youtube,
   &-flickr,
   &-embeded,
   &-download {
@@ -73,6 +74,14 @@
 
     &:hover {
       background-color: darken($col10, 10%);
+    }
+  }
+
+  &-youtube {
+    background-color: $col12;
+
+    &:hover {
+      background-color: darken($col12, 10%);
     }
   }
 
@@ -154,6 +163,7 @@
     &-twitter,
     &-facebook,
     &-google,
+    &-youtube,
     &-flickr,
     &-embeded,
     &-download {
