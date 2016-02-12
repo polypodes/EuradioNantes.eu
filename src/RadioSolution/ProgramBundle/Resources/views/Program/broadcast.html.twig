@@ -35,7 +35,7 @@
 		            <strong class="playlist-track-title">{{ broadcast.track.title }}&nbsp;</strong>
 		            <span class="playlist-artist">{{ broadcast.track.artist }}&nbsp;</span>
 		            <span class="playlist-album">
-                  {%- if broadcast.track.album.featuredFrom and broadcast.track.album.featuredTo -%}
+                  {%- if broadcast.track.album.featuredFrom and broadcast.track.album.featuredTo and broadcast.track.album.published -%}
                     <a href="{{ path('album', {'slug': broadcast.track.album.slug }) }}">{{ broadcast.track.album.title }}</a>
                   {%- else -%}
                     {{ broadcast.track.album.title }}
