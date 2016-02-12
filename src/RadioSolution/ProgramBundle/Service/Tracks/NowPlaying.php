@@ -127,7 +127,8 @@ class NowPlaying implements ContainerAwareInterface
             $this->terms = trim(file_get_contents($this->nowPlayingUrl));
         }
         $unProcessable = array(
-            "EuradioNantes - La diversite europeenne au creux de l'oreille"
+            "EuradioNantes - La diversite europeenne au creux de l'oreille",
+            "Euradionantes 101.3 FM - L'Europe vue d'une autre oreille",
         );
 
         if (in_array($this->terms, $unProcessable)) {
