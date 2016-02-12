@@ -11,7 +11,8 @@ class HomeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em
-            ->createQuery("SELECT p FROM ApplicationSonataNewsBundle:Post p WHERE p.enabled = 1 ORDER BY p.position DESC, p.publicationDateStart DESC")
+            ->createQuery("SELECT p FROM ApplicationSonataNewsBundle:Post p WHERE p.enabled = 1 AND p.publicationDateStart <= :now ORDER BY p.position DESC, p.publicationDateStart DESC")
+            ->setParameter('now', new \DateTime())
             ->setMaxResults(18)
         ;
 
