@@ -30,14 +30,14 @@ import {selectAll, each} from '../util/util';
  */
 function common() {
   // on air (in header)
-  const elements = selectAll('.player-svg, .player-what');
+  const elements = selectAll('.player-svg');
 
   if (elements.length > 0) {
     each(elements, function(el, i){
       el.addEventListener('click', function(e) {
         e.preventDefault();
         if (ecoutePath) {
-          window.open(ecoutePath, 'Le direct - Euradionantes','width=1010,height=495,left=320,top=445,scrollbars=yes');
+          window.open(ecoutePath, 'Le direct - Euradionantes','width=1010,height=495,left=320,top=<445></445>,scrollbars=yes');
         }
       });
     });
