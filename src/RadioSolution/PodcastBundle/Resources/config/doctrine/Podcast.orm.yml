@@ -11,9 +11,6 @@ RadioSolution\PodcastBundle\Entity\Podcast:
       length: 255
     real_time_start:
       type: datetime
-    home_page:
-      type: boolean
-      default: false
     dlAuth:
       type: boolean
       default: true

@@ -37,8 +37,6 @@ class Podcast
      */
     private $post;
 
-    private $home_page;
-
     /**
      * @var RadioSolution\ProgramBundle\Entity\Program
      */
@@ -227,14 +225,6 @@ class Podcast
     public function getImageEmission()
     {
     	return $this->program->getEmission()->getMedia();
-    }
-
-    public function getHomePage(){
-    	return $this->home_page;
-    }
-
-    public function setHomePage($homePage){
-    	$this->home_page=$homePage;
     }
 
     public function getMarkers()
