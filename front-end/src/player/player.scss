@@ -221,7 +221,7 @@
 
     &-track {
       display: block;
-      max-width: 460px;
+      max-width: 320px;
       overflow: hidden;
       line-height: 15px;
       text-overflow: ellipsis;
@@ -249,6 +249,14 @@
       position: absolute;
       top: 12px;
       right: 15px;
+    }
+  }
+}
+
+@media (min-width: $screen-lg) {
+  .player {
+    &-track {
+      max-width: 460px;
     }
   }
 }
