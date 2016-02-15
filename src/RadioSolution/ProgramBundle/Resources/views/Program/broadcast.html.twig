@@ -27,31 +27,31 @@
 		{% if entities|length > 0 -%}
 			<section class="walkman-container walkman-playlist">
 
-		    <ol class="playlist-list">
-		      {% for broadcast in entities -%}
-		        <li class="playlist-item">
-		          <time class="playlist-item-time" datetime="{{ broadcast.broadcasted|date('Y-m-d H:i') }}">{{ broadcast.broadcasted|date('H:i') }}&nbsp;</time>
-		          {% if broadcast.track %}
-		            <strong class="playlist-track-title">{{ broadcast.track.title }}&nbsp;</strong>
-		            <span class="playlist-artist">{{ broadcast.track.artist }}&nbsp;</span>
-		            <span class="playlist-album">
-                  {%- if broadcast.track.album.featuredFrom and broadcast.track.album.featuredTo -%}
-                    <a href="{{ path('album', {'slug': broadcast.track.album.slug }) }}">{{ broadcast.track.album.title }}</a>
-                  {%- else -%}
-                    {{ broadcast.track.album.title }}
-                  {%- endif -%}
-                </span>
-		          {% else %}
-		            {% set terms = broadcast.terms|split(' - ') %}
-		            <strong class="playlist-track-title">{{ terms[terms|length > 1 ? 1 : 0] }}</strong>
-		            {% if terms|length > 1 %}<span class="playlist-artist">{{ terms[0] }}&nbsp;</span>{% endif %}
-		            {% if terms|length > 2 %}<span class="playlist-album">{{ terms[2] }}</span>{% endif %}
-		          {% endif -%}
-		        </li>
-		      {% endfor %}
-		    </ol>
-	  	</section>
-	  {%- else -%}
+    		    <ol class="playlist-list">
+    		      {% for broadcast in entities -%}
+    		        <li class="playlist-item">
+    		          <time class="playlist-item-time" datetime="{{ broadcast.broadcasted|date('Y-m-d H:i') }}">{{ broadcast.broadcasted|date('H:i') }}&nbsp;</time>
+    		          {% if broadcast.track %}
+    		            <strong class="playlist-track-title">{{ broadcast.track.title }}&nbsp;</strong>
+    		            <span class="playlist-artist">{{ broadcast.track.artist }}&nbsp;</span>
+    		            <span class="playlist-album">
+                      {%- if broadcast.track.album.featuredFrom and broadcast.track.album.featuredTo and broadcast.track.album.published -%}
+                        <a href="{{ path('album', {'slug': broadcast.track.album.slug }) }}">{{ broadcast.track.album.title }}</a>
+                      {%- else -%}
+                        {{ broadcast.track.album.title }}
+                      {%- endif -%}
+                    </span>
+    		          {% else %}
+    		            {% set terms = broadcast.terms|split(' - ') %}
+    		            <strong class="playlist-track-title">{{ terms[terms|length > 1 ? 1 : 0] }}</strong>
+    		            {% if terms|length > 1 %}<span class="playlist-artist">{{ terms[0] }}&nbsp;</span>{% endif %}
+    		            {% if terms|length > 2 %}<span class="playlist-album">{{ terms[2] }}</span>{% endif %}
+    		          {% endif -%}
+    		        </li>
+    		      {% endfor %}
+    		    </ol>
+    	  	</section>
+        {%- else -%}
 			<p><em>Aucune information disponible</em></p>
 		{%- endif %}
 
