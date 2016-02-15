@@ -4,6 +4,8 @@
 
 // Mobile first
 .bloc-content {
+  display: inline-block;
+  width: 100%;
   max-width: 570px;
   margin: 0 auto;
   margin-bottom: 25px;
