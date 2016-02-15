@@ -136,3 +136,45 @@ $headings-color:          inherit !default;
     transform: translate3d(-50%, 0, 0);
   }
 }
+
+@-webkit-keyframes slideInRight {
+  from {
+    visibility: visible;
+    transform: translate3d(100vw, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes slideOutRight {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    visibility: hidden;
+    transform: translate3d(100vw, 0, 0);
+  }
+}
+
+@-webkit-keyframes slideInRightLevel2 {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes slideOutRightLevel2 {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
