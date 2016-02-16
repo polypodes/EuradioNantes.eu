@@ -35,7 +35,7 @@ function initPlayer() {
   
   if(iOS) {
     console.log('IOS');
-    simulateClick('player');
+    dispatchMouseEvent(player, 'click', true, true);
   }
 
   playerControl.addEventListener('click', function(e) {
@@ -59,15 +59,13 @@ function initPlayer() {
 
 }
 
-function simulateClick(elId) {
-  var evt;
-  var el = document.getElementById(elId);
-  if (document.createEvent) {
-      evt = document.createEvent("MouseEvents");
-      evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-  }
-  (evt) ? el.dispatchEvent(evt) : (el.click && el.click());
-}
+var dispatchMouseEvent = function(target, var_args) {
+  var e = document.createEvent("MouseEvents");
+  // If you need clientX, clientY, etc., you can call
+  // initMouseEvent instead of initEvent
+  e.initEvent.apply(e, Array.prototype.slice.call(arguments, 1));
+  target.dispatchEvent(e);
+};
 
 ////////////////////////////////////////
 // Public API                         //
