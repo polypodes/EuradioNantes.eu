@@ -32,7 +32,7 @@ function initPlayer() {
   ;
 
   player.play();
-  
+
   playerControl.addEventListener('click', function(e) {
     if (player.paused){
       player.play();
@@ -67,13 +67,15 @@ function init() {
 
   openLinksInOpener();
 
-  initPlayer();
+  document.addEventListener('DOMContentLoaded', function () {
+    initPlayer();
+  });
 
   setInterval(function() {
     //openLinksInOpener();
     var request = new XMLHttpRequest();
     request.open('GET', this.location.href, true);
-    request.setRequestHeader('X-Requested-With','XMLHttpRequest');
+    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
     request.onload = function() {
       if (request.status >= 200 && request.status < 400) {
