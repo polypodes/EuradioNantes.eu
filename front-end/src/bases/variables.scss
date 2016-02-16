@@ -98,7 +98,7 @@ $headings-color:          inherit !default;
 @keyframes slideInRight {
   from {
     visibility: visible;
-    transform: translate3d(100vw, 0, 0);
+    transform: translate3d(100%, 0, 0);
   }
 
   100% {
@@ -112,8 +112,7 @@ $headings-color:          inherit !default;
   }
 
   100% {
-    visibility: hidden;
-    transform: translate3d(100vw, 0, 0);
+    transform: translate3d(100%, 0, 0);
   }
 }
 
@@ -139,8 +138,7 @@ $headings-color:          inherit !default;
 
 @-webkit-keyframes slideInRight {
   from {
-    visibility: visible;
-    transform: translate3d(100vw, 0, 0);
+    transform: translate3d(100%, 0, 0);
   }
 
   100% {
@@ -154,8 +152,7 @@ $headings-color:          inherit !default;
   }
 
   100% {
-    visibility: hidden;
-    transform: translate3d(100vw, 0, 0);
+    transform: translate3d(100%, 0, 0);
   }
 }
 
