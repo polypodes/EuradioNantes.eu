@@ -35,7 +35,7 @@ function initPlayer() {
   
   if(iOS) {
     console.log('IOS');
-    dispatchMouseEvent(playerControl, 'click', true, true);
+    playerControl.click();
   }
 
   playerControl.addEventListener('click', function(e) {
