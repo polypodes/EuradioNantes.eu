@@ -31,7 +31,11 @@ function initPlayer() {
       pauseButton = selectAll('.player-pause')[0]
   ;
 
-  player.play();
+  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  
+  if(iOS) {
+    simulateClick('player');
+  }
 
   playerControl.addEventListener('click', function(e) {
     if (player.paused){
@@ -52,6 +56,16 @@ function initPlayer() {
     addClass(pauseButton, 'player-hide');
   });
 
+}
+
+function simulateClick(elId) {
+  var evt;
+  var el = document.getElementById(elId);
+  if (document.createEvent) {
+      evt = document.createEvent("MouseEvents");
+      evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+  }
+  (evt) ? el.dispatchEvent(evt) : (el.click && el.click());
 }
 
 ////////////////////////////////////////
