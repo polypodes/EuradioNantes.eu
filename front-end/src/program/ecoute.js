@@ -36,7 +36,7 @@ function initPlayer() {
   if(iOS) {
     console.log('IOS');
     setTimeout(function() {
-      console.log('YO');
+      console.log($);
       playerControl.dispatchEvent(new MouseEvent('click'));
     }, 5000);
   }
