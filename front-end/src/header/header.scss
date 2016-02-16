@@ -191,14 +191,12 @@
       animation-duration: .5s;
       animation-name: slideInRight;
       animation-fill-mode: forwards;
-      visibility: visible;
     }
 
     &-menu-hide {
       animation-duration: .5s;
       animation-name: slideOutRight;
       animation-fill-mode: forwards;
-      visibility: hidden;
     }
 
     &-level2 {
