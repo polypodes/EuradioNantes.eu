@@ -30,10 +30,12 @@ function initPlayer() {
       playButton = selectAll('.player-play')[0],
       pauseButton = selectAll('.player-pause')[0]
   ;
+
+  player.play();
+  
   playerControl.addEventListener('click', function(e) {
     if (player.paused){
       player.play();
-
     } else {
       player.pause();
     }
