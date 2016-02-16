@@ -34,6 +34,7 @@ function initPlayer() {
   var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   
   if(iOS) {
+    console.log('IOS');
     simulateClick('player');
   }
 
