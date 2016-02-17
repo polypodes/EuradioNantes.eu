@@ -24,7 +24,7 @@
     <div id="embed-code" class="share-embed-inner">
       <span class="share-embed-title">Copiez-collez ce code</span>
       {% set iframeUrl = url('podcast_embed', {'id': podcast.getId()}) %}
-      {% set html = '<iframe width="100%" height="315" src="' ~ iframeUrl ~ '" frameborder="0"></iframe>' %}
+      {% set html = '<iframe width="100%" height="115" src="' ~ iframeUrl ~ '" frameborder="0" style="overflow: hidden;" scrolling="no"></iframe>' %}
       <input type="text" value="{{
         html|e
       }}" class="share-embed-input">
