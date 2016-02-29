@@ -111,9 +111,10 @@
       overflow: hidden;
       text-align: left;
       background-color: $col01;
-      animation-duration: .01s;
-      animation-name: slideOutRight;
-      animation-fill-mode: forwards;
+      transform: translateX(100%);
+      // animation-duration: .01s;
+      // animation-name: slideOutRight;
+      // animation-fill-mode: forwards;
     }
 
     &-menu-button {
@@ -188,15 +189,17 @@
     }
 
     &-menu-show {
-      animation-duration: .5s;
-      animation-name: slideInRight;
-      animation-fill-mode: forwards;
+      transform: translateX(0%);
+      // animation-duration: .5s;
+      // animation-name: slideInRight;
+      // animation-fill-mode: forwards;
     }
 
     &-menu-hide {
-      animation-duration: .5s;
-      animation-name: slideOutRight;
-      animation-fill-mode: forwards;
+      transform: translateX(100%);
+      // animation-duration: .5s;
+      // animation-name: slideOutRight;
+      // animation-fill-mode: forwards;
     }
 
     &-level2 {
