@@ -23,7 +23,7 @@ file that was distributed with this source code.
         </svg>
       </button>
       <button class="header-menu-back">‹ Retour</button>
-      <div class="header-menu">
+      <div class="header-menu header-menu-hide">
         <nav class="header-menu-nav">
           {% set menuItem = knp_menu_get('MenuBundle:Builder:mainMenu', {}, {'idmenu': 1 }) %}
           {{ knp_menu_render(menuItem) }}
