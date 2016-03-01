@@ -35,14 +35,14 @@
               <li class="track-title"><strong>{{ onair.track.title }}&nbsp;</strong></li>
               <li class="track-artist">{{ onair.track.artist }}&nbsp;</li>
               <li class="track-album">
-                {%- if broadcast.track.album.featuredFrom and broadcast.track.album.featuredTo -%}
-                  <a href="{{ path('album', {'slug': broadcast.track.album.slug }) }}">{{ broadcast.track.album.title }}</a>
+                {%- if onair.track.album.featuredFrom and onair.track.album.featuredTo -%}
+                  <a href="{{ path('album', {'slug': onair.track.album.slug }) }}">{{ onair.track.album.title }}</a>
                 {%- else -%}
-                  {{ broadcast.track.album.title }}
+                  {{ onair.track.album.title }}
                 {%- endif -%}
               </li>
             {% else %}
-              {% set terms = onair.terms|split(' - ') %}
+              {% set terms = onair.terms|split(' -') %}
               <li class="track-title"><strong>{{ terms[terms|length > 1 ? 1 : 0] }}</strong></li>
               {% if terms|length > 1 %}<li class="track-artist">{{ terms[0] }}&nbsp;</li>{% endif %}
               {% if terms|length > 2 %}<li class="track-album">{{ terms[2] }}</li>{% endif %}
@@ -61,18 +61,20 @@
           {% if broadcast.track %}
             <strong class="playlist-track-title">{{ broadcast.track.title }}&nbsp;</strong>
             – <span class="playlist-artist">{{ broadcast.track.artist }}&nbsp;</span>
+            {%- if broadcast.track.album.title is not empty -%}
             – <span class="playlist-album">
               {%- if broadcast.track.album.featuredFrom and broadcast.track.album.featuredTo -%}
                 <a href="{{ path('album', {'slug': broadcast.track.album.slug }) }}">{{ broadcast.track.album.title }}</a>
               {%- else -%}
                 {{ broadcast.track.album.title }}
               {%- endif -%}
+            {%- endif -%}
             </span>
           {% else %}
-            {% set terms = broadcast.terms|split(' - ') %}
+            {% set terms = broadcast.terms|split(' -') %}
             <strong class="playlist-track-title">{{ terms[terms|length > 1 ? 1 : 0] }}</strong>
             {% if terms|length > 1 %}– <span class="playlist-artist">{{ terms[0] }}&nbsp;</span>{% endif %}
-            {% if terms|length > 2 %}– <span class="playlist-album">{{ terms[2] }}</span>{% endif %}
+            {#% if terms|length > 2 %}– <span class="playlist-album">{{ terms[2] }}</span>{% endif %#}
           {% endif -%}
         </li>
       {% else %}
