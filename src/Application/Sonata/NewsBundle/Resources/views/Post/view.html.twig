@@ -15,7 +15,7 @@
 
   {% if post.image -%}
     <figure class="content-img">
-      <img src="{% path post.image, 'large' %}" srcset="{% path post.image, 'large_mobile' %} 480w, {% path post.image, 'large' %} 1900w" alt="Illustration de l'article" class="bloc-content-img img-responsive">
+      <img src="{% path post.image, 'large' %}" srcset="{% path post.image, 'large_mobile' %} 480w, {% path post.image, 'large' %} 1900w" alt="{{ post.image.description }}" class="bloc-content-img img-responsive">
     </figure>
   {%- endif %}
 
@@ -67,7 +67,7 @@
   <article data-clickable="true" class="bloc-content{% if rel.type == 'podcast' %} bloc-podcast{% endif %}">
     <div class="bloc-content-inner">
       {% if rel.image -%}
-        <figure class="bloc-content-figure"><img src="{% path rel.image, 'list_tablet' %}" srcset="{% path rel.image, 'list_mobile' %} 480w, {% path rel.image, 'list_tablet' %} 1900w" alt="Illustration de l'article « {{ rel.title }} »" class="bloc-content-img img-responsive"></figure>
+        <figure class="bloc-content-figure"><img src="{% path rel.image, 'list_tablet' %}" srcset="{% path rel.image, 'list_mobile' %} 480w, {% path rel.image, 'list_tablet' %} 1900w" alt="{{ rel.image.description }}" class="bloc-content-img img-responsive"></figure>
       {%- endif %}
       <div class="bloc-content-text">
         {% if rel.collection -%}

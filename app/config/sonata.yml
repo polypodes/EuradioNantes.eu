@@ -29,8 +29,7 @@ sonata_block:
 
 sonata_user:
     manager_type: orm # can be orm or mongodb
-    #security_acl: true
-    security_acl: false
+    security_acl: true
     class:
         user:         Application\Sonata\UserBundle\Entity\User
         group:        Application\Sonata\UserBundle\Entity\Group
@@ -172,6 +171,8 @@ sonata_page:
     direct_publication: true # or %kernel.debug% if you want to publish in dev mode (but not in prod)
 
 sonata_admin:
+    security:
+        handler: sonata.admin.security.handler.acl
     options:
         use_select2: true
     assets:

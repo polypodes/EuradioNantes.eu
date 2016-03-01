@@ -4,7 +4,7 @@
   <h1 class="content-title">{{ label.title }}</h1>
 
   {% if label.image %}
-  <figure class="content-img"><img src="{% path label.image, 'large' %}" srcset="{% path label.image, 'large_mobile' %} 480w, {% path label.image, 'large' %} 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
+  <figure class="content-img"><img src="{% path label.image, 'large' %}" srcset="{% path label.image, 'large_mobile' %} 480w, {% path label.image, 'large' %} 1900w" alt="{{ label.image.description }}" class="bloc-content-img img-responsive"></figure>
   {% endif %}
   <!--<p class="chapo">Small batch mumblecore bicycle rights mustache, single-origin coffee Bushwick twee kogi YOLO pickled. Aesthetic sartorial Wes Anderson farm-to-table church-key. Cronut American Apparel vegan seitan bitters, hoodie mlkshk whatever mustache Carles.</p>-->
 

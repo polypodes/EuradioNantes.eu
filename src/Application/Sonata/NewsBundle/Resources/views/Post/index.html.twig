@@ -17,7 +17,7 @@
     <article data-clickable="true" class="bloc-content">
       <div class="bloc-content-inner">
         {% if top.image -%}
-          <figure class="bloc-content-figure"><img src="{% path top.image, 'list_tablet' %}" srcset="{% path top.image, 'list_mobile' %} 480w, {% path top.image, 'list_tablet' %} 1900w" alt="Illustration de l'article « {{ top.title }} »" class="bloc-content-img img-responsive"></figure>
+          <figure class="bloc-content-figure"><img src="{% path top.image, 'list_tablet' %}" srcset="{% path top.image, 'list_mobile' %} 480w, {% path top.image, 'list_tablet' %} 1900w" alt="{{ top.image.description }}" class="bloc-content-img img-responsive"></figure>
         {%- endif %}
         <div class="bloc-content-text">
           {% if top.collection -%}
@@ -37,7 +37,7 @@
       <article data-clickable="true" class="bloc-content">
         <div class="bloc-content-inner">
           {% if post.image -%}
-            <figure class="bloc-content-figure"><img src="{% path post.image, 'list_tablet' %}" srcset="{% path post.image, 'list_mobile' %} 480w, {% path post.image, 'list_tablet' %} 992w, {% path post.image, 'list_desktop' %} 1900w" alt="Illustration de l'article « {{ post.title }} »" class="bloc-content-img img-responsive"></figure>
+            <figure class="bloc-content-figure"><img src="{% path post.image, 'list_tablet' %}" srcset="{% path post.image, 'list_mobile' %} 480w, {% path post.image, 'list_tablet' %} 992w, {% path post.image, 'list_desktop' %} 1900w" alt="{{ post.image.description }}" class="bloc-content-img img-responsive"></figure>
           {%- endif %}
           <div class="bloc-content-text">
             {% if post.collection -%}

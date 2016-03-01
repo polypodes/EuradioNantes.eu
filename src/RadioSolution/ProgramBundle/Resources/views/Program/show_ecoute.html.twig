@@ -7,7 +7,7 @@
         <h2 class="sr-only">Émission à l’écoute</h2>
         <div class="show">
           {% if program.emission.media %}
-            <img src="{% path program.emission.media, 'list_ecoute' %}" alt="" class="show-image">
+            <img src="{% path program.emission.media, 'list_ecoute' %}" alt="{{ program.emission.media.description }}" class="show-image">
           {% endif %}
           <ul class="show-info">
             <li class="show-time">
@@ -25,7 +25,7 @@
         <div class="track">
           {% if onair.track and onair.track.album %}
             {% if onair.track.album.image %}
-              <img src="{% path onair.track.album.image, 'list_ecoute' %}" alt="" class="track-image">
+              <img src="{% path onair.track.album.image, 'list_ecoute' %}" alt="{{ onair.track.album.image.description }}" class="track-image">
             {% elseif onair.track.album.thumbnailUrl %}
               <img src="{{ onair.track.album.thumbnailUrl }}" alt="" class="track-image">
             {% endif %}
