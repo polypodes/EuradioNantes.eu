@@ -6,7 +6,7 @@
     <div class="media-left">
       {% if album.image -%}
         <figure>
-          <img class="media-object" src="{% path album.image, 'large' %}" srcset="{% path album.image, 'large_mobile' %} 480w, {% path album.image, 'large' %} 1900w" alt="Illustration de l'album" class="bloc-content-img img-responsive">
+          <img class="media-object" src="{% path album.image, 'large' %}" srcset="{% path album.image, 'large_mobile' %} 480w, {% path album.image, 'large' %} 1900w" alt="{{ album.image.description }}" class="bloc-content-img img-responsive">
         </figure>
       {% elseif album.thumbnailUrl %}
         <figure>

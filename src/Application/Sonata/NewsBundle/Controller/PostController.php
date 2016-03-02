@@ -65,7 +65,15 @@ class PostController extends BaseController
         }
 
         $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem('Actualités', $this->get('router')->generate('listeactus'));
+        if ($post->getType() == 'podcast' && $post->getPodcast() && $post->getPodcast()->getProgram()) {
+            $breadcrumbs->addItem('Les émissions de A à Z', $this->get('router')->generate('emissions'));
+
+            $emission = $post->getPodcast()->getProgram()->getEmission();
+            $breadcrumbs->addItem($emission->getName(), $this->get('router')->generate('emission', array('name' => $emission->getSlug())));
+
+        } else {
+            $breadcrumbs->addItem('Actualités', $this->get('router')->generate('listeactus'));
+        }
         $breadcrumbs->addItem($post->getTitle());
 
         if ($seoPage = $this->getSeoPage()) {

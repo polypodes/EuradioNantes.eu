@@ -7,7 +7,7 @@
         <h2 class="sr-only">Émission à l’écoute</h2>
         <div class="show">
           {% if program.emission.media %}
-            <img src="{% path program.emission.media, 'list_ecoute' %}" alt="" class="show-image">
+            <img src="{% path program.emission.media, 'list_ecoute' %}" alt="{{ program.emission.media.description }}" class="show-image">
           {% endif %}
           <ul class="show-info">
             <li class="show-time">
@@ -25,7 +25,7 @@
         <div class="track">
           {% if onair.track and onair.track.album %}
             {% if onair.track.album.image %}
-              <img src="{% path onair.track.album.image, 'list_ecoute' %}" alt="" class="track-image">
+              <img src="{% path onair.track.album.image, 'list_ecoute' %}" alt="{{ onair.track.album.image.description }}" class="track-image">
             {% elseif onair.track.album.thumbnailUrl %}
               <img src="{{ onair.track.album.thumbnailUrl }}" alt="" class="track-image">
             {% endif %}
@@ -35,14 +35,14 @@
               <li class="track-title"><strong>{{ onair.track.title }}&nbsp;</strong></li>
               <li class="track-artist">{{ onair.track.artist }}&nbsp;</li>
               <li class="track-album">
-                {%- if broadcast.track.album.featuredFrom and broadcast.track.album.featuredTo -%}
-                  <a href="{{ path('album', {'slug': broadcast.track.album.slug }) }}">{{ broadcast.track.album.title }}</a>
+                {%- if onair.track.album.featuredFrom and onair.track.album.featuredTo -%}
+                  <a href="{{ path('album', {'slug': onair.track.album.slug }) }}">{{ onair.track.album.title }}</a>
                 {%- else -%}
-                  {{ broadcast.track.album.title }}
+                  {{ onair.track.album.title }}
                 {%- endif -%}
               </li>
             {% else %}
-              {% set terms = onair.terms|split(' - ') %}
+              {% set terms = onair.terms|split(' -') %}
               <li class="track-title"><strong>{{ terms[terms|length > 1 ? 1 : 0] }}</strong></li>
               {% if terms|length > 1 %}<li class="track-artist">{{ terms[0] }}&nbsp;</li>{% endif %}
               {% if terms|length > 2 %}<li class="track-album">{{ terms[2] }}</li>{% endif %}
@@ -60,19 +60,21 @@
           <time class="playlist-item-time" datetime="{{ broadcast.broadcasted|date('Y-m-d H:i') }}">{{ broadcast.broadcasted|date('H:i') }}&nbsp;</time>
           {% if broadcast.track %}
             <strong class="playlist-track-title">{{ broadcast.track.title }}&nbsp;</strong>
-            <span class="playlist-artist">{{ broadcast.track.artist }}&nbsp;</span>
-            <span class="playlist-album">
+            – <span class="playlist-artist">{{ broadcast.track.artist }}&nbsp;</span>
+            {%- if broadcast.track.album.title is not empty -%}
+            – <span class="playlist-album">
               {%- if broadcast.track.album.featuredFrom and broadcast.track.album.featuredTo -%}
                 <a href="{{ path('album', {'slug': broadcast.track.album.slug }) }}">{{ broadcast.track.album.title }}</a>
               {%- else -%}
                 {{ broadcast.track.album.title }}
               {%- endif -%}
+            {%- endif -%}
             </span>
           {% else %}
-            {% set terms = broadcast.terms|split(' - ') %}
+            {% set terms = broadcast.terms|split(' -') %}
             <strong class="playlist-track-title">{{ terms[terms|length > 1 ? 1 : 0] }}</strong>
-            {% if terms|length > 1 %}<span class="playlist-artist">{{ terms[0] }}&nbsp;</span>{% endif %}
-            {% if terms|length > 2 %}<span class="playlist-album">{{ terms[2] }}</span>{% endif %}
+            {% if terms|length > 1 %}– <span class="playlist-artist">{{ terms[0] }}&nbsp;</span>{% endif %}
+            {#% if terms|length > 2 %}– <span class="playlist-album">{{ terms[2] }}</span>{% endif %#}
           {% endif -%}
         </li>
       {% else %}

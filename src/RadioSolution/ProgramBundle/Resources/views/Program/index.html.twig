@@ -51,7 +51,7 @@
   					  	<article class="grille-list-item{% if isChild %} grille-list-item-child{% endif %}">
   					  		<span class="grille-list-hour">{{ entity.timeStart|date('H:i') }} -	{{ entity.timeStop|date('H:i') }}</span>
   					  		{% if entity.imageEmission -%}
-  					  			<img src="{% path entity.imageEmission, 'list_program' %}" alt="" class="grille-list-img">
+  					  			<img src="{% path entity.imageEmission, 'list_program' %}" alt="{{ entity.imageEmission.description }}" class="grille-list-img">
   					  		{%- endif %}
   					      <div class="grille-list-text">
   					      	{% if entity.emission.collection %}

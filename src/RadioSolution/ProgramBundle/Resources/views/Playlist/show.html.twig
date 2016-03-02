@@ -26,11 +26,11 @@
         <div class="media-left">
           {% if entity.image -%}
             <figure class="bloc-content-figure">
-              <img class="media-object" src="{% path entity.image, 'list_tablet' %}" srcset="{% path entity.image, 'list_mobile' %} 480w, {% path entity.image, 'list_tablet' %} 992w, {% path entity.image, 'list_desktop' %} 1900w" alt="Illustration du label « {{ entity.title }} »" class="bloc-content-img img-responsive">
+              <img class="media-object" src="{% path entity.image, 'list_tablet' %}" srcset="{% path entity.image, 'list_mobile' %} 480w, {% path entity.image, 'list_tablet' %} 992w, {% path entity.image, 'list_desktop' %} 1900w" alt="{{ entity.image.description }}" class="bloc-content-img img-responsive">
             </figure>
           {% elseif entity.thumbnailUrl %}
             <figure class="bloc-content-figure">
-              <img class="media-object" src="{{ entity.thumbnailUrl }}" alt="Illustration du label « {{ entity.title }} »" class="bloc-content-img img-responsive">
+              <img class="media-object" src="{{ entity.thumbnailUrl }}" alt="Illustration de la playlist « {{ entity.title }} »" class="bloc-content-img img-responsive">
             </figure>
           {%- endif %}
         </div>
