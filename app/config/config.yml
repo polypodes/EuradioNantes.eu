@@ -177,11 +177,11 @@ ivory_ck_editor:
     default_config: normal
     configs:
         mini:
-            toolbar: [ [ "Source",'-','Bold','Italic','Subscript','Superscript','-','-','Link','Unlink','-','RemoveFormat' ] ]
+            toolbar: 'custom_mini'
             language: '%locale%'
 
         normal:
-            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Subscript','Superscript','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight','-','Link','Unlink','Anchor','-','RemoveFormat' ], '/', [ 'Undo','Redo','-','PasteFromWord','-','Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','-','SpecialChar','-','ShowBlocks' ] ] #'JustifyBlock',
+            toolbar: 'custom_normal'
             #contentsCss: /path/to/style.css
             #contentsLanguage: fr
             language: '%locale%'
@@ -207,7 +207,7 @@ ivory_ck_editor:
             #removePlugins: 'iframe'
 
         plus:
-            toolbar: [ [ 'Source','-','Bold','Italic','-','NumberedList','BulletedList','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Link','Unlink','Anchor','-','RemoveFormat' ], '/', [ 'Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','HorizontalRule','-','SpecialChar'], '/', [ 'Undo','Redo','-','PasteFromWord','PasteText', 'Find','Replace','-','SelectAll','-','SpellChecker','-','Maximize','ShowBlocks' ] ]
+            toolbar: 'custom_full'
             language: '%locale%'
             filebrowserBrowseRoute: admin_sonata_media_media_browser
             filebrowserImageBrowseRoute: admin_sonata_media_media_browser
@@ -227,16 +227,15 @@ ivory_ck_editor:
             #removePlugins: 'iframe'
 
     toolbars:
-        #configs:
-        #    mini: [ [ "Source", "-", "Save" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]
-        #    my_toolbar_2: [ [ "Source" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]
-        #items:
-        #    document: [ 'Source' ]
-        #    clipboard: [ 'Undo','Redo','-','PasteFromWord','PasteText' ]
-        #    editing: [ 'Find','Replace','-','SelectAll','-','SpellChecker' ]
-        #    basicstyles: [ 'Bold','Italic','-','Subscript','Superscript','-','RemoveFormat' ]
-        #    paragraph: [ 'NumberedList','BulletedList','-','Blockquote' ]
-        #    links: [ 'Link','Unlink','Anchor' ]
+        configs:
+            custom_mini: [ "@basic_editing" ]
+            custom_normal: [ "@normal_editing",'/','@normal_authoring' ]
+            custom_full: [ "@normal_editing",'/','@normal_authoring','/','@extended_authoring' ] #[ [ "@document",'-',"@basicstyles",'-',"@paragraph",'-',"@alignement",'-',"@links" ], '/', [ 'Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','HorizontalRule','-','SpecialChar'], '/', [ 'Undo','Redo','-','PasteFromWord','PasteText', 'Find','Replace','-','SelectAll','-','SpellChecker','-','Maximize','ShowBlocks' ] ]
+        items:
+            basic_editing: [ 'Source','-','Bold','Italic','Underline','-','Subscript','Superscript','-','RemoveFormat','-','Link','Unlink','Anchor' ]
+            normal_editing: [ 'Source','-','Bold','Italic','Underline','-','Subscript','Superscript','-','RemoveFormat','-','Link','Unlink','Anchor','-','NumberedList','BulletedList','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight' ]
+            normal_authoring: [ 'Undo','Redo','-','PasteFromWord','PasteText','Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','-','SpecialChar','-','ShowBlocks' ]
+            extended_authoring: [ 'Find','Replace','-','HorizontalRule','-','SpellChecker','-','Maximize' ]
         #    insert: [ 'Image','Flash','-','Table','HorizontalRule','-','SpecialChar' ]
         #    styles: [ 'Styles','Format']
         #    colors: [ 'TextColor','BGColor' ]
