@@ -35,6 +35,7 @@ class StaticContentAdmin extends Admin
   	}
   	$label = 'Ordre du contenu (le plus grand '.$maxValue.')';
     $formMapper
+      ->add('published', null, array('label' => 'Publié'))
       ->add('name', null, array('label' => 'Nom'))
       ->add('slug', null, array('label' => 'Titre URL', 'required' => false))
       ->add('categoryStaticContent', 'sonata_type_model', array('label' => 'Catégorie', 'required' => false))
@@ -61,6 +62,7 @@ class StaticContentAdmin extends Admin
       //->add('order_content', null, array('label' => 'Ordre'))
       ->add('categoryStaticContent', null, array('label' => 'Catégorie'))
       ->add('URL', 'string', array('label' => 'URL', 'template' => 'StaticContentBundle:StaticContentAdmin:list_URL.html.twig'))
+      ->add('published', null, array('label' => 'Publié', 'editable' => true))
     ;
   }
 

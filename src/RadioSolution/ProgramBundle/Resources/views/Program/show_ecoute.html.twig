@@ -74,7 +74,7 @@
             {% set terms = broadcast.terms|split(' -') %}
             <strong class="playlist-track-title">{{ terms[terms|length > 1 ? 1 : 0] }}</strong>
             {% if terms|length > 1 %}– <span class="playlist-artist">{{ terms[0] }}&nbsp;</span>{% endif %}
-            {#% if terms|length > 2 %}– <span class="playlist-album">{{ terms[2] }}</span>{% endif %#}
+            {% if terms|length > 2 and terms[2] is not empty %}– <span class="playlist-album">{{ terms[2] }}</span>{% endif %}
           {% endif -%}
         </li>
       {% else %}
