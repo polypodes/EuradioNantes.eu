@@ -19,7 +19,9 @@
     </figure>
   {%- endif %}
 
-  {{ post.content|raw }}
+  <div class="rte">
+    {{ post.content|raw }}
+  </div>
 
   {% if post.author %}
   <div data-clickable="true" class="author">

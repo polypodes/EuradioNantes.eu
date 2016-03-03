@@ -13,7 +13,9 @@
   <figure class="content-img"><img src="{% path entity.media, 'large' %}" srcset="{% path entity.media, 'large_mobile' %} 480w, {% path entity.media, 'large' %} 1900w" alt="Image de l'article" class="bloc-content-img img-responsive"></figure>
   {% endif #}
 
-  {{ entity.body|raw }}
+  <div class="rte">
+    {{ entity.body|raw }}
+  </div>
 
 	<article class="podcast podcast-list">
 

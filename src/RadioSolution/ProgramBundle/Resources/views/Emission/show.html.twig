@@ -17,7 +17,9 @@
   {% endif %}
   <!--<p class="chapo">Small batch mumblecore bicycle rights mustache, single-origin coffee Bushwick twee kogi YOLO pickled. Aesthetic sartorial Wes Anderson farm-to-table church-key. Cronut American Apparel vegan seitan bitters, hoodie mlkshk whatever mustache Carles.</p>-->
 
-  {{ entity.description|raw }}
+  <div class="rte">
+    {{ entity.description|raw }}
+  </div>
 
   {{ render(controller('PodcastBundle:Podcast:emission', { 'id': entity.id, 'page': app.request.get('page'), 'title': entity.name ~ ' - Émission - Eur@dioNantes' })) }}
 
