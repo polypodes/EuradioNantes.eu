@@ -5,3 +5,9 @@ home:
 newsletter_subscription:
     path:  newsletter/subscribe
     defaults: { _controller: "SiteBundle:Newsletter:subscribe" }
+
+xml_sitemap:
+  path: "/sitemap.{_format}"
+  defaults: { _controller: "SiteBundle:XMLSitemap:index" }
+  requirements: { _format: xml }
+
