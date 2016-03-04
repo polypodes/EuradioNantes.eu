@@ -5,13 +5,14 @@ namespace RadioSolution\SiteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class XMLSitemapController extends Controller
 {
 
     /**
-     * @Route("/sitemap.{_format}", name="xml_sitemap", Requirements={"_format" = "xml"})
-     * @Template("AcmeSampleStoreBundle:Sitemaps:sitemap.xml.twig")
+     * #Route("/sitemap.{_format}", name="xml_sitemap", Requirements={"_format" = "xml"})
+     * #Template("AcmeSampleStoreBundle:Sitemaps:sitemap.xml.twig")
      */
     public function indexAction()
     {
@@ -19,13 +20,21 @@ class XMLSitemapController extends Controller
 
         $urls = array();
         //$hostname = $this->getRequest()->getHost();
-        $hostname = $this->getRequest()->getSchemeAndHttpHost();
+        $hostname = $this->getRequest()->getSchemeAndHttpHost() . '/';
 
         // accueil
-        $urls[] = array('loc' => $this->get('router')->generate('home'), 'changefreq' => 'daily', 'priority' => '1.0');
+        $urls[] = array(
+            'loc' => $this->get('router')->generate('home', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'changefreq' => 'daily',
+            'priority' => '1.0'
+        );
 
         // écoute en direct
-        $urls[] = array('loc' => $this->get('router')->generate('broadcast'), 'changefreq' => 'daily', 'priority' => '5.0');
+        $urls[] = array(
+            'loc' => $this->get('router')->generate('broadcast', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'changefreq' => 'daily',
+            'priority' => '0.5'
+        );
 
         // menus et items
         $menus = $em
@@ -34,6 +43,11 @@ class XMLSitemapController extends Controller
         ;
         foreach($menus as $menu) {
             foreach($menu->getItems() as $item) {
+                $url = $item->getUrl();
+                if (in_array($url, ['/', '#'])) continue;
+                // remove trailing slash
+                if (strpos('/',$url) === 0) $url = substr($url, 1);
+
                 $priority = '0.5';
                 $frequency = 'monthly';
                 switch ($item->getUrl()) {
@@ -56,7 +70,7 @@ class XMLSitemapController extends Controller
 
                 }
                 $urls[] = array(
-                    'loc' => $item->getUrl(),
+                    'loc' => preg_match('@^https?://@i', $url) ? $url : $hostname . $url,
                     'changefreq' => $frequency,
                     'priority' => $priority
                 );
@@ -68,13 +82,14 @@ class XMLSitemapController extends Controller
         $posts = $em
             ->createQuery("SELECT p FROM ApplicationSonataNewsBundle:Post p WHERE p.enabled = 1 AND p.publicationDateStart <= :now ORDER BY p.position DESC, p.publicationDateStart DESC")
             ->setParameter('now', new \DateTime())
-            //->setMaxResults(18)
+            //->setMaxResults(20000)
             ->getResult()
         ;
         foreach ($posts as $post) {
             $urls[] = array(
-                'loc' => $this->container->get('sonata.news.blog')->getPermalinkGenerator()->generate($post), //$this->get('router')->generate('home_product_detail', array('productSlug' => $post->getSlug())),
+                'loc' => $hostname . 'news/' . $this->container->get('sonata.news.blog')->getPermalinkGenerator()->generate($post), //$this->get('router')->generate('home_product_detail', array('productSlug' => $post->getSlug())),
                 'priority' => '0.9',
+                'changefreq' => 'weekly',
                 //'lastmod' => $post->getUpdatedAt()->format('c')
             );
         }
@@ -82,19 +97,24 @@ class XMLSitemapController extends Controller
         // les émissions
         $emissions = $em
             ->createQuery("SELECT e FROM ProgramBundle:Emission e WHERE e.published = 1 ORDER BY e.name ASC")
-            //->setMaxResults(18)
+            //->setMaxResults(1000)
             ->getResult()
         ;
         foreach ($emissions as $emission) {
             $urls[] = array(
-                'loc' => $this->get('router')->generate('emission', array('name' => $emission->getSlug())),
+                'loc' => $this->get('router')->generate('emission', array('name' => $emission->getSlug()), UrlGeneratorInterface::ABSOLUTE_URL),
                 'priority' => '0.8',
                 'lastmod' => $emission->getUpdatedAt()->format('c')
             );
         }
 
         // les playlists
-        $playlists =  $this->getDoctrine()->getRepository('ProgramBundle:Playlist')->queryPublishedOrderedByFeaturedFrom()->getQuery()->getResult();
+        $playlists = $this->getDoctrine()->getRepository('ProgramBundle:Playlist')
+            ->queryPublishedOrderedByFeaturedFrom()
+            ->getQuery()
+            //->setMaxResults(1000)
+            ->getResult()
+        ;
         //$em
         //    ->createQuery("SELECT p FROM ProgramBundle:Playlist p WHERE p.published = 1 ORDER BY e.name ASC")
         //    //->setMaxResults(18)
@@ -102,27 +122,37 @@ class XMLSitemapController extends Controller
         //;
         foreach ($playlists as $playlist) {
             $urls[] = array(
-                'loc' => $this->get('router')->generate('playlist', array('slug' => $playlist->getSlug())),
+                'loc' => $this->get('router')->generate('playlist', array('slug' => $playlist->getSlug()), UrlGeneratorInterface::ABSOLUTE_URL),
                 'priority' => '0.7',
                 'lastmod' => $playlist->getUpdatedAt()->format('c')
             );
         }
 
         // les albums
-        $albums = $this->getDoctrine()->getRepository('ProgramBundle:Album')->queryPublishedOrderedByFeaturedFrom()->getQuery()->getResult();
+        $albums = $this->getDoctrine()->getRepository('ProgramBundle:Album')
+            ->queryPublishedOrderedByFeaturedFrom()
+            ->getQuery()
+            //->setMaxResults(1000)
+            ->getResult()
+        ;
         foreach ($albums as $album) {
             $urls[] = array(
-                'loc' => $this->get('router')->generate('album', array('slug' => $album->getSlug())),
+                'loc' => $this->get('router')->generate('album', array('slug' => $album->getSlug()), UrlGeneratorInterface::ABSOLUTE_URL),
                 'priority' => '0.7',
                 'lastmod' => $album->getUpdatedAt()->format('c')
             );
         }
 
         // les labels
-        $labels = $this->getDoctrine()->getRepository('ProgramBundle:Label')->queryPublishedOrderedByFeaturedFrom()->getQuery()->getResult();
+        $labels = $this->getDoctrine()->getRepository('ProgramBundle:Label')
+            ->queryPublishedOrderedByFeaturedFrom()
+            ->getQuery()
+            //->setMaxResults(1000)
+            ->getResult()
+        ;
         foreach ($labels as $label) {
             $urls[] = array(
-                'loc' => $this->get('router')->generate('playlist', array('slug' => $label->getSlug())),
+                'loc' => $this->get('router')->generate('playlist', array('slug' => $label->getSlug()), UrlGeneratorInterface::ABSOLUTE_URL),
                 'priority' => '0.7',
                 'lastmod' => $label->getUpdatedAt()->format('c')
             );
