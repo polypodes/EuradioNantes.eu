@@ -3,7 +3,9 @@
 
   <h1 class="content-title">{{ playlist.title }}</h1>
 
-  {{ playlist.content|raw }}
+  <div class="rte">
+    {{ playlist.content|raw }}
+  </div>
 
   {% if playlist.albums -%}
     <article class="podcast podcast-list">
@@ -36,7 +38,7 @@
         </div>
         <div class="media-body">
           <h3 class="podcast-item-title"><a href="{{ path('album', {'slug': entity.slug}) }}">{{ entity.artist ~ ' ' ~ entity.title }}</a></h3>
-          <p class="podcast-item-text">{{ entity.resume| truncate(80, true, "…") }}</p>
+          <p class="podcast-item-text">{{ entity.resume| truncate(80, true, "…")|raw }}</p>
         </div>
       </div>
 

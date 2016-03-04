@@ -16,7 +16,9 @@
     </figure>
   {%- endif %}
 
-  {{ entity.body|raw }}
+  <div class="rte">
+    {{ entity.body|raw }}
+  </div>
 
   <section id="contact-form" class="comment">
     <h3 class="comment-title2">Envoyer une demande de contact</h3>{#'title_leave_comment'|trans({}, 'SonataNewsBundle') #}

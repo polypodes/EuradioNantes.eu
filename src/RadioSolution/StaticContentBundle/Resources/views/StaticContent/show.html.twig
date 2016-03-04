@@ -16,7 +16,9 @@
     </figure>
   {%- endif %}
 
-  {{ entity.body|raw }}
+  <div class="rte">
+    {{ entity.body|raw }}
+  </div>
 
   {# if entity.author %}
   <div data-clickable="true" class="author">

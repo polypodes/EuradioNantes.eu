@@ -276,7 +276,7 @@ sonata_seo:
         metas:
             name:
                 keywords:             "Nantes, radio, Europe, européen, européenne, école"
-                escription:           "Toute l'information locale européenne, la musique indé d'Europe et d'ailleurs, les magazines, la radio-école... Sur le 101.3 FM, la RNT et euradionantes.eu"
+                description:           "Toute l'information locale européenne, la musique indé d'Europe et d'ailleurs, les magazines, la radio-école... Sur le 101.3 FM, la RNT et euradionantes.eu"
                 robots:               index, follow
 
             property:
