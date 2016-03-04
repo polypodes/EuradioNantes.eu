@@ -2,10 +2,9 @@
   {{ wo_render_breadcrumbs() }}
 
   <h1 class="content-title">{{ album.artist }} <small>{{ album.title }}</small></h1>
-  <div class="media">
-    <div class="media-left">
+      
       {% if album.image -%}
-        <figure>
+        <figure class="bloc-content-figure">
           <img class="media-object" src="{% path album.image, 'large' %}" srcset="{% path album.image, 'large_mobile' %} 480w, {% path album.image, 'large' %} 1900w" alt="{{ album.image.description }}" class="bloc-content-img img-responsive">
         </figure>
       {% elseif album.thumbnailUrl %}
@@ -13,8 +12,6 @@
           <img class="media-object" src="{{ album.thumbnailUrl }}{# path album.image, 'large' #}" srcset="{{ album.thumbnailUrl }}{# path album.image, 'large_mobile' #} 480w, {{ album.thumbnailUrl }}{# path album.image, 'large' #} 1900w" alt="Illustration de l'album" class="bloc-content-img img-responsive">
         </figure>
       {%- endif %}
-    </div>
-    <div class="media-body">
       <div class="album-content">
         {{ album.content|raw }}
       </div>
@@ -54,8 +51,6 @@
         </li>
         {%- endif %}
       </ul>
-    </div>
-  </div>
 
   {{ include('SiteBundle:Social:share.html.twig') }}
 
