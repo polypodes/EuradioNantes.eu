@@ -38,8 +38,6 @@ function initPlayer() {
     //  playerControl.dispatchEvent(new MouseEvent('click'));
     //}, 5000);
     player.pause();
-    removeClass(pauseButton, 'player-hide');
-    addClass(playButton, 'player-hide');
   }
 
   playerControl.addEventListener('click', function(e) {
