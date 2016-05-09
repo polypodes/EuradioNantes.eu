@@ -234,7 +234,7 @@ ivory_ck_editor:
         items:
             basic_editing: [ 'Source','-','Bold','Italic','Underline','-','Subscript','Superscript','-','RemoveFormat','-','Link','Unlink','Anchor' ]
             normal_editing: [ 'Source','-','Bold','Italic','Underline','-','Subscript','Superscript','-','RemoveFormat','-','Link','Unlink','Anchor','-','NumberedList','BulletedList','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight' ]
-            normal_authoring: [ 'Undo','Redo','-','PasteFromWord','PasteText','Format','Styles','-','Image','Flash','MediaEmbed','Audio','-','Table','-','SpecialChar','-','ShowBlocks' ]
+            normal_authoring: [ 'Undo','Redo','-','PasteFromWord','PasteText','Format','Styles','-','Image','MediaEmbed','Audio','-','Table','-','SpecialChar','-','ShowBlocks' ]
             extended_authoring: [ 'Find','Replace','-','HorizontalRule','-','SpellChecker','-','Maximize' ]
         #    insert: [ 'Image','Flash','-','Table','HorizontalRule','-','SpecialChar' ]
         #    styles: [ 'Styles','Format']
