@@ -54,8 +54,8 @@ class PostAdmin extends BaseAdmin
                 ->add('short_title', 'text', array('required' => false, 'label' => "Titre court"))
                 ->add('type', 'choice', array('required' => true, 'label' => 'Type', 'choices' => $this->choices))
 
-                ->add('abstract', 'ckeditor', array('required' => true))
-                ->add('content', 'ckeditor', array())
+                ->add('abstract', 'ckeditor', array('required' => true, 'config_name' => 'mini'))
+                ->add('content', 'ckeditor', array('config_name' => 'plus'))
                 ->add('image', 'sonata_type_model_list', array('required' => false), array(
                     'link_parameters' => array(
                         'context' => 'default',
