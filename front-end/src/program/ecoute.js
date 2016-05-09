@@ -32,11 +32,9 @@ function initPlayer() {
   ;
 
   var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  
+
   if(iOS) {
-    console.log('IOS');
     setTimeout(function() {
-      console.log($);
       playerControl.dispatchEvent(new MouseEvent('click'));
     }, 5000);
   }
@@ -50,12 +48,10 @@ function initPlayer() {
   });
 
   player.addEventListener('playing', function(e) {
-    console.log('playing');
     removeClass(pauseButton, 'player-hide');
     addClass(playButton, 'player-hide');
   });
   player.addEventListener('pause', function(e) {
-    console.log('paused');
     removeClass(playButton, 'player-hide');
     addClass(pauseButton, 'player-hide');
   });

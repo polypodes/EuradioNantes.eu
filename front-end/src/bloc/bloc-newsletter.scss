@@ -6,8 +6,8 @@
   @include font01-bold();
   position: relative;
   padding: 10px 15px;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 25px;
   color: $col01;
   background-color: $col06;
 
@@ -64,4 +64,10 @@
   margin-bottom: 10px;
   border-radius: 5px;
   color: #444;
+}
+
+@media (min-width: $screen-md-min) {
+  .bloc-newsletter {
+    margin-top: 0;
+  }
 }

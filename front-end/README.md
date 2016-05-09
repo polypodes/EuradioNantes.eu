@@ -4,6 +4,7 @@ This folder contains all the assets and stuff for the front-end part of euradion
 
 ## Requirements :
 
+Works with Nodejs v0.12.12
 
 **nodejs** : `brew install node` 
 
