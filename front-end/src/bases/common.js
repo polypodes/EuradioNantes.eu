@@ -36,7 +36,7 @@ function common() {
     each(elements, function(el, i){
       el.addEventListener('click', function(e) {
         e.preventDefault();
-        if (ecoutePath) {
+        if (typeof ecoutePath != 'undefined' ) {
           window.open(ecoutePath, 'Le direct - Euradionantes','width=1010,height=495,left=320,top=<445></445>,scrollbars=yes');
         }
       });

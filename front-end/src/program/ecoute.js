@@ -34,9 +34,12 @@ function initPlayer() {
   var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   if(iOS) {
-    setTimeout(function() {
-      playerControl.dispatchEvent(new MouseEvent('click'));
-    }, 5000);
+    //setTimeout(function() {
+    //  playerControl.dispatchEvent(new MouseEvent('click'));
+    //}, 5000);
+    player.pause();
+    removeClass(pauseButton, 'player-hide');
+    addClass(playButton, 'player-hide');
   }
 
   playerControl.addEventListener('click', function(e) {
