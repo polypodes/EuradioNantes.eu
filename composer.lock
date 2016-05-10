@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "00fc6aeeddbebb5086e91d27b5ba5446",
-    "content-hash": "f7d8de4622c6300d70faed9bf9b79bca",
+    "hash": "dbe0b0add9a132c1bf1293e016ef71b5",
+    "content-hash": "92dd8fb9a8692e236f61df1e14abc888",
     "packages": [
         {
             "name": "ahmedsamy/hype-mailchimp-bundle",
@@ -164,66 +164,6 @@
                 "slugify"
             ],
             "time": "2016-02-11 09:53:46"
-        },
-        {
-            "name": "dflydev/markdown",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dflydev/dflydev-markdown.git",
-                "reference": "6baed9b50f29c980795b6656d43722aadb126f7e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dflydev/dflydev-markdown/zipball/6baed9b50f29c980795b6656d43722aadb126f7e",
-                "reference": "6baed9b50f29c980795b6656d43722aadb126f7e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "dflydev\\markdown": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Dragonfly Development Inc.",
-                    "email": "info@dflydev.com",
-                    "homepage": "http://dflydev.com"
-                },
-                {
-                    "name": "Beau Simensen",
-                    "email": "beau@dflydev.com",
-                    "homepage": "http://beausimensen.com"
-                },
-                {
-                    "name": "Michel Fortin",
-                    "homepage": "http://michelf.com"
-                },
-                {
-                    "name": "John Gruber",
-                    "homepage": "http://daringfireball.net"
-                }
-            ],
-            "description": "PHP Markdown & Extra",
-            "homepage": "http://github.com/dflydev/dflydev-markdown",
-            "keywords": [
-                "markdown"
-            ],
-            "abandoned": "michelf/php-markdown",
-            "time": "2013-09-23 12:00:18"
         },
         {
             "name": "doctrine/annotations",
@@ -993,36 +933,39 @@
         },
         {
             "name": "egeloen/ckeditor-bundle",
-            "version": "2.5.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egeloen/IvoryCKEditorBundle.git",
-                "reference": "702109e94cbda9deebbcc9604aa8654cf71f08ee"
+                "reference": "b73c770f84abf771d5385379bfca09acdb6b53ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/702109e94cbda9deebbcc9604aa8654cf71f08ee",
-                "reference": "702109e94cbda9deebbcc9604aa8654cf71f08ee",
+                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/b73c770f84abf771d5385379bfca09acdb6b53ad",
+                "reference": "b73c770f84abf771d5385379bfca09acdb6b53ad",
                 "shasum": ""
             },
             "require": {
-                "egeloen/json-builder": "~1.0.0",
+                "egeloen/json-builder": "~1.0|~2.0",
                 "php": ">=5.3.3",
-                "symfony/form": "~2.2",
-                "symfony/framework-bundle": "~2.2"
+                "symfony/dependency-injection": "~2.2|~3.0",
+                "symfony/form": "~2.2|~3.0",
+                "symfony/framework-bundle": "~2.2|~3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "~0.6",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
+                "symfony/yaml": "^2.0.5|~3.0",
                 "twig/twig": "~1.12"
             },
             "suggest": {
-                "twig/twig": "Allows to use twig templates"
+                "egeloen/form-extra-bundle": "Allows to load CKEditor asynchronously",
+                "twig/twig": "Allows to use Twig templates"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -1044,35 +987,36 @@
             "keywords": [
                 "CKEditor"
             ],
-            "time": "2014-11-08 10:48:36"
+            "time": "2016-05-05 20:28:52"
         },
         {
             "name": "egeloen/json-builder",
-            "version": "1.0.3",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egeloen/ivory-json-builder.git",
-                "reference": "6209142ed808e9899473e9b6091b8a4f4d8de794"
+                "reference": "c6afb2c53ac1070144d5d3330d5f86567b132d23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/6209142ed808e9899473e9b6091b8a4f4d8de794",
-                "reference": "6209142ed808e9899473e9b6091b8a4f4d8de794",
+                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/c6afb2c53ac1070144d5d3330d5f86567b132d23",
+                "reference": "c6afb2c53ac1070144d5d3330d5f86567b132d23",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=5.3.0",
-                "symfony/property-access": "~2.2"
+                "symfony/property-access": "~2.2|~3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "~0.6"
+                "satooshi/php-coveralls": "~0.6",
+                "symfony/phpunit-bridge": "~2.7|~3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -1096,7 +1040,7 @@
                 "builder",
                 "json"
             ],
-            "time": "2014-11-08 10:51:34"
+            "time": "2015-12-06 13:20:24"
         },
         {
             "name": "excelwebzone/recaptcha-bundle",
@@ -2186,23 +2130,25 @@
         },
         {
             "name": "knplabs/knp-markdown-bundle",
-            "version": "1.2.0",
-            "target-dir": "Knp/Bundle/MarkdownBundle",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMarkdownBundle.git",
-                "reference": "9f4f88919db4f4b7f8e374ac0de1a93e05b05646"
+                "reference": "27d6c8c866a5fef70df3f219e6c2afab25e145ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMarkdownBundle/zipball/9f4f88919db4f4b7f8e374ac0de1a93e05b05646",
-                "reference": "9f4f88919db4f4b7f8e374ac0de1a93e05b05646",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMarkdownBundle/zipball/27d6c8c866a5fef70df3f219e6c2afab25e145ce",
+                "reference": "27d6c8c866a5fef70df3f219e6c2afab25e145ce",
                 "shasum": ""
             },
             "require": {
-                "dflydev/markdown": "1.0.*@dev",
-                "php": ">=5.3.3",
-                "symfony/framework-bundle": "~2.0"
+                "michelf/php-markdown": "~1.4",
+                "php": ">=5.3.9",
+                "symfony/framework-bundle": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5"
             },
             "suggest": {
                 "ext-sundown": "to use optional support for php-sundown extension instead of php implementation",
@@ -2211,12 +2157,12 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.4.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Knp\\Bundle\\MarkdownBundle": ""
+                "psr-4": {
+                    "Knp\\Bundle\\MarkdownBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2241,7 +2187,7 @@
                 "knplabs",
                 "markdown"
             ],
-            "time": "2013-05-20 08:29:54"
+            "time": "2015-12-15 20:41:45"
         },
         {
             "name": "knplabs/knp-menu",
@@ -3284,12 +3230,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "25f7ebe45430472642f3758d047dc0bce154da3f"
+                "reference": "04c1e81e9c21adf36ab1f1d6d0ccd8b48f3a1171"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/25f7ebe45430472642f3758d047dc0bce154da3f",
-                "reference": "25f7ebe45430472642f3758d047dc0bce154da3f",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/04c1e81e9c21adf36ab1f1d6d0ccd8b48f3a1171",
+                "reference": "04c1e81e9c21adf36ab1f1d6d0ccd8b48f3a1171",
                 "shasum": ""
             },
             "require": {
@@ -3318,7 +3264,7 @@
             },
             "require-dev": {
                 "sensio/generator-bundle": "~2.3|~3.0",
-                "sonata-project/intl-bundle": "dev-master",
+                "sonata-project/intl-bundle": "^2.2.4",
                 "symfony/phpunit-bridge": "~2.7|~3.0",
                 "symfony/yaml": "~2.3|~3.0"
             },
@@ -3361,7 +3307,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2016-03-01 09:38:52"
+            "time": "2016-03-07 07:00:29"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -4006,33 +3952,36 @@
         },
         {
             "name": "sonata-project/formatter-bundle",
-            "version": "2.3.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataFormatterBundle.git",
-                "reference": "e370b324b083f064bea53f99f0cd4da037abbf8c"
+                "reference": "51df7f41a14423579b08e64609b56b020b71cce6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataFormatterBundle/zipball/e370b324b083f064bea53f99f0cd4da037abbf8c",
-                "reference": "e370b324b083f064bea53f99f0cd4da037abbf8c",
+                "url": "https://api.github.com/repos/sonata-project/SonataFormatterBundle/zipball/51df7f41a14423579b08e64609b56b020b71cce6",
+                "reference": "51df7f41a14423579b08e64609b56b020b71cce6",
                 "shasum": ""
             },
             "require": {
-                "egeloen/ckeditor-bundle": "~2.2",
-                "knplabs/knp-markdown-bundle": "~1.2.0",
+                "egeloen/ckeditor-bundle": "^2.5|^3.0|^4.0",
+                "knplabs/knp-markdown-bundle": "~1.4",
                 "sonata-project/block-bundle": "~2.2,>=2.2.1",
-                "sonata-project/core-bundle": "~2.2",
-                "symfony/symfony": "~2.3",
-                "twig/twig": "*"
+                "sonata-project/core-bundle": "~2.3,>=2.3.1",
+                "symfony/form": "~2.3|~3.0",
+                "symfony/framework-bundle": "~2.3|~3.0",
+                "symfony/property-access": "~2.3|~3.0",
+                "twig/twig": "~1.12"
             },
             "require-dev": {
-                "sonata-project/markitup-bundle": "~2.1"
+                "symfony/phpunit-bridge": "~2.7|~3.0",
+                "symfony/validator": "~2.3|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "2.4.x-dev"
                 }
             },
             "autoload": {
@@ -4046,17 +3995,17 @@
             ],
             "authors": [
                 {
-                    "name": "Thomas Rabaix",
-                    "email": "thomas.rabaix@sonata-project.org",
-                    "homepage": "http://sonata-project.org"
-                },
-                {
                     "name": "Sonata Community",
                     "homepage": "https://github.com/sonata-project/SonataFormatterBundle/contributors"
+                },
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@sonata-project.org",
+                    "homepage": "https://sonata-project.org"
                 }
             ],
             "description": "Symfony SonataFormatterBundle",
-            "homepage": "http://sonata-project.org/bundles/formatter",
+            "homepage": "https://sonata-project.org/bundles/formatter",
             "keywords": [
                 "CKEditor",
                 "formatter",
@@ -4064,7 +4013,7 @@
                 "markitup",
                 "sonata"
             ],
-            "time": "2014-12-18 15:55:02"
+            "time": "2016-04-19 21:44:37"
         },
         {
             "name": "sonata-project/google-authenticator",
@@ -4275,45 +4224,50 @@
         },
         {
             "name": "sonata-project/news-bundle",
-            "version": "2.3.5",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNewsBundle.git",
-                "reference": "2dc0e181f2657924e12497ed3ab0ef109406d88d"
+                "reference": "aff41e31d9cc92bf2a80ad028fca1dcad8caf92e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataNewsBundle/zipball/2dc0e181f2657924e12497ed3ab0ef109406d88d",
-                "reference": "2dc0e181f2657924e12497ed3ab0ef109406d88d",
+                "url": "https://api.github.com/repos/sonata-project/SonataNewsBundle/zipball/aff41e31d9cc92bf2a80ad028fca1dcad8caf92e",
+                "reference": "aff41e31d9cc92bf2a80ad028fca1dcad8caf92e",
                 "shasum": ""
             },
             "require": {
-                "friendsofsymfony/rest-bundle": "~1.1",
-                "jms/serializer-bundle": "~0.11",
-                "nelmio/api-doc-bundle": "~2.4",
                 "sonata-project/admin-bundle": "~2.3",
                 "sonata-project/classification-bundle": "~2.2",
-                "sonata-project/datagrid-bundle": "~2.2@dev",
+                "sonata-project/core-bundle": "~2.3,>=2.3.10",
+                "sonata-project/datagrid-bundle": "~2.2",
                 "sonata-project/easy-extends-bundle": "~2.1",
                 "sonata-project/formatter-bundle": "~2.3",
                 "sonata-project/intl-bundle": "~2.1",
                 "sonata-project/media-bundle": "~2.2",
                 "sonata-project/user-bundle": "~2.2",
-                "symfony/symfony": "~2.3"
+                "symfony/symfony": "~2.3|~3.0"
+            },
+            "conflict": {
+                "jms/serializer": "<0.13"
             },
             "require-dev": {
                 "doctrine/orm": "*",
-                "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
-                "sonata-project/notification-bundle": "2.2.*@dev"
+                "friendsofsymfony/rest-bundle": "~1.1",
+                "jms/serializer-bundle": "~0.11|~1.0",
+                "nelmio/api-doc-bundle": "~2.4",
+                "sonata-project/doctrine-orm-admin-bundle": "~2.2",
+                "sonata-project/notification-bundle": "~2.2",
+                "sonata-project/seo-bundle": "~1.1|~2.0"
             },
             "suggest": {
-                "sonata-project/doctrine-orm-admin-bundle": "~2.2.*",
-                "sonata-project/notification-bundle": "~2.*"
+                "sonata-project/doctrine-orm-admin-bundle": "~2.2",
+                "sonata-project/notification-bundle": "~2.2"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "2.4.x-dev"
                 }
             },
             "autoload": {
@@ -4327,24 +4281,24 @@
             ],
             "authors": [
                 {
-                    "name": "Thomas Rabaix",
-                    "email": "thomas.rabaix@sonata-project.org",
-                    "homepage": "http://sonata-project.org"
-                },
-                {
                     "name": "Sonata Community",
                     "homepage": "https://github.com/sonata-project/SonataNewsBundle/contributors"
+                },
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@sonata-project.org",
+                    "homepage": "https://sonata-project.org"
                 }
             ],
             "description": "Symfony SonataNewsBundle",
-            "homepage": "http://sonata-project.org/bundles/news",
+            "homepage": "https://sonata-project.org/bundles/news",
             "keywords": [
                 "blog",
                 "news",
                 "post",
                 "sonata"
             ],
-            "time": "2014-09-11 14:31:35"
+            "time": "2016-04-08 17:08:53"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -4430,12 +4384,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataPageBundle.git",
-                "reference": "56cf87987bb35d4458fc344d4306d18cfe56d4a8"
+                "reference": "f0b5440b7f3961b6ecba1caf577777de2de116a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/56cf87987bb35d4458fc344d4306d18cfe56d4a8",
-                "reference": "56cf87987bb35d4458fc344d4306d18cfe56d4a8",
+                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/f0b5440b7f3961b6ecba1caf577777de2de116a4",
+                "reference": "f0b5440b7f3961b6ecba1caf577777de2de116a4",
                 "shasum": ""
             },
             "require": {
@@ -4499,7 +4453,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2016-02-22 17:51:38"
+            "time": "2016-03-06 09:21:55"
         },
         {
             "name": "sonata-project/seo-bundle",
@@ -4815,12 +4769,12 @@
             "version": "1.3.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony-cmf/RoutingBundle.git",
+                "url": "https://github.com/symfony-cmf/routing-bundle.git",
                 "reference": "c4950dda9c4f60d2186d24bf7c7e1b4c05f5daf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/c4950dda9c4f60d2186d24bf7c7e1b4c05f5daf6",
+                "url": "https://api.github.com/repos/symfony-cmf/routing-bundle/zipball/c4950dda9c4f60d2186d24bf7c7e1b4c05f5daf6",
                 "reference": "c4950dda9c4f60d2186d24bf7c7e1b4c05f5daf6",
                 "shasum": ""
             },
@@ -6129,8 +6083,11 @@
         "sonata-project/datagrid-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20,
         "sonata-project/media-bundle": 20,
+        "sonata-project/formatter-bundle": 20,
+        "sonata-project/news-bundle": 20,
         "sonata-project/page-bundle": 20,
-        "ahmedsamy/hype-mailchimp-bundle": 20
+        "ahmedsamy/hype-mailchimp-bundle": 20,
+        "egeloen/ckeditor-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

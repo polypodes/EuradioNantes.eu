@@ -177,11 +177,14 @@ ivory_ck_editor:
     default_config: normal
     configs:
         mini:
-            toolbar: 'custom_mini'
+            toolbar:
+            - ['Source','-','Bold','Italic','Underline','-','Subscript','Superscript','-','RemoveFormat','-','Link','Unlink','Anchor']
             language: '%locale%'
 
         normal:
-            toolbar: 'custom_normal'
+            toolbar:
+            - [ 'Source','-','Bold','Italic','Underline','-','Subscript','Superscript','-','RemoveFormat','-','Link','Unlink','Anchor','-','NumberedList','BulletedList','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight' ]
+            - [ 'Undo','Redo','-','PasteFromWord','PasteText','Format','Styles','-','Image','MediaEmbed','Audio','-','Table','-','SpecialChar','-','ShowBlocks' ]
             #contentsCss: /path/to/style.css
             #contentsLanguage: fr
             language: '%locale%'
@@ -207,7 +210,24 @@ ivory_ck_editor:
             #removePlugins: 'iframe'
 
         plus:
-            toolbar: 'custom_full'
+            toolbar:
+            #- [ 'Source','-','Bold','Italic','Underline','-','Subscript','Superscript','-','RemoveFormat','-','Link','Unlink','Anchor','-','NumberedList','BulletedList','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight' ]
+            #- '/'
+            #- [ 'Undo','Redo','-','PasteFromWord','PasteText','Format','Styles','-','Image','MediaEmbed','Audio','-','Table','-','SpecialChar','-','ShowBlocks' ]
+            #- '/'
+            #- [ 'Find','Replace','-','HorizontalRule','-','SpellChecker','-','Maximize' ]
+            - [ 'Source' ]
+            - [ 'Styles', 'Format', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight' ]
+            - [ 'TextColor', 'BGColor' ]
+            - [ 'Image', 'MediaEmbed', 'Audio', '-', 'Table', 'HorizontalRule', 'SpecialChar' ]
+            - '/'
+            - [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ]
+            - [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ]
+            - [ 'Link', 'Unlink', 'Anchor' ]
+            - '/'
+            - ['Undo', 'Redo', '-','PasteText', 'PasteFromWord']
+            - [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ]
+            - [ 'Maximize', 'ShowBlocks' ]
             language: '%locale%'
             filebrowserBrowseRoute: admin_sonata_media_media_browser
             filebrowserImageBrowseRoute: admin_sonata_media_media_browser
